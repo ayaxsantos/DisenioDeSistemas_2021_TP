@@ -1,34 +1,31 @@
 package dominio;
 
-import dominio.excepciones.ContraseniaCortaException;
-import dominio.excepciones.ContraseniaDebilException;
+import dominio.excepciones.ContraseñaCortaException;
+import dominio.excepciones.ContraseñaDebilException;
 
 import java.util.List;
 
 public class Usuario {
+
     private final String usuario;
-    private String contrasenia;
+    private final String contraseña;
 
-    public Usuario(String usuario, String contrasenia) {
+    public Usuario(String usuario, String contraseña) {
         this.usuario = usuario;
-        this.validarContrasenia(contrasenia);
-        this.contrasenia = contrasenia;
+        this.validarContraseña(contraseña);
+        this.contraseña = contraseña;
     }
 
-    private void validarContrasenia(String contrasenia){
-        List<String> contraseniasInseguras = Archivo.obtenerContraseniasInseguras();
+    private void validarContraseña(String contraseña) {
+        if(contraseña.length() < 8)
+            throw new ContraseñaCortaException();
 
-        boolean esContraseniaDebil = contraseniasInseguras.stream().
-                anyMatch(unaContrasenia -> unaContrasenia.equals(contrasenia));
+        List<String> contraseñasInseguras = Archivo.obtenerContraseñasInseguras();
+        boolean esContraseñaDebil = contraseñasInseguras.stream()
+            .anyMatch(contraseñaInsegura -> contraseñaInsegura.equals(contraseña));
 
-        if(esContraseniaDebil){
-            throw new ContraseniaDebilException();
-        }
-        else if(contrasenia.length() < 8) {
-            throw new ContraseniaCortaException();
-        }
+        if(esContraseñaDebil)
+            throw new ContraseñaDebilException();
     }
-
-
 
 }

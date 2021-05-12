@@ -7,22 +7,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Archivo {
-    private static final String rutaArchivo = "src/main/resources/contraseniasInseguras.txt";
 
-    public static List<String> obtenerContraseniasInseguras(){
-        Scanner escaner = null;
+    private static final String rutaArchivo = "src/main/resources/contraseñasInseguras.txt";
+
+    public static List<String> obtenerContraseñasInseguras(){
+        List<String> contraseñasInseguras = new ArrayList<>();
         try {
-            escaner = new Scanner(new File(rutaArchivo));
+            Scanner escaner = new Scanner(new File(rutaArchivo));
+            while(escaner.hasNext())
+                contraseñasInseguras.add(escaner.next());
+            escaner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        List<String> contraseniasInseguras = new ArrayList<>();
-        while (escaner.hasNext()){
-            contraseniasInseguras.add(escaner.next());
-        }
-        escaner.close();
-
-        return contraseniasInseguras;
+        return contraseñasInseguras;
     }
 }

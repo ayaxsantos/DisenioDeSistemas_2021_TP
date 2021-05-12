@@ -1,6 +1,6 @@
 import dominio.Usuario;
-import dominio.excepciones.ContraseniaCortaException;
-import dominio.excepciones.ContraseniaDebilException;
+import dominio.excepciones.ContraseñaCortaException;
+import dominio.excepciones.ContraseñaDebilException;
 
 public class Main {
 
@@ -12,13 +12,13 @@ public class Main {
         generarUsuario("Usuario4", "Ho23@·Hola");
     }
 
-    public static void generarUsuario(String usuario, String contrasenia) {
+    public static void generarUsuario(String usuario, String contraseña) {
         try {
-            new Usuario(usuario, contrasenia);
+            new Usuario(usuario, contraseña);
             System.out.println("Se genero correctamente: " + usuario);
-        } catch (ContraseniaDebilException e) {
+        } catch (ContraseñaDebilException e) {
             System.out.println("No se pudo generar el usuario: " + usuario + ", contrasenia debil");
-        } catch (ContraseniaCortaException e) {
+        } catch (ContraseñaCortaException e) {
             System.out.println("No se pudo generar el usuario: " + usuario + ", contrasenia corta");
         }
 
