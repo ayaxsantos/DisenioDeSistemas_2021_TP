@@ -1,4 +1,4 @@
-package dominio;
+package dominio.usuario;
 
 public interface CriteriosValidacion {
 

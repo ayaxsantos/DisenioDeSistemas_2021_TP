@@ -1,4 +1,4 @@
-package dominio;
+package dominio.archivo;
 
 import java.util.List;
 import java.util.Scanner;

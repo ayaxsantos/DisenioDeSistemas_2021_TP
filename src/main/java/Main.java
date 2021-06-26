@@ -1,4 +1,4 @@
-import dominio.Usuario;
+import dominio.usuario.Usuario;
 import dominio.excepciones.ContraseñaCortaException;
 import dominio.excepciones.ContraseñaDebilException;
 

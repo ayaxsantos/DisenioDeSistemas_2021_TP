@@ -1,4 +1,4 @@
-package dominio;
+package dominio.usuario;
 
 import dominio.excepciones.ContraseñaCortaException;
 

@@ -1,5 +1,6 @@
-package dominio;
+package dominio.usuario;
 
+import dominio.archivo.Archivo;
 import dominio.excepciones.ContraseñaDebilException;
 
 import java.util.List;
