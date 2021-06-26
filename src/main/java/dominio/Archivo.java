@@ -1,25 +1,25 @@
 package dominio;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Archivo {
 
-    private static final String rutaArchivo = "src/main/resources/contraseñasInseguras.txt";
-
-    public static List<String> obtenerContraseñasInseguras(){
-        List<String> contraseñasInseguras = new ArrayList<>();
+    public static List<String> leer(String ruta) {
+        List<String> lineas = new ArrayList<>();
         try {
-            Scanner escaner = new Scanner(new File(rutaArchivo));
+            Scanner escaner = new Scanner(new File(ruta));
             while(escaner.hasNext())
-                contraseñasInseguras.add(escaner.next());
+                lineas.add(escaner.next());
             escaner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return contraseñasInseguras;
+        return lineas;
     }
+
 }

@@ -1,10 +1,5 @@
 package dominio;
 
-import dominio.excepciones.ContraseñaCortaException;
-import dominio.excepciones.ContraseñaDebilException;
-
-import java.util.List;
-
 public class Usuario {
 
     private final String usuario;
