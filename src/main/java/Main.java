@@ -5,10 +5,10 @@ import dominio.excepciones.ContraseñaDebilException;
 public class Main {
 
     public static void main(String[] args) {
-        generarUsuario("Usuario1", "12345");
+        generarUsuario("Usuario1", "12345"); //Debil
         generarUsuario("Usuario2", "Cont321Ho@13");
-        generarUsuario("Usuario3", "password");
-        generarUsuario("Usuario4", "kj2@3");
+        generarUsuario("Usuario3", "password"); //Debil
+        generarUsuario("Usuario4", "kj2@3"); //Corta
         generarUsuario("Usuario4", "Ho23@·Hola");
     }
 
@@ -23,5 +23,7 @@ public class Main {
         }
 
     }
+
+
 
 }
