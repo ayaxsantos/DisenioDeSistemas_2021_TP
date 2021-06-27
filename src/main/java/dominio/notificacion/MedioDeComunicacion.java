@@ -1,14 +1,21 @@
 package dominio.notificacion;
 
-public abstract class MedioDeComunicacion {
+import dominio.notificacion.mensaje.Mensaje;
+import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
-    private boolean esPreferido;
+public class MedioDeComunicacion {
 
-    public MedioDeComunicacion(boolean esPreferido) {
+    private final EstrategiaDeComunicacion estrategiaDeComunicacion;
+    private final boolean esPreferido;
+
+    public MedioDeComunicacion(EstrategiaDeComunicacion estrategiaDeComunicacion, boolean esPreferido) {
+        this.estrategiaDeComunicacion = estrategiaDeComunicacion;
         this.esPreferido = esPreferido;
     }
 
-    public abstract void notificar(Mensaje mensaje);
+    public void enviar(Mensaje mensaje) {
+        this.estrategiaDeComunicacion.enviar(mensaje);
+    }
 
     public boolean esPreferido() {
         return this.esPreferido;
