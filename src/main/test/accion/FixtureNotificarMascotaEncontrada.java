@@ -22,12 +22,13 @@ public class FixtureNotificarMascotaEncontrada {
     protected static String numeroContactoDueño = "+5491134561101";
 
     protected static String emailRescatista = "celestefernandez@gmail.com";
-    protected static String emailDueño = "camiberro@gmail.com";
+    protected static String emailDueño = "ccalvoromero@gmail.com";
 
     protected static boolean esPreferido = true;
     protected static boolean noEsPreferido = false;
 
     protected static String mensajeMascotaEncontrada = "";
+    protected static String asuntoMascotaEncontrada = "[Importante] Rescate de Patitas";
 
     protected static Mascota crearMascota(int idMascota) {
         return new Mascota(idMascota, "Ayudante de Santa", Animal.PERRO , "", 10, Sexo.MACHO, "");

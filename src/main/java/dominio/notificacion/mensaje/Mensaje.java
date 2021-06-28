@@ -2,7 +2,7 @@ package dominio.notificacion.mensaje;
 
 public class Mensaje {
 
-    private String email;
+    private String emailDestino;
     private final String telefonoOrigen;
     private String telefonoDestino;
     private final String cuerpo;
@@ -14,12 +14,12 @@ public class Mensaje {
         this.telefonoOrigen = telefonoOrigen;
     }
 
-    public void agregarEmail(String email) {
-        this.email = email;
+    public void agregarEmailDestino(String emailDestino) {
+        this.emailDestino = emailDestino;
     }
 
-    public void agregarTelefonoDestino(String telefono) {
-        this.telefonoDestino = telefono;
+    public void agregarTelefonoDestino(String telefonoDestino) {
+        this.telefonoDestino = telefonoDestino;
     }
 
     public String cuerpo() {
@@ -32,5 +32,13 @@ public class Mensaje {
 
     public String telefonoOrigen(){
         return this.telefonoOrigen;
+    }
+
+    public String emailDestino() {
+        return this.emailDestino;
+    }
+
+    public String asunto() {
+        return this.asunto;
     }
 }

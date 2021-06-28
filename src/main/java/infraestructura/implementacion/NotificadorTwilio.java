@@ -11,11 +11,9 @@ public class NotificadorTwilio implements Notificador {
     public static final String AUTH_TOKEN = "427b2790814830815dc832a4168d47bc";
 
     @Override
-    public void enviar(String numeroOrigen, String numeroDestino, String cuerpo) {
+    public void enviar(String origen, String destinatario, String asunto, String cuerpo) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        PhoneNumber origen = new PhoneNumber(numeroOrigen);
-        PhoneNumber destino = new PhoneNumber(numeroDestino);
-        Message mensaje = Message.creator(destino, origen , cuerpo).create();
+        Message mensaje = Message.creator(new PhoneNumber(destinatario), new PhoneNumber(origen), cuerpo).create();
         System.out.println(mensaje.getBody());
     }
 

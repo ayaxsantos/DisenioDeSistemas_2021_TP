@@ -22,7 +22,7 @@ public class Contacto {
     }
 
     public void notificar(Mensaje mensaje) {
-        mensaje.agregarEmail(this.email);
+        mensaje.agregarEmailDestino(this.email);
         mensaje.agregarTelefonoDestino(this.telefono);
         mediosDeComunicacion.stream()
             .filter(MedioDeComunicacion::esPreferido)
