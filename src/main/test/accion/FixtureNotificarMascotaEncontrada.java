@@ -3,13 +3,10 @@ package accion;
 import dominio.animal.Sexo;
 import dominio.animal.Animal;
 import dominio.animal.Mascota;
-import dominio.notificacion.Contacto;
-import dominio.notificacion.estrategia.Email;
-import dominio.notificacion.estrategia.SMS;
-import dominio.notificacion.estrategia.WhatsApp;
 import dominio.persona.Dueño;
+import dominio.persona.Persona;
 import dominio.persona.Rescatista;
-import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
+import dominio.notificacion.Contacto;
 
 import java.time.LocalDateTime;
 
@@ -24,38 +21,31 @@ public class FixtureNotificarMascotaEncontrada {
     protected static String numeroWhatsappRescatista = "+14155238886";
     protected static String numeroContactoDueño = "+5491134561101";
 
-    protected static EstrategiaDeComunicacion sms = new SMS();
-    protected static EstrategiaDeComunicacion email = new Email();
-    protected static EstrategiaDeComunicacion whatsApp = new WhatsApp();
+    protected static String emailRescatista = "celestefernandez@gmail.com";
+    protected static String emailDueño = "camiberro@gmail.com";
 
-    protected static Mascota unaMascota = crearMascota();
-    protected static Dueño unDueño = crearDueño();
-    protected static Rescatista unRescatista = crearRescatista();
-    protected static String mensajeMascotaEncontrada = mensajeMascotaEncontrada();
+    protected static boolean esPreferido = true;
+    protected static boolean noEsPreferido = false;
 
-    private static Mascota crearMascota() {
-        return new Mascota(idMascotaEncontradaExistente, "Ayudante de Santa", Animal.PERRO , "", 10, Sexo.MACHO, "");
+    protected static String mensajeMascotaEncontrada = "";
+
+    protected static Mascota crearMascota(int idMascota) {
+        return new Mascota(idMascota, "Ayudante de Santa", Animal.PERRO , "", 10, Sexo.MACHO, "");
     }
 
-    private static Dueño crearDueño() {
-        Dueño dueño = new Dueño("Camila", "Berro", LocalDateTime.now(), numeroDocumentoDueño, "Avenida Siempre Viva 742");
-        dueño.añadirMascota(unaMascota);
-        Contacto contactoDueño = new Contacto(dueño.nombre(), dueño.apellido(), numeroContactoDueño, "camiberro@gmail.com");
-        contactoDueño.añadirMedioDeComunicacion(sms, true);
-        contactoDueño.añadirMedioDeComunicacion(email, false);
-        contactoDueño.añadirMedioDeComunicacion(whatsApp, false);
-        dueño.añadirContacto(contactoDueño);
-        return dueño;
+    protected static Dueño crearDueño() {
+        return new Dueño("Camila", "Berro", LocalDateTime.now(), numeroDocumentoDueño, "Avenida Siempre Viva 742");
     }
 
-    private static Rescatista crearRescatista() {
-        Rescatista rescatista = new Rescatista("Celeste", "Fernandez",LocalDateTime.now(), numeroDocumentoRescatista, "Calle Falsa 123");
-        Contacto contactoRescatista = new Contacto(rescatista.nombre(), rescatista.apellido(), numeroSMSRescatista, "celesfernandez@gmail.com");
-        rescatista.añadirContacto(contactoRescatista);
-        return rescatista;
+    protected static Rescatista crearRescatista() {
+        return new Rescatista("Celeste", "Fernandez",LocalDateTime.now(), numeroDocumentoRescatista, "Calle Falsa 123");
     }
 
-    private static String mensajeMascotaEncontrada() {
+    protected static Contacto crearContacto(Persona persona, String telefono, String email) {
+        return new Contacto(persona.nombre(), persona.apellido(), telefono, email);
+    }
+
+    protected static String mensajeMascotaEncontrada(Rescatista unRescatista, Mascota unaMascota) {
         return "Hola, soy " + unRescatista.nombre() + " y encontré a " + unaMascota.nombre() + ". " +
            "Mi número es " + unRescatista.telefonoPersonal() + " y mi email es " + unRescatista.emailPersonal();
     }

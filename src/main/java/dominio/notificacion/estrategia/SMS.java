@@ -7,15 +7,15 @@ public class SMS implements EstrategiaDeComunicacion {
 
     private Notificador notificador;
 
-    @Override
-    public void enviar(Mensaje mensaje) {
-        notificador.enviar(mensaje.telefonoOrigen(), mensaje.telefonoDestino(), mensaje.cuerpo());
-        System.out.println("Mensaje enviado por correo SMS!");
+    public SMS(Notificador notificador) {
+        this.notificador = notificador;
     }
 
     @Override
-    public void asignarNotificador(Notificador notificador) {
-        this.notificador = notificador;
+    public void enviar(Mensaje mensaje) {
+        System.out.println(mensaje.cuerpo());
+        notificador.enviar(mensaje.telefonoOrigen(), mensaje.telefonoDestino(), mensaje.cuerpo());
+        System.out.println("Mensaje enviado por correo SMS!");
     }
 
 }
