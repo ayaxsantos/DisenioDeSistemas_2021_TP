@@ -1,4 +1,3 @@
 package dominio.excepcion;
 
-public class ContraseñaDebilException extends RuntimeException {
-}
+public class ContraseñaDebilException extends RuntimeException { }

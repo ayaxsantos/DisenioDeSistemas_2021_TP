@@ -39,4 +39,12 @@ public abstract class Persona {
         return this.contactos;
     }
 
+    public String telefonoPersonal() {
+        return this.contactos.get(0).telefono();
+    }
+
+    public String emailPersonal() {
+        return this.contactos.get(0).email();
+    }
+
 }

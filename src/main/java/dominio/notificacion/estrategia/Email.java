@@ -1,8 +1,8 @@
 package dominio.notificacion.estrategia;
 
 import dominio.notificacion.mensaje.Mensaje;
-import infraestructura.Notificador;
-import infraestructura.implementacion.NotificadorEmail;
+import infraestructura.notificador.Notificador;
+import infraestructura.notificador.NotificadorEmail;
 
 public class Email implements EstrategiaDeComunicacion {
 

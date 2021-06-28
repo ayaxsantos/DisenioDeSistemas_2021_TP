@@ -1,19 +1,18 @@
-package infraestructura.implementacion;
+package infraestructura.notificador;
 
-import infraestructura.Notificador;
+import java.util.Properties;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.util.Properties;
+import javax.mail.internet.InternetAddress;
 
 public class NotificadorEmail implements Notificador {
 
-    private static final String EMAIL_ORIGEN = "rescatedepatitas.dds.g6.k3002@gmail.com";
-    private static final String CONTRASEÑA_EMAIL_ORIGEN = "ddsg6k3002";
+    private final String emailOrigen = "rescatedepatitas.dds.g6.k3002@gmail.com";
+    private final String contraseñaEmailOrigen = "ddsg6k3002";
 
     @Override
     public void enviar(String origen, String destinatario, String asunto, String cuerpo) {
@@ -21,12 +20,12 @@ public class NotificadorEmail implements Notificador {
         Session sesion = Session.getDefaultInstance(propiedades);
         MimeMessage mensaje = new MimeMessage(sesion);
         try {
-            mensaje.setFrom(new InternetAddress(EMAIL_ORIGEN));
+            mensaje.setFrom(new InternetAddress(emailOrigen));
             mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
             mensaje.setSubject(asunto);
             mensaje.setText(cuerpo);
             Transport transporte = sesion.getTransport("smtp");
-            transporte.connect(EMAIL_ORIGEN, CONTRASEÑA_EMAIL_ORIGEN);
+            transporte.connect(emailOrigen, contraseñaEmailOrigen);
             transporte.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
             transporte.close();
         } catch (MessagingException ex) {

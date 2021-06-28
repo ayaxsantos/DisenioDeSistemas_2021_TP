@@ -2,8 +2,8 @@ package dominio.notificacion.estrategia;
 
 import dominio.notificacion.mensaje.Mensaje;
 
-import infraestructura.Notificador;
-import infraestructura.implementacion.NotificadorTwilio;
+import infraestructura.notificador.Notificador;
+import infraestructura.notificador.NotificadorTwilio;
 
 public class SMS implements EstrategiaDeComunicacion {
 

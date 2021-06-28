@@ -6,7 +6,7 @@ import dominio.persona.Rescatista;
 import dominio.notificacion.mensaje.Mensaje;
 import dominio.notificacion.mensaje.MensajeMascotaEncontrada;
 
-import infraestructura.Personas;
+import infraestructura.personas.Personas;
 
 public class NotificarMascotaEncontrada {
 

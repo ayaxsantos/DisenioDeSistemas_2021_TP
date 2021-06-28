@@ -10,8 +10,8 @@ import dominio.notificacion.estrategia.WhatsApp;
 import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 import dominio.excepcion.MascotaNoCorrespondeADueñoException;
 
-import infraestructura.Personas;
-import infraestructura.Notificador;
+import infraestructura.personas.Personas;
+import infraestructura.notificador.Notificador;
 
 import org.mockito.Mockito;
 import org.junit.jupiter.api.Test;
