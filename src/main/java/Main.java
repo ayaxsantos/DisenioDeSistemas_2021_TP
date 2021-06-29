@@ -4,6 +4,7 @@ import com.twilio.rest.api.v2010.account.Message;
 
 import dominio.animal.Mascota;
 import dominio.excepcion.MascotaNoEncontradaException;
+import infraestructura.hogares.Hogar;
 import infraestructura.hogares.ServicioHogares;
 
 import java.io.IOException;
@@ -38,11 +39,5 @@ public class Main {
         System.out.println(message.getSid());
     }
 
-    public boolean probarDistancia(,, int radio){
 
-
-
-
-
-    }
 }

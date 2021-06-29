@@ -12,7 +12,6 @@ import java.util.List;
 public class RegistrarMascota {
 
     private Mascota unaMascota;
-    private List<Persona> unasPersonas;
 
     private Personas personas;
 

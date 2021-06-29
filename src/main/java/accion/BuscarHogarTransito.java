@@ -47,7 +47,7 @@ public class BuscarHogarTransito {
      */
 
     //Algunos hogares solamente aceptan perros, otros solamente gatos y a otros les da lo mismo. cele
-    private List<Hogar> criterioTipoAnimal(HogaresResponse hogaresRespuesta, Mascota mascota){
+    private List<Hogar> criterioTipoAnimal(HogaresResponse hogares, Mascota mascota){
         if(mascota.animal() == Animal.GATO){
             return (List<Hogar>) hogares.hogares.stream().filter(hogar -> hogar.admisiones.gatos);
         } else {
@@ -61,21 +61,25 @@ public class BuscarHogarTransito {
                 .filter(hogar -> estaCerca(radio, hogar, rescatista));
     }
 
-    private Boolean estaCerca(int radio, Hogar hogar, Persona rescatista){
+    private Boolean estaCerca(Double radio, Hogar hogar, Persona rescatista){
         Double latitudRescatista = rescatista.domicilio().latitud;
         Double longitudRescatista = rescatista.domicilio().longitud;
         Double latitudHogar = rescatista.domicilio().latitud;
         Double longitudHogar = rescatista.domicilio().longitud;
+        Double diferenciaLatitud = latitudHogar -latitudRescatista;
+        if(diferenciaLatitud < 0){diferenciaLatitud = diferenciaLatitud * (-1);}
+        Double diferenciaLongitud = longitudHogar - longitudRescatista;
+        if(diferenciaLongitud < 0){diferenciaLongitud = diferenciaLongitud * (-1);}
 
-        return latitudHogar - latitudRescatista <= radio && longitudHogar - longitudRescatista <= radio;
+        return diferenciaLatitud <= radio && diferenciaLongitud <= radio;
     }
 
     //Algunos hogares poseen patios y otros no. Si poseen patio, aceptan mascotas medianas o
    private List<Hogar> criterioTamanio(HogaresResponse hogaresRespuesta, Mascota mascota) {
-       if (mascota.tamaño() == Tamaño.CHICA) {
+       if (mascota.tamaño() == Tamaño.CHICO) {
            return (List<Hogar>) hogaresRespuesta.hogares.stream().filter(hogar -> !hogar.patio);
        } else {
-           return (List<Hogar>) hogaresRespuesta.hogares.stream().filter(hogar ->Ohogar.patio);
+           return (List<Hogar>) hogaresRespuesta.hogares.stream().filter(hogar ->hogar.patio);
        }
    }
 
@@ -89,6 +93,7 @@ public class BuscarHogarTransito {
     }
 
     //Puede que un hogar no tenga disponibilidad por estar con su capacidad completa.
+
     private List<Hogar> hogaresConCapacidadDisponible(HogaresResponse hogaresRespuesta) {
         return hogaresRespuesta.hogares.stream()
             .filter(hogar -> hogar.capacidad > 0).collect(Collectors.toList());
