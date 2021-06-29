@@ -1,4 +1,4 @@
 package dominio.persona;
 
-public class Voluntario {
+public class Voluntario extends Rol{
 }
