@@ -15,6 +15,7 @@ public class Mascota {
     private final String apodo;
     private final Integer edad;
     private final Sexo sexo;
+    private final Tamaño tamaño;
     private final String descripcionFisica;
     private final List<Foto> fotos = new ArrayList<>();
     private final Map<Caracteristica, String> caracteristicas = new HashMap<>();
@@ -26,6 +27,7 @@ public class Mascota {
         this.apodo = apodo;
         this.edad = edad;
         this.sexo = sexo;
+        this.tamaño = tamaño;
         this.descripcionFisica = descripcionFisica;
     }
 
@@ -41,4 +43,16 @@ public class Mascota {
         return this.nombre;
     }
 
+    public Animal animal() {
+        return animal;
+    }
+
+    public Map<Caracteristica,String> caracteristicas()
+    {
+        return this.caracteristicas;
+    }
+
+    public Tamaño tamaño() {
+        return tamaño;
+    }
 }

@@ -1,6 +1,7 @@
 package dominio.persona;
 
 import dominio.notificacion.mensaje.Mensaje;
+import infraestructura.hogares.Ubicacion;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -11,8 +12,9 @@ public class Persona {
     private final Contacto contacto;
     private final LocalDateTime fechaNacimiento;
     private final Documento documento;
-    private final String domicilio;
+    private final Ubicacion domicilio = new Ubicacion();
     private final List<Contacto> contactos = new ArrayList<>();
+
 
     private Dueño dueño;
     private Rescatista rescatista;
@@ -22,7 +24,6 @@ public class Persona {
         this.contacto = contacto;
         this.fechaNacimiento = fechaNacimiento;
         this.documento = documento;
-        this.domicilio = domicilio;
         this.contactos.add(otroContacto);
     }
 
@@ -36,6 +37,14 @@ public class Persona {
 
     public String email() {
         return this.contacto.email();
+    }
+
+    public int numeroDocumento() {
+        return this.documento.numero();
+    }
+
+    public Ubicacion domicilio() {
+        return this.domicilio;
     }
 
     public Dueño dueño() {

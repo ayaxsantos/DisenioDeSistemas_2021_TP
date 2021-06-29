@@ -10,4 +10,8 @@ public class Documento {
         this.numero = numero;
     }
 
+    public Integer numero() {
+        return this.numero;
+    }
+
 }

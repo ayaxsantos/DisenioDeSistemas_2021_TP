@@ -1,3 +1,15 @@
 package dominio.persona;
 
-public class Rescatista  { }
+import infraestructura.hogares.Ubicacion;
+
+public class Rescatista  {
+
+    private Ubicacion ubicacion;
+
+    public Rescatista(Ubicacion ubicacion){
+        this.ubicacion = ubicacion;
+    }
+
+
+
+}

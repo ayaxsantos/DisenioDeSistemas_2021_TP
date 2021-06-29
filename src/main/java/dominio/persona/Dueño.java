@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Dueño {
 
+    private int idDuenio;
     private final List<Mascota> mascotas = new ArrayList<>();
 
     public void añadirMascota(Mascota mascota){
@@ -18,6 +19,11 @@ public class Dueño {
         return mascotas.stream()
             .filter(unaMascota -> unaMascota.id() == idMascota)
             .findFirst().orElseThrow(MascotaNoEncontradaException::new);
+    }
+
+    public Integer getIdDuenio()
+    {
+        return this.idDuenio;
     }
 
 }

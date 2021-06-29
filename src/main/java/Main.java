@@ -9,6 +9,8 @@ import infraestructura.hogares.ServicioHogares;
 import java.io.IOException;
 import java.util.List;
 import dominio.persona.*;
+import infraestructura.hogares.Ubicacion;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -36,5 +38,11 @@ public class Main {
         System.out.println(message.getSid());
     }
 
+    public boolean probarDistancia(,, int radio){
 
+
+
+
+
+    }
 }
