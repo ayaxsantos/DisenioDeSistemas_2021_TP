@@ -1,8 +1,9 @@
-package dominio.notificacion;
+package dominio.persona;
 
 import java.util.List;
 import java.util.ArrayList;
 
+import dominio.notificacion.MedioDeComunicacion;
 import dominio.notificacion.mensaje.Mensaje;
 import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
@@ -31,6 +32,10 @@ public class Contacto {
 
     public void añadirMedioDeComunicacion(EstrategiaDeComunicacion estrategiaDeComunicacion, boolean esPreferido) {
         mediosDeComunicacion.add(new MedioDeComunicacion(estrategiaDeComunicacion, esPreferido));
+    }
+
+    public String nombre() {
+        return this.nombre;
     }
 
     public String telefono() {

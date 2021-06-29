@@ -1,8 +1,8 @@
 package dominio.autenticacion;
 
-import dominio.excepcion.OrganizacionNoEncontradaException;
-import dominio.organizacion.Organizacion;
 import dominio.persona.Persona;
+import dominio.organizacion.Organizacion;
+import dominio.excepcion.OrganizacionNoEncontradaException;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ public class Usuario {
     private List<Organizacion> organizacionesPertenecientes;
     private Organizacion organizacionActual;
     private Persona persona;
+    private boolean estaLogueado = false;
 
     public Usuario(String usuario, String contraseña, Persona persona) {
         ValidadorContraseña.ejecutar(contraseña);
@@ -25,26 +26,31 @@ public class Usuario {
         return this.persona;
     }
 
-    public void cerrarSesion() {
-        System.out.println("Sesion cerrada");
+    public boolean existe(String unUsuario) {
+        return this.usuario.equals(unUsuario);
     }
 
-    public void iniciarSesion(String unUsuario, String unaContraseña) {
-        if (unUsuario.equals(this.usuario) && unaContraseña.equals(this.contraseña))
-            System.out.println("Sesion iniciada");
-        else System.out.println("Sesion fallida");
+    public void iniciarSesion(String usuario, String contraseña) {
+        this.estaLogueado = this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
+    }
+
+    public void cerrarSesion() {
+        this.estaLogueado = false;
     }
 
     public void elegirOrganizacion(Organizacion unaOrganizacion) {
-        organizacionActual = this.organizacionesPertenecientes.stream().
-                filter(organizacion -> organizacion.equals(unaOrganizacion)).findFirst().orElseThrow(OrganizacionNoEncontradaException::new);
+        organizacionActual = this.organizacionesPertenecientes.stream()
+            .filter(organizacion -> organizacion.equals(unaOrganizacion))
+            .findFirst()
+            .orElseThrow(OrganizacionNoEncontradaException::new);
     }
 
-    public void añadirOrganizacion(Organizacion unaOrganizacion) {
-        this.organizacionesPertenecientes.add(unaOrganizacion);
+    public void añadirOrganizacion(Organizacion organizacion) {
+        this.organizacionesPertenecientes.add(organizacion);
     }
 
     public String nombreUsuario() {
         return this.usuario;
     }
+
 }

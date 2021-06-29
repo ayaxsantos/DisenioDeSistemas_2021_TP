@@ -1,6 +1,6 @@
 package dominio.persona;
 
-import dominio.notificacion.Contacto;
+import dominio.notificacion.mensaje.Mensaje;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -8,49 +8,61 @@ import java.time.LocalDateTime;
 
 public class Persona {
 
-    private final String nombre;
-    private final String apellido;
+    private final Contacto contacto;
     private final LocalDateTime fechaNacimiento;
-    private String tipoDocumento;
-    private final int numeroDocumento;
+    private final Documento documento;
     private final String domicilio;
     private final List<Contacto> contactos = new ArrayList<>();
 
-    public Persona(String nombre, String apellido, LocalDateTime fechaNacimiento, int numeroDocumento, String domicilio, String telefono, String email) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+    private Dueño dueño;
+    private Rescatista rescatista;
+    private Voluntario voluntario;
+
+    public Persona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, String domicilio, Contacto otroContacto) {
+        this.contacto = contacto;
         this.fechaNacimiento = fechaNacimiento;
-        this.numeroDocumento = numeroDocumento;
+        this.documento = documento;
         this.domicilio = domicilio;
-        this.contactos.add(new Contacto(this.nombre, this.apellido, telefono, email));
-    }
-
-    public Contacto contactoPersonal(){
-        return this.contactos.get(0);
-    }
-
-    public void añadirContacto(Contacto unContacto){
-        contactos.add(unContacto);
+        this.contactos.add(otroContacto);
     }
 
     public String nombre() {
-        return this.nombre;
+        return this.contacto.nombre();
     }
 
-    public String apellido() {
-        return this.apellido;
+    public String telefono() {
+        return this.contacto.telefono();
     }
 
-    public List<Contacto> contactos() {
-        return this.contactos;
+    public String email() {
+        return this.contacto.email();
     }
 
-    public String telefonoPersonal() {
-        return this.contactos.get(0).telefono();
+    public Dueño dueño() {
+        if(this.dueño == null)
+            this.dueño = new Dueño();
+        return this.dueño;
     }
 
-    public String emailPersonal() {
-        return this.contactos.get(0).email();
+    public Rescatista rescatista() {
+        if(this.rescatista == null)
+            this.rescatista = new Rescatista();
+        return this.rescatista;
+    }
+
+    public Voluntario voluntario() {
+        if(this.voluntario == null)
+            this.voluntario = new Voluntario();
+        return this.voluntario;
+    }
+
+    public void notificar(Mensaje mensaje) {
+        this.contacto.notificar(mensaje);
+        this.contactos.forEach(unContacto -> unContacto.notificar(mensaje));
+    }
+
+    public void añadirContacto(Contacto contacto){
+        contactos.add(contacto);
     }
 
 }

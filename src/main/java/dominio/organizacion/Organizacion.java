@@ -2,10 +2,10 @@ package dominio.organizacion;
 
 import dominio.Administrador;
 import dominio.animal.Mascota;
-import dominio.excepcion.MascotaNoCorrespondeADueñoException;
 import dominio.persona.Dueño;
 import dominio.persona.Rescatista;
 import dominio.persona.Voluntario;
+import dominio.excepcion.MascotaNoEncontradaException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +79,6 @@ public class Organizacion {
 
     //tengo la lista de dueños, y quiero la mascota que puede estar en cualquiera de ellos // hay que hacer un map
     public Mascota buscarMascota(int idMascota) {
-        return dueños.stream().map(dueño -> dueño.buscarMascota(idMascota)).findFirst().orElseThrow(MascotaNoCorrespondeADueñoException::new);
+        return dueños.stream().map(dueño -> dueño.buscarMascota(idMascota)).findFirst().orElseThrow(MascotaNoEncontradaException::new);
     }
 }

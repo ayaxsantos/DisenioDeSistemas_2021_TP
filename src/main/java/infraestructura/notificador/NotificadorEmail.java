@@ -1,5 +1,7 @@
 package infraestructura.notificador;
 
+import dominio.excepcion.EmailNoEnviadoException;
+
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -29,7 +31,7 @@ public class NotificadorEmail implements Notificador {
             transporte.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
             transporte.close();
         } catch (MessagingException ex) {
-            ex.printStackTrace();
+            throw new EmailNoEnviadoException();
         }
     }
 

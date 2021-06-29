@@ -1,16 +1,22 @@
 package dominio;
 
 import dominio.autenticacion.Usuario;
-import dominio.excepcion.UsuarioNoEncontrado;
+import dominio.excepcion.UsuarioNoEncontradoException;
 import dominio.organizacion.Organizacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sistema {
-    private List<Usuario> usuariosRegistrados;
-    private List<Organizacion> organizacionesRegistradas;
+
+    private final List<Usuario> usuarios = new ArrayList<>();
+    private final List<Organizacion> organizaciones = new ArrayList<>();
 
     public Usuario buscarUsuario(String unUsuario){
-        return usuariosRegistrados.stream().filter(usuario -> usuario.nombreUsuario().equals(unUsuario)).findFirst().orElseThrow(UsuarioNoEncontrado::new);
+        return usuarios.stream()
+            .filter(usuario -> usuario.existe(unUsuario))
+            .findFirst()
+            .orElseThrow(UsuarioNoEncontradoException::new);
     }
+
 }

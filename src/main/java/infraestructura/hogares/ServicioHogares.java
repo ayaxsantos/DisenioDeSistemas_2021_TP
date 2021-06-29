@@ -5,6 +5,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import dominio.excepcion.HogaresNoObtenidosException;
+
 import java.io.IOException;
 
 public class ServicioHogares {
@@ -20,11 +22,15 @@ public class ServicioHogares {
             .build();
     }
 
-    public HogaresResponse hogares(int paginas) throws IOException {
-        Hogares hogares = this.retrofit.create(Hogares.class);
-        Call<HogaresResponse> solicitud = hogares.todos(paginas, bearerToken);
-        Response<HogaresResponse> respuesta = solicitud.execute();
-        return respuesta.body();
+    public HogaresResponse hogares(int paginas) {
+        try {
+            Hogares hogares = this.retrofit.create(Hogares.class);
+            Call<HogaresResponse> solicitud = hogares.todos(paginas, bearerToken);
+            Response<HogaresResponse> respuesta = solicitud.execute();
+            return respuesta.body();
+        } catch (IOException e) {
+            throw new HogaresNoObtenidosException();
+        }
     }
 
 }
