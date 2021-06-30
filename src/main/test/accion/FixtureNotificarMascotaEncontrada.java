@@ -4,6 +4,7 @@ import dominio.animal.Sexo;
 import dominio.animal.Animal;
 import dominio.animal.Mascota;
 
+import dominio.animal.Tamaño;
 import dominio.persona.Contacto;
 import dominio.notificacion.estrategia.SMS;
 import dominio.notificacion.estrategia.Email;
@@ -13,6 +14,7 @@ import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 import dominio.persona.Persona;
 import dominio.persona.Documento;
 
+import dominio.persona.UbicacionPersona;
 import infraestructura.notificador.Notificador;
 
 import java.time.LocalDateTime;
@@ -26,13 +28,14 @@ public class FixtureNotificarMascotaEncontrada {
     private static final String apodo = "Huesos";
     private static final int edad = 10;
     private static final Sexo sexo = Sexo.MACHO;
+    private static final Tamaño tamaño = Tamaño.CHICO;
     private static final String descripcionFisica = "Chiquito y dormilon";
 
     protected static final int numeroDocumentoDueño = 11111;
     private static final String nombreDueño = "Camila";
     private static final String apellidoDueño = "Berro";
     private static final LocalDateTime fechaNacimientoDueño = LocalDateTime.now();
-    private static final String direccionDueño = "Avenida Siempre Viva 742";
+    private static final UbicacionPersona direccionDueño = new UbicacionPersona(-34.58805543938273, -58.39709555890073);
     private static final String emailDueño = "ccalvoromero@gmail.com";
     protected static final String numeroDueño = "+5491134561101";
 
@@ -48,7 +51,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static final String nombreRescatista = "Celeste";
     private static final String apellidoRescatista = "Fernandez";
     private static final LocalDateTime fechaNacimientoRescatista = LocalDateTime.now();
-    private static final String direccionRescatista = "Calle Falsa 123";
+    private static final UbicacionPersona direccionRescatista = new UbicacionPersona(-34.46013439745161, -58.80857841888721);
     protected static final String numeroSMSRescatista = "+12252247262";
     protected static final String numeroWhatsappRescatista = "+14155238886";
     private static final String emailRescatista = "celestefernandez@gmail.com";
@@ -63,9 +66,9 @@ public class FixtureNotificarMascotaEncontrada {
     protected static String mensajeMascotaEncontrada = "";
     protected static final String asuntoMascotaEncontrada = "[Importante] Rescate de Patitas";
 
-    private static Mascota mascota;
+    public static Mascota mascota;
     protected static Persona personaDueño;
-    protected static Persona personaRescatista;
+    public static Persona personaRescatista;
 
     private static Contacto contactoDueño;
     private static Contacto contactoRescatista;
@@ -85,8 +88,8 @@ public class FixtureNotificarMascotaEncontrada {
         whatsApp = new WhatsApp(notificador);
     }
 
-    protected static void inicializarMascota() {
-        mascota = crearMascota(idMascotaEncontradaExistente, nombreMascota, animal, apodo, edad, sexo, descripcionFisica);
+    public static void inicializarMascota() {
+        mascota = crearMascota(idMascotaEncontradaExistente, nombreMascota, animal, apodo, edad, sexo, tamaño, descripcionFisica);
     }
 
     protected static void inicializarDueño() {
@@ -101,7 +104,7 @@ public class FixtureNotificarMascotaEncontrada {
         personaDueño.dueño().añadirMascota(mascota);
     }
 
-    protected static void inicializarRescatista() {
+    public static void inicializarRescatista() {
         otroContactoRescatista = crearContacto(nombreContactoRescatista, apellidoContactoRescatista, numeroContactoRescatista, emailContactoRescatista);
         documentoRescatista = crearDocumento(tipoDocumento, numeroDocumentoRescatista);
         contactoRescatista = crearContacto(nombreRescatista, apellidoRescatista,  numeroSMSRescatista, emailRescatista);
@@ -109,11 +112,11 @@ public class FixtureNotificarMascotaEncontrada {
         mensajeMascotaEncontrada = mensajeMascotaEncontrada(personaRescatista, mascota);
     }
 
-    private static Mascota crearMascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, String descripcionFisica) {
-        return new Mascota(id, nombre, animal, apodo, edad, sexo, descripcionFisica);
+    private static Mascota crearMascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica) {
+        return new Mascota(id, nombre, animal, apodo, edad, sexo, tamaño, descripcionFisica);
     }
 
-    private static Persona crearPersona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, String direccion, Contacto otroContacto) {
+    private static Persona crearPersona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, UbicacionPersona direccion, Contacto otroContacto) {
         return new Persona(contacto, fechaNacimiento, documento, direccion, otroContacto);
     }
 

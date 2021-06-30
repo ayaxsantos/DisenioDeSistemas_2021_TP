@@ -1,15 +1,15 @@
 package dominio.persona;
 
-import infraestructura.hogares.Ubicacion;
-
 public class Rescatista  {
 
-    private Ubicacion ubicacion;
+    private int radioDeHogares;
 
-    public Rescatista(Ubicacion ubicacion){
-        this.ubicacion = ubicacion;
+    public int radioDeHogares() {
+        return this.radioDeHogares;
     }
 
-
+    public void asignarRadioHogaresDeseado(int radioDeHogares){
+        this.radioDeHogares = radioDeHogares;
+    }
 
 }

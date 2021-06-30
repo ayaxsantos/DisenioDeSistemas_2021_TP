@@ -20,7 +20,7 @@ public class Mascota {
     private final List<Foto> fotos = new ArrayList<>();
     private final Map<Caracteristica, String> caracteristicas = new HashMap<>();
 
-    public Mascota(int id, String nombre, Animal animal, String apodo, Integer edad, Sexo sexo, String descripcionFisica){
+    public Mascota(int id, String nombre, Animal animal, String apodo, Integer edad, Sexo sexo, Tamaño tamaño, String descripcionFisica){
         this.id = id;
         this.nombre = nombre;
         this.animal = animal;
@@ -47,12 +47,12 @@ public class Mascota {
         return animal;
     }
 
-    public Map<Caracteristica,String> caracteristicas()
-    {
+    public Map<Caracteristica,String> caracteristicas() {
         return this.caracteristicas;
     }
 
     public Tamaño tamaño() {
         return tamaño;
     }
+
 }
