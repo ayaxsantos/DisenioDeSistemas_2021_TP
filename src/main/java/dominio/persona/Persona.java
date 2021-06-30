@@ -1,10 +1,10 @@
 package dominio.persona;
 
-import dominio.notificacion.mensaje.Mensaje;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+
+import dominio.notificacion.mensaje.Mensaje;
 
 public class Persona {
 

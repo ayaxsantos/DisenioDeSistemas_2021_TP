@@ -3,7 +3,7 @@ package accion;
 import dominio.animal.Mascota;
 
 import dominio.persona.Persona;
-import infraestructura.Mascotas;
+import infraestructura.mascotas.Mascotas;
 import infraestructura.hogares.Hogar;
 import dominio.hogar.criterios.*;
 import dominio.hogar.ValidacionHogar;

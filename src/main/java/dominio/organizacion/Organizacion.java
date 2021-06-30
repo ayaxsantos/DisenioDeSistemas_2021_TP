@@ -1,14 +1,13 @@
 package dominio.organizacion;
 
 import dominio.Administrador;
-import dominio.animal.Mascota;
 import dominio.persona.Dueño;
+import dominio.persona.Persona;
 import dominio.persona.Rescatista;
 import dominio.persona.Voluntario;
-import dominio.excepcion.MascotaNoEncontradaException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Organizacion {
 
@@ -77,8 +76,8 @@ public class Organizacion {
         //TODO: en entrega más adelante
     }
 
-    //tengo la lista de dueños, y quiero la mascota que puede estar en cualquiera de ellos // hay que hacer un map
-    public Mascota buscarMascota(int idMascota) {
-        return dueños.stream().map(dueño -> dueño.buscarMascota(idMascota)).findFirst().orElseThrow(MascotaNoEncontradaException::new);
+    private void generarVoluntario(Persona persona){
+        this.añadirVoluntario(persona.voluntario());
     }
+
 }
