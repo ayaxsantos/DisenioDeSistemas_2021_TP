@@ -1,12 +1,9 @@
-package infraestructura.hogares.criterios;
+package dominio.hogar.criterios;
 
 import dominio.animal.Mascota;
+import dominio.hogar.ValidacionHogar;
 import dominio.persona.Persona;
 import infraestructura.hogares.Hogar;
-import infraestructura.hogares.HogaresResponse;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CapacidadDisponible implements ValidacionHogar {
 

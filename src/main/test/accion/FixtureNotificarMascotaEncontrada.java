@@ -51,7 +51,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static final String nombreRescatista = "Celeste";
     private static final String apellidoRescatista = "Fernandez";
     private static final LocalDateTime fechaNacimientoRescatista = LocalDateTime.now();
-    private static final UbicacionPersona direccionRescatista = new UbicacionPersona(-34.46013439745161, -58.80857841888721);
+    private static final UbicacionPersona direccionRescatista = new UbicacionPersona(-34.58805543938273, -58.39709555890073);
     protected static final String numeroSMSRescatista = "+12252247262";
     protected static final String numeroWhatsappRescatista = "+14155238886";
     private static final String emailRescatista = "celestefernandez@gmail.com";

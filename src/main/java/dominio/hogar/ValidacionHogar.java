@@ -1,4 +1,4 @@
-package infraestructura.hogares.criterios;
+package dominio.hogar;
 
 import dominio.animal.Mascota;
 import dominio.persona.Persona;

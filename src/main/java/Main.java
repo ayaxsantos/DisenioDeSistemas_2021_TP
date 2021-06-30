@@ -4,13 +4,11 @@ import com.twilio.rest.api.v2010.account.Message;
 
 import dominio.animal.Mascota;
 import dominio.excepcion.MascotaNoEncontradaException;
-import infraestructura.hogares.Hogar;
-import infraestructura.hogares.ServicioHogares;
+
 
 import java.io.IOException;
 import java.util.List;
 import dominio.persona.*;
-import infraestructura.hogares.Ubicacion;
 
 import java.util.ArrayList;
 
@@ -18,7 +16,7 @@ public class Main {
 
     private static List<Dueño> dueños = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         pruebasTwilio();
     }
 

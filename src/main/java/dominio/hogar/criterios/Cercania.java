@@ -1,6 +1,7 @@
-package infraestructura.hogares.criterios;
+package dominio.hogar.criterios;
 
 import dominio.animal.Mascota;
+import dominio.hogar.ValidacionHogar;
 import dominio.persona.Persona;
 
 import infraestructura.hogares.Hogar;
