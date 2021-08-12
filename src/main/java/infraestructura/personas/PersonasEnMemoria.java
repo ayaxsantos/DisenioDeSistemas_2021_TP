@@ -1,6 +1,7 @@
 package infraestructura.personas;
 
 import dominio.persona.Persona;
+import dominio.Personas;
 
 import java.util.ArrayList;
 import java.util.List;

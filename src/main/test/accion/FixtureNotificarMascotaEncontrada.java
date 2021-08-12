@@ -15,7 +15,7 @@ import dominio.persona.Persona;
 import dominio.persona.Documento;
 
 import dominio.persona.UbicacionPersona;
-import infraestructura.notificador.Notificador;
+import dominio.Notificador;
 
 import java.time.LocalDateTime;
 

@@ -1,7 +1,7 @@
 package infraestructura;
 
 import dominio.excepcion.EmailNoEnviadoException;
-import infraestructura.notificador.Notificador;
+import dominio.Notificador;
 import infraestructura.notificador.NotificadorEmail;
 
 import org.junit.jupiter.api.Test;

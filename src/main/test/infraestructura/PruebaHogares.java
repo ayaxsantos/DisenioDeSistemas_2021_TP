@@ -1,34 +1,29 @@
 package infraestructura;
 
-import dominio.excepcion.HogaresNoObtenidosException;
+import dominio.Hogares;
 import infraestructura.hogares.HogaresResponse;
-import infraestructura.hogares.ServicioHogares;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
+import org.mockito.Mockito;
 
-import static infraestructura.FixtureHogares.offsetValido;
-import static infraestructura.FixtureHogares.offsetInvalido;
+import static infraestructura.FixtureHogares.*;
 
 public class PruebaHogares {
 
-    private ServicioHogares servicioHogares;
+    private Hogares hogares;
 
     @BeforeEach
     void inicializar() {
-        servicioHogares = new ServicioHogares();
+        hogares = Mockito.mock(Hogares.class);
     }
 
     @Test
     public void se_obtienen_los_hogares_enviando_un_offset_valido_correctamente()  {
-        HogaresResponse respuesta = servicioHogares.hogares(offsetValido);
+        Mockito.when(hogares.obtener()).thenReturn(hogaresResponse);
+        HogaresResponse respuesta = hogares.obtener();
         Assertions.assertTrue(respuesta.hogares.size() > 0);
-    }
-
-    @Test
-    public void error_al_obtener_los_hogares_enviando_un_offset_erroneo()  {
-        Assertions.assertThrows(HogaresNoObtenidosException.class, () -> servicioHogares.hogares(offsetInvalido));
     }
 
 }

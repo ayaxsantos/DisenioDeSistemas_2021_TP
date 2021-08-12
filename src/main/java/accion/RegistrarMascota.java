@@ -6,7 +6,7 @@ import dominio.animal.Tamaño;
 
 import dominio.animal.Mascota;
 import dominio.persona.Persona;
-import infraestructura.personas.Personas;
+import dominio.Personas;
 
 public class RegistrarMascota {
 

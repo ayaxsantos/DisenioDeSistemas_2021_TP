@@ -1,18 +1,12 @@
 package dominio.notificacion.estrategia;
 
+import dominio.Notificador;
 import dominio.notificacion.mensaje.Mensaje;
-
-import infraestructura.notificador.Notificador;
-import infraestructura.notificador.NotificadorTwilio;
 
 public class WhatsApp implements EstrategiaDeComunicacion {
 
     private final Notificador notificador;
     private final String prefijo = "whatsapp:";
-
-    public WhatsApp() {
-        this.notificador = new NotificadorTwilio();
-    }
 
     public WhatsApp(Notificador notificador) {
         this.notificador = notificador;

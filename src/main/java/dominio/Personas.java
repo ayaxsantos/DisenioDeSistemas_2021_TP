@@ -1,4 +1,4 @@
-package infraestructura.personas;
+package dominio;
 
 import dominio.persona.Persona;
 

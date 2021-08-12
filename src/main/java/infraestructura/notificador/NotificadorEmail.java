@@ -1,6 +1,7 @@
 package infraestructura.notificador;
 
 import dominio.excepcion.EmailNoEnviadoException;
+import dominio.Notificador;
 
 import java.util.Properties;
 

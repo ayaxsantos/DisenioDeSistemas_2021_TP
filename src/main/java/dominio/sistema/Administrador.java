@@ -1,4 +1,4 @@
-package dominio;
+package dominio.sistema;
 
 import dominio.autenticacion.Usuario;
 import dominio.organizacion.Caracteristica;

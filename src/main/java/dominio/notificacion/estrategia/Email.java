@@ -1,16 +1,11 @@
 package dominio.notificacion.estrategia;
 
+import dominio.Notificador;
 import dominio.notificacion.mensaje.Mensaje;
-import infraestructura.notificador.Notificador;
-import infraestructura.notificador.NotificadorEmail;
 
 public class Email implements EstrategiaDeComunicacion {
 
     private final Notificador notificador;
-
-    public Email() {
-        this.notificador = new NotificadorEmail();
-    }
 
     public Email(Notificador notificador) {
         this.notificador = notificador;

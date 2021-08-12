@@ -1,6 +1,6 @@
 package dominio.organizacion;
 
-import dominio.Administrador;
+import dominio.sistema.Administrador;
 import dominio.persona.Dueño;
 import dominio.persona.Persona;
 import dominio.persona.Rescatista;

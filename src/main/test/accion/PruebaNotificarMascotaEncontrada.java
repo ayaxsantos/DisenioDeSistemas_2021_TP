@@ -3,8 +3,8 @@ package accion;
 import dominio.persona.Persona;
 import dominio.excepcion.MascotaNoEncontradaException;
 
-import infraestructura.personas.Personas;
-import infraestructura.notificador.Notificador;
+import dominio.Personas;
+import dominio.Notificador;
 
 import org.mockito.Mockito;
 import org.junit.jupiter.api.Test;

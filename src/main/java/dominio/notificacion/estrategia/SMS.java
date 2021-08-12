@@ -1,17 +1,11 @@
 package dominio.notificacion.estrategia;
 
+import dominio.Notificador;
 import dominio.notificacion.mensaje.Mensaje;
-
-import infraestructura.notificador.Notificador;
-import infraestructura.notificador.NotificadorTwilio;
 
 public class SMS implements EstrategiaDeComunicacion {
 
     private final Notificador notificador;
-
-    public SMS() {
-        this.notificador = new NotificadorTwilio();
-    }
 
     public SMS(Notificador notificador) {
         this.notificador = notificador;

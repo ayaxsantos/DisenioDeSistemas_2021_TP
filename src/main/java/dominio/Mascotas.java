@@ -1,4 +1,4 @@
-package infraestructura.mascotas;
+package dominio;
 
 import dominio.animal.Mascota;
 
