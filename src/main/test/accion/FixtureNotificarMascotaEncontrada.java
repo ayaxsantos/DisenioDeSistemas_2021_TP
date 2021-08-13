@@ -14,7 +14,7 @@ import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 import dominio.persona.Persona;
 import dominio.persona.Documento;
 
-import dominio.persona.UbicacionPersona;
+import dominio.persona.Direccion;
 import dominio.Notificador;
 
 import java.time.LocalDateTime;
@@ -35,7 +35,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static final String nombreDueño = "Camila";
     private static final String apellidoDueño = "Berro";
     private static final LocalDateTime fechaNacimientoDueño = LocalDateTime.now();
-    private static final UbicacionPersona direccionDueño = new UbicacionPersona(-34.58805543938273, -58.39709555890073);
+    private static final Direccion direccionDueño = new Direccion(-34.58805543938273, -58.39709555890073);
     private static final String emailDueño = "ccalvoromero@gmail.com";
     protected static final String numeroDueño = "+5491134561101";
 
@@ -51,7 +51,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static final String nombreRescatista = "Celeste";
     private static final String apellidoRescatista = "Fernandez";
     private static final LocalDateTime fechaNacimientoRescatista = LocalDateTime.now();
-    private static final UbicacionPersona direccionRescatista = new UbicacionPersona(-34.58805543938273, -58.39709555890073);
+    private static final Direccion direccionRescatista = new Direccion(-34.58805543938273, -58.39709555890073);
     protected static final String numeroSMSRescatista = "+12252247262";
     protected static final String numeroWhatsappRescatista = "+14155238886";
     private static final String emailRescatista = "celestefernandez@gmail.com";
@@ -116,7 +116,7 @@ public class FixtureNotificarMascotaEncontrada {
         return new Mascota(id, nombre, animal, apodo, edad, sexo, tamaño, descripcionFisica);
     }
 
-    private static Persona crearPersona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, UbicacionPersona direccion, Contacto otroContacto) {
+    private static Persona crearPersona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, Direccion direccion, Contacto otroContacto) {
         return new Persona(contacto, fechaNacimiento, documento, direccion, otroContacto);
     }
 

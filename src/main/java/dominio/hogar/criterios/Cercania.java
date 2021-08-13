@@ -14,7 +14,7 @@ public class Cercania implements ValidacionHogar {
         Double longitudRescatista = personaRescatista.domicilio().longitud();
         Double latitudHogar = hogar.ubicacion.latitud;
         Double longitudHogar = hogar.ubicacion.longitud;
-        Double diferenciaLatitud = latitudHogar -latitudRescatista;
+        Double diferenciaLatitud = latitudHogar - latitudRescatista;
         if(diferenciaLatitud < 0)
             diferenciaLatitud = diferenciaLatitud * (-1);
         Double diferenciaLongitud = longitudHogar - longitudRescatista;

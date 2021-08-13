@@ -1,6 +1,6 @@
 package dominio.persona;
 
-public class Rescatista  {
+public class Rescatista {
 
     private int radioDeHogares;
 

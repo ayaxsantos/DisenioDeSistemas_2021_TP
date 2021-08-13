@@ -11,14 +11,14 @@ public class Persona {
     private final Contacto contacto;
     private final LocalDateTime fechaNacimiento;
     private final Documento documento;
-    private final UbicacionPersona domicilio;
+    private final Direccion domicilio;
     private final List<Contacto> contactos = new ArrayList<>();
 
     private Dueño dueño;
     private Rescatista rescatista;
     private Voluntario voluntario;
 
-    public Persona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, UbicacionPersona domicilio, Contacto otroContacto) {
+    public Persona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, Direccion domicilio, Contacto otroContacto) {
         this.contacto = contacto;
         this.fechaNacimiento = fechaNacimiento;
         this.documento = documento;
@@ -42,7 +42,7 @@ public class Persona {
         return this.documento.numero();
     }
 
-    public UbicacionPersona domicilio() {
+    public Direccion domicilio() {
         return this.domicilio;
     }
 
