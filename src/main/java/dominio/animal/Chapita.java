@@ -9,8 +9,11 @@ public class Chapita {
         this.codigoQR = codigoQR;
     }
 
-    public void formulario(String codigoQR){
-
+    public void leer(String codigoQR){
+       // this.codigoQR.generarFormulario();
 
     }
+
+
+    public void generarFormulario(){}
 }
