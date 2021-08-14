@@ -1,9 +1,9 @@
-package accion;
+package accion.Rescatista;
 
 import dominio.animal.Mascota;
 import dominio.persona.Persona;
 import dominio.notificacion.mensaje.Mensaje;
-import dominio.notificacion.mensaje.MensajeMascotaEncontrada;
+import dominio.notificacion.mensaje.MensajeMascotaEncontradaPorRescatista;
 
 import dominio.Personas;
 
@@ -19,7 +19,7 @@ public class NotificarMascotaEncontrada {
         Persona personaDueño =  personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
         Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
         Mascota mascota = personaDueño.dueño().buscarMascota(idMascota);
-        Mensaje mensaje = new MensajeMascotaEncontrada(personaRescatista, mascota);
+        Mensaje mensaje = new MensajeMascotaEncontradaPorRescatista(personaRescatista, mascota);
         personaDueño.notificar(mensaje);
     }
 

@@ -1,4 +1,4 @@
-package accion;
+package accion.Rescatista;
 
 import dominio.animal.Mascota;
 import dominio.persona.Persona;

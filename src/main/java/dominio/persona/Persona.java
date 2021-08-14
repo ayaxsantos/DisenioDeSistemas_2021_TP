@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+import dominio.Publicaciones;
 import dominio.notificacion.mensaje.Mensaje;
+import dominio.publicacion.Publicacion;
 
 public class Persona {
 

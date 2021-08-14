@@ -1,4 +1,4 @@
-package accion;
+package accion.Duenio;
 
 import dominio.animal.Animal;
 import dominio.animal.Sexo;

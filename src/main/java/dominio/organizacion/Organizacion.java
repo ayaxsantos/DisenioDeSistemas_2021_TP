@@ -1,5 +1,7 @@
 package dominio.organizacion;
 
+import dominio.Publicaciones;
+import dominio.persona.Persona;
 import dominio.sistema.Administrador;
 import dominio.persona.Dueño;
 import dominio.persona.Rescatista;

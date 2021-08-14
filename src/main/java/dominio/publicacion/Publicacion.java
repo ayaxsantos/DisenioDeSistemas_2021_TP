@@ -14,15 +14,20 @@ public class Publicacion {
     private final String estadoMascota;
     private final List<String> fotosMascota = new ArrayList<>();
     private final LocalDateTime fecha;
-    private final boolean estaAprobada;
+    private boolean estaVisible;
 
     public Publicacion(Persona rescatista, Direccion ubicacionMascota, String estadoMascota) {
         this.rescatista = rescatista;
         this.ubicacionMascota = ubicacionMascota;
         this.estadoMascota = estadoMascota;
         this.fecha = LocalDateTime.now();
-        this.estaAprobada = false;
+        this.estaVisible = false;
     }
+
+    public void estaVisible(boolean estaVisible){
+        this.estaVisible = estaVisible;
+    }
+
 
 
 }
