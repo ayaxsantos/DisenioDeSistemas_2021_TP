@@ -1,12 +1,12 @@
-package accion.Duenio;
+package accion.dueño;
 
-import dominio.animal.Animal;
-import dominio.animal.Sexo;
-import dominio.animal.Tamaño;
-
-import dominio.animal.Mascota;
-import dominio.persona.Persona;
 import dominio.Personas;
+import dominio.persona.Persona;
+
+import dominio.animal.Sexo;
+import dominio.animal.Animal;
+import dominio.animal.Tamaño;
+import dominio.animal.Mascota;
 
 public class RegistrarMascota {
 
@@ -20,6 +20,7 @@ public class RegistrarMascota {
         Mascota mascota = new Mascota(idMascota, nombre, tipoAnimal, apodo, edad, sexo, tamaño, descripcionFisica);
         Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño);
         persona.dueño().añadirMascota(mascota);
+        personas.guardar(persona);
     }
 
 }

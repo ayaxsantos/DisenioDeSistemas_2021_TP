@@ -1,17 +1,14 @@
-package accion.Voluntario;
+package accion.voluntario;
 
 import dominio.Personas;
 import dominio.Publicaciones;
 import dominio.persona.Persona;
 import dominio.publicacion.Publicacion;
 
-
 public class AprobarPublicacion {
 
     private final Publicaciones publicaciones;
     private final Personas personas;
-
-
 
     public AprobarPublicacion(Publicaciones publicaciones, Personas personas) {
         this.publicaciones = publicaciones;
@@ -24,4 +21,5 @@ public class AprobarPublicacion {
         personaVoluntaria.voluntario().aprobarPublicacion(publicacion);
         publicaciones.guardar(publicacion);
     }
+
 }

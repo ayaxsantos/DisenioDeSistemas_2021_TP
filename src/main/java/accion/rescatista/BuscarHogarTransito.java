@@ -1,12 +1,12 @@
-package accion.Rescatista;
+package accion.rescatista;
 
-import dominio.animal.Mascota;
-import dominio.persona.Persona;
 import dominio.Hogares;
-import dominio.hogar.ValidacionHogar;
-
 import dominio.Personas;
 import dominio.Mascotas;
+import dominio.animal.Mascota;
+import dominio.persona.Persona;
+import dominio.hogar.ValidacionHogar;
+
 import infraestructura.hogares.Hogar;
 import infraestructura.hogares.HogaresResponse;
 

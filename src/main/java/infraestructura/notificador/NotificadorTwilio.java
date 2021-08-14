@@ -1,9 +1,10 @@
 package infraestructura.notificador;
 
+import dominio.Notificador;
+
 import com.twilio.Twilio;
 import com.twilio.type.PhoneNumber;
 import com.twilio.rest.api.v2010.account.Message;
-import dominio.Notificador;
 
 public class NotificadorTwilio implements Notificador {
 
@@ -14,7 +15,6 @@ public class NotificadorTwilio implements Notificador {
     public void enviar(String origen, String destinatario, String asunto, String cuerpo) {
         Twilio.init(idServicio, claveServicio);
         Message mensaje = Message.creator(new PhoneNumber(destinatario), new PhoneNumber(origen), cuerpo).create();
-        System.out.println(mensaje.getBody());
     }
 
 }

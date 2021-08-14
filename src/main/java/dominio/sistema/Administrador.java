@@ -1,8 +1,8 @@
 package dominio.sistema;
 
 import dominio.autenticacion.Usuario;
-import dominio.organizacion.Caracteristica;
 import dominio.organizacion.Organizacion;
+import dominio.organizacion.Caracteristica;
 
 public class Administrador {
 
@@ -33,4 +33,5 @@ public class Administrador {
     public Administrador crearAdministrador(Usuario unUsuario, Organizacion unaOrganizacion) {
         return new Administrador(unUsuario, unaOrganizacion);
     }
+
 }

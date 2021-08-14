@@ -3,8 +3,8 @@ package dominio.persona;
 import java.util.List;
 import java.util.ArrayList;
 
-import dominio.notificacion.MedioDeComunicacion;
 import dominio.notificacion.mensaje.Mensaje;
+import dominio.notificacion.MedioDeComunicacion;
 import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
 public class Contacto {

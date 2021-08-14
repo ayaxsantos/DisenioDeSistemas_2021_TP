@@ -24,17 +24,6 @@ public class ServicioHogares implements Hogares {
             .build();
     }
 
-    public HogaresResponse hogares(int paginas) {
-        try {
-            APIHogares hogares = this.retrofit.create(APIHogares.class);
-            Call<HogaresResponse> solicitud = hogares.todos(paginas, bearerToken);
-            Response<HogaresResponse> respuesta = solicitud.execute();
-            return respuesta.body();
-        } catch (IOException e) {
-            throw new HogaresNoObtenidosException();
-        }
-    }
-
     @Override
     public HogaresResponse obtener() {
         try {
@@ -46,4 +35,5 @@ public class ServicioHogares implements Hogares {
             throw new HogaresNoObtenidosException();
         }
     }
+
 }

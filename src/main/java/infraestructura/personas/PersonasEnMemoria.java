@@ -1,10 +1,10 @@
 package infraestructura.personas;
 
-import dominio.persona.Persona;
 import dominio.Personas;
+import dominio.persona.Persona;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class PersonasEnMemoria implements Personas {
 
@@ -16,6 +16,11 @@ public class PersonasEnMemoria implements Personas {
             .filter(persona -> persona.numeroDocumento() == numeroDocumento)
             .findFirst()
             .orElseThrow(RuntimeException::new);
+    }
+
+    @Override
+    public void guardar(Persona persona) {
+        personas.add(persona);
     }
 
 }

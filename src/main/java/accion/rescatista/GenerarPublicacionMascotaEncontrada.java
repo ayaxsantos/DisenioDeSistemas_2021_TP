@@ -1,4 +1,4 @@
-package accion.Rescatista;
+package accion.rescatista;
 
 import dominio.Personas;
 import dominio.Publicaciones;
