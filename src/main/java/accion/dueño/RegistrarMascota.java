@@ -16,7 +16,7 @@ public class RegistrarMascota {
         this.personas = personas;
     }
 
-    public void ejecutar(Integer documentoDueño, Integer idMascota, String nombre, Animal tipoAnimal, String apodo, Integer edad, Sexo sexo, Tamaño tamaño, String descripcionFisica){
+    public void ejecutar(int documentoDueño, int idMascota, String nombre, Animal tipoAnimal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica){
         Mascota mascota = new Mascota(idMascota, nombre, tipoAnimal, apodo, edad, sexo, tamaño, descripcionFisica);
         Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño);
         persona.dueño().añadirMascota(mascota);

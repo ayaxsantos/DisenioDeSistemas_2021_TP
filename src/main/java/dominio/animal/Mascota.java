@@ -13,14 +13,14 @@ public class Mascota {
     private final String nombre;
     private final Animal animal;
     private final String apodo;
-    private final Integer edad;
+    private final int edad;
     private final Sexo sexo;
     private final Tamaño tamaño;
     private final String descripcionFisica;
     private final List<Foto> fotos = new ArrayList<>();
     private final Map<Caracteristica, String> caracteristicas = new HashMap<>();
 
-    public Mascota(int id, String nombre, Animal animal, String apodo, Integer edad, Sexo sexo, Tamaño tamaño, String descripcionFisica){
+    public Mascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica){
         this.id = id;
         this.nombre = nombre;
         this.animal = animal;
@@ -31,8 +31,8 @@ public class Mascota {
         this.descripcionFisica = descripcionFisica;
     }
 
-    public void añadirFoto(Foto unaFoto){
-        fotos.add(unaFoto);
+    public void añadirFoto(Foto foto){
+        fotos.add(foto);
     }
 
     public int id() {

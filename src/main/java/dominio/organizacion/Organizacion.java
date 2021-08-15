@@ -1,6 +1,7 @@
 package dominio.organizacion;
 
 import dominio.persona.Persona;
+import dominio.pregunta.Pregunta;
 import dominio.sistema.Administrador;
 import dominio.persona.Dueño;
 import dominio.persona.Rescatista;
@@ -16,6 +17,8 @@ public class Organizacion {
     private final List<Rescatista> rescatistas = new ArrayList<>();
     private final List<Voluntario> voluntarios = new ArrayList<>();
     private final List<Caracteristica> caracteristicas = new ArrayList<>();
+    private final List<String> preguntasAdopcion = new ArrayList<>();
+    private final List<String> preguntasQuieroAdoptar = new ArrayList<>();
     private int tamañoFoto;
     private int calidadFoto;
 
@@ -38,6 +41,18 @@ public class Organizacion {
 
     public void quitarCaracteristica(Caracteristica unaCaracteristica) {
         this.caracteristicas.remove(unaCaracteristica);
+    }
+
+    public void agregarPreguntaAdopcion(String unaPregunta){
+        this.preguntasAdopcion.add(unaPregunta);
+    }
+
+    public void eliminarPreguntaAdopcion(String unaPregunta){
+        this.preguntasAdopcion.remove(unaPregunta);
+    }
+
+    public void agregarPreguntaQuieroAdoptar(String unaPregunta){
+        this.preguntasQuieroAdoptar.add(unaPregunta);
     }
 
     public void añadirAdministrador(Administrador unAdministrador) {

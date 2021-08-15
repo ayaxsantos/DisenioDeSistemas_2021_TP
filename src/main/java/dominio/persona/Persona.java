@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-import dominio.Publicaciones;
 import dominio.notificacion.mensaje.Mensaje;
-import dominio.publicacion.Publicacion;
 
 public class Persona {
 
@@ -19,6 +17,7 @@ public class Persona {
     private Dueño dueño;
     private Rescatista rescatista;
     private Voluntario voluntario;
+    private Adoptante adoptante;
 
     public Persona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, Direccion domicilio, Contacto otroContacto) {
         this.contacto = contacto;
@@ -64,6 +63,12 @@ public class Persona {
         if(this.voluntario == null)
             this.voluntario = new Voluntario();
         return this.voluntario;
+    }
+
+    public Adoptante adoptante() {
+        if(this.adoptante == null)
+            this.adoptante = new Adoptante();
+        return this.adoptante;
     }
 
     public void notificar(Mensaje mensaje) {

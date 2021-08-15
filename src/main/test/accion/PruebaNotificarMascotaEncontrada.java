@@ -1,6 +1,7 @@
 package accion;
 
 import dominio.persona.Persona;
+import accion.rescatista.NotificarMascotaEncontrada;
 import dominio.excepcion.MascotaNoEncontradaException;
 
 import dominio.Personas;
