@@ -6,9 +6,9 @@ import dominio.animal.Mascota;
 import dominio.excepcion.MascotaNoEncontradaException;
 
 
-import java.io.IOException;
 import java.util.List;
-import dominio.persona.*;
+
+import dominio.persona.rol.Dueño;
 
 import java.util.ArrayList;
 

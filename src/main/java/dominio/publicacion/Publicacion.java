@@ -2,12 +2,14 @@ package dominio.publicacion;
 
 import java.time.LocalDateTime;
 
-public class Publicacion {
+public abstract class Publicacion {
 
+    private final int numeroDocumento;
     private boolean estaVisible;
     private final LocalDateTime fecha;
 
-    public Publicacion() {
+    public Publicacion(int numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
         this.estaVisible = false;
         this.fecha = LocalDateTime.now();
     }

@@ -1,4 +1,4 @@
-package dominio.persona;
+package dominio.persona.rol;
 
 public class Rescatista {
 

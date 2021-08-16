@@ -1,11 +1,11 @@
 package dominio.organizacion;
 
 import dominio.persona.Persona;
-import dominio.pregunta.Pregunta;
+import dominio.publicacion.Publicacion;
 import dominio.sistema.Administrador;
-import dominio.persona.Dueño;
-import dominio.persona.Rescatista;
-import dominio.persona.Voluntario;
+import dominio.persona.rol.Dueño;
+import dominio.persona.rol.Rescatista;
+import dominio.persona.rol.Voluntario;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,6 +19,11 @@ public class Organizacion {
     private final List<Caracteristica> caracteristicas = new ArrayList<>();
     private final List<String> preguntasAdopcion = new ArrayList<>();
     private final List<String> preguntasQuieroAdoptar = new ArrayList<>();
+
+    private final List<Publicacion> publicacionesMascotaEncontrada = new ArrayList<>();
+    private final List<Publicacion> publicacionesMascotaEnAdopcion = new ArrayList<>();
+    private final List<Publicacion> publicacionesBusquedaAdopcion = new ArrayList<>();
+
     private int tamañoFoto;
     private int calidadFoto;
 
@@ -95,4 +100,15 @@ public class Organizacion {
         this.añadirVoluntario(persona.voluntario());
     }
 
+    public void añadirPublicacionBusquedaAdopcion(Publicacion publicacion) {
+        this.publicacionesBusquedaAdopcion.add(publicacion);
+    }
+
+    public void añadirPublicacionMascotaEnAdopcion(Publicacion publicacion) {
+        this.publicacionesMascotaEnAdopcion.add(publicacion);
+    }
+
+    public void añadirPublicacionMascotaEncontrada(Publicacion publicacion) {
+        this.publicacionesMascotaEncontrada.add(publicacion);
+    }
 }

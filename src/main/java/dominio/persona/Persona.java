@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 import dominio.notificacion.mensaje.Mensaje;
+import dominio.persona.rol.Adoptante;
+import dominio.persona.rol.Dueño;
+import dominio.persona.rol.Rescatista;
+import dominio.persona.rol.Voluntario;
 
 public class Persona {
 
