@@ -18,6 +18,8 @@ import dominio.persona.Direccion;
 import dominio.Notificador;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FixtureNotificarMascotaEncontrada {
 
@@ -30,6 +32,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static final Sexo sexo = Sexo.MACHO;
     private static final Tamaño tamaño = Tamaño.CHICO;
     private static final String descripcionFisica = "Chiquito y dormilon";
+    private static final List<String> fotos = new ArrayList<>();
 
     protected static final int numeroDocumentoDueño = 11111;
     private static final String nombreDueño = "Camila";
@@ -89,7 +92,7 @@ public class FixtureNotificarMascotaEncontrada {
     }
 
     public static void inicializarMascota() {
-        mascota = crearMascota(idMascotaEncontradaExistente, nombreMascota, animal, apodo, edad, sexo, tamaño, descripcionFisica);
+        mascota = crearMascota(idMascotaEncontradaExistente, nombreMascota, animal, apodo, edad, sexo, tamaño, descripcionFisica, fotos);
     }
 
     protected static void inicializarDueño() {
@@ -112,8 +115,8 @@ public class FixtureNotificarMascotaEncontrada {
         mensajeMascotaEncontrada = mensajeMascotaEncontrada(personaRescatista, mascota);
     }
 
-    private static Mascota crearMascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica) {
-        return new Mascota(id, nombre, animal, apodo, edad, sexo, tamaño, descripcionFisica);
+    private static Mascota crearMascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica, List<String> fotos) {
+        return new Mascota(id, nombre, animal, apodo, edad, sexo, tamaño, descripcionFisica, fotos);
     }
 
     private static Persona crearPersona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, Direccion direccion, Contacto otroContacto) {

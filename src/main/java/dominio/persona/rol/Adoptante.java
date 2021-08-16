@@ -1,3 +1,12 @@
 package dominio.persona.rol;
 
-public class Adoptante { }
+import dominio.persona.Preferencia;
+
+public class Adoptante {
+    private Preferencia preferencia;
+
+    public Preferencia preferencia() {
+        return this.preferencia;
+    }
+
+}

@@ -16,4 +16,15 @@ public class Preferencia {
         this.tamaño = tamaño;
     }
 
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public Tamaño getTamaño() {
+        return tamaño;
+    }
 }

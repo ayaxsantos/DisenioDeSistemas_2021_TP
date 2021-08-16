@@ -1,6 +1,9 @@
 package dominio.organizacion;
 
+import dominio.foto.CalidadFoto;
+import dominio.foto.TamañoFoto;
 import dominio.persona.Persona;
+import dominio.persona.rol.Adoptante;
 import dominio.publicacion.Publicacion;
 import dominio.sistema.Administrador;
 import dominio.persona.rol.Dueño;
@@ -16,6 +19,8 @@ public class Organizacion {
     private final List<Dueño> dueños = new ArrayList<>();
     private final List<Rescatista> rescatistas = new ArrayList<>();
     private final List<Voluntario> voluntarios = new ArrayList<>();
+    private final List<Persona> adoptantes = new ArrayList();
+    private final List<Persona> adoptantesActivos = new ArrayList<>();
     private final List<Caracteristica> caracteristicas = new ArrayList<>();
     private final List<String> preguntasAdopcion = new ArrayList<>();
     private final List<String> preguntasQuieroAdoptar = new ArrayList<>();
@@ -24,20 +29,28 @@ public class Organizacion {
     private final List<Publicacion> publicacionesMascotaEnAdopcion = new ArrayList<>();
     private final List<Publicacion> publicacionesBusquedaAdopcion = new ArrayList<>();
 
-    private int tamañoFoto;
-    private int calidadFoto;
+    private TamañoFoto tamañoFoto;
+    private CalidadFoto calidadFoto;
 
-    public Organizacion(int tamañoFoto, int calidadFoto) {
+    public Organizacion(TamañoFoto tamañoFoto, CalidadFoto calidadFoto) {
         this.tamañoFoto = tamañoFoto;
         this.calidadFoto = calidadFoto;
     }
 
-    public void tamañoFoto(int tamaño) {
-        this.tamañoFoto = tamaño;
+    public void tamañoFoto(int alto, int ancho) {
+        this.tamañoFoto = new TamañoFoto(alto, ancho);
     }
 
-    public void calidadFoto(int calidad) {
-        this.calidadFoto = calidad;
+    public void calidadFoto(String calidad) {
+        this.calidadFoto = CalidadFoto.obtener(calidad);
+    }
+
+    public TamañoFoto tamañoFoto() {
+        return this.tamañoFoto;
+    }
+
+    public CalidadFoto calidadFoto() {
+        return this.calidadFoto;
     }
 
     public void añadirCaracteristica(Caracteristica unaCaracteristica) {
@@ -92,11 +105,7 @@ public class Organizacion {
         this.voluntarios.remove(unVoluntario);
     }
 
-    public void normalizar(String rutaFoto) {
-        //TODO: en entrega más adelante
-    }
-
-    private void generarVoluntario(Persona persona){
+    private void generarVoluntario(dominio.persona.Persona persona){
         this.añadirVoluntario(persona.voluntario());
     }
 
@@ -111,4 +120,17 @@ public class Organizacion {
     public void añadirPublicacionMascotaEncontrada(Publicacion publicacion) {
         this.publicacionesMascotaEncontrada.add(publicacion);
     }
+
+    public List<Publicacion> publicacionesMascotaEnAdopcion() {
+        return this.publicacionesMascotaEnAdopcion;
+    }
+
+    public List<Persona> adoptantesActivos() {
+        return this.adoptantesActivos;
+    }
+
+    public void añadirAdoptanteActivo(Persona personaAdoptante) {
+        this.adoptantesActivos.add(personaAdoptante);
+    }
+
 }

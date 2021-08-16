@@ -1,13 +1,13 @@
 package accion.adoptante;
 
-import dominio.Organizaciones;
 import dominio.Personas;
-import dominio.organizacion.Organizacion;
 import dominio.persona.Persona;
+import dominio.persona.Preferencia;
+import dominio.Organizaciones;
+import dominio.organizacion.Organizacion;
 import dominio.notificacion.mensaje.Mensaje;
 import dominio.notificacion.mensaje.MensajePublicacionQuieroAdoptar;
 import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
-import dominio.persona.Preferencia;
 import dominio.publicacion.Publicacion;
 import dominio.publicacion.PublicacionBusquedaAdopcion;
 
@@ -26,12 +26,13 @@ public class GenerarPublicacionBusquedaAdopcion {
     }
 
     public void ejecutar(int numeroDocumentoAdoptante, int idOrganizacion, Preferencia preferencia, List<String> comodidades) {
-        Publicacion publicacion = new PublicacionBusquedaAdopcion(numeroDocumentoAdoptante, preferencia, comodidades);
         Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
+        Persona personaAdoptante = personas.obtenerPorNumeroDocumento(numeroDocumentoAdoptante);
+        Publicacion publicacion = new PublicacionBusquedaAdopcion(numeroDocumentoAdoptante, preferencia, comodidades);
         organizacion.añadirPublicacionBusquedaAdopcion(publicacion);
+        organizacion.añadirAdoptanteActivo(personaAdoptante);
         organizaciones.guardar(organizacion);
         Mensaje mensaje = new MensajePublicacionQuieroAdoptar(publicacion);
-        Persona personaAdoptante = personas.obtenerPorNumeroDocumento(numeroDocumentoAdoptante);
         mensaje.agregarEmailDestino(personaAdoptante.email());
         estrategiaDeComunicacion.enviar(mensaje);
     }

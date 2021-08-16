@@ -10,9 +10,43 @@ necesarias de la mascota.
 
  */
 
-public class EnviarRecomendacionAdopcion {
+import dominio.Organizaciones;
+import dominio.organizacion.Organizacion;
+import dominio.notificacion.mensaje.Mensaje;
+import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
+import dominio.notificacion.mensaje.MensajeRecomendacionesAdopcion;
+import dominio.persona.Persona;
+import dominio.publicacion.Publicacion;
 
-   //TODO Identificar --preferencias-- y --comodidades-- para armar las recomendaciones
-   //TODO Enviar el mail con las recomendaciones a todos las personas interesadas en adoptar (a las personas que armaron una publicacion)
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimerTask;
+
+public class EnviarRecomendacionAdopcion extends TimerTask {
+
+    private final Organizaciones organizaciones;
+    private final EstrategiaDeComunicacion estrategiaDeComunicacion;
+
+    public EnviarRecomendacionAdopcion(Organizaciones organizaciones, EstrategiaDeComunicacion estrategiaDeComunicacion) {
+        this.organizaciones = organizaciones;
+        this.estrategiaDeComunicacion = estrategiaDeComunicacion;
+    }
+
+    public void run() {
+        List<Organizacion> todasOrganizaciones = organizaciones.obtenerTodas();
+        todasOrganizaciones.forEach(organizacion -> {
+            List<Publicacion> publicaciones = organizacion.publicacionesMascotaEnAdopcion();
+            List<Persona> personasAdoptantesActivos = organizacion.adoptantesActivos();
+            personasAdoptantesActivos.forEach(personaAdoptante -> {
+                List<String> recomendaciones = this.determinarRecomendaciones(personaAdoptante, publicaciones);
+                Mensaje mensaje = new MensajeRecomendacionesAdopcion(personaAdoptante, recomendaciones);
+                estrategiaDeComunicacion.enviar(mensaje);
+            });
+        });
+    }
+
+    private List<String> determinarRecomendaciones(Persona personaAdoptante, List<Publicacion> publicaciones) {
+        return new ArrayList<>();
+    }
 
 }

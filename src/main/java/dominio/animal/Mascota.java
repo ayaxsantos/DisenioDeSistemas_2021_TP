@@ -2,8 +2,8 @@ package dominio.animal;
 
 import dominio.organizacion.Caracteristica;
 
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -17,10 +17,10 @@ public class Mascota {
     private final Sexo sexo;
     private final Tamaño tamaño;
     private final String descripcionFisica;
-    private final List<Foto> fotos = new ArrayList<>();
+    private final List<String> fotosNormalizadas = new ArrayList<>();
     private final Map<Caracteristica, String> caracteristicas = new HashMap<>();
 
-    public Mascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica){
+    public Mascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica, List<String> fotosNormalizadas){
         this.id = id;
         this.nombre = nombre;
         this.animal = animal;
@@ -29,10 +29,11 @@ public class Mascota {
         this.sexo = sexo;
         this.tamaño = tamaño;
         this.descripcionFisica = descripcionFisica;
+        this.fotosNormalizadas.addAll(fotosNormalizadas);
     }
 
-    public void añadirFoto(Foto foto){
-        fotos.add(foto);
+    public void añadirFotoNormalizada(String fotosNormalizada){
+        this.fotosNormalizadas.add(fotosNormalizada);
     }
 
     public int id() {

@@ -14,11 +14,11 @@ public class Administrador {
         this.usuario = unUsuario;
     }
 
-    public void definirTamañoFoto(int tamaño) {
-        organizacion.tamañoFoto(tamaño);
+    public void definirTamañoFoto(int alto, int ancho) {
+        organizacion.tamañoFoto(alto, ancho);
     }
 
-    public void definirCalidadFoto(int calidad) {
+    public void definirCalidadFoto(String calidad) {
         organizacion.calidadFoto(calidad);
     }
 
