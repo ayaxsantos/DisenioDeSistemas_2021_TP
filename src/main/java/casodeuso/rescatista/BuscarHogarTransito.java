@@ -1,4 +1,4 @@
-package accion.rescatista;
+package casodeuso.rescatista;
 
 import dominio.Hogares;
 import dominio.Personas;

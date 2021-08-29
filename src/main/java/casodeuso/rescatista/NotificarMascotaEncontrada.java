@@ -1,4 +1,4 @@
-package accion.rescatista;
+package casodeuso.rescatista;
 
 import dominio.animal.Mascota;
 import dominio.persona.Persona;

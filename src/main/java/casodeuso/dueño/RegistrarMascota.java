@@ -1,4 +1,4 @@
-package accion.dueño;
+package casodeuso.dueño;
 
 import dominio.Personas;
 import dominio.persona.Persona;

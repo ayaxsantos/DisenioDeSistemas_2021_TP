@@ -1,4 +1,4 @@
-package accion.voluntario;
+package casodeuso.voluntario;
 
 import dominio.Personas;
 import dominio.Publicaciones;

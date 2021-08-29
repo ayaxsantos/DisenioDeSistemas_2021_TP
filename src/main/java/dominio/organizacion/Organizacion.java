@@ -5,6 +5,7 @@ import dominio.foto.TamañoFoto;
 import dominio.persona.Persona;
 import dominio.persona.rol.Adoptante;
 import dominio.publicacion.Publicacion;
+import dominio.publicacion.PublicacionMascotaEnAdopcion;
 import dominio.sistema.Administrador;
 import dominio.persona.rol.Dueño;
 import dominio.persona.rol.Rescatista;
@@ -26,7 +27,7 @@ public class Organizacion {
     private final List<String> preguntasQuieroAdoptar = new ArrayList<>();
 
     private final List<Publicacion> publicacionesMascotaEncontrada = new ArrayList<>();
-    private final List<Publicacion> publicacionesMascotaEnAdopcion = new ArrayList<>();
+    private final List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion = new ArrayList<>();
     private final List<Publicacion> publicacionesBusquedaAdopcion = new ArrayList<>();
 
     private TamañoFoto tamañoFoto;
@@ -113,7 +114,7 @@ public class Organizacion {
         this.publicacionesBusquedaAdopcion.add(publicacion);
     }
 
-    public void añadirPublicacionMascotaEnAdopcion(Publicacion publicacion) {
+    public void añadirPublicacionMascotaEnAdopcion(PublicacionMascotaEnAdopcion publicacion) {
         this.publicacionesMascotaEnAdopcion.add(publicacion);
     }
 
@@ -121,7 +122,7 @@ public class Organizacion {
         this.publicacionesMascotaEncontrada.add(publicacion);
     }
 
-    public List<Publicacion> publicacionesMascotaEnAdopcion() {
+    public List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion() {
         return this.publicacionesMascotaEnAdopcion;
     }
 
