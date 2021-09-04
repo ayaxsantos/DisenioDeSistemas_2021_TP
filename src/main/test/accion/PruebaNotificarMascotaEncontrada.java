@@ -1,7 +1,7 @@
-package accion;
+package casodeuso;
 
 import dominio.persona.Persona;
-import accion.rescatista.NotificarMascotaEncontrada;
+import casodeuso.rescatista.NotificarMascotaEncontrada;
 import dominio.excepcion.MascotaNoEncontradaException;
 
 import dominio.Personas;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Assertions;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.any;
-import static accion.FixtureNotificarMascotaEncontrada.*;
+import static casodeuso.FixtureNotificarMascotaEncontrada.*;
 
 public class PruebaNotificarMascotaEncontrada {
 

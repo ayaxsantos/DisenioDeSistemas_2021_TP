@@ -1,4 +1,4 @@
-package accion.organizacion;
+package casodeuso.organizacion;
 
 import dominio.Normalizador;
 import dominio.Organizaciones;

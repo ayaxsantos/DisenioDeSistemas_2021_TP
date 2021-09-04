@@ -1,4 +1,4 @@
-package accion;
+package casodeuso;
 
 import dominio.animal.Sexo;
 import dominio.animal.Animal;

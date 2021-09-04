@@ -1,4 +1,4 @@
-package accion.adoptante;
+package casodeuso.adoptante;
 
 import dominio.Personas;
 import dominio.persona.Persona;

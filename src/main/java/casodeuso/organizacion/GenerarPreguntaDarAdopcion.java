@@ -1,19 +1,19 @@
-package accion.organizacion;
+package casodeuso.organizacion;
 
 import dominio.Organizaciones;
 import dominio.organizacion.Organizacion;
 
-public class EliminarPreguntaDarAdopcion {
+public class GenerarPreguntaDarAdopcion {
 
     private final Organizaciones organizaciones;
 
-    public EliminarPreguntaDarAdopcion(Organizaciones organizaciones) {
+    public GenerarPreguntaDarAdopcion(Organizaciones organizaciones) {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(int idOrganizacion, String preguntaAdopcion){
+    public void ejecutar(int idOrganizacion, String preguntaAdopcion) {
         Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
-        organizacion.eliminarPreguntaAdopcion(preguntaAdopcion);
+        organizacion.agregarPreguntaAdopcion(preguntaAdopcion);
         organizaciones.guardar(organizacion);
     }
 
