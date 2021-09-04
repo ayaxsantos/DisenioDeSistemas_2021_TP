@@ -4,6 +4,7 @@ import dominio.persona.Persona;
 import dominio.organizacion.Organizacion;
 import dominio.excepcion.OrganizacionNoEncontradaException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -20,6 +21,7 @@ public class Usuario {
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.persona = persona;
+        this.organizacionesPertenecientes = new ArrayList<>();
     }
 
     public Persona persona(){
@@ -53,4 +55,19 @@ public class Usuario {
         return this.usuario;
     }
 
+    public boolean estaLogueado() {
+        return estaLogueado;
+    }
+
+    public void setEstaLogueado(boolean estaLogueado) {
+        this.estaLogueado = estaLogueado;
+    }
+
+    public List<Organizacion> organizacionesPertenecientes() {
+        return organizacionesPertenecientes;
+    }
+
+    public Organizacion organizacionActual() {
+        return organizacionActual;
+    }
 }
