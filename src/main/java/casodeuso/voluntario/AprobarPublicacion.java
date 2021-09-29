@@ -1,24 +1,24 @@
 package casodeuso.voluntario;
 
-import dominio.Personas;
+import dominio.Voluntarios;
 import dominio.Publicaciones;
-import dominio.persona.Persona;
+import dominio.organizacion.Voluntario;
 import dominio.publicacion.Publicacion;
 
 public class AprobarPublicacion {
 
     private final Publicaciones publicaciones;
-    private final Personas personas;
+    private final Voluntarios voluntarios;
 
-    public AprobarPublicacion(Publicaciones publicaciones, Personas personas) {
+    public AprobarPublicacion(Publicaciones publicaciones, Voluntarios voluntarios) {
         this.publicaciones = publicaciones;
-        this.personas = personas;
+        this.voluntarios = voluntarios;
     }
 
-    public void ejecutar(int idPublicacion, int numeroDocumentoVoluntario){
-        Persona personaVoluntaria = personas.obtenerPorNumeroDocumento(numeroDocumentoVoluntario);
+    public void ejecutar(int idPublicacion, String nombreUsuario) {
+        Voluntario unVoluntario = voluntarios.obtenerPorNombreUsuario(nombreUsuario);
         Publicacion publicacion = publicaciones.obtenerPorId(idPublicacion);
-        personaVoluntaria.voluntario().aprobarPublicacion(publicacion);
+        unVoluntario.aprobarPublicacion(publicacion);
         publicaciones.guardar(publicacion);
     }
 

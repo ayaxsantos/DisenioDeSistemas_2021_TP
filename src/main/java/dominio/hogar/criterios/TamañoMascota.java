@@ -2,8 +2,8 @@ package dominio.hogar.criterios;
 
 import dominio.animal.Mascota;
 import dominio.animal.Tamaño;
-import dominio.hogar.ValidacionHogar;
 import dominio.persona.Persona;
+import dominio.hogar.ValidacionHogar;
 import infraestructura.hogares.Hogar;
 
 public class TamañoMascota implements ValidacionHogar {

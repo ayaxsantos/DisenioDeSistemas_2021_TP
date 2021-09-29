@@ -1,7 +1,5 @@
 package dominio.animal;
 
-import dominio.organizacion.Caracteristica;
-
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
@@ -18,22 +16,21 @@ public class Mascota {
     private final Tamaño tamaño;
     private final String descripcionFisica;
     private final List<String> fotosNormalizadas = new ArrayList<>();
-    private final Map<Caracteristica, String> caracteristicas = new HashMap<>();
+    private final Map<String, String> caracteristicas = new HashMap<>();
 
-    public Mascota(int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica, List<String> fotosNormalizadas){
-        this.id = id;
-        this.nombre = nombre;
-        this.animal = animal;
-        this.apodo = apodo;
-        this.edad = edad;
-        this.sexo = sexo;
-        this.tamaño = tamaño;
-        this.descripcionFisica = descripcionFisica;
-        this.fotosNormalizadas.addAll(fotosNormalizadas);
-    }
-
-    public void añadirFotoNormalizada(String fotosNormalizada){
-        this.fotosNormalizadas.add(fotosNormalizada);
+    public Mascota(
+        int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño,
+        String descripcionFisica, List<String> fotosNormalizadas,  Map<String, String> caracteristicas){
+            this.id = id;
+            this.nombre = nombre;
+            this.animal = animal;
+            this.apodo = apodo;
+            this.edad = edad;
+            this.sexo = sexo;
+            this.tamaño = tamaño;
+            this.descripcionFisica = descripcionFisica;
+            this.fotosNormalizadas.addAll(fotosNormalizadas);
+            this.caracteristicas.putAll(caracteristicas);
     }
 
     public int id() {
@@ -48,7 +45,7 @@ public class Mascota {
         return animal;
     }
 
-    public Map<Caracteristica,String> caracteristicas() {
+    public Map<String,String> caracteristicas() {
         return this.caracteristicas;
     }
 

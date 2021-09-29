@@ -18,7 +18,7 @@ public class NotificarMascotaEncontrada {
     public void ejecutar(int numeroDocumentoRescatista, int numeroDocumentoDueño, int idMascota){
         Persona personaDueño =  personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
         Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
-        Mascota mascota = personaDueño.dueño().buscarMascota(idMascota);
+        Mascota mascota = personaDueño.buscarMascota(idMascota);
         Mensaje mensaje = new MensajeNotificarMascotaEncontrada(personaRescatista, mascota);
         personaDueño.notificar(mensaje);
     }

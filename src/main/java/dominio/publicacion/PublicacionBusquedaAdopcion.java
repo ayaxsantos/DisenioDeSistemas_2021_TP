@@ -3,8 +3,6 @@ package dominio.publicacion;
 import java.util.List;
 import java.util.ArrayList;
 
-import dominio.persona.Preferencia;
-
 public class PublicacionBusquedaAdopcion extends Publicacion {
 
     private final Preferencia preferencia;

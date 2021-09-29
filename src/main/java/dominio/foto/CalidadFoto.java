@@ -13,7 +13,7 @@ public enum CalidadFoto {
         this.valor = valor;
     }
 
-    private String valor;
+    private final String valor;
 
     public static CalidadFoto obtener(String valor) {
         return Arrays.stream(CalidadFoto.values())

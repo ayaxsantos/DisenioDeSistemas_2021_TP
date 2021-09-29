@@ -4,43 +4,68 @@ import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+import dominio.animal.Mascota;
+import dominio.autenticacion.Usuario;
+import dominio.publicacion.Preferencia;
 import dominio.notificacion.mensaje.Mensaje;
-import dominio.persona.rol.Adoptante;
-import dominio.persona.rol.Dueño;
-import dominio.persona.rol.Rescatista;
-import dominio.persona.rol.Voluntario;
+import dominio.excepcion.MascotaNoEncontradaException;
 
 public class Persona {
 
-    private final Contacto contacto;
+    private final Usuario usuario;
+    private final Contacto contactoPersonal;
     private final LocalDateTime fechaNacimiento;
     private final Documento documento;
     private final Direccion domicilio;
     private final List<Contacto> contactos = new ArrayList<>();
+    private final List<Mascota> mascotas = new ArrayList<>();
+    private int radioHogares;
+    private Preferencia preferencia;
 
-    private Dueño dueño;
-    private Rescatista rescatista;
-    private Voluntario voluntario;
-    private Adoptante adoptante;
-
-    public Persona(Contacto contacto, LocalDateTime fechaNacimiento, Documento documento, Direccion domicilio, Contacto otroContacto) {
-        this.contacto = contacto;
+    public Persona(Contacto contactoPersonal, LocalDateTime fechaNacimiento, Documento documento,
+                   Direccion domicilio, Contacto otroContacto, Usuario usuario, int radioHogares) {
+        this.contactoPersonal = contactoPersonal;
         this.fechaNacimiento = fechaNacimiento;
         this.documento = documento;
         this.domicilio = domicilio;
         this.contactos.add(otroContacto);
+        this.usuario = usuario;
+        this.radioHogares = radioHogares;
+    }
+
+    public void notificar(Mensaje mensaje) {
+        this.contactoPersonal.notificar(mensaje);
+        this.contactos.forEach(unContacto -> unContacto.notificar(mensaje));
+    }
+
+    public Mascota buscarMascota(int idMascota) {
+        return mascotas.stream()
+            .filter(unaMascota -> unaMascota.id() == idMascota)
+            .findFirst().orElseThrow(MascotaNoEncontradaException::new);
+    }
+
+    public void añadirContacto(Contacto contacto){
+        contactos.add(contacto);
+    }
+
+    public void añadirMascota(Mascota mascota){
+        mascotas.add(mascota);
+    }
+
+    public void radioHogares(int radioDeHogares){
+        this.radioHogares = radioDeHogares;
     }
 
     public String nombre() {
-        return this.contacto.nombre();
+        return this.contactoPersonal.nombre();
     }
 
     public String telefono() {
-        return this.contacto.telefono();
+        return this.contactoPersonal.telefono();
     }
 
     public String email() {
-        return this.contacto.email();
+        return this.contactoPersonal.email();
     }
 
     public int numeroDocumento() {
@@ -51,37 +76,12 @@ public class Persona {
         return this.domicilio;
     }
 
-    public Dueño dueño() {
-        if(this.dueño == null)
-            this.dueño = new Dueño();
-        return this.dueño;
+    public int radioHogares() {
+        return this.radioHogares;
     }
 
-    public Rescatista rescatista() {
-        if(this.rescatista == null)
-            this.rescatista = new Rescatista();
-        return this.rescatista;
-    }
-
-    public Voluntario voluntario() {
-        if(this.voluntario == null)
-            this.voluntario = new Voluntario();
-        return this.voluntario;
-    }
-
-    public Adoptante adoptante() {
-        if(this.adoptante == null)
-            this.adoptante = new Adoptante();
-        return this.adoptante;
-    }
-
-    public void notificar(Mensaje mensaje) {
-        this.contacto.notificar(mensaje);
-        this.contactos.forEach(unContacto -> unContacto.notificar(mensaje));
-    }
-
-    public void añadirContacto(Contacto contacto){
-        contactos.add(contacto);
+    public Preferencia preferencia() {
+        return this.preferencia;
     }
 
 }

@@ -1,4 +1,4 @@
-package dominio.persona;
+package dominio.publicacion;
 
 import dominio.animal.Animal;
 import dominio.animal.Sexo;
@@ -16,15 +16,16 @@ public class Preferencia {
         this.tamaño = tamaño;
     }
 
-    public Animal getAnimal() {
+    public Animal animal() {
         return animal;
     }
 
-    public Sexo getSexo() {
+    public Sexo sexo() {
         return sexo;
     }
 
-    public Tamaño getTamaño() {
+    public Tamaño tamaño() {
         return tamaño;
     }
+
 }

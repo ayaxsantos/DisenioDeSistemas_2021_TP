@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ContraseñaDebil implements Criterios {
 
-    private final String rutaArchivo = "src/main/resources/contraseñasInseguras.txt";
+    private final static String rutaArchivo = "src/main/resources/contraseñasInseguras.txt";
 
     public void validar(String contraseña) {
         List<String> contraseñasInseguras = Archivo.leer(rutaArchivo);

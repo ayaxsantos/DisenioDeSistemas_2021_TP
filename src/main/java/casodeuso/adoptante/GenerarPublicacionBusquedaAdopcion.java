@@ -2,7 +2,7 @@ package casodeuso.adoptante;
 
 import dominio.Personas;
 import dominio.persona.Persona;
-import dominio.persona.Preferencia;
+import dominio.publicacion.Preferencia;
 import dominio.Organizaciones;
 import dominio.organizacion.Organizacion;
 import dominio.notificacion.mensaje.Mensaje;

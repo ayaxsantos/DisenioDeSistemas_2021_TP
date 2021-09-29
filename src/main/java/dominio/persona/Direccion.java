@@ -2,19 +2,19 @@ package dominio.persona;
 
 public class Direccion {
 
-    private Double latitud;
-    private Double longitud;
+    private final double latitud;
+    private final double longitud;
 
-    public Direccion(Double latitud, Double longitud) {
+    public Direccion(double latitud, double longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
     }
 
-    public Double latitud(){
+    public double latitud(){
         return this.latitud;
     }
 
-    public Double longitud(){
+    public double longitud(){
         return this.longitud;
     }
 

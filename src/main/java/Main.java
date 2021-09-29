@@ -3,24 +3,15 @@ import com.twilio.Twilio;
 import com.twilio.type.PhoneNumber;
 import com.twilio.rest.api.v2010.account.Message;
 
-import dominio.animal.Mascota;
-import dominio.excepcion.MascotaNoEncontradaException;
-
-
 import java.util.Calendar;
-import java.util.List;
 
 import dominio.notificacion.estrategia.Email;
-import dominio.persona.rol.Dueño;
 import infraestructura.notificador.NotificadorEmail;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-
-    private static List<Dueño> dueños = new ArrayList<>();
 
     public static void main(String[] args) {
         planificador();
@@ -42,13 +33,6 @@ public class Main {
         time.schedule(new EnviarRecomendacionAdopcion(null, new Email(new NotificadorEmail())), calendar.getTime(), TimeUnit.DAYS.toMillis(7));
     }
 
-    public static Mascota buscarMascota(int idMascota) {
-        return dueños.stream()
-            .map(dueño -> dueño.buscarMascota(idMascota))
-            .findFirst()
-            .orElseThrow(MascotaNoEncontradaException::new);
-    }
-
     public static void pruebasTwilio() {
         final String ACCOUNT_SID = "ACf25d0dc84e759ee44aabaae28289e897";
         final String AUTH_TOKEN = "427b2790814830815dc832a4168d47bc";
@@ -58,6 +42,5 @@ public class Main {
         Message message = Message.creator(to, from, "hola").create();
         System.out.println(message.getSid());
     }
-
 
 }

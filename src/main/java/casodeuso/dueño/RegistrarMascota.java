@@ -9,6 +9,7 @@ import dominio.animal.Tamaño;
 import dominio.animal.Mascota;
 
 import java.util.List;
+import java.util.Map;
 
 public class RegistrarMascota {
 
@@ -18,11 +19,12 @@ public class RegistrarMascota {
         this.personas = personas;
     }
 
-    public void ejecutar(int documentoDueño, int idMascota, String nombre, Animal tipoAnimal,
-        String apodo, int edad, Sexo sexo, Tamaño tamaño, String descripcionFisica, List<String> fotos){
-            Mascota mascota = new Mascota(idMascota, nombre, tipoAnimal, apodo, edad, sexo, tamaño, descripcionFisica, fotos);
+    public void ejecutar(
+        int documentoDueño, int idMascota, String nombre, Animal tipoAnimal, String apodo, int edad, Sexo sexo,
+        Tamaño tamaño, String descripcionFisica, List<String> fotos, Map<String, String> caracteristicas){
+            Mascota mascota = new Mascota(idMascota, nombre, tipoAnimal, apodo, edad, sexo, tamaño, descripcionFisica, fotos, caracteristicas);
             Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño);
-            persona.dueño().añadirMascota(mascota);
+            persona.añadirMascota(mascota);
             personas.guardar(persona);
     }
 

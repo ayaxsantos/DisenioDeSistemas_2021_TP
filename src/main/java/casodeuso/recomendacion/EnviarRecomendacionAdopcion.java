@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 
 import dominio.Organizaciones;
 import dominio.persona.Persona;
-import dominio.persona.Preferencia;
+import dominio.publicacion.Preferencia;
 import dominio.organizacion.Organizacion;
 import dominio.notificacion.mensaje.Mensaje;
-import dominio.publicacion.PublicacionMascotaEnAdopcion;
+import dominio.publicacion.Publicacion;
 import dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 import dominio.notificacion.mensaje.MensajeRecomendacionesAdopcion;
 
@@ -36,25 +36,25 @@ public class EnviarRecomendacionAdopcion extends TimerTask {
     public void run() {
         List<Organizacion> todasOrganizaciones = organizaciones.obtenerTodas();
         todasOrganizaciones.forEach(organizacion -> {
-            List<PublicacionMascotaEnAdopcion> publicaciones = organizacion.publicacionesMascotaEnAdopcion();
-            List<Persona> personasAdoptantesActivos = organizacion.adoptantesActivos();
-            personasAdoptantesActivos.forEach(personaAdoptante -> {
-                List<String> recomendaciones = this.determinarRecomendaciones(personaAdoptante, publicaciones);
-                Mensaje mensaje = new MensajeRecomendacionesAdopcion(personaAdoptante, recomendaciones);
+            List<Publicacion> publicaciones = organizacion.publicacionesMascotaEnAdopcion();
+            List<Persona> adoptantesActivos = organizacion.adoptantesActivos();
+            adoptantesActivos.forEach(adoptante -> {
+                List<String> recomendaciones = this.determinarRecomendaciones(adoptante, publicaciones);
+                Mensaje mensaje = new MensajeRecomendacionesAdopcion(adoptante, recomendaciones);
                 estrategiaDeComunicacion.enviar(mensaje);
             });
         });
     }
 
-    private List<String> determinarRecomendaciones(Persona personaAdoptante, List<PublicacionMascotaEnAdopcion> publicacionesAdopcion) {
-        Preferencia preferenciaAdoptante = personaAdoptante.adoptante().preferencia();
+    private List<String> determinarRecomendaciones(Persona personaAdoptante, List<Publicacion> publicacionesAdopcion) {
+        Preferencia preferenciaAdoptante = personaAdoptante.preferencia();
         return publicacionesAdopcion.stream()
             .filter(publicacionAdopcion -> this.condicionesParaFiltrar(publicacionAdopcion, preferenciaAdoptante))
             .map(Object::toString)
             .collect(Collectors.toList());
     }
 
-    private boolean condicionesParaFiltrar(PublicacionMascotaEnAdopcion publicacionAdopcion, Preferencia preferenciaAdoptante) {
+    private boolean condicionesParaFiltrar(Publicacion publicacionAdopcion, Preferencia preferenciaAdoptante) {
         // Pasarle comodidades y preferencias de cada uno
         // matchear con publicaciones que se adecuen a lo que busca el adoptante activo
         // guardar las mascotas en publicacionAdopcion en vez del idmascota asi tenemos acceso directo :)
