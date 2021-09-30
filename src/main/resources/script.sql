@@ -7,12 +7,14 @@ create table usuario(
     nombre_usuario varchar(32) not null,
     contraseña varchar(32) not null,
     constraint id_usuario_pk primary key (id_usuario)
+    constraint usuario_id_persona_fk foreign key (id_persona) references documento(id_persona)
 );
 
 create table administrador(
     id_administrador mediumint primary key auto_increment,
     id_usuario mediumint,
     constraint administrador_id_usuario_fk foreign key (id_usuario) references usuario(id_usuario)
+    constraint administrador_id_organizacion_fk foreign key (id_organizacion) references organizacion(id_organizacion)
 );
 
 create table animal(
