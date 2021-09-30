@@ -1,22 +1,20 @@
-import casodeuso.recomendacion.EnviarRecomendacionAdopcion;
+import com.utn.casodeuso.recomendacion.EnviarRecomendacionAdopcion;
 import com.twilio.Twilio;
 import com.twilio.type.PhoneNumber;
 import com.twilio.rest.api.v2010.account.Message;
 
 import java.util.Calendar;
 
-import dominio.notificacion.estrategia.Email;
-import infraestructura.notificador.NotificadorEmail;
+import com.utn.dominio.notificacion.estrategia.Email;
+import com.utn.infraestructura.notificador.NotificadorEmail;
 
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
+
 public class Main {
 
-    public static void main(String[] args) {
-        planificador();
-        pruebasTwilio();
-    }
+    public static void main(String[] args) { }
 
     private static void planificador() {
         Calendar calendar = Calendar.getInstance();
