@@ -1,4 +1,3 @@
-drop database rescatedepatitas;
 create database rescatedepatitas;
 
 use rescatedepatitas;
