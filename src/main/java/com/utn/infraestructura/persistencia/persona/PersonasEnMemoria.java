@@ -1,4 +1,4 @@
-package com.utn.infraestructura.personas;
+package com.utn.infraestructura.persistencia.persona;
 
 import com.utn.dominio.Personas;
 import com.utn.dominio.persona.Persona;
