@@ -9,27 +9,16 @@ create table documento(
     constraint id_documento_pk primary key (id_documento)
 );
 
-create table usuario(
-    id_usuario mediumint auto_increment,
-    nombre_usuario varchar(32) not null,
-    contraseña varchar(32) not null,
-    id_documento mediumint,
-    constraint id_usuario_pk primary key (id_usuario),
-    constraint usuario_id_persona_fk foreign key (id_documento) references documento(id_documento)
-);
-
-
 create table organizacion(
     id_organizacion mediumint auto_increment,
     constraint id_organizacion_pk primary key(id_organizacion)
 );
 
-create table administrador(
-    id_administrador mediumint primary key auto_increment,
-    id_usuario mediumint,
-    id_organizacion mediumint,
-    constraint administrador_id_usuario_fk foreign key (id_usuario) references usuario(id_usuario),
-    constraint administrador_id_organizacion_fk foreign key (id_organizacion) references organizacion(id_organizacion)
+create table direccion(
+    id_direccion mediumint auto_increment,
+    latitud double not null,
+    longitud double not null,
+    constraint id_direccion_pk primary key (id_direccion)
 );
 
 create table animal(
@@ -50,12 +39,53 @@ create table tamaño(
     constraint id_tamaño_pk primary key (id_tamaño)
 );
 
-create table direccion(
-    id_direccion mediumint auto_increment,
-    latitud double not null,
-    longitud double not null,
-    constraint id_direccion_pk primary key (id_direccion)
+create table preferencia(
+	id_preferencia mediumint auto_increment,
+    id_animal mediumint,
+    id_sexo mediumint,
+    id_tamaño mediumint,
+    constraint id_preferencia_pk primary key (id_preferencia),
+    constraint preferencia_id_animal_fk foreign key (id_animal) references animal(id_animal),
+	constraint preferencia_id_sexo_fk foreign key (id_sexo) references sexo(id_sexo),
+	constraint preferencia_id_tamaño_fk foreign key (id_tamaño) references tamaño(id_tamaño)
+
 );
+
+create table persona(
+    id_persona mediumint auto_increment,
+    fechaNacimiento date not null,
+    id_documento mediumint,
+    id_direccion mediumint,
+    id_persona_x_contacto mediumint,
+    id_preferencia mediumint,
+    constraint id_persona_pk primary key (id_persona),
+    constraint persona_id_documento_fk foreign key (id_documento) references documento(id_documento),
+    constraint persona_id_direccion_fk foreign key (id_direccion) references direccion(id_direccion),
+	constraint persona_id_preferencia_fk foreign key (id_preferencia) references preferencia(id_preferencia)
+    #constraint persona_id_persona_x_contacto_fk foreign key (id_persona_x_contacto) references persona_x_contacto(id_persona_x_contacto)
+);
+
+create table usuario(
+    id_usuario mediumint auto_increment,
+    nombre_usuario varchar(32) not null,
+    contraseña varchar(32) not null,
+    id_persona mediumint,
+    constraint id_usuario_pk primary key (id_usuario),
+    constraint usuario_id_persona_fk foreign key (id_persona) references persona(id_persona)
+);
+
+create table administrador(
+    id_administrador mediumint primary key auto_increment,
+    id_usuario mediumint,
+    id_organizacion mediumint,
+    constraint administrador_id_usuario_fk foreign key (id_usuario) references usuario(id_usuario),
+    constraint administrador_id_organizacion_fk foreign key (id_organizacion) references organizacion(id_organizacion)
+);
+
+
+
+
+
 
 
 
@@ -74,17 +104,7 @@ create table mascota(
 	constraint mascota_id_tamaño_fk foreign key (id_tamaño) references tamaño(id_tamaño)
 );
 
-create table preferencia(
-	id_preferencia mediumint auto_increment,
-    id_animal mediumint,
-    id_sexo mediumint,
-    id_tamaño mediumint,
-    constraint id_preferencia_pk primary key (id_preferencia),
-    constraint preferencia_id_animal_fk foreign key (id_animal) references animal(id_animal),
-	constraint preferencia_id_sexo_fk foreign key (id_sexo) references sexo(id_sexo),
-	constraint preferencia_id_tamaño_fk foreign key (id_tamaño) references tamaño(id_tamaño)
 
-);
 
 create table contacto(
 	id_contacto mediumint auto_increment,
@@ -95,19 +115,6 @@ create table contacto(
     constraint id_contacto_pk primary key (id_contacto)
 );
 
-create table persona(
-    id_persona mediumint auto_increment,
-    fechaNacimiento date not null,
-    id_documento mediumint,
-    id_direccion mediumint,
-    id_persona_x_contacto mediumint,
-    id_preferencia mediumint,
-    constraint id_persona_pk primary key (id_persona),
-    constraint persona_id_documento_fk foreign key (id_documento) references documento(id_documento),
-    constraint persona_id_direccion_fk foreign key (id_direccion) references direccion(id_direccion),
-	constraint persona_id_preferencia_fk foreign key (id_preferencia) references preferencia(id_preferencia)
-    #constraint persona_id_persona_x_contacto_fk foreign key (id_persona_x_contacto) references persona_x_contacto(id_persona_x_contacto)
-);
 
 create table persona_x_contacto(
     id_persona_x_contacto mediumint auto_increment,
@@ -151,4 +158,3 @@ create table medio_de_comunicacion_preferido(
     constraint medio_de_comunicacion_preferido_id_medio_fk foreign key (id_medio_de_comunicacion) references medio_de_comunicacion(id_medio_de_comunicacion),
     constraint medio_de_comunicacion_preferido_id_contacto_fk foreign key (id_contacto) references contacto(id_contacto)
 );
-
