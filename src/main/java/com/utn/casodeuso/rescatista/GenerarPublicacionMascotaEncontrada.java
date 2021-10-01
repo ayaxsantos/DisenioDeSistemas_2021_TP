@@ -3,6 +3,7 @@ package com.utn.casodeuso.rescatista;
 import com.utn.dominio.Personas;
 import com.utn.dominio.Organizaciones;
 
+import com.utn.dominio.persona.Persona;
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.publicacion.Publicacion;
@@ -20,7 +21,8 @@ public class GenerarPublicacionMascotaEncontrada {
 
     public void ejecutar(int numeroDocumentoRescatista, int idOrganizacion, Double latitud, Double longitud, String estadoMascota) {
         Direccion direccionMascotaEncontrada = new Direccion(latitud, longitud);
-        Publicacion publicacion = new PublicacionMascotaEncontrada(numeroDocumentoRescatista, direccionMascotaEncontrada, estadoMascota);
+        Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
+        Publicacion publicacion = new PublicacionMascotaEncontrada(personaRescatista, direccionMascotaEncontrada, estadoMascota);
         Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
         organizacion.añadirPublicacionMascotaEncontrada(publicacion);
         organizaciones.guardar(organizacion);

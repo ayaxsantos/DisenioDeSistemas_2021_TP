@@ -1,6 +1,7 @@
 package com.utn.dominio.organizacion;
 
 import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.foto.TamañoFoto;
 
 public class Administrador {
 
@@ -12,8 +13,8 @@ public class Administrador {
         this.usuario = usuario;
     }
 
-    public void definirTamañoFoto(int alto, int ancho) {
-        organizacion.tamañoFoto(alto, ancho);
+    public void definirTamañoFoto(TamañoFoto unTamaño) {
+        organizacion.tamañoFoto(unTamaño);
     }
 
     public void definirCalidadFoto(String calidad) {

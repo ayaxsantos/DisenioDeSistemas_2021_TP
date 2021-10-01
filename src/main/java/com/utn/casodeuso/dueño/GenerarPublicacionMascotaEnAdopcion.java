@@ -2,6 +2,7 @@ package com.utn.casodeuso.dueño;
 
 import com.utn.dominio.Personas;
 import com.utn.dominio.Organizaciones;
+import com.utn.dominio.persona.Persona;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 
@@ -18,7 +19,8 @@ public class GenerarPublicacionMascotaEnAdopcion {
     }
 
     public void ejecutar(int numeroDocumentoDueño, int idMascota, int idOrganizacion, List<String> respuestasMascota) {
-        PublicacionMascotaEnAdopcion publicacion = new PublicacionMascotaEnAdopcion(numeroDocumentoDueño, idMascota, respuestasMascota);
+        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
+        PublicacionMascotaEnAdopcion publicacion = new PublicacionMascotaEnAdopcion(personaDueño, idMascota, respuestasMascota);
         Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
         organizacion.añadirPublicacionMascotaEnAdopcion(publicacion);
         organizaciones.guardar(organizacion);

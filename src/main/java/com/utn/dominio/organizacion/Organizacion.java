@@ -81,8 +81,8 @@ public class Organizacion {
         this.adoptantesActivos.add(personaAdoptante);
     }
 
-    public void tamañoFoto(int alto, int ancho) {
-        this.tamañoFoto = new TamañoFoto(alto, ancho);
+    public void tamañoFoto(TamañoFoto unTamaño) {
+        this.tamañoFoto = unTamaño;
     }
 
     public void calidadFoto(String calidad) {

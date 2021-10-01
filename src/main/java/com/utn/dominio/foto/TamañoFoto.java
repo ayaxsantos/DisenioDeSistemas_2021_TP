@@ -17,5 +17,4 @@ public class TamañoFoto {
     public int ancho() {
         return this.ancho;
     }
-
 }

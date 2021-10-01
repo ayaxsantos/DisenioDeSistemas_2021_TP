@@ -2,7 +2,7 @@ package com.utn.infraestructura.persistencia.persona.jpa;
 
 import javax.persistence.*;
 import java.math.BigInteger;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "persona")
@@ -14,7 +14,7 @@ public class JpaPersona {
     private BigInteger idPersona;
 
     @Column(name = "fecha_nacimiento", nullable = false)
-    private LocalDate fechaNacimiento;
+    private LocalDateTime fechaNacimiento;
 
     @Column(name = "id_documento")
     private BigInteger idDocumento;
@@ -24,5 +24,10 @@ public class JpaPersona {
 
     @Column(name = "id_preferencia")
     private BigInteger idPreferencia;
+
+    public LocalDateTime fechaNacimiento() {
+        return this.fechaNacimiento;
+    }
+
 
 }

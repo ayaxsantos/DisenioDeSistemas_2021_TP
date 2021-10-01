@@ -11,7 +11,26 @@ create table documento(
 
 create table organizacion(
     id_organizacion mediumint auto_increment,
-    constraint id_organizacion_pk primary key(id_organizacion)
+    nombre_organizacion varchar(40),
+    id_direccion mediumint,
+    id_tamaño_foto mediumint,
+    id_calidad_foto mediumint,
+    constraint id_organizacion_pk primary key(id_organizacion),
+    constraint organizacion_id_direccion_fk foreign key (id_direccion) references direccion(id_direccion),
+    constraint organizacion_id_tamaño_foto_fk foreign key (id_tamaño_foto) references tamañoFoto(id_tamaño_foto),
+    constraint organizacion_id_calidad_foto_fk foreign key (id_calidad_foto) references calidadFoto(id_calidad_foto)
+);
+
+create table tamañoFoto(
+    id_tamaño_foto mediumint auto_increment,
+    descripcion varchar(10),
+    constraint id_tamaño_foto_pk primary key(id_tamaño_foto)
+);
+
+create table calidadFoto(
+    id_calidad_foto mediumint auto_increment,
+    descripcion varchar(10),
+    constraint id_calidad_foto_pk primary key(id_calidad_foto)
 );
 
 create table direccion(

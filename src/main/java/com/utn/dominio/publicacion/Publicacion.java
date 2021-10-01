@@ -1,15 +1,17 @@
 package com.utn.dominio.publicacion;
 
+import com.utn.dominio.persona.Persona;
+
 import java.time.LocalDateTime;
 
 public abstract class Publicacion {
 
-    private final int numeroDocumento;
+    private final Persona persona;
     private boolean estaVisible;
     private final LocalDateTime fecha;
 
-    public Publicacion(int numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
+    public Publicacion(Persona persona) {
+        this.persona = persona;
         this.estaVisible = false;
         this.fecha = LocalDateTime.now();
     }
