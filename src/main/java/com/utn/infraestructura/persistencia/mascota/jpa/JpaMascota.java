@@ -44,19 +44,6 @@ public class JpaMascota
     @Column(name = "id_persona")
     private BigInteger idPersona;
 
-    public JpaMascota(BigInteger id, String nombre, BigInteger animal, String apodo, BigInteger edad, String descripcionFisica, BigInteger idAnimal, BigInteger idSexo, BigInteger idTamaño, BigInteger idPersona) {
-        this.id = id;
-        this.nombre = nombre;
-        this.animal = animal;
-        this.apodo = apodo;
-        this.edad = edad;
-        this.descripcionFisica = descripcionFisica;
-        this.idAnimal = idAnimal;
-        this.idSexo = idSexo;
-        this.idTamaño = idTamaño;
-        this.idPersona = idPersona;
-    }
-
     //Generar accessors porfa
 
 
