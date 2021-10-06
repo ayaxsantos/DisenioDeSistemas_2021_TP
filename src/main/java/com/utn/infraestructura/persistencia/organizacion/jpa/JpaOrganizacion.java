@@ -1,7 +1,11 @@
 package com.utn.infraestructura.persistencia.organizacion.jpa;
 
+import com.utn.infraestructura.persistencia.administrador.jpa.JpaAdministrador;
+import com.utn.infraestructura.persistencia.voluntario.jpa.JpaVoluntario;
+
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.List;
 
 @Entity
 @Table(name = "organizacion")
@@ -23,6 +27,12 @@ public class JpaOrganizacion
 
     @Column(name = "id_calidad_foto")
     private BigInteger idCalidadFoto;
+
+    @OneToMany(mappedBy = "idOrganizacion")
+    private List<JpaVoluntario> unosVoluntarios;
+
+    @OneToMany(mappedBy = "idOrganizacion")
+    private List<JpaAdministrador> unosAdministrador;
 
     //Generar accessors.
 

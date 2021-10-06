@@ -1,4 +1,4 @@
-package com.utn.infraestructura.persistencia.contacto;
+package com.utn.infraestructura.persistencia.contacto.jpa;
 
 import javax.persistence.*;
 import java.math.BigInteger;

@@ -75,19 +75,19 @@ create table persona(
     id_documento mediumint,
     id_direccion mediumint,
     id_preferencia mediumint,
+    id_usuario mediumint,
     constraint id_persona_pk primary key (id_persona),
     constraint persona_id_documento_fk foreign key (id_documento) references documento(id_documento),
     constraint persona_id_direccion_fk foreign key (id_direccion) references direccion(id_direccion),
-	constraint persona_id_preferencia_fk foreign key (id_preferencia) references preferencia(id_preferencia)
+	constraint persona_id_preferencia_fk foreign key (id_preferencia) references preferencia(id_preferencia),
+    constraint persona_id_usuario_fk foreign key (id_usuario) references usuario(id_usuario)
 );
 
 create table usuario(
     id_usuario mediumint auto_increment,
     nombre_usuario varchar(32) not null,
     contraseña varchar(32) not null,
-    id_persona mediumint,
-    constraint id_usuario_pk primary key (id_usuario),
-    constraint usuario_id_persona_fk foreign key (id_persona) references persona(id_persona)
+    constraint id_usuario_pk primary key (id_usuario)
 );
 
 create table administrador(
@@ -107,7 +107,9 @@ create table mascota(
     id_animal mediumint,
     id_sexo mediumint,
     id_tamaño mediumint,
+    id_persona mediumint,
     constraint id_mascota_pk primary key (id_mascota),
+    constraint mascota_id_persona_fk foreign key (id_persona) references persona(id_persona),
     constraint mascota_id_animal_fk foreign key (id_animal) references animal(id_animal),
 	constraint mascota_id_sexo_fk foreign key (id_sexo) references sexo(id_sexo),
 	constraint mascota_id_tamaño_fk foreign key (id_tamaño) references tamaño(id_tamaño)

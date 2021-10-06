@@ -4,7 +4,9 @@ import com.utn.dominio.Personas;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.mensaje.MensajeConfirmarMascotaEncontrada;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ConfirmarMascotaEncontrada {
 
     private final Personas personas;

@@ -1,4 +1,4 @@
-package com.utn.infraestructura.persistencia.preferencia;
+package com.utn.infraestructura.persistencia.preferencia.jpa;
 
 import javax.persistence.*;
 import java.math.BigInteger;

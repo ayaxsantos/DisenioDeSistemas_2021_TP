@@ -5,9 +5,11 @@ import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.persistencia.organizacion.jpa.JpaOrganizacion;
 import com.utn.infraestructura.persistencia.organizacion.jpa.JpaRepositorioOrganizaciones;
 import com.utn.infraestructura.persistencia.persona.jpa.JpaPersona;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class OrganizacionesEnMySQL implements Organizaciones {
 
     private final JpaRepositorioOrganizaciones jpaRepositorioOrganizaciones;

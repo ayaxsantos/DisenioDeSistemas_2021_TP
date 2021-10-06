@@ -1,4 +1,4 @@
-package com.utn.infraestructura.persistencia.direccion;
+package com.utn.infraestructura.persistencia.direccion.jpa;
 
 import javax.persistence.*;
 import java.math.BigInteger;

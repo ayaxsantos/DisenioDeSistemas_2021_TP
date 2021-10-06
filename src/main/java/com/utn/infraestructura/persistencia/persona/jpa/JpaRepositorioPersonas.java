@@ -2,6 +2,7 @@ package com.utn.infraestructura.persistencia.persona.jpa;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.utn.infraestructura.persistencia.persona.jpa.JpaPersona;
 
 public interface JpaRepositorioPersonas extends JpaRepository<JpaPersona, Long> {
 
@@ -14,6 +15,8 @@ public interface JpaRepositorioPersonas extends JpaRepository<JpaPersona, Long> 
         "where doc.numero = :numeroDocumento")
     JpaPersona obtenerPorNumeroDocumento(int numeroDocumento);
 
-    @Query("")
+    @Query(
+            value = "insert into persona (id_persona, fecha_nacimiento, id_documento, id_direccion,id_preferencia) " +
+                    "values(:id_persona,:fecha_nacimiento,:id_documento, :id_direccion, :id_preferencia)", nativeQuery = true )
     void guardar(JpaPersona jpaPersona);
 }

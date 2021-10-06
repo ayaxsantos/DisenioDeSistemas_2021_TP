@@ -5,9 +5,11 @@ import com.utn.dominio.Organizaciones;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class GenerarPublicacionMascotaEnAdopcion {
 
     private final Personas personas;

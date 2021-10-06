@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
+
 @Entity
 @Table(name = "persona")
 public class JpaPersona {
@@ -24,6 +25,9 @@ public class JpaPersona {
 
     @Column(name = "id_preferencia")
     private BigInteger idPreferencia;
+
+    @Column(name = "id_usuario")
+    private BigInteger idUsuario;
 
     public LocalDateTime fechaNacimiento() {
         return this.fechaNacimiento;

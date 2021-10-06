@@ -1,5 +1,4 @@
 package com.utn.infraestructura.persistencia.contacto;
-/*
-public class ContactosEnMySQL implements {
+
+public class ContactosEnMySQL{
 }
-*/

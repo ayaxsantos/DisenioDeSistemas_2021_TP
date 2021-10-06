@@ -15,8 +15,10 @@ public class JpaVoluntario
     @Column(name = "id_usuario")
     private BigInteger idUsuario;
 
-    @Column(name = "id_organizacion")
+    @ManyToOne
+    @JoinColumn(name = "id_organizacion",referencedColumnName = "id")
     private BigInteger idOrganizacion;
+
 
     //Generar accessors.
 

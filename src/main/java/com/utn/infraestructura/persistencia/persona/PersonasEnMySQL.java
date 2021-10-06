@@ -8,7 +8,9 @@ import com.utn.dominio.persona.Documento;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.infraestructura.persistencia.persona.jpa.JpaPersona;
 import com.utn.infraestructura.persistencia.persona.jpa.JpaRepositorioPersonas;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class PersonasEnMySQL implements Personas {
 
     private final JpaRepositorioPersonas jpaRepositorioPersonas;
