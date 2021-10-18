@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface JpaRepositorioUsuarios extends JpaRepository<JpaUsuario, Long> {
 
-    @Query("select usu.id from JpaUsuario usu where usu.id =: idUsuario")
-    JpaUsuario obtenerPorId(int idUsuario);
+    @Query("select usu from JpaUsuario usu where usu.nombreUsuario =: nombreDeUsuario")
+    JpaUsuario obtenerPorNombreUsuario(String nombreDeUsuario);
 }

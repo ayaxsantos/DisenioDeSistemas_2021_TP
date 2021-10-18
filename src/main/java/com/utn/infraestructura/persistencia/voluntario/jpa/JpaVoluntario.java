@@ -1,7 +1,13 @@
 package com.utn.infraestructura.persistencia.voluntario.jpa;
 
+import com.utn.dominio.organizacion.Organizacion;
+import com.utn.infraestructura.persistencia.organizacion.jpa.JpaOrganizacion;
+import com.utn.infraestructura.persistencia.usuario.jpa.JpaUsuario;
+
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "voluntario")
@@ -12,12 +18,20 @@ public class JpaVoluntario
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
 
-    @Column(name = "id_usuario")
-    private BigInteger idUsuario;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+    private JpaUsuario usuarioJPA;
+
 
     @ManyToOne
-    @JoinColumn(name = "id_organizacion",referencedColumnName = "id")
-    private BigInteger idOrganizacion;
+    private JpaOrganizacion organizacion;
+
+    public JpaVoluntario() {
+    }
+
+
+    //@JoinColumn(name = "id_organizacion",referencedColumnName = "id")
+    //private JpaOrganizacion OrganizacionJpa;
 
 
     //Generar accessors.

@@ -1,5 +1,7 @@
 package com.utn.infraestructura.persistencia.documento.jpa;
 
+import com.utn.infraestructura.persistencia.persona.jpa.JpaPersona;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 
@@ -17,5 +19,8 @@ public class JpaDocumento {
 
     @Column(name = "numero")
     private BigInteger numero;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private JpaPersona unaPersona;
 
 }

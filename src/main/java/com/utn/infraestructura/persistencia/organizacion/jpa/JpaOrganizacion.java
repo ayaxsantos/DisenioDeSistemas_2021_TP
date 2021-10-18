@@ -1,5 +1,7 @@
 package com.utn.infraestructura.persistencia.organizacion.jpa;
 
+import com.utn.dominio.Voluntarios;
+import com.utn.dominio.organizacion.Voluntario;
 import com.utn.infraestructura.persistencia.administrador.jpa.JpaAdministrador;
 import com.utn.infraestructura.persistencia.voluntario.jpa.JpaVoluntario;
 
@@ -28,8 +30,8 @@ public class JpaOrganizacion
     @Column(name = "id_calidad_foto")
     private BigInteger idCalidadFoto;
 
-    @OneToMany(mappedBy = "idOrganizacion")
-    private List<JpaVoluntario> unosVoluntarios;
+    @OneToMany(mappedBy = "organizacion")
+    private List<JpaVoluntario> voluntarios;
 
     @OneToMany(mappedBy = "idOrganizacion")
     private List<JpaAdministrador> unosAdministrador;
