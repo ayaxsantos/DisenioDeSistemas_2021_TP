@@ -14,7 +14,7 @@ public interface JpaRepositorioVoluntario extends JpaRepository<JpaVoluntario, L
 
     @Modifying
     @Query(
-            value =" insert into voluntario (id_voluntario,id_usuario,id_organizacion) " +
-            "values(:id_voluntario,:id_usuario,:id_organizacion)", nativeQuery = true )
+            value =" insert into voluntario (id,id_usuario,id_organizacion) " +
+          "values(:id_voluntario,:id_usuario,:id_organizacion)", nativeQuery = true )
     void guardar(JpaVoluntario jpaVoluntario);
 }

@@ -28,7 +28,7 @@ public class GenerarPublicacionBusquedaAdopcion {
     public void ejecutar(int numeroDocumentoAdoptante, int idOrganizacion, Preferencia preferencia, List<String> comodidades) {
         Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
         Persona personaAdoptante = personas.obtenerPorNumeroDocumento(numeroDocumentoAdoptante);
-        Publicacion publicacion = new PublicacionBusquedaAdopcion(personaAdoptante, preferencia, comodidades);
+        PublicacionBusquedaAdopcion publicacion = new PublicacionBusquedaAdopcion(personaAdoptante, preferencia, comodidades);
         organizacion.añadirPublicacionBusquedaAdopcion(publicacion);
         organizacion.añadirAdoptanteActivo(personaAdoptante);
         organizaciones.guardar(organizacion);

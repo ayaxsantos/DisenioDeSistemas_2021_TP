@@ -15,28 +15,32 @@ import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 import com.utn.dominio.Organizaciones;
+import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.publicacion.Preferencia;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
-import com.utn.dominio.publicacion.Publicacion;
 import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.MensajeRecomendacionesAdopcion;
+import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
+import com.utn.infraestructura.persistencia.mascota.MascotasEnMySQL;
 
 public class EnviarRecomendacionAdopcion extends TimerTask {
 
     private final Organizaciones organizaciones;
     private final EstrategiaDeComunicacion estrategiaDeComunicacion;
+    private final MascotasEnMySQL mascotasEnMySQL;
 
-    public EnviarRecomendacionAdopcion(Organizaciones organizaciones, EstrategiaDeComunicacion estrategiaDeComunicacion) {
+    public EnviarRecomendacionAdopcion(Organizaciones organizaciones, EstrategiaDeComunicacion estrategiaDeComunicacion, MascotasEnMySQL mascotasEnMySQL) {
         this.organizaciones = organizaciones;
         this.estrategiaDeComunicacion = estrategiaDeComunicacion;
+        this.mascotasEnMySQL = mascotasEnMySQL;
     }
 
     public void run() {
         List<Organizacion> todasOrganizaciones = organizaciones.obtenerTodas();
         todasOrganizaciones.forEach(organizacion -> {
-            List<Publicacion> publicaciones = organizacion.publicacionesMascotaEnAdopcion();
+            List<PublicacionMascotaEnAdopcion> publicaciones = organizacion.publicacionesMascotaEnAdopcion();
             List<Persona> adoptantesActivos = organizacion.adoptantesActivos();
             adoptantesActivos.forEach(adoptante -> {
                 List<String> recomendaciones = this.determinarRecomendaciones(adoptante, publicaciones);
@@ -46,7 +50,7 @@ public class EnviarRecomendacionAdopcion extends TimerTask {
         });
     }
 
-    private List<String> determinarRecomendaciones(Persona personaAdoptante, List<Publicacion> publicacionesAdopcion) {
+    private List<String> determinarRecomendaciones(Persona personaAdoptante, List<PublicacionMascotaEnAdopcion> publicacionesAdopcion) {
         Preferencia preferenciaAdoptante = personaAdoptante.preferencia();
         return publicacionesAdopcion.stream()
             .filter(publicacionAdopcion -> this.condicionesParaFiltrar(publicacionAdopcion, preferenciaAdoptante))
@@ -54,11 +58,11 @@ public class EnviarRecomendacionAdopcion extends TimerTask {
             .collect(Collectors.toList());
     }
 
-    private boolean condicionesParaFiltrar(Publicacion publicacionAdopcion, Preferencia preferenciaAdoptante) {
-        // Pasarle comodidades y preferencias de cada uno
-        // matchear con publicaciones que se adecuen a lo que busca el adoptante activo
-        // guardar las mascotas en publicacionAdopcion en vez del idmascota asi tenemos acceso directo :)
-        return true;
+    private boolean condicionesParaFiltrar(PublicacionMascotaEnAdopcion publicacion, Preferencia preferenciaAdoptante) {
+        Mascota mascota = mascotasEnMySQL.obtenerPorId(publicacion.getIdMascota());
+        return mascota.animal() == preferenciaAdoptante.animal()
+                && mascota.tamaño() == preferenciaAdoptante.tamaño()
+                && mascota.sexo() == preferenciaAdoptante.sexo();
     }
 
 }

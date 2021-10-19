@@ -15,34 +15,34 @@ public class JpaMascota
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Integer id;
 
     @Column(name = "nombre",nullable = false)
     private String nombre;
 
     @Column(name = "animal")
-    private BigInteger animal;
+    private Integer animal;
 
     @Column(name = "apodo")
     private String apodo;
 
     @Column(name = "edad")
-    private BigInteger edad;
+    private Integer edad;
 
     @Column(name = "descripcion_fisica")
     private String descripcionFisica;
 
     @Column(name = "id_animal")
-    private BigInteger idAnimal;
+    private Integer idAnimal;
 
     @Column(name = "id_sexo")
-    private BigInteger idSexo;
+    private Integer idSexo;
 
     @Column(name = "id_tamaño")
-    private BigInteger idTamaño;
+    private Integer idTamaño;
 
     @Column(name = "id_persona")
-    private BigInteger idPersona;
+    private Integer idPersona;
 
     //Generar accessors porfa
 

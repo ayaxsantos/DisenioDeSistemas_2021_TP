@@ -10,7 +10,7 @@ public class JpaContacto{
     @Id
     @Column(name = "id_contacto")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger idContacto;
+    private Integer idContacto;
 
     @Column(name = "nombre")
     private String nombre;

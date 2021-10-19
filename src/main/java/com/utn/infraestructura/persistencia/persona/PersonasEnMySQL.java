@@ -1,3 +1,4 @@
+
 package com.utn.infraestructura.persistencia.persona;
 
 import com.utn.dominio.Personas;
@@ -24,7 +25,7 @@ public class PersonasEnMySQL implements Personas {
         JpaPersona jpaPersona = jpaRepositorioPersonas.obtenerPorNumeroDocumento(numeroDocumento);
         return new Persona(
             new Contacto("", "", "", ""),
-            jpaPersona.fechaNacimiento(),
+            jpaPersona.getFechaNacimiento(),
             new Documento("", 0),
             new Direccion(0,0),
             new Contacto("", "", "", ""),

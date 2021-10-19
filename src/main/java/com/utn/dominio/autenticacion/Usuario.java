@@ -66,4 +66,7 @@ public class Usuario {
         return organizacionActual;
     }
 
+    public String getContraseña() {
+        return contraseña;
+    }
 }

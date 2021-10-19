@@ -16,25 +16,37 @@ public class JpaOrganizacion
     @Id
     @Column(name = "id_organizacion")
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private BigInteger id;
+    private Integer id;
 
-    @Column(name = "nombre_organizacion")
-    private String nombreOrganizacion;
-
-    @Column(name = "id_direccion")
-    private BigInteger idDireccion;
-
-    @Column(name = "id_tamaño_foto")
-    private BigInteger idTamañoFoto;
-
-    @Column(name = "id_calidad_foto")
-    private BigInteger idCalidadFoto;
-
-    @OneToMany(mappedBy = "organizacion")
+    @OneToMany(mappedBy = "organizacionJPA")
     private List<JpaVoluntario> voluntarios;
 
     @OneToMany(mappedBy = "idOrganizacion")
     private List<JpaAdministrador> unosAdministrador;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<JpaVoluntario> getVoluntarios() {
+        return voluntarios;
+    }
+
+    public void setVoluntarios(List<JpaVoluntario> voluntarios) {
+        this.voluntarios = voluntarios;
+    }
+
+    public List<JpaAdministrador> getUnosAdministrador() {
+        return unosAdministrador;
+    }
+
+    public void setUnosAdministrador(List<JpaAdministrador> unosAdministrador) {
+        this.unosAdministrador = unosAdministrador;
+    }
 
     //Generar accessors.
 

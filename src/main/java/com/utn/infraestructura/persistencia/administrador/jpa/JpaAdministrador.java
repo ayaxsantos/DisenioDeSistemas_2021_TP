@@ -12,13 +12,13 @@ public class JpaAdministrador
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Integer id;
 
     @Column(name = "id_usuario")
-    private BigInteger idUsuario;
+    private Integer idUsuario;
 
     @Column(name = "id_organizacion")
-    private BigInteger idOrganizacion;
+    private Integer idOrganizacion;
 
     @OneToOne
     @JoinColumn(name = "id_voluntario",referencedColumnName = "id")

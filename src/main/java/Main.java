@@ -28,7 +28,7 @@ public class Main {
 
         // Start running the task on Monday at 10:00:00, period is set to 8 hours
         // if you want to run the task immediately, set the 2nd parameter to 0
-        time.schedule(new EnviarRecomendacionAdopcion(null, new Email(new NotificadorEmail())), calendar.getTime(), TimeUnit.DAYS.toMillis(7));
+        //time.schedule(new EnviarRecomendacionAdopcion(null, new Email(new NotificadorEmail())), calendar.getTime(), TimeUnit.DAYS.toMillis(7));
     }
 
     public static void pruebasTwilio() {

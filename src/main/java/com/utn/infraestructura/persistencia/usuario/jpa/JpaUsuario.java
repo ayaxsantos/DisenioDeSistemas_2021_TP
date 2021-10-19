@@ -4,7 +4,6 @@ import com.utn.infraestructura.persistencia.administrador.jpa.JpaAdministrador;
 import com.utn.infraestructura.persistencia.voluntario.jpa.JpaVoluntario;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 import com.utn.infraestructura.persistencia.persona.jpa.JpaPersona;
 
@@ -16,32 +15,70 @@ public class JpaUsuario
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Integer id;
 
     @Column(name = "nombreUsuario",nullable = false)
     private String nombreUsuario;
 
     @Column(name = "contrasenia")
-    private BigInteger contrasenia;
-
-    @Column(name = "id_persona")
-    private BigInteger idPersona;
+    private String contrasenia;
 
     @OneToOne
-    @JoinColumn(name = "id_persona",referencedColumnName = "id")
     private JpaPersona unaPersona;
 
-    @OneToOne(mappedBy = "usuarioJPA", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "usuarioJPA")
     private JpaVoluntario unVoluntario;
 
     @OneToOne
-    @JoinColumn(name = "id_administrador",referencedColumnName = "id")
     private JpaAdministrador unAdministrador;
-    //POJO
-    //FK joinear con tablas
 
-    //Generar accessors porfa
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public JpaPersona getUnaPersona() {
+        return unaPersona;
+    }
+
+    public void setUnaPersona(JpaPersona unaPersona) {
+        this.unaPersona = unaPersona;
+    }
+
+    public JpaVoluntario getUnVoluntario() {
+        return unVoluntario;
+    }
+
+    public void setUnVoluntario(JpaVoluntario unVoluntario) {
+        this.unVoluntario = unVoluntario;
+    }
+
+    public JpaAdministrador getUnAdministrador() {
+        return unAdministrador;
+    }
+
+    public void setUnAdministrador(JpaAdministrador unAdministrador) {
+        this.unAdministrador = unAdministrador;
+    }
 }
 
 

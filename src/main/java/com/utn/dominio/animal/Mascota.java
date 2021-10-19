@@ -53,4 +53,5 @@ public class Mascota {
         return tamaño;
     }
 
+    public Sexo sexo() { return sexo; }
 }

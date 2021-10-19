@@ -1,3 +1,4 @@
+/*
 package com.utn.infraestructura.presentacion;
 import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.infraestructura.presentacion.dto.DatosUsuario;
@@ -15,10 +16,10 @@ public class UsuariosController {
     private final UsuariosEnMySQL repositorioUsuarios;
 
     public UsuariosController() {
-        this.repositorioUsuarios = new UsuariosEnMySQL();
+        this.repositorioUsuarios = new UsuariosEnMySQL();   //TODO: Esto rompe con el modelado de la persistencia
     }
 
-    @GetMapping("RescateDePatitas/IniciarSesion/{nombreUsuario} & {contraseña}")
+    @GetMapping("../IniciarSesion/{nombreUsuario} & {contraseña}")
     public ResponseEntity<DatosUsuario> verificarCredenciales(@PathVariable String nombreUsuario, @PathVariable String contraseña) {
         Usuario unUsuario = repositorioUsuarios.obtenerPorNombreUsuario(nombreUsuario);
         try {
@@ -29,3 +30,4 @@ public class UsuariosController {
         return ResponseEntity.status(200).build();
     }
 }
+*/

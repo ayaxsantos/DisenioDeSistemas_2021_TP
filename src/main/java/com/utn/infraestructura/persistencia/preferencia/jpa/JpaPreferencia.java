@@ -10,18 +10,15 @@ public class JpaPreferencia {
     @Id
     @Column(name = "id_preferencia")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger idPreferencia;
+    private Integer idPreferencia;
 
-    @Id
     @Column(name = "id_animal")
-    private BigInteger idAnimal;
+    private Integer idAnimal;
 
-    @Id
     @Column(name = "id_sexo")
-    private BigInteger idSexo;
+    private Integer idSexo;
 
-    @Id
     @Column(name = "id_tamaño")
-    private BigInteger idTamaño;
+    private Integer idTamaño;
 
 }

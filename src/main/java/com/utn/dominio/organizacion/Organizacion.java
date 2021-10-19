@@ -6,7 +6,9 @@ import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.publicacion.Publicacion;
+import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
+import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 
 public class Organizacion {
 
@@ -17,9 +19,9 @@ public class Organizacion {
     private final List<String> caracteristicas = new ArrayList<>();
     private final List<String> preguntasAdopcion = new ArrayList<>();
     private final List<String> preguntasQuieroAdoptar = new ArrayList<>();
-    private final List<Publicacion> publicacionesMascotaEncontrada = new ArrayList<>();
-    private final List<Publicacion> publicacionesMascotaEnAdopcion = new ArrayList<>();
-    private final List<Publicacion> publicacionesBusquedaAdopcion = new ArrayList<>();
+    private final List<PublicacionMascotaEncontrada> publicacionesMascotaEncontrada = new ArrayList<>();
+    private final List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion = new ArrayList<>();
+    private final List<PublicacionBusquedaAdopcion> publicacionesBusquedaAdopcion = new ArrayList<>();
 
     private TamañoFoto tamañoFoto;
     private CalidadFoto calidadFoto;
@@ -65,7 +67,7 @@ public class Organizacion {
         this.voluntarios.remove(unVoluntario);
     }
 
-    public void añadirPublicacionBusquedaAdopcion(Publicacion publicacion) {
+    public void añadirPublicacionBusquedaAdopcion(PublicacionBusquedaAdopcion publicacion) {
         this.publicacionesBusquedaAdopcion.add(publicacion);
     }
 
@@ -73,7 +75,7 @@ public class Organizacion {
         this.publicacionesMascotaEnAdopcion.add(publicacion);
     }
 
-    public void añadirPublicacionMascotaEncontrada(Publicacion publicacion) {
+    public void añadirPublicacionMascotaEncontrada(PublicacionMascotaEncontrada publicacion) {
         this.publicacionesMascotaEncontrada.add(publicacion);
     }
 
@@ -97,12 +99,11 @@ public class Organizacion {
         return this.calidadFoto;
     }
 
-    public List<Publicacion> publicacionesMascotaEnAdopcion() {
+    public List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion() {
         return this.publicacionesMascotaEnAdopcion;
     }
 
     public List<Persona> adoptantesActivos() {
         return this.adoptantesActivos;
     }
-
 }

@@ -10,7 +10,7 @@ public class JpaDireccion {
     @Id
     @Column(name = "id_direccion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger idDireccion;
+    private Integer idDireccion;
 
     @Column(name = "latitud", nullable = false)
     private double latitud;

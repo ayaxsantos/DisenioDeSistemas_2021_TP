@@ -12,13 +12,13 @@ public class JpaDocumento {
     @Id
     @Column(name = "id_documento")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger idDocumento;
+    private Integer idDocumento;
 
     @Column(name = "tipo")
     private String tipo;
 
     @Column(name = "numero")
-    private BigInteger numero;
+    private Integer numero;
 
     @OneToOne(cascade = CascadeType.ALL)
     private JpaPersona unaPersona;

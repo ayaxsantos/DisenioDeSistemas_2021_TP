@@ -1,18 +1,18 @@
 package com.utn.dominio.organizacion;
 
 import java.util.List;
-import java.util.ArrayList;
+
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.publicacion.Publicacion;
 
 public class Voluntario {
 
     private final Usuario usuario;
-    private final List<Organizacion> organizaciones = new ArrayList<>();
+    private final Organizacion organizacion;
 
-    public Voluntario(Usuario usuario, List<Organizacion> organizaciones) {
+    public Voluntario(Usuario usuario, Organizacion organizacion) {
         this.usuario = usuario;
-        this.organizaciones.addAll(organizaciones);
+        this.organizacion = organizacion;
     }
 
     public void aprobarPublicacion(Publicacion publicacion){
@@ -23,4 +23,11 @@ public class Voluntario {
         publicacion.estaVisible(false);
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Organizacion getOrganizacion() {
+        return organizacion;
+    }
 }

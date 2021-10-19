@@ -16,4 +16,8 @@ public class PublicacionMascotaEnAdopcion extends Publicacion {
         this.respuestas.addAll(respuestas);
     }
 
+    public int getIdMascota(){
+        return idMascota;
+    }
+
 }

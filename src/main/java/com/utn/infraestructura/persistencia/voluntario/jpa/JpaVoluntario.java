@@ -14,26 +14,36 @@ import java.util.Set;
 public class JpaVoluntario
 {
     @Id
-    @Column(name = "id_voluntario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Integer id;
 
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     private JpaUsuario usuarioJPA;
 
-
     @ManyToOne
-    private JpaOrganizacion organizacion;
+    private JpaOrganizacion organizacionJPA;
 
-    public JpaVoluntario() {
+    public Integer getId() {
+        return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    //@JoinColumn(name = "id_organizacion",referencedColumnName = "id")
-    //private JpaOrganizacion OrganizacionJpa;
+    public JpaUsuario getUsuarioJPA() {
+        return usuarioJPA;
+    }
 
+    public void setUsuarioJPA(JpaUsuario usuarioJPA) {
+        this.usuarioJPA = usuarioJPA;
+    }
 
-    //Generar accessors.
+    public JpaOrganizacion getOrganizacionJPA() {
+        return organizacionJPA;
+    }
 
+    public void setOrganizacionJPA(JpaOrganizacion organizacionJPA) {
+        this.organizacionJPA = organizacionJPA;
+    }
 }

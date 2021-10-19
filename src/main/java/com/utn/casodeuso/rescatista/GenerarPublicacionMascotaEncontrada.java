@@ -22,7 +22,7 @@ public class GenerarPublicacionMascotaEncontrada {
     public void ejecutar(int numeroDocumentoRescatista, int idOrganizacion, Double latitud, Double longitud, String estadoMascota) {
         Direccion direccionMascotaEncontrada = new Direccion(latitud, longitud);
         Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
-        Publicacion publicacion = new PublicacionMascotaEncontrada(personaRescatista, direccionMascotaEncontrada, estadoMascota);
+        PublicacionMascotaEncontrada publicacion = new PublicacionMascotaEncontrada(personaRescatista, direccionMascotaEncontrada, estadoMascota);
         Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
         organizacion.añadirPublicacionMascotaEncontrada(publicacion);
         organizaciones.guardar(organizacion);
