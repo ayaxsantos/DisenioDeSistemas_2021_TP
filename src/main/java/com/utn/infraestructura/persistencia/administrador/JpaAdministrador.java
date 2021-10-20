@@ -1,30 +1,33 @@
-package com.utn.infraestructura.persistencia.voluntario.jpa;
+package com.utn.infraestructura.persistencia.administrador;
 
-import com.utn.dominio.organizacion.Organizacion;
-import com.utn.infraestructura.persistencia.organizacion.jpa.JpaOrganizacion;
-import com.utn.infraestructura.persistencia.usuario.jpa.JpaUsuario;
+import com.utn.infraestructura.persistencia.organizacion.JpaOrganizacion;
+import com.utn.infraestructura.persistencia.usuario.JpaUsuario;
+import com.utn.infraestructura.persistencia.voluntario.JpaVoluntario;
 
 import javax.persistence.*;
-import java.math.BigInteger;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "voluntario")
-public class JpaVoluntario
+@Table(name = "administrador")
+public class JpaAdministrador
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
-    private Integer numeroDNI;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private JpaUsuario usuarioJPA;
 
     @ManyToOne
     private JpaOrganizacion organizacionJPA;
+
+    public JpaAdministrador(Integer id, JpaUsuario usuarioJPA, JpaOrganizacion organizacionJPA) {
+        this.id = id;
+        this.usuarioJPA = usuarioJPA;
+        this.organizacionJPA = organizacionJPA;
+    }
+
+    public JpaAdministrador() {
+    }
 
     public Integer getId() {
         return id;
@@ -48,13 +51,5 @@ public class JpaVoluntario
 
     public void setOrganizacionJPA(JpaOrganizacion organizacionJPA) {
         this.organizacionJPA = organizacionJPA;
-    }
-
-    public Integer getNumeroDNI() {
-        return numeroDNI;
-    }
-
-    public void setNumeroDNI(Integer numeroDNI) {
-        this.numeroDNI = numeroDNI;
     }
 }

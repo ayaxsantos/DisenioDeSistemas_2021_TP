@@ -18,6 +18,7 @@ import com.utn.dominio.persona.Documento;
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.Notificador;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ public class FixtureNotificarMascotaEncontrada {
     protected static final int numeroDocumentoDueño = 11111;
     private static final String nombreDueño = "Camila";
     private static final String apellidoDueño = "Berro";
-    private static final LocalDateTime fechaNacimientoDueño = LocalDateTime.now();
+    private static final LocalDate fechaNacimientoDueño = LocalDate.now();
     private static final Direccion direccionDueño = new Direccion(-34.58805543938273, -58.39709555890073);
     private static final String emailDueño = "ccalvoromero@gmail.com";
     protected static final String numeroDueño = "+5491134561101";
@@ -61,7 +62,7 @@ public class FixtureNotificarMascotaEncontrada {
     protected static final int numeroDocumentoRescatista = 22222;
     private static final String nombreRescatista = "Celeste";
     private static final String apellidoRescatista = "Fernandez";
-    private static final LocalDateTime fechaNacimientoRescatista = LocalDateTime.now();
+    private static final LocalDate fechaNacimientoRescatista = LocalDate.now();
     private static final Direccion direccionRescatista = new Direccion(-34.58805543938273, -58.39709555890073);
     protected static final String numeroSMSRescatista = "+12252247262";
     protected static final String numeroWhatsappRescatista = "+14155238886";
@@ -135,8 +136,8 @@ public class FixtureNotificarMascotaEncontrada {
     }
 
     private static Persona crearPersona(
-        Contacto contacto, LocalDateTime fechaNacimiento, Documento documento,
-        Direccion direccion, Contacto otroContacto, Usuario usuario, int radioHogares) {
+            Contacto contacto, LocalDate fechaNacimiento, Documento documento,
+            Direccion direccion, Contacto otroContacto, Usuario usuario, int radioHogares) {
             return new Persona(contacto, fechaNacimiento, documento, direccion, otroContacto, usuario, radioHogares);
     }
 

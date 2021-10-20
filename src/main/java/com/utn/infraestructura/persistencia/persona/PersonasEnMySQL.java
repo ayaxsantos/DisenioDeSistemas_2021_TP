@@ -3,41 +3,33 @@ package com.utn.infraestructura.persistencia.persona;
 
 import com.utn.dominio.Personas;
 import com.utn.dominio.persona.Persona;
-import com.utn.dominio.persona.Contacto;
-import com.utn.dominio.persona.Direccion;
-import com.utn.dominio.persona.Documento;
-import com.utn.dominio.autenticacion.Usuario;
-import com.utn.infraestructura.persistencia.persona.jpa.JpaPersona;
-import com.utn.infraestructura.persistencia.persona.jpa.JpaRepositorioPersonas;
+import com.utn.infraestructura.persistencia.contacto.JpaContacto;
+import com.utn.infraestructura.persistencia.direccion.JpaDireccion;
+import com.utn.infraestructura.persistencia.documento.JpaDocumento;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class PersonasEnMySQL implements Personas {
 
-    private final JpaRepositorioPersonas jpaRepositorioPersonas;
-
-    public PersonasEnMySQL(JpaRepositorioPersonas jpaRepositorioPersonas) {
-        this.jpaRepositorioPersonas = jpaRepositorioPersonas;
-    }
-
     @Override
     public Persona obtenerPorNumeroDocumento(int numeroDocumento) {
-        JpaPersona jpaPersona = jpaRepositorioPersonas.obtenerPorNumeroDocumento(numeroDocumento);
-        return new Persona(
-            new Contacto("", "", "", ""),
-            jpaPersona.getFechaNacimiento(),
-            new Documento("", 0),
-            new Direccion(0,0),
-            new Contacto("", "", "", ""),
-            new Usuario("", ""),
-            0
-        );
+        return null;
     }
 
     @Override
     public void guardar(Persona persona) {
-        JpaPersona jpaPersona = new JpaPersona();
-        jpaRepositorioPersonas.guardar(jpaPersona);
+        JpaDocumento documentoJPA = new JpaDocumento(null, persona.getDocumento().getTipo(), persona.getDocumento().getNumero());
+        JpaDireccion direccionJPA = new JpaDireccion(null, persona.getDomicilio().latitud(), persona.getDomicilio().longitud());
+        JpaContacto contactoJPA = new JpaContacto(null, persona.getContactoPersonal().getNombre(), persona.getContactoPersonal().getApellido(), persona.getContactoPersonal().getTelefono(), persona.getContactoPersonal().getEmail());
+        List<JpaContacto> contactosJPA = new ArrayList<>();
+        persona.getContactos().forEach(unContacto -> contactosJPA.add(new JpaContacto(null,unContacto.getNombre(), unContacto.getApellido(), unContacto.getTelefono(), unContacto.getEmail())));
+
+        //JpaPersona personaJPA = new JpaPersona(null, persona.getFechaNacimiento(), documentoJPA, direccionJPA, contactoJPA, contactosJPA, );
+
+
     }
 
 }

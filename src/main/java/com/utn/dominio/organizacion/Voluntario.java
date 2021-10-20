@@ -5,12 +5,10 @@ import com.utn.dominio.publicacion.Publicacion;
 
 public class Voluntario {
 
-    private final int numeroDNI;
     private final Usuario usuario;
     private final Organizacion organizacion;
 
-    public Voluntario(int numeroDNI, Usuario usuario, Organizacion organizacion) {
-        this.numeroDNI = numeroDNI;
+    public Voluntario(Usuario usuario, Organizacion organizacion) {
         this.usuario = usuario;
         this.organizacion = organizacion;
     }
@@ -29,9 +27,5 @@ public class Voluntario {
 
     public Organizacion getOrganizacion() {
         return organizacion;
-    }
-
-    public int getNumeroDNI() {
-        return numeroDNI;
     }
 }

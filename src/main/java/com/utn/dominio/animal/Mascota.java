@@ -9,9 +9,9 @@ public class Mascota {
 
     private final int id;
     private final String nombre;
-    private final Animal animal;
     private final String apodo;
     private final int edad;
+    private final Animal animal;
     private final Sexo sexo;
     private final Tamaño tamaño;
     private final String descripcionFisica;
@@ -19,8 +19,8 @@ public class Mascota {
     private final Map<String, String> caracteristicas = new HashMap<>();
 
     public Mascota(
-        int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño,
-        String descripcionFisica, List<String> fotosNormalizadas,  Map<String, String> caracteristicas){
+            int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño,
+            String descripcionFisica, List<String> fotosNormalizadas, Map<String, String> caracteristicas){
             this.id = id;
             this.nombre = nombre;
             this.animal = animal;

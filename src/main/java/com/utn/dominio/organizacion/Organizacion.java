@@ -4,13 +4,18 @@ import java.util.List;
 import java.util.ArrayList;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.persona.Persona;
-import com.utn.dominio.publicacion.Publicacion;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 
 public class Organizacion {
+
+    private String nombre;
+    private Direccion direccion;
+    private TamañoFoto tamañoFoto;
+    private CalidadFoto calidadFoto;
 
     private final List<Administrador> administradores = new ArrayList<>();
     private final List<Voluntario> voluntarios = new ArrayList<>();
@@ -23,10 +28,10 @@ public class Organizacion {
     private final List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion = new ArrayList<>();
     private final List<PublicacionBusquedaAdopcion> publicacionesBusquedaAdopcion = new ArrayList<>();
 
-    private TamañoFoto tamañoFoto;
-    private CalidadFoto calidadFoto;
 
-    public Organizacion(TamañoFoto tamañoFoto, CalidadFoto calidadFoto) {
+    public Organizacion(String nombre, Direccion direccion, TamañoFoto tamañoFoto, CalidadFoto calidadFoto) {
+        this.nombre = nombre;
+        this.direccion = direccion;
         this.tamañoFoto = tamañoFoto;
         this.calidadFoto = calidadFoto;
     }
@@ -66,6 +71,8 @@ public class Organizacion {
     public void eliminarVoluntario(Voluntario unVoluntario) {
         this.voluntarios.remove(unVoluntario);
     }
+
+    public void añadirPersona(Persona unaPersona){this.personas.add(unaPersona);}
 
     public void añadirPublicacionBusquedaAdopcion(PublicacionBusquedaAdopcion publicacion) {
         this.publicacionesBusquedaAdopcion.add(publicacion);

@@ -14,4 +14,11 @@ public class Documento {
         return this.numero;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
 }

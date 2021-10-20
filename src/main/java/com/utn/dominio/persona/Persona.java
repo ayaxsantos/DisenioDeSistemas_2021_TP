@@ -1,5 +1,6 @@
 package com.utn.dominio.persona;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class Persona {
 
     private final Usuario usuario;
     private final Contacto contactoPersonal;
-    private final LocalDateTime fechaNacimiento;
+    private final LocalDate fechaNacimiento;
     private final Documento documento;
     private final Direccion domicilio;
     private final List<Contacto> contactos = new ArrayList<>();
@@ -22,7 +23,7 @@ public class Persona {
     private int radioHogares;
     private Preferencia preferencia;
 
-    public Persona(Contacto contactoPersonal, LocalDateTime fechaNacimiento, Documento documento,
+    public Persona(Contacto contactoPersonal, LocalDate fechaNacimiento, Documento documento,
                    Direccion domicilio, Contacto otroContacto, Usuario usuario, int radioHogares) {
         this.contactoPersonal = contactoPersonal;
         this.fechaNacimiento = fechaNacimiento;
@@ -84,4 +85,47 @@ public class Persona {
         return this.preferencia;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Contacto getContactoPersonal() {
+        return contactoPersonal;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public Documento getDocumento() {
+        return documento;
+    }
+
+    public Direccion getDomicilio() {
+        return domicilio;
+    }
+
+    public List<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public int getRadioHogares() {
+        return radioHogares;
+    }
+
+    public void setRadioHogares(int radioHogares) {
+        this.radioHogares = radioHogares;
+    }
+
+    public Preferencia getPreferencia() {
+        return preferencia;
+    }
+
+    public void setPreferencia(Preferencia preferencia) {
+        this.preferencia = preferencia;
+    }
 }

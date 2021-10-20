@@ -10,6 +10,7 @@ import com.utn.dominio.excepcion.ContraseñaCortaException;
 import com.utn.dominio.excepcion.ContraseñaDebilException;
 import com.utn.dominio.excepcion.OrganizacionNoEncontradaException;
 
+import com.utn.dominio.persona.Direccion;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -71,7 +72,7 @@ public class PruebaUsuario {
     @Test
     public void se_añade_una_organizacion_correctamente() {
         Usuario usuario = new Usuario(nombreUsuario, contraseñaSegura);
-        Organizacion organizacion = new Organizacion(new TamañoFoto(1,1), CalidadFoto.BAJA);
+        Organizacion organizacion = new Organizacion("nombre", new Direccion(32,32), TamañoFoto.NORMAL, CalidadFoto.BAJA);
         usuario.añadirOrganizacion(organizacion);
         Assertions.assertEquals(1, usuario.organizacionesPertenecientes().size());
     }
@@ -79,7 +80,7 @@ public class PruebaUsuario {
     @Test
     public void se_elige_una_organizacion_correctamente() {
         Usuario usuario = new Usuario(nombreUsuario, contraseñaSegura);
-        Organizacion organizacion = new Organizacion(new TamañoFoto(1,1), CalidadFoto.BAJA);
+        Organizacion organizacion = new Organizacion("nombre", new Direccion(32,32), TamañoFoto.NORMAL, CalidadFoto.BAJA);
         usuario.añadirOrganizacion(organizacion);
         usuario.elegirOrganizacionActual(organizacion);
         Assertions.assertEquals(organizacion, usuario.organizacionActual());
@@ -88,7 +89,7 @@ public class PruebaUsuario {
     @Test
     public void se_elige_una_organizacion_inexistente() {
         Usuario usuario = new Usuario(nombreUsuario, contraseñaSegura);
-        Organizacion organizacion = new Organizacion(new TamañoFoto(1,1), CalidadFoto.BAJA);
+        Organizacion organizacion = new Organizacion("nombre", new Direccion(32,32), TamañoFoto.NORMAL, CalidadFoto.BAJA);
         Assertions.assertThrows(OrganizacionNoEncontradaException.class,
                 () -> usuario.elegirOrganizacionActual(organizacion));
     }

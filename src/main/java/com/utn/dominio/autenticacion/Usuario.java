@@ -69,4 +69,9 @@ public class Usuario {
     public String getContraseña() {
         return contraseña;
     }
+
+    public void setOrganizacionesPertenecientes(List<Organizacion> unasOrganizaciones)
+    {
+        this.organizacionesPertenecientes.addAll(unasOrganizaciones);
+    }
 }
