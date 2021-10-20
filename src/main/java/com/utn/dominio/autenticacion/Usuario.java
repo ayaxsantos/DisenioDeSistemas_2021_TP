@@ -29,19 +29,13 @@ public class Usuario extends EntidadPersistencia {
     @Transient
     private boolean estaLogueado = false;
 
+    public Usuario() {}
+
     public Usuario(String usuario, String contraseña) {
         ValidadorContraseña.ejecutar(contraseña);
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.organizacionesPertenecientes = new ArrayList<>();
-    }
-
-    public Usuario() {
-
-    }
-
-    public boolean existe(String unUsuario) {
-        return this.usuario.equals(unUsuario);
     }
 
     public void iniciarSesion(String usuario, String contraseña) {
@@ -89,8 +83,8 @@ public class Usuario extends EntidadPersistencia {
         return contraseña;
     }
 
-    public void setOrganizacionesPertenecientes(List<Organizacion> unasOrganizaciones)
-    {
+    public void setOrganizacionesPertenecientes(List<Organizacion> unasOrganizaciones) {
         this.organizacionesPertenecientes.addAll(unasOrganizaciones);
     }
+
 }
