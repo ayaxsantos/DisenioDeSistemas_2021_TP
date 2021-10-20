@@ -17,6 +17,9 @@ public class JpaVoluntario
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(nullable = false)
+    private Integer numeroDNI;
+
     @OneToOne(cascade = CascadeType.ALL)
     private JpaUsuario usuarioJPA;
 
@@ -45,5 +48,13 @@ public class JpaVoluntario
 
     public void setOrganizacionJPA(JpaOrganizacion organizacionJPA) {
         this.organizacionJPA = organizacionJPA;
+    }
+
+    public Integer getNumeroDNI() {
+        return numeroDNI;
+    }
+
+    public void setNumeroDNI(Integer numeroDNI) {
+        this.numeroDNI = numeroDNI;
     }
 }

@@ -26,7 +26,8 @@ public class VoluntariosEnMySQL implements Voluntarios {
         EntityManagerHelper.beginTransaction();
 
         JpaVoluntario jpaVoluntario = (JpaVoluntario) EntityManagerHelper.getEntityManager()
-            .createQuery("select vol.id, vol.usuarioJPA, vol.organizacionJPA from JpaVoluntario vol, vol.usuarioJPA usr where usr.nombreUsuario = '" + nombreUsuario + "'").getSingleResult();
+            .createQuery("FROM JpaVoluntario vol WHERE EXISTS (FROM vol.usuarioJPA usr WHERE usr.nombreUsuario = '"
+                    + nombreUsuario +"')").getSingleResult();
 
         EntityManagerHelper.commit();
 
@@ -35,10 +36,27 @@ public class VoluntariosEnMySQL implements Voluntarios {
 
         Organizacion organizacion = new Organizacion(new TamañoFoto(32,16), CalidadFoto.BAJA);
         Usuario usuario = new Usuario(usuarioJpa.getNombreUsuario(), usuarioJpa.getContrasenia());
-        Voluntario voluntario = new Voluntario(usuario, organizacion);
+        Voluntario voluntario = new Voluntario(5488759, usuario, organizacion);
         return voluntario;
     }
 
+    @Override
+    public Voluntario obtenerPorNumeroDNI(int numeroDNI) {
+        EntityManagerHelper.beginTransaction();
+
+        JpaVoluntario voluntarioJPA = (JpaVoluntario) EntityManagerHelper.getEntityManager()
+                        .createQuery("FROM JpaVoluntario vol where vol.numeroDNI = "+ numeroDNI).getSingleResult();
+
+        EntityManagerHelper.commit();
+
+        Organizacion organizacion = new Organizacion(new TamañoFoto(32,16), CalidadFoto.BAJA);
+        Usuario usuario = new Usuario(voluntarioJPA.getUsuarioJPA().getNombreUsuario(), voluntarioJPA.getUsuarioJPA().getContrasenia());
+        Voluntario voluntario = new Voluntario(voluntarioJPA.getNumeroDNI(), usuario, organizacion);
+
+        return voluntario;
+    }
+
+    @Override
     public void guardar(Voluntario voluntario) {
         //JpaVoluntario jpaVoluntario = new JpaVoluntario();
         //jpaRepositorioVoluntario.guardar(jpaVoluntario);
@@ -51,6 +69,7 @@ public class VoluntariosEnMySQL implements Voluntarios {
         usuarioJpa.setContrasenia(voluntario.getUsuario().getContraseña());
 
         voluntarioJpa.setUsuarioJPA(usuarioJpa);
+        voluntarioJpa.setNumeroDNI(voluntario.getNumeroDNI());
 
         EntityManagerHelper.beginTransaction();
 

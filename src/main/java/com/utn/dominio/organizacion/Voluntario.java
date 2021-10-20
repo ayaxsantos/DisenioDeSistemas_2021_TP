@@ -1,16 +1,16 @@
 package com.utn.dominio.organizacion;
 
-import java.util.List;
-
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.publicacion.Publicacion;
 
 public class Voluntario {
 
+    private final int numeroDNI;
     private final Usuario usuario;
     private final Organizacion organizacion;
 
-    public Voluntario(Usuario usuario, Organizacion organizacion) {
+    public Voluntario(int numeroDNI, Usuario usuario, Organizacion organizacion) {
+        this.numeroDNI = numeroDNI;
         this.usuario = usuario;
         this.organizacion = organizacion;
     }
@@ -29,5 +29,9 @@ public class Voluntario {
 
     public Organizacion getOrganizacion() {
         return organizacion;
+    }
+
+    public int getNumeroDNI() {
+        return numeroDNI;
     }
 }
