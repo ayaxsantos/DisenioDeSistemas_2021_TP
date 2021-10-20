@@ -35,9 +35,12 @@ public class PruebaJPA {
 
     @Test
     public void se_persiste_voluntario_en_db(){
-        Organizacion organizacion = new Organizacion("nombre", new Direccion(3,3), null, CalidadFoto.BAJA);
+        Organizacion organizacion = new Organizacion("nombre", new Direccion(3,3), TamañoFoto.GRANDE, CalidadFoto.BAJA);
         Usuario usuario = new Usuario("pepe", "hola1234");
         Voluntario voluntario = new Voluntario(usuario, organizacion);
+
+        organizacion.añadirVoluntario(voluntario);
+
         voluntarios.guardar(voluntario);
     }
 

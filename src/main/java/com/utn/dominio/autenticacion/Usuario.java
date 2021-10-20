@@ -2,16 +2,31 @@ package com.utn.dominio.autenticacion;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.excepcion.OrganizacionNoEncontradaException;
 
-public class Usuario {
+import javax.persistence.*;
 
-    private final String usuario;
-    private final String contraseña;
-    private final List<Organizacion> organizacionesPertenecientes;
+@Entity
+@Table(name = "usuario")
+public class Usuario extends EntidadPersistencia {
+
+    @Column
+    private String usuario;
+
+    @Column
+    private String contraseña;
+
+    @ManyToMany
+    private List<Organizacion> organizacionesPertenecientes;
+
+    @Transient
     private Organizacion organizacionActual;
+
+    @Transient
     private boolean estaLogueado = false;
 
     public Usuario(String usuario, String contraseña) {
@@ -19,6 +34,10 @@ public class Usuario {
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.organizacionesPertenecientes = new ArrayList<>();
+    }
+
+    public Usuario() {
+
     }
 
     public boolean existe(String unUsuario) {

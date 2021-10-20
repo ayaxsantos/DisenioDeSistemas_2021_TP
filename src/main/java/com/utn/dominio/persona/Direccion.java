@@ -1,13 +1,25 @@
 package com.utn.dominio.persona;
 
-public class Direccion {
+import com.utn.dominio.EntidadPersistencia;
 
-    private final double latitud;
-    private final double longitud;
+import javax.persistence.*;
+
+@Entity
+@Table(name="direccion")
+public class Direccion extends EntidadPersistencia{
+
+    @Column
+    private double latitud;
+    @Column
+    private double longitud;
 
     public Direccion(double latitud, double longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
+    }
+
+    public Direccion() {
+
     }
 
     public double latitud(){
