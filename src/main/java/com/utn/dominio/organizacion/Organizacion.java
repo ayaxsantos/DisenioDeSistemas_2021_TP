@@ -2,6 +2,8 @@ package com.utn.dominio.organizacion;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.persona.Direccion;
@@ -10,23 +12,46 @@ import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 
-public class Organizacion {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "organizacion")
+public class Organizacion extends EntidadPersistencia {
+
+    @Column
     private String nombre;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Direccion direccion;
+
+    @Enumerated(EnumType.STRING)
     private TamañoFoto tamañoFoto;
+
+    @Enumerated(EnumType.STRING)
     private CalidadFoto calidadFoto;
 
-    private final List<Administrador> administradores = new ArrayList<>();
-    private final List<Voluntario> voluntarios = new ArrayList<>();
-    private final List<Persona> personas = new ArrayList<>();
-    private final List<Persona> adoptantesActivos = new ArrayList<>();
-    private final List<String> caracteristicas = new ArrayList<>();
-    private final List<String> preguntasAdopcion = new ArrayList<>();
-    private final List<String> preguntasQuieroAdoptar = new ArrayList<>();
-    private final List<PublicacionMascotaEncontrada> publicacionesMascotaEncontrada = new ArrayList<>();
-    private final List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion = new ArrayList<>();
-    private final List<PublicacionBusquedaAdopcion> publicacionesBusquedaAdopcion = new ArrayList<>();
+    @OneToMany(mappedBy = "organizacion", cascade = CascadeType.ALL)
+    private List<Voluntario> voluntarios = new ArrayList<>();
+
+
+    @Transient
+    private List<Administrador> administradores = new ArrayList<>();
+    @Transient
+    private List<Persona> personas = new ArrayList<>();
+    @Transient
+    private List<Persona> adoptantesActivos = new ArrayList<>();
+    @Transient
+    private List<String> caracteristicas = new ArrayList<>();
+    @Transient
+    private List<String> preguntasAdopcion = new ArrayList<>();
+    @Transient
+    private List<String> preguntasQuieroAdoptar = new ArrayList<>();
+    @Transient
+    private List<PublicacionMascotaEncontrada> publicacionesMascotaEncontrada = new ArrayList<>();
+    @Transient
+    private List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion = new ArrayList<>();
+    @Transient
+    private List<PublicacionBusquedaAdopcion> publicacionesBusquedaAdopcion = new ArrayList<>();
 
 
     public Organizacion(String nombre, Direccion direccion, TamañoFoto tamañoFoto, CalidadFoto calidadFoto) {
@@ -34,6 +59,10 @@ public class Organizacion {
         this.direccion = direccion;
         this.tamañoFoto = tamañoFoto;
         this.calidadFoto = calidadFoto;
+    }
+
+    public Organizacion() {
+
     }
 
     public void añadirCaracteristica(String unaCaracteristica) {
@@ -72,7 +101,9 @@ public class Organizacion {
         this.voluntarios.remove(unVoluntario);
     }
 
-    public void añadirPersona(Persona unaPersona){this.personas.add(unaPersona);}
+    public void añadirPersona(Persona unaPersona) {
+        this.personas.add(unaPersona);
+    }
 
     public void añadirPublicacionBusquedaAdopcion(PublicacionBusquedaAdopcion publicacion) {
         this.publicacionesBusquedaAdopcion.add(publicacion);
