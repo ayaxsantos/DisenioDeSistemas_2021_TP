@@ -11,12 +11,13 @@ import com.utn.infraestructura.persistencia.EntityManagerHelper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MascotasEnMySQL implements Mascotas {
+public class MascotasEnMySQL implements Mascotas
+{
     public Mascota obtenerPorId(int idMascota) {
 
         EntityManagerHelper.beginTransaction();
-        Mascota jpaMascota = (Mascota) EntityManagerHelper.getEntityManager()
-                .createQuery( "from JpaMascota mas where mas.id = " + idMascota).getSingleResult();
+        Mascota unaMascota = (Mascota) EntityManagerHelper.getEntityManager()
+                .createQuery( "from Mascota mas where mas.id = " + idMascota).getSingleResult();
         EntityManagerHelper.commit();
 
         return null;
@@ -24,7 +25,11 @@ public class MascotasEnMySQL implements Mascotas {
 
     @Override
     public void guardar(Mascota mascota) {
+        EntityManagerHelper.beginTransaction();
 
+        EntityManagerHelper.persist(mascota);
+
+        EntityManagerHelper.commit();
     }
 
 }
