@@ -6,7 +6,6 @@ import com.utn.dominio.Organizaciones;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.organizacion.Organizacion;
-import com.utn.dominio.publicacion.Publicacion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 
 public class GenerarPublicacionMascotaEncontrada {
@@ -19,11 +18,11 @@ public class GenerarPublicacionMascotaEncontrada {
         this.personas = personas;
     }
 
-    public void ejecutar(int numeroDocumentoRescatista, int idOrganizacion, Double latitud, Double longitud, String estadoMascota) {
+    public void ejecutar(int numeroDocumentoRescatista, String nombreOrganizacion, Double latitud, Double longitud, String estadoMascota) {
         Direccion direccionMascotaEncontrada = new Direccion(latitud, longitud);
         Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
         PublicacionMascotaEncontrada publicacion = new PublicacionMascotaEncontrada(personaRescatista, direccionMascotaEncontrada, estadoMascota);
-        Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
+        Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
         organizacion.añadirPublicacionMascotaEncontrada(publicacion);
         organizaciones.guardar(organizacion);
     }

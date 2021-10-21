@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Organizaciones {
     List<Organizacion> obtenerTodas();
-    Organizacion obtenerPorId(int idOrganizacion);
+    Organizacion obtenerPorNombre(String nombreOrganizacion);
     void guardar(Organizacion organizacion);
 }

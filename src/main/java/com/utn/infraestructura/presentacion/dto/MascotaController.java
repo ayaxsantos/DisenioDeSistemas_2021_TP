@@ -2,7 +2,7 @@ package com.utn.infraestructura.presentacion.dto;
 
 import com.utn.dominio.animal.Mascota;
 
-import com.utn.infraestructura.persistencia.mascota.MascotasEnMySQL;
+import com.utn.infraestructura.persistencia.MascotasEnMySQL;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

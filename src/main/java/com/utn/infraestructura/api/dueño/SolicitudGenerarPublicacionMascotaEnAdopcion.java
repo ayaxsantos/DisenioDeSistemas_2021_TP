@@ -6,22 +6,36 @@ import java.util.List;
 
 public class SolicitudGenerarPublicacionMascotaEnAdopcion {
 
+    /*
     @JsonProperty
     private int idMascota;
 
     @JsonProperty
-    private int idOrganizacion;
+    private int idOrganizacion;*/
+
+    @JsonProperty
+    private String nombreMascota;
+
+    @JsonProperty
+    private String nombreOrganizacion;
 
     @JsonProperty
     private List<String> respuestasMascota;
 
-    public int idMascota() {
+
+    //TODO eliminar si no hace falta
+    /*public int idMascota() {
         return this.idMascota;
     }
 
     public int idOrganizacion() {
         return this.idOrganizacion;
+    }*/
+
+    public String nombreOrganizacion() {
+        return this.nombreOrganizacion;
     }
+    public String nombreMascota(){return this.nombreMascota;}
 
     public List<String> respuestasMascota() {
         return this.respuestasMascota;

@@ -15,7 +15,6 @@ import java.util.TimerTask;
 import java.util.stream.Collectors;
 
 import com.utn.dominio.Organizaciones;
-import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.publicacion.Preferencia;
 import com.utn.dominio.organizacion.Organizacion;
@@ -23,18 +22,15 @@ import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.MensajeRecomendacionesAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
-import com.utn.infraestructura.persistencia.mascota.MascotasEnMySQL;
 
 public class EnviarRecomendacionAdopcion extends TimerTask {
 
     private final Organizaciones organizaciones;
     private final EstrategiaDeComunicacion estrategiaDeComunicacion;
-    private final MascotasEnMySQL mascotasEnMySQL;
 
-    public EnviarRecomendacionAdopcion(Organizaciones organizaciones, EstrategiaDeComunicacion estrategiaDeComunicacion, MascotasEnMySQL mascotasEnMySQL) {
+    public EnviarRecomendacionAdopcion(Organizaciones organizaciones, EstrategiaDeComunicacion estrategiaDeComunicacion) {
         this.organizaciones = organizaciones;
         this.estrategiaDeComunicacion = estrategiaDeComunicacion;
-        this.mascotasEnMySQL = mascotasEnMySQL;
     }
 
     public void run() {
@@ -59,10 +55,7 @@ public class EnviarRecomendacionAdopcion extends TimerTask {
     }
 
     private boolean condicionesParaFiltrar(PublicacionMascotaEnAdopcion publicacion, Preferencia preferenciaAdoptante) {
-        Mascota mascota = mascotasEnMySQL.obtenerPorId(publicacion.getIdMascota());
-        return mascota.animal() == preferenciaAdoptante.animal()
-                && mascota.tamaño() == preferenciaAdoptante.tamaño()
-                && mascota.sexo() == preferenciaAdoptante.sexo();
+        return preferenciaAdoptante.equals(publicacion.obtenerFisionomia());
     }
 
 }

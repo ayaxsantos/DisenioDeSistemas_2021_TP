@@ -1,4 +1,4 @@
-package com.utn.infraestructura.persistencia.mascota;
+package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Mascotas;
 import com.utn.dominio.animal.Mascota;

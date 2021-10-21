@@ -14,8 +14,8 @@ public class NormalizarFoto {
         this.organizaciones = organizaciones;
     }
 
-    public String ejecutar(int idOrganizacion, String fotoOriginal) {
-        Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
+    public String ejecutar(String nombreOrganizacion, String fotoOriginal) {
+        Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
         return normalizador.ejecutar(fotoOriginal, organizacion.calidadFoto(), organizacion.tamañoFoto());
     }
 

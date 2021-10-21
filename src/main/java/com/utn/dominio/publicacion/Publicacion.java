@@ -1,23 +1,41 @@
 package com.utn.dominio.publicacion;
 
+import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.persona.Persona;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.LocalDate;
 
-public abstract class Publicacion {
 
-    private final Persona persona;
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Publicacion extends EntidadPersistencia {
+
+
+    @Column
     private boolean estaVisible;
-    private final LocalDateTime fecha;
+
+    @Column
+    private LocalDate fecha;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Persona persona;
 
     public Publicacion(Persona persona) {
         this.persona = persona;
         this.estaVisible = false;
-        this.fecha = LocalDateTime.now();
+        this.fecha = LocalDate.now();
+    }
+
+    public Publicacion() {
+
     }
 
     public void estaVisible(boolean estaVisible){
         this.estaVisible = estaVisible;
     }
 
+    public Persona getPersona() {
+        return persona;
+    }
 }

@@ -23,9 +23,11 @@ public class RegistrarMascota {
 
     public void ejecutar(int documentoDueño, int idMascota, String nombre, String tipoAnimal, String apodo, int edad,
         String sexo, String tamaño, String descripcionFisica, List<String> fotos, Map<String, String> caracteristicas){
-            Mascota mascota = new Mascota(idMascota, nombre, Animal.buscar(tipoAnimal),
-                apodo, edad, Sexo.buscar(sexo), Tamaño.buscar(tamaño),
-                descripcionFisica, fotos, caracteristicas);
+            Mascota mascota = new Mascota(nombre,
+                apodo, edad, Animal.buscar(tipoAnimal), Sexo.buscar(sexo), Tamaño.buscar(tamaño),
+                descripcionFisica);
+            fotos.forEach(unaFoto -> mascota.añadirFoto(unaFoto));
+            caracteristicas.forEach((unaCaracteristica, unaRespuesta) -> mascota.añadirCaracteristica(unaCaracteristica, unaRespuesta)); //TODO testear que funcione bien
             Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño);
             persona.añadirMascota(mascota);
             personas.guardar(persona);

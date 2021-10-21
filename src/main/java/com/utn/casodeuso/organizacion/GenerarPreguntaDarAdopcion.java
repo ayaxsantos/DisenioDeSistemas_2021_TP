@@ -11,8 +11,8 @@ public class GenerarPreguntaDarAdopcion {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(int idOrganizacion, String preguntaAdopcion) {
-        Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
+    public void ejecutar(String nombreOrganizacion, String preguntaAdopcion) {
+        Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
         organizacion.agregarPreguntaAdopcion(preguntaAdopcion);
         organizaciones.guardar(organizacion);
     }

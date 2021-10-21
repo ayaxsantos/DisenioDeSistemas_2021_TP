@@ -1,4 +1,4 @@
-package com.utn.infraestructura.persistencia.voluntario;
+package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Voluntarios;
 import com.utn.dominio.autenticacion.Usuario;

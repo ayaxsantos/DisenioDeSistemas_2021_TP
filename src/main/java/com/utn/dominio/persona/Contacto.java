@@ -2,17 +2,32 @@ package com.utn.dominio.persona;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.MedioDeComunicacion;
 import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
-public class Contacto {
+import javax.persistence.*;
 
-    private final String nombre;
-    private final String apellido;
-    private final String telefono;
-    private final String email;
-    private final List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
+@Entity
+@Table(name = "contacto")
+public class Contacto extends EntidadPersistencia {
+
+    @Column
+    private String nombre;
+
+    @Column
+    private String apellido;
+
+    @Column
+    private String telefono;
+
+    @Column
+    private String email;
+
+    @Transient //Todo realizar la correcta relación
+    private List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
 
     public Contacto(String nombre, String apellido, String telefono, String email) {
         this.nombre = nombre;
@@ -21,12 +36,16 @@ public class Contacto {
         this.email = email;
     }
 
+    public Contacto() {
+
+    }
+
     public void notificar(Mensaje mensaje) {
         mensaje.agregarEmailDestino(this.email);
         mensaje.agregarTelefonoDestino(this.telefono);
         mediosDeComunicacion.stream()
-            .filter(MedioDeComunicacion::esPreferido)
-            .forEach(medioDeComunicacion -> medioDeComunicacion.enviar(mensaje));
+                .filter(MedioDeComunicacion::esPreferido)
+                .forEach(medioDeComunicacion -> medioDeComunicacion.enviar(mensaje));
     }
 
     public void añadirMedioDeComunicacion(EstrategiaDeComunicacion estrategiaDeComunicacion, boolean esPreferido) {

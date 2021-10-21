@@ -5,17 +5,29 @@ import java.util.ArrayList;
 
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.persona.Persona;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "publicacionMascotaEncontrada")
 public class PublicacionMascotaEncontrada extends Publicacion {
 
-    private final Direccion ubicacionMascota;
-    private final String estadoMascota;
-    private final List<String> fotosMascota = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Direccion ubicacionMascota;
+
+    @Column
+    private String estadoMascota;
+
+    @ElementCollection
+    private List<String> fotosMascota;
 
     public PublicacionMascotaEncontrada(Persona personaRescatista, Direccion ubicacionMascota, String estadoMascota) {
         super(personaRescatista);
         this.ubicacionMascota = ubicacionMascota;
         this.estadoMascota = estadoMascota;
+        this.fotosMascota = new ArrayList<>();
     }
 
+    public PublicacionMascotaEncontrada() {
+
+    }
 }

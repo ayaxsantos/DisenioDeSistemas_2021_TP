@@ -3,25 +3,50 @@ package com.utn.dominio.persona;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
 
+import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.publicacion.Preferencia;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.excepcion.MascotaNoEncontradaException;
 
-public class Persona {
+import javax.persistence.*;
 
-    private final Usuario usuario;
-    private final Contacto contactoPersonal;
-    private final LocalDate fechaNacimiento;
-    private final Documento documento;
-    private final Direccion domicilio;
-    private final List<Contacto> contactos = new ArrayList<>();
-    private final List<Mascota> mascotas = new ArrayList<>();
-    private int radioHogares;
+@Entity
+@Table(name = "persona")
+public class Persona extends EntidadPersistencia {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Usuario usuario;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Contacto contactoPersonal;
+
+    @Column(columnDefinition = "DATE")
+    private LocalDate fechaNacimiento;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Documento documento;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Direccion domicilio;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Contacto> contactos = new ArrayList<>();
+
+    //TODO En SQL se esta creando una tabla auxiliar donde relaciona PK de Mascota con PK de Persona. (Relacionado con TODO de Mascota)
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Mascota> mascotas;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Preferencia preferencia;
+
+    @Column
+    private boolean esAdoptante;
+
+    @Transient
+    private int radioHogares;
 
     public Persona(Contacto contactoPersonal, LocalDate fechaNacimiento, Documento documento,
                    Direccion domicilio, Contacto otroContacto, Usuario usuario, int radioHogares) {
@@ -32,6 +57,20 @@ public class Persona {
         this.contactos.add(otroContacto);
         this.usuario = usuario;
         this.radioHogares = radioHogares;
+        this.mascotas = new ArrayList<>();
+        this.esAdoptante = false;
+    }
+
+    public Persona() {
+
+    }
+
+    public boolean isEsAdoptante() {
+        return esAdoptante;
+    }
+
+    public void setEsAdoptante(boolean esAdoptante) {
+        this.esAdoptante = esAdoptante;
     }
 
     public void notificar(Mensaje mensaje) {
@@ -39,21 +78,21 @@ public class Persona {
         this.contactos.forEach(unContacto -> unContacto.notificar(mensaje));
     }
 
-    public Mascota buscarMascota(int idMascota) {
+    public Mascota buscarMascota(String nombreMascota) {
         return mascotas.stream()
-            .filter(unaMascota -> unaMascota.id() == idMascota)
-            .findFirst().orElseThrow(MascotaNoEncontradaException::new);
+                .filter(unaMascota -> unaMascota.getNombre().equals(nombreMascota))
+                .findFirst().orElseThrow(MascotaNoEncontradaException::new);
     }
 
-    public void añadirContacto(Contacto contacto){
+    public void añadirContacto(Contacto contacto) {
         contactos.add(contacto);
     }
 
-    public void añadirMascota(Mascota mascota){
+    public void añadirMascota(Mascota mascota) {
         mascotas.add(mascota);
     }
 
-    public void radioHogares(int radioDeHogares){
+    public void radioHogares(int radioDeHogares) {
         this.radioHogares = radioDeHogares;
     }
 

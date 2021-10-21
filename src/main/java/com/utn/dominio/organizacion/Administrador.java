@@ -3,6 +3,7 @@ package com.utn.dominio.organizacion;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.foto.TamañoFoto;
 
+//TODO Hibernate
 public class Administrador {
 
     private final Usuario usuario;

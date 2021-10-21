@@ -27,8 +27,8 @@ import java.util.Map;
 
 public class FixtureNotificarMascotaEncontrada {
 
-    protected static final int idMascotaEncontradaExistente = 33333;
-    protected static final int idMascotaEncontradaNoExistente = 55555;
+    protected static final String nombreMascotaEncontradaExistente = "Ayudante de Santa";
+    protected static final String nombreMascotaEncontradaNoExistente = "Beneto";
     private static final String nombreMascota = "Ayudante de Santa";
     private static final Animal animal = Animal.PERRO;
     private static final String apodo = "Huesos";
@@ -103,7 +103,7 @@ public class FixtureNotificarMascotaEncontrada {
     }
 
     public static void inicializarMascota() {
-        mascota = crearMascota(idMascotaEncontradaExistente, nombreMascota, animal, apodo, edad, sexo, tamaño, descripcionFisica, fotos, caracteristicasMascota);
+        mascota = crearMascota(nombreMascota, animal, apodo, edad, sexo, tamaño, descripcionFisica, fotos, caracteristicasMascota);
     }
 
     protected static void inicializarDueño() {
@@ -115,30 +115,34 @@ public class FixtureNotificarMascotaEncontrada {
         contactoDueño = crearContacto(nombreDueño, apellidoDueño, numeroDueño, emailDueño);
         contactoDueño.añadirMedioDeComunicacion(sms, esPreferido);
         personaDueño = crearPersona(contactoDueño, fechaNacimientoDueño, documentoDueño,
-                                    direccionDueño, otroContactoDueño, usuarioDueño, radioHogares);
+                direccionDueño, otroContactoDueño, usuarioDueño, radioHogares);
         personaDueño.añadirMascota(mascota);
     }
 
     public static void inicializarRescatista() {
         otroContactoRescatista = crearContacto(nombreContactoRescatista, apellidoContactoRescatista,
-                                               numeroContactoRescatista, emailContactoRescatista);
+                numeroContactoRescatista, emailContactoRescatista);
         documentoRescatista = crearDocumento(tipoDocumento, numeroDocumentoRescatista);
-        contactoRescatista = crearContacto(nombreRescatista, apellidoRescatista,  numeroSMSRescatista, emailRescatista);
+        contactoRescatista = crearContacto(nombreRescatista, apellidoRescatista, numeroSMSRescatista, emailRescatista);
         personaRescatista = crearPersona(contactoRescatista, fechaNacimientoRescatista, documentoRescatista,
-                                         direccionRescatista, otroContactoRescatista, usuarioRescatista, radioHogares);
+                direccionRescatista, otroContactoRescatista, usuarioRescatista, radioHogares);
         mensajeMascotaEncontrada = mensajeMascotaEncontrada(personaRescatista, mascota);
     }
 
     private static Mascota crearMascota(
-        int id, String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño,
-        String descripcionFisica, List<String> fotos, Map<String, String> caracteristicas) {
-            return new Mascota(id, nombre, animal, apodo, edad, sexo, tamaño, descripcionFisica, fotos, caracteristicas);
+            String nombre, Animal animal, String apodo, int edad, Sexo sexo, Tamaño tamaño,
+            String descripcionFisica, List<String> fotos, Map<String, String> caracteristicas) {
+        Mascota mascota = new Mascota(nombre, apodo, edad, animal, sexo, tamaño, descripcionFisica);
+        fotos.forEach(unaFoto -> mascota.añadirFoto(unaFoto));
+        caracteristicas.forEach((unaCaracteristica, unaRespuesta) -> mascota.añadirCaracteristica(unaCaracteristica, unaRespuesta)); //TODO testear que funcione bien
+
+        return mascota;
     }
 
     private static Persona crearPersona(
             Contacto contacto, LocalDate fechaNacimiento, Documento documento,
             Direccion direccion, Contacto otroContacto, Usuario usuario, int radioHogares) {
-            return new Persona(contacto, fechaNacimiento, documento, direccion, otroContacto, usuario, radioHogares);
+        return new Persona(contacto, fechaNacimiento, documento, direccion, otroContacto, usuario, radioHogares);
     }
 
     private static Documento crearDocumento(String tipo, Integer numero) {
@@ -150,8 +154,8 @@ public class FixtureNotificarMascotaEncontrada {
     }
 
     private static String mensajeMascotaEncontrada(Persona personaRescatista, Mascota mascota) {
-        return "Hola, soy " + personaRescatista.nombre() + " y encontré a " + mascota.nombre() + ". " +
-            "Mi número es " + personaRescatista.telefono() + " y mi email es " + personaRescatista.email();
+        return "Hola, soy " + personaRescatista.nombre() + " y encontré a " + mascota.getNombre() + ". " +
+                "Mi número es " + personaRescatista.telefono() + " y mi email es " + personaRescatista.email();
     }
 
 }

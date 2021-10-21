@@ -11,7 +11,7 @@ public class CumpleCaracteristicas implements ValidacionHogar {
 
     @Override
     public boolean ejecutar(Hogar hogar, Persona personaRescatista, Mascota mascota) {
-        List<String> unasCaracteristicas = new ArrayList<>(mascota.caracteristicas().values());
+        List<String> unasCaracteristicas = new ArrayList<>(mascota.getCaracteristicas().values());
         return !unasCaracteristicas.isEmpty() && hogar.caracteristicas.containsAll(unasCaracteristicas);
     }
 

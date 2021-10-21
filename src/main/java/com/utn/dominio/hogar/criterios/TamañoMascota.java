@@ -10,7 +10,7 @@ public class TamañoMascota implements ValidacionHogar {
 
     @Override
     public boolean ejecutar(Hogar hogar, Persona personaRescatista, Mascota mascota) {
-        return (mascota.tamaño() == Tamaño.CHICO) != hogar.patio;
+        return (mascota.getTamaño() == Tamaño.CHICO) != hogar.patio;
     }
 
 }

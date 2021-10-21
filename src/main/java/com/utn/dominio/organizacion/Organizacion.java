@@ -2,6 +2,7 @@ package com.utn.dominio.organizacion;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.foto.CalidadFoto;
@@ -33,25 +34,31 @@ public class Organizacion extends EntidadPersistencia {
     @OneToMany(mappedBy = "organizacion", cascade = CascadeType.ALL)
     private List<Voluntario> voluntarios = new ArrayList<>();
 
-
     @Transient
     private List<Administrador> administradores = new ArrayList<>();
-    @Transient
+
+    @ManyToMany
     private List<Persona> personas = new ArrayList<>();
-    @Transient
-    private List<Persona> adoptantesActivos = new ArrayList<>();
-    @Transient
-    private List<String> caracteristicas = new ArrayList<>();
-    @Transient
-    private List<String> preguntasAdopcion = new ArrayList<>();
-    @Transient
-    private List<String> preguntasQuieroAdoptar = new ArrayList<>();
-    @Transient
-    private List<PublicacionMascotaEncontrada> publicacionesMascotaEncontrada = new ArrayList<>();
-    @Transient
-    private List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion = new ArrayList<>();
-    @Transient
-    private List<PublicacionBusquedaAdopcion> publicacionesBusquedaAdopcion = new ArrayList<>();
+
+    @ElementCollection
+    private List<String> caracteristicas;
+
+    @ElementCollection
+    private List<String> preguntasAdopcion;
+
+    @ElementCollection
+    private List<String> preguntasQuieroAdoptar;
+
+    //Todo: Consultar como evitar la generacion de tablas automaticas,
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PublicacionMascotaEncontrada> publicacionesMascotaEncontrada;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PublicacionBusquedaAdopcion> publicacionesBusquedaAdopcion;
 
 
     public Organizacion(String nombre, Direccion direccion, TamañoFoto tamañoFoto, CalidadFoto calidadFoto) {
@@ -59,6 +66,12 @@ public class Organizacion extends EntidadPersistencia {
         this.direccion = direccion;
         this.tamañoFoto = tamañoFoto;
         this.calidadFoto = calidadFoto;
+        this.caracteristicas = new ArrayList<>();
+        this.preguntasAdopcion = new ArrayList<>();
+        this.preguntasQuieroAdoptar = new ArrayList<>();
+        this.publicacionesMascotaEncontrada = new ArrayList<>();
+        this.publicacionesMascotaEnAdopcion = new ArrayList<>();
+        this.publicacionesBusquedaAdopcion = new ArrayList<>();
     }
 
     public Organizacion() {
@@ -117,10 +130,6 @@ public class Organizacion extends EntidadPersistencia {
         this.publicacionesMascotaEncontrada.add(publicacion);
     }
 
-    public void añadirAdoptanteActivo(Persona personaAdoptante) {
-        this.adoptantesActivos.add(personaAdoptante);
-    }
-
     public void tamañoFoto(TamañoFoto unTamaño) {
         this.tamañoFoto = unTamaño;
     }
@@ -142,6 +151,6 @@ public class Organizacion extends EntidadPersistencia {
     }
 
     public List<Persona> adoptantesActivos() {
-        return this.adoptantesActivos;
+        return personas.stream().filter(unaPersona -> unaPersona.isEsAdoptante()).collect(Collectors.toList());
     }
 }

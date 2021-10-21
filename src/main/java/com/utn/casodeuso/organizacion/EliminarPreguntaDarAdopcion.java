@@ -11,8 +11,8 @@ public class EliminarPreguntaDarAdopcion {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(int idOrganizacion, String preguntaAdopcion){
-        Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
+    public void ejecutar(String nombreOrganizacion, String preguntaAdopcion){
+        Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
         organizacion.eliminarPreguntaAdopcion(preguntaAdopcion);
         organizaciones.guardar(organizacion);
     }

@@ -1,4 +1,4 @@
-package com.utn.infraestructura.persistencia.usuario;
+package com.utn.infraestructura.persistencia;
 
 import java.util.Optional;
 import com.utn.dominio.Usuarios;

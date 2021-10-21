@@ -11,7 +11,7 @@ public class TipoAnimal implements ValidacionHogar {
 
     @Override
     public boolean ejecutar(Hogar hogar, Persona personaRescatista, Mascota mascota) {
-        return mascota.animal() == Animal.GATO ? hogar.admisiones.gatos : hogar.admisiones.perros;
+        return mascota.getAnimal() == Animal.GATO ? hogar.admisiones.gatos : hogar.admisiones.perros;
     }
 
 }

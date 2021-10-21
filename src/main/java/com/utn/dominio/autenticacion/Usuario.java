@@ -20,7 +20,7 @@ public class Usuario extends EntidadPersistencia {
     @Column
     private String contraseña;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Organizacion> organizacionesPertenecientes;
 
     @Transient

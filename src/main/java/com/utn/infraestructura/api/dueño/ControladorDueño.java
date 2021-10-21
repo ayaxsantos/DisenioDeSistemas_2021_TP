@@ -40,13 +40,25 @@ public class ControladorDueño {
             return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("dueños/{numeroDocumento}/publicaciones")
+    //TODO eliminar si no hace falta
+    /*@PostMapping("dueños/{numeroDocumento}/publicaciones")
     public ResponseEntity<Void> generarPublicacionMascotaEnAdopcion(
         @PathVariable("numeroDocumento") int numeroDocumentoDueño,
         @RequestBody SolicitudGenerarPublicacionMascotaEnAdopcion solicitudGenerarPublicacionMascotaEnAdopcion) {
             generarPublicacionMascotaEnAdopcion.ejecutar(numeroDocumentoDueño,
                 solicitudGenerarPublicacionMascotaEnAdopcion.idMascota(),
                 solicitudGenerarPublicacionMascotaEnAdopcion.idOrganizacion(),
+                solicitudGenerarPublicacionMascotaEnAdopcion.respuestasMascota());
+            return new ResponseEntity<>(HttpStatus.CREATED);
+    }*/
+
+    @PostMapping("dueños/{numeroDocumento}/publicaciones")
+    public ResponseEntity<Void> generarPublicacionMascotaEnAdopcion(
+        @PathVariable("numeroDocumento") int numeroDocumentoDueño,
+        @RequestBody SolicitudGenerarPublicacionMascotaEnAdopcion solicitudGenerarPublicacionMascotaEnAdopcion) {
+            generarPublicacionMascotaEnAdopcion.ejecutar(numeroDocumentoDueño,
+                solicitudGenerarPublicacionMascotaEnAdopcion.nombreMascota(),
+                solicitudGenerarPublicacionMascotaEnAdopcion.nombreOrganizacion(),
                 solicitudGenerarPublicacionMascotaEnAdopcion.respuestasMascota());
             return new ResponseEntity<>(HttpStatus.CREATED);
     }

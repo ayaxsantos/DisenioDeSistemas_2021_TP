@@ -36,7 +36,7 @@ public class PruebaNotificarMascotaEncontrada {
         dado_un_rescatista_y_un_dueño_con_mascota_existente();
         dados_que_los_dueños_y_rescatistas_estan_registrados(personaDueño, personaRescatista);
         dada_que_la_notificacion_al_dueño_es_exitosa(numeroSMSRescatista, numeroDueño, asuntoMascotaEncontrada, mensajeMascotaEncontrada);
-        cuando_notificamos_al_dueño_que_se_encontro_su_mascota(numeroDocumentoRescatista, numeroDocumentoDueño, idMascotaEncontradaExistente);
+        cuando_notificamos_al_dueño_que_se_encontro_su_mascota(numeroDocumentoRescatista, numeroDocumentoDueño, nombreMascotaEncontradaExistente);
         entonces_al_dueño_se_le_envia_al_menos_un_mensaje(asuntoMascotaEncontrada, mensajeMascotaEncontrada);
     }
 
@@ -45,7 +45,7 @@ public class PruebaNotificarMascotaEncontrada {
         dado_un_rescatista_y_un_dueño_con_mascota_existente();
         dados_que_los_dueños_y_rescatistas_estan_registrados(personaDueño, personaRescatista);
         Assertions.assertThrows(MascotaNoEncontradaException.class, () ->
-            cuando_notificamos_al_dueño_que_se_encontro_su_mascota(numeroDocumentoRescatista, numeroDocumentoDueño, idMascotaEncontradaNoExistente));
+            cuando_notificamos_al_dueño_que_se_encontro_su_mascota(numeroDocumentoRescatista, numeroDocumentoDueño, nombreMascotaEncontradaNoExistente));
     }
 
     private void dado_un_rescatista_y_un_dueño_con_mascota_existente() {
@@ -63,8 +63,8 @@ public class PruebaNotificarMascotaEncontrada {
         Mockito.doNothing().when(notificador).enviar(origen, destino, asunto, mensaje);
     }
 
-    private void cuando_notificamos_al_dueño_que_se_encontro_su_mascota(int numeroDocumentoRescatista, int numeroDocumentoDueño, int idMascota) {
-        notificarMascotaEncontrada.ejecutar(numeroDocumentoRescatista, numeroDocumentoDueño, idMascota);
+    private void cuando_notificamos_al_dueño_que_se_encontro_su_mascota(int numeroDocumentoRescatista, int numeroDocumentoDueño, String nombreMascota) {
+        notificarMascotaEncontrada.ejecutar(numeroDocumentoRescatista, numeroDocumentoDueño, nombreMascota);
     }
 
     private void entonces_al_dueño_se_le_envia_al_menos_un_mensaje(String asunto, String mensaje) {

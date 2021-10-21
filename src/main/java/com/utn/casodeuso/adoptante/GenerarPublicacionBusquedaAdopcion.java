@@ -8,7 +8,6 @@ import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.mensaje.MensajePublicacionQuieroAdoptar;
 import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
-import com.utn.dominio.publicacion.Publicacion;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 
 import java.util.List;
@@ -25,12 +24,12 @@ public class GenerarPublicacionBusquedaAdopcion {
         this.estrategiaDeComunicacion = estrategiaDeComunicacion;
     }
 
-    public void ejecutar(int numeroDocumentoAdoptante, int idOrganizacion, Preferencia preferencia, List<String> comodidades) {
-        Organizacion organizacion = organizaciones.obtenerPorId(idOrganizacion);
+    public void ejecutar(int numeroDocumentoAdoptante, String nombreOrganizacion, Preferencia preferencia, List<String> comodidades) {
+        Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
         Persona personaAdoptante = personas.obtenerPorNumeroDocumento(numeroDocumentoAdoptante);
         PublicacionBusquedaAdopcion publicacion = new PublicacionBusquedaAdopcion(personaAdoptante, preferencia, comodidades);
         organizacion.añadirPublicacionBusquedaAdopcion(publicacion);
-        organizacion.añadirAdoptanteActivo(personaAdoptante);
+        organizacion.añadirPersona(personaAdoptante);
         organizaciones.guardar(organizacion);
         Mensaje mensaje = new MensajePublicacionQuieroAdoptar(publicacion);
         mensaje.agregarEmailDestino(personaAdoptante.email());
