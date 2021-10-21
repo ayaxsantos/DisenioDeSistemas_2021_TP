@@ -34,7 +34,7 @@ public class Organizacion extends EntidadPersistencia {
     @OneToMany(mappedBy = "organizacion", cascade = CascadeType.ALL)
     private List<Voluntario> voluntarios = new ArrayList<>();
 
-    @Transient
+    @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL)
     private List<Administrador> administradores = new ArrayList<>();
 
     @ManyToMany

@@ -1,17 +1,29 @@
 package com.utn.dominio.organizacion;
 
+import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.foto.TamañoFoto;
 
-//TODO Hibernate
-public class Administrador {
+import javax.persistence.*;
 
-    private final Usuario usuario;
-    private final Organizacion organizacion;
+@Entity
+@Table(name = "administrador")
+public class Administrador extends EntidadPersistencia {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Usuario usuario;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Organizacion organizacion;
 
     public Administrador(Usuario usuario, Organizacion organizacion) {
         this.organizacion = organizacion;
         this.usuario = usuario;
+    }
+
+    public Administrador()
+    {
+
     }
 
     public void definirTamañoFoto(TamañoFoto unTamaño) {

@@ -9,6 +9,7 @@ import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.organizacion.Voluntario;
 import com.utn.dominio.persona.Contacto;
@@ -71,8 +72,12 @@ public class PruebaTemporal {
 
         Direccion domicilioOrgTest = new Direccion(5447.358, 5648.74);
         Usuario usuarioVolTest = new Usuario("volOrg", "324ae41gg");
+        Usuario usuarioAdminTest = new Usuario("adminOrg", "32ad965min");
+
         Organizacion organizacionTest = new Organizacion("PatitasJugetonas", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
         Voluntario voluntarioTest = new Voluntario(usuarioVolTest, organizacionTest);
+        Administrador administradorTest = new Administrador(usuarioAdminTest,organizacionTest);
+
         organizacionTest.agregarPreguntaAdopcion("Tu animal tiene vacunas?");
         organizacionTest.agregarPreguntaAdopcion("Tu animal es jugeton?");
         organizacionTest.añadirVoluntario(voluntarioTest);
@@ -107,6 +112,8 @@ public class PruebaTemporal {
         organizacionTest.agregarPreguntaAdopcion("Cuanto pesa??");
         organizacionTest.agregarPreguntaQuieroAdoptar("Tiene patio??");
         personaTest.setPreferencia(new Preferencia(Sexo.HEMBRA,Animal.PERRO,Tamaño.CHICO));
+
+        organizacionTest.añadirAdministrador(administradorTest);
 
         personas.guardar(personaTest);
     }
