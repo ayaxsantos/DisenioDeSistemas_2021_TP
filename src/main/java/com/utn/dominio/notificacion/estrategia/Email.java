@@ -1,14 +1,22 @@
 package com.utn.dominio.notificacion.estrategia;
 
 import com.utn.dominio.Notificador;
+import com.utn.dominio.notificacion.MedioDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 
-public class Email implements EstrategiaDeComunicacion {
+import javax.persistence.*;
 
-    private final Notificador notificador;
+@Entity
+@DiscriminatorValue("email")
+public class Email extends MedioDeComunicacion {
 
-    public Email(Notificador notificador) {
-        this.notificador = notificador;
+
+    public Email(Notificador notificador, boolean esPreferido) {
+        super(notificador, esPreferido);
+    }
+
+    public Email() {
+
     }
 
     @Override

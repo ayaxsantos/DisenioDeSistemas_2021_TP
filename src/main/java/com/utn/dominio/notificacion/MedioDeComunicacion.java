@@ -1,25 +1,37 @@
 package com.utn.dominio.notificacion;
 
+import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.Notificador;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
-//TODO Hibernate
-public class MedioDeComunicacion {
+import javax.persistence.*;
 
-    private final EstrategiaDeComunicacion estrategiaDeComunicacion;
-    private final boolean esPreferido;
+//TODO que se genere 1 sola tabla donde tiene las 6 altenativas. SMS-Email-Whatsapp con no preferido y SMS-Email-Whatsapp con preferido. Porque sino crea de mas con id unicos.
+@Entity
+@Table(name = "medioDeComunicacion")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
+public abstract class MedioDeComunicacion extends EntidadPersistencia {
 
-    public MedioDeComunicacion(EstrategiaDeComunicacion estrategiaDeComunicacion, boolean esPreferido) {
-        this.estrategiaDeComunicacion = estrategiaDeComunicacion;
+    @Transient
+    protected Notificador notificador;
+
+    @Column
+    private boolean esPreferido;
+
+    public MedioDeComunicacion(Notificador notificador, boolean esPreferido) {
+        this.notificador = notificador;
         this.esPreferido = esPreferido;
     }
 
-    public void enviar(Mensaje mensaje) {
-        this.estrategiaDeComunicacion.enviar(mensaje);
+    public MedioDeComunicacion() {
+
     }
 
     public boolean esPreferido() {
         return this.esPreferido;
     }
 
+    public abstract void enviar(Mensaje mensaje);
 }

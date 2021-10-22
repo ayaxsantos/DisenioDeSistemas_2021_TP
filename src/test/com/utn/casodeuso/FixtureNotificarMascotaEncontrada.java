@@ -17,6 +17,8 @@ import com.utn.dominio.persona.Documento;
 
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.Notificador;
+import com.utn.infraestructura.notificador.NotificadorEmail;
+import com.utn.infraestructura.notificador.NotificadorTwilio;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -92,14 +94,14 @@ public class FixtureNotificarMascotaEncontrada {
     private static Documento documentoDueño;
     private static Documento documentoRescatista;
 
-    private static EstrategiaDeComunicacion sms;
-    private static EstrategiaDeComunicacion email;
-    private static EstrategiaDeComunicacion whatsApp;
+    private static Notificador sms;
+    private static Notificador email;
+    private static Notificador whatsApp;
 
     protected static void inicializarEstrategiasDeNotificacion(Notificador notificador) {
-        email = new Email(notificador);
-        sms = new SMS(notificador);
-        whatsApp = new WhatsApp(notificador);
+        email = notificador;
+        sms = notificador;
+        whatsApp = notificador;
     }
 
     public static void inicializarMascota() {
@@ -108,12 +110,12 @@ public class FixtureNotificarMascotaEncontrada {
 
     protected static void inicializarDueño() {
         otroContactoDueño = crearContacto(nombreContactoDueño, apellidoContactoDueño, numeroContactoDueño, emailContactoDueño);
-        otroContactoDueño.añadirMedioDeComunicacion(sms, noEsPreferido);
-        otroContactoDueño.añadirMedioDeComunicacion(email, esPreferido);
-        otroContactoDueño.añadirMedioDeComunicacion(whatsApp, noEsPreferido);
+        otroContactoDueño.añadirMedioDeComunicacion(new SMS(sms, noEsPreferido));
+        otroContactoDueño.añadirMedioDeComunicacion(new Email(email, esPreferido));
+        otroContactoDueño.añadirMedioDeComunicacion(new WhatsApp(whatsApp, noEsPreferido));
         documentoDueño = crearDocumento(tipoDocumento, numeroDocumentoDueño);
         contactoDueño = crearContacto(nombreDueño, apellidoDueño, numeroDueño, emailDueño);
-        contactoDueño.añadirMedioDeComunicacion(sms, esPreferido);
+        contactoDueño.añadirMedioDeComunicacion(new SMS(sms, esPreferido));
         personaDueño = crearPersona(contactoDueño, fechaNacimientoDueño, documentoDueño,
                 direccionDueño, otroContactoDueño, usuarioDueño, radioHogares);
         personaDueño.añadirMascota(mascota);

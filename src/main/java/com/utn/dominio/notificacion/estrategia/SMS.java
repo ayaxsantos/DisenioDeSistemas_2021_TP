@@ -1,14 +1,22 @@
 package com.utn.dominio.notificacion.estrategia;
 
 import com.utn.dominio.Notificador;
+import com.utn.dominio.notificacion.MedioDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 
-public class SMS implements EstrategiaDeComunicacion {
+import javax.persistence.*;
 
-    private final Notificador notificador;
+@Entity
+@DiscriminatorValue("sms")
+public class SMS extends MedioDeComunicacion {
 
-    public SMS(Notificador notificador) {
-        this.notificador = notificador;
+
+    public SMS(Notificador notificador, boolean esPreferido) {
+        super(notificador, esPreferido);
+    }
+
+    public SMS() {
+
     }
 
     @Override

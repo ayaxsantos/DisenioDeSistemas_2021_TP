@@ -9,6 +9,9 @@ import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.notificacion.estrategia.Email;
+import com.utn.dominio.notificacion.estrategia.SMS;
+import com.utn.dominio.notificacion.estrategia.WhatsApp;
 import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.organizacion.Voluntario;
@@ -20,6 +23,8 @@ import com.utn.dominio.publicacion.Preferencia;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
+import com.utn.infraestructura.notificador.NotificadorEmail;
+import com.utn.infraestructura.notificador.NotificadorTwilio;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
 import com.utn.infraestructura.persistencia.VoluntariosEnMySQL;
 import org.junit.jupiter.api.Test;
@@ -114,6 +119,12 @@ public class PruebaTemporal {
         personaTest.setPreferencia(new Preferencia(Sexo.HEMBRA,Animal.PERRO,Tamaño.CHICO));
 
         organizacionTest.añadirAdministrador(administradorTest);
+
+        contactoTest.añadirMedioDeComunicacion(new SMS(new NotificadorTwilio(), false));
+        contactoTest.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), true));
+        contactoTest.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
+        otroContactoTest.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
+        otroContactoTest.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), false));
 
         personas.guardar(personaTest);
     }
