@@ -1,7 +1,9 @@
 package com.utn.dominio.organizacion;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.utn.dominio.EntidadPersistencia;
@@ -37,8 +39,11 @@ public class Organizacion extends EntidadPersistencia {
     @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL)
     private List<Administrador> administradores = new ArrayList<>();
 
+    /*@ManyToMany
+    private List<Persona> personas = new ArrayList<>();*/
+
     @ManyToMany
-    private List<Persona> personas = new ArrayList<>();
+    private Set<Persona> personas = new HashSet<>();
 
     @ElementCollection
     private List<String> caracteristicas;

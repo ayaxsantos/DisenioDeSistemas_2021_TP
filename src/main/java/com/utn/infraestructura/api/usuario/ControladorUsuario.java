@@ -3,6 +3,8 @@ package com.utn.infraestructura.api.usuario;
 import com.utn.casodeuso.usuario.CerrarSesion;
 import com.utn.casodeuso.usuario.IniciarSesion;
 
+import com.utn.dominio.autenticacion.Usuario;
+import com.utn.infraestructura.persistencia.UsuariosEnMySQL;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -24,9 +24,12 @@ public class GenerarPublicacionMascotaEnAdopcion {
     public void ejecutar(int numeroDocumentoDueño, String nombreMascota, String nombreOrganizacion, List<String> respuestasMascota) {
         Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
         Mascota mascotaDeDueño = personaDueño.buscarMascota(nombreMascota);
-        PublicacionMascotaEnAdopcion publicacion = new PublicacionMascotaEnAdopcion(personaDueño, mascotaDeDueño, respuestasMascota);
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
+
+
+        PublicacionMascotaEnAdopcion publicacion = new PublicacionMascotaEnAdopcion(personaDueño, mascotaDeDueño, respuestasMascota);
         organizacion.añadirPublicacionMascotaEnAdopcion(publicacion);
+
         organizaciones.guardar(organizacion);
     }
 

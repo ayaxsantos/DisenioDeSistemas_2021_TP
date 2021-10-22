@@ -10,7 +10,6 @@ import javax.persistence.*;
 @DiscriminatorValue("sms")
 public class SMS extends MedioDeComunicacion {
 
-
     public SMS(Notificador notificador, boolean esPreferido) {
         super(notificador, esPreferido);
     }
@@ -25,5 +24,4 @@ public class SMS extends MedioDeComunicacion {
         notificador.enviar(mensaje.telefonoOrigen(), mensaje.telefonoDestino(), mensaje.asunto(), mensaje.cuerpo());
         System.out.println("Mensaje enviado por correo SMS!");
     }
-
 }

@@ -3,10 +3,6 @@ package com.utn.infraestructura.persistencia;
 import com.utn.dominio.Mascotas;
 import com.utn.dominio.animal.Mascota;
 
-import com.utn.dominio.animal.Animal;
-import com.utn.dominio.animal.Tamaño;
-import com.utn.dominio.animal.Sexo;
-
 import com.utn.infraestructura.persistencia.EntityManagerHelper;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +16,7 @@ public class MascotasEnMySQL implements Mascotas
                 .createQuery( "from Mascota mas where mas.id = " + idMascota).getSingleResult();
         EntityManagerHelper.commit();
 
-        return null;
+        return unaMascota;
     }
 
     @Override

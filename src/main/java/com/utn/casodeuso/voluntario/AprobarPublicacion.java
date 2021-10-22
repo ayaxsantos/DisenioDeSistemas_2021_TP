@@ -18,7 +18,9 @@ public class AprobarPublicacion {
     public void ejecutar(int idPublicacion, String nombreUsuario) {
         Voluntario unVoluntario = voluntarios.obtenerPorNombreUsuario(nombreUsuario);
         Publicacion publicacion = publicaciones.obtenerPorId(idPublicacion);
+
         unVoluntario.aprobarPublicacion(publicacion);
+
         publicaciones.guardar(publicacion);
     }
 

@@ -16,6 +16,8 @@ public class QuererAdoptarMascota {
     public void ejecutar(int numeroDocumentoAdoptante, int numeroDocumentoDueño) {
         Persona personaAdoptante = personas.obtenerPorNumeroDocumento(numeroDocumentoAdoptante);
         Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
+
+
         Mensaje mensaje = new MensajeQuererAdoptarMascota(personaAdoptante);
         personaDueño.notificar(mensaje);
     }

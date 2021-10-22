@@ -18,6 +18,7 @@ public class ConfirmarMascotaEncontrada {
     public void ejecutar(int numeroDocumentoRescatista, int numeroDocumentoDueño){
         Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
         Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
+
         Mensaje mensaje = new MensajeConfirmarMascotaEncontrada(personaDueño);
         personaRescatista.notificar(mensaje);
     }

@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public enum Sexo {
 
-    MACHO("Macho"),
-    HEMBRA("Hembra");
+    MACHO("MACHO"),
+    HEMBRA("HEMBRA");
 
     Sexo(String descripcion){
         this.descripcion = descripcion;

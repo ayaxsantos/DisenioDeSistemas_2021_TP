@@ -18,8 +18,11 @@ public class NotificarMascotaEncontrada {
     public void ejecutar(int numeroDocumentoRescatista, int numeroDocumentoDueño, String nombreMascota){
         Persona personaDueño =  personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
         Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
+
+
         Mascota mascota = personaDueño.buscarMascota(nombreMascota);
         Mensaje mensaje = new MensajeNotificarMascotaEncontrada(personaRescatista, mascota);
+
         personaDueño.notificar(mensaje);
     }
 

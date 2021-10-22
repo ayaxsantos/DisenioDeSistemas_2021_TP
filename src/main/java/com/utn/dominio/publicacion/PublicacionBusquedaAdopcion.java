@@ -18,9 +18,9 @@ public class PublicacionBusquedaAdopcion extends Publicacion {
     private List<String> comodidades;
 
     //TODO por que se pasa persona y una preferencia, cuando la misma preferencia se encuentra en la persona?
-    public PublicacionBusquedaAdopcion(Persona personaAdoptante, Preferencia preferencia, List<String> comodidades) {
+    public PublicacionBusquedaAdopcion(Persona personaAdoptante, List<String> comodidades) {
         super(personaAdoptante);
-        this.preferencia = preferencia;
+        this.preferencia = personaAdoptante.getPreferencia();
         this.comodidades = new ArrayList<>();
         this.comodidades.addAll(comodidades);
     }
