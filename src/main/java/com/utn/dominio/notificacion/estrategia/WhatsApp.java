@@ -1,15 +1,24 @@
 package com.utn.dominio.notificacion.estrategia;
 
 import com.utn.dominio.Notificador;
+import com.utn.dominio.notificacion.MedioDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 
-public class WhatsApp implements EstrategiaDeComunicacion {
+import javax.persistence.*;
 
-    private final Notificador notificador;
+@Entity
+@DiscriminatorValue("whatsapp")
+public class WhatsApp extends MedioDeComunicacion {
+
+    @Transient
     private final String prefijo = "whatsapp:";
 
-    public WhatsApp(Notificador notificador) {
-        this.notificador = notificador;
+    public WhatsApp(Notificador notificador, boolean esPreferido) {
+        super(notificador, esPreferido);
+    }
+
+    public WhatsApp() {
+
     }
 
     @Override

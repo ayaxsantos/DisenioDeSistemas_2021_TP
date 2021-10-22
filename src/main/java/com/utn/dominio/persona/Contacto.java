@@ -26,7 +26,7 @@ public class Contacto extends EntidadPersistencia {
     @Column
     private String email;
 
-    @Transient //Todo realizar la correcta relación
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
 
     public Contacto(String nombre, String apellido, String telefono, String email) {
@@ -48,8 +48,8 @@ public class Contacto extends EntidadPersistencia {
                 .forEach(medioDeComunicacion -> medioDeComunicacion.enviar(mensaje));
     }
 
-    public void añadirMedioDeComunicacion(EstrategiaDeComunicacion estrategiaDeComunicacion, boolean esPreferido) {
-        mediosDeComunicacion.add(new MedioDeComunicacion(estrategiaDeComunicacion, esPreferido));
+    public void añadirMedioDeComunicacion(MedioDeComunicacion unMedioDeComunicacion) {
+        mediosDeComunicacion.add(unMedioDeComunicacion);
     }
 
     public String nombre() {
