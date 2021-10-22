@@ -3,6 +3,8 @@ package com.utn.casodeuso.organizacion;
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.organizacion.Organizacion;
 
+import java.util.List;
+
 public class GenerarPreguntaDarAdopcion {
 
     private final Organizaciones organizaciones;
@@ -11,9 +13,11 @@ public class GenerarPreguntaDarAdopcion {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(String nombreOrganizacion, String preguntaAdopcion) {
+    public void ejecutar(String nombreOrganizacion, List<String> preguntasAdopcion) {
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
-        organizacion.agregarPreguntaAdopcion(preguntaAdopcion);
+
+        preguntasAdopcion.forEach(unaPregunta -> organizacion.agregarPreguntaAdopcion(unaPregunta));
+
         organizaciones.guardar(organizacion);
     }
 

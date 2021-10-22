@@ -34,8 +34,8 @@ public class ControladorDueño {
     public ResponseEntity<Void> registrarMascota(
         @PathVariable("numeroDocumento") int numeroDocumentoDueño, @RequestBody SolicitudRegistrarMascota solicitud){
             registrarMascota.ejecutar(
-                numeroDocumentoDueño, solicitud.idMascota(), solicitud.nombre(), solicitud.tipoAnimal(),
-                solicitud.apodo(), solicitud.edad(), solicitud.sexo(), solicitud.tamaño(), solicitud.descripcionFisica(),
+                numeroDocumentoDueño, solicitud.nombre(),
+                solicitud.apodo(), solicitud.edad(), solicitud.sexo(),solicitud.tipoAnimal(), solicitud.tamaño(), solicitud.descripcionFisica(),
                 solicitud.fotos(), solicitud.caracteristicas());
             return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -63,7 +63,7 @@ public class ControladorDueño {
             return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("dueños/{numeroDocumento}/publicaciones")
+    @PostMapping("dueños/{numeroDocumento}/publicacionesEncontrada")
     public ResponseEntity<Void> confirmarMascotaEncontrada(
         @PathVariable("numeroDocumento") int numeroDocumentoDueño,
         @RequestBody SolicitudConfirmarMascotaEncontrada solicitudConfirmarMascotaEncontrada) {

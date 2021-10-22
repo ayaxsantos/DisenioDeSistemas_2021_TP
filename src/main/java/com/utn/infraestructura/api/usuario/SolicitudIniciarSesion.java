@@ -7,7 +7,7 @@ public class SolicitudIniciarSesion {
     @JsonProperty
     private String nombreUsuario;
 
-    @JsonProperty
+   @JsonProperty
     private String contraseña;
 
     public String nombreUsuario() {
@@ -17,5 +17,4 @@ public class SolicitudIniciarSesion {
     public String contraseña() {
         return this.contraseña;
     }
-
 }

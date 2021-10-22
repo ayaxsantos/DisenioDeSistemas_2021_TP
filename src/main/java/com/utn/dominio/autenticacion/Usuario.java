@@ -48,6 +48,11 @@ public class Usuario extends EntidadPersistencia {
         this.estaLogueado = false;
     }
 
+    public void setNombreUsuario(String nombreUsuario)
+    {
+        this.usuario = nombreUsuario;
+    }
+
     public void elegirOrganizacionActual(Organizacion unaOrganizacion) {
         this.organizacionActual = this.organizacionesPertenecientes.stream()
             .filter(organizacion -> organizacion.equals(unaOrganizacion))

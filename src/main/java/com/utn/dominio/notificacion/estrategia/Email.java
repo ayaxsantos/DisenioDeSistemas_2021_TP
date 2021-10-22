@@ -10,7 +10,6 @@ import javax.persistence.*;
 @DiscriminatorValue("email")
 public class Email extends MedioDeComunicacion {
 
-
     public Email(Notificador notificador, boolean esPreferido) {
         super(notificador, esPreferido);
     }
@@ -25,5 +24,4 @@ public class Email extends MedioDeComunicacion {
         notificador.enviar("no_email_origen", mensaje.emailDestino(), mensaje.asunto(), mensaje.cuerpo());
         System.out.println("Mensaje enviado por email!");
     }
-
 }

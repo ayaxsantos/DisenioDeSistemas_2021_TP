@@ -84,6 +84,10 @@ public class Persona extends EntidadPersistencia {
                 .findFirst().orElseThrow(MascotaNoEncontradaException::new);
     }
 
+    public void avisoDeBaja(Mensaje unMensaje){
+        this.contactoPersonal.notificar(unMensaje);
+    }
+
     public void añadirContacto(Contacto contacto) {
         contactos.add(contacto);
     }

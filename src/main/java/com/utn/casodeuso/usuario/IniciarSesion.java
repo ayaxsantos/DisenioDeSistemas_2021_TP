@@ -15,8 +15,7 @@ public class IniciarSesion {
 
     public void ejecutar(String nombreUsuario, String contraseña) {
         usuarios.obtenerPorNombreUsuario(nombreUsuario)
-            .orElseThrow(CredencialesInvalidasException::new)
-            .iniciarSesion(nombreUsuario, contraseña);
+                .orElseThrow(CredencialesInvalidasException::new)
+                .iniciarSesion(nombreUsuario, contraseña);
     }
-
 }

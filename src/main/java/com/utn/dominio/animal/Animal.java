@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public enum Animal {
 
-    GATO("Gato"),
-    PERRO("Perro");
+    GATO("GATO"),
+    PERRO("PERRO");
 
     Animal(String descripcion){
         this.descripcion = descripcion;

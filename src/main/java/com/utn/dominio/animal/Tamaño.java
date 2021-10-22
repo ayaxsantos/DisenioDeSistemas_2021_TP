@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public enum Tamaño {
 
-    CHICO("Chico"),
-    MEDIANO("Mediano"),
-    GRANDE("Grande");
+    CHICO("CHICO"),
+    MEDIANO("MEDIANO"),
+    GRANDE("GRANDE");
 
     private final String descripcion;
 

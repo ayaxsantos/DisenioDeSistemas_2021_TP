@@ -1,12 +1,15 @@
 package com.utn.infraestructura;
 
+import com.utn.casodeuso.dueño.RegistrarMascota;
 import com.utn.dominio.Personas;
+import com.utn.dominio.Usuarios;
 import com.utn.dominio.Voluntarios;
 import com.utn.dominio.animal.Animal;
 import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.notificacion.estrategia.Email;
@@ -26,11 +29,13 @@ import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 import com.utn.infraestructura.notificador.NotificadorEmail;
 import com.utn.infraestructura.notificador.NotificadorTwilio;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
+import com.utn.infraestructura.persistencia.UsuariosEnMySQL;
 import com.utn.infraestructura.persistencia.VoluntariosEnMySQL;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PruebaTemporal {
 
@@ -67,13 +72,21 @@ public class PruebaTemporal {
     }
 
     @Test
+    public void se_rescata_usuario_de_db(){
+        Usuarios usuarios = new UsuariosEnMySQL();
+        Usuario usuario = usuarios.obtenerPorNombreUsuario("pepebavutti").orElseThrow(CredencialesInvalidasException::new);
+
+        System.out.println("Hola");
+    }
+
+    @Test
     public void se_persiste_persona_en_db(){
-        Contacto contactoTest = new Contacto("Eduardo","Bavutti","+54 9 11 8755-7845","ebavutti@gmail.com");
+        Contacto contactoTest = new Contacto("Celes","","+54 9 11 8755-7845","ebavutti@gmail.com");
         LocalDate nacimientoTest = LocalDate.of(1990,04,27);
         Documento documentoTest = new Documento("DNI", 38554127);
         Direccion domicilioTest = new Direccion(1742.38,2394.2);
         Contacto otroContactoTest = new Contacto("Isabela", "Ferriera", "+54 9 11 7855-4121", "iferriera@gmail.com");
-        Usuario usuarioTest = new Usuario("edubavutti", "1990isaedu");
+        Usuario usuarioTest = new Usuario("pepebavutti", "noSeQuePoner...");
 
         Direccion domicilioOrgTest = new Direccion(5447.358, 5648.74);
         Usuario usuarioVolTest = new Usuario("volOrg", "324ae41gg");
@@ -109,7 +122,7 @@ public class PruebaTemporal {
         personaTest.añadirMascota(mascotaTest);
         personaTest.añadirMascota(otraMascotaTest);
 
-        organizacionTest.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(personaTest, personaTest.getPreferencia(), new ArrayList<String>(){{add("Hola"); add("Adios");}}));
+        organizacionTest.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(personaTest, new ArrayList<String>(){{add("Hola"); add("Adios");}}));
         organizacionTest.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(personaTest,mascotaTest, new ArrayList<String>(){{add("Debe ser");add("Por dogshow");}}));
         organizacionTest.añadirPublicacionMascotaEncontrada(new PublicacionMascotaEncontrada(personaTest,new Direccion(20,23),"Todo okey"));
 
@@ -120,6 +133,8 @@ public class PruebaTemporal {
 
         organizacionTest.añadirAdministrador(administradorTest);
 
+        personaTest.setEsAdoptante(false);
+
         contactoTest.añadirMedioDeComunicacion(new SMS(new NotificadorTwilio(), false));
         contactoTest.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), true));
         contactoTest.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
@@ -127,5 +142,16 @@ public class PruebaTemporal {
         otroContactoTest.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), false));
 
         personas.guardar(personaTest);
+    }
+
+    @Test
+    public void se_actualiza_persona(){
+        Persona persona = personas.obtenerPorNumeroDocumento(38554127);
+        persona.getUsuario().setNombreUsuario("InserteUsuarioGenerico");
+        persona.setPreferencia(new Preferencia(Sexo.MACHO,Animal.GATO,Tamaño.GRANDE));
+        persona.setEsAdoptante(true);
+        persona.añadirMascota(new Mascota("nombre", "String apodo", 25, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE," String descripcionFisica"));
+
+        personas.guardar(persona);
     }
 }

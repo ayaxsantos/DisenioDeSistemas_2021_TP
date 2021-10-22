@@ -2,9 +2,7 @@
 package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Personas;
-import com.utn.dominio.organizacion.Voluntario;
 import com.utn.dominio.persona.Persona;
-import com.utn.infraestructura.persistencia.EntityManagerHelper;
 import org.springframework.stereotype.Repository;
 
 @Repository

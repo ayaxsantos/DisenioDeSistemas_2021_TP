@@ -30,6 +30,7 @@ public class BuscarHogarTransito {
     public List<Hogar> ejecutar(int numeroDocumentoRescatista, int idMascota) {
         Persona persona = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
         Mascota mascota = mascotas.obtenerPorId(idMascota);
+
         HogaresResponse respuesta = hogares.obtener();
         return respuesta.hogares.stream().filter(hogar ->
             validacionesHogar.stream().allMatch(validacionHogar ->
