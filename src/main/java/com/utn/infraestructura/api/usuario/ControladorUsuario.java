@@ -18,14 +18,12 @@ public class ControladorUsuario {
     private final CerrarSesion cerrarSesion;
 
     public ControladorUsuario(IniciarSesion iniciarSesion, CerrarSesion cerrarSesion) {
-        //this.iniciarSesion = iniciarSesion;
-        this.iniciarSesion = new IniciarSesion(new UsuariosEnMySQL());
+        this.iniciarSesion = iniciarSesion;
         this.cerrarSesion = cerrarSesion;
     }
 
     @PostMapping("usuarios/autenticar")
     public ResponseEntity<Void> iniciarSesion(@RequestBody SolicitudIniciarSesion solicitudIniciarSesion) {
-        System.out.println("Usuario " + solicitudIniciarSesion.nombreUsuario()+ " Contra " + solicitudIniciarSesion.contraseña());
         iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contraseña());
         return new ResponseEntity<>(HttpStatus.OK);
     }
