@@ -3,10 +3,6 @@ package com.utn.infraestructura.persistencia;
 import com.utn.dominio.Mascotas;
 import com.utn.dominio.animal.Mascota;
 
-import com.utn.infraestructura.persistencia.EntityManagerHelper;
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class MascotasEnMySQL implements Mascotas
 {
     public Mascota obtenerPorId(int idMascota) {

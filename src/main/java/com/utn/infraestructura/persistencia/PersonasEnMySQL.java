@@ -3,9 +3,8 @@ package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Personas;
 import com.utn.dominio.persona.Persona;
-import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class PersonasEnMySQL implements Personas {
 
     @Override

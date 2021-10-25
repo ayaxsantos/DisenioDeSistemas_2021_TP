@@ -3,12 +3,9 @@ package com.utn.infraestructura.persistencia;
 import com.utn.dominio.Usuarios;
 import com.utn.dominio.autenticacion.Usuario;
 
-import jdk.nashorn.internal.runtime.options.Option;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
-@Repository
+
 public class UsuariosEnMySQL implements Usuarios {
 
     @Override
@@ -17,8 +14,10 @@ public class UsuariosEnMySQL implements Usuarios {
 
         Usuario unUsuario = (Usuario) EntityManagerHelper
                 .getEntityManager()
-                .createQuery("from Usuario usu where usu.usuario = '" + nombreUsuario + "'")
+                .createQuery("select usu from Usuario usu where usu.usuario = ?1",Usuario.class)
+                .setParameter(1,nombreUsuario)
                 .getSingleResult();
+
         EntityManagerHelper.commit();
 
         return Optional.of(unUsuario);

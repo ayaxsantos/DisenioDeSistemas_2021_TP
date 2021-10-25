@@ -1,16 +1,23 @@
 package com.utn.infraestructura.presentacion.dto;
 
-public class DatosUsuario {
-    
-    private boolean confirmacion;
+public class DatosUsuario
+{
+    private String nombreUsuario;
+    private String contraseña;
 
-    public void setConfirmacion(boolean unaConfirmacion)
-    {
-        this.confirmacion = unaConfirmacion;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
-    
-    public boolean getConfirmacion()
-    {
-        return this.confirmacion;
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 }

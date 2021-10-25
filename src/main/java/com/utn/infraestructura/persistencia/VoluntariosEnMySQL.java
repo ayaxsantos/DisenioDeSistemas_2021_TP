@@ -1,14 +1,9 @@
 package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Voluntarios;
-import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.organizacion.Voluntario;
-import com.utn.infraestructura.persistencia.EntityManagerHelper;
-import org.springframework.stereotype.Repository;
 
-@Repository
+
 public class VoluntariosEnMySQL implements Voluntarios {
 
     public Voluntario obtenerPorNombreUsuario(String nombreUsuario) {

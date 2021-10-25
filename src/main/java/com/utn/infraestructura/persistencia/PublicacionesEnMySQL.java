@@ -1,7 +1,6 @@
 package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Publicaciones;
-import com.utn.dominio.organizacion.Voluntario;
 import com.utn.dominio.publicacion.Publicacion;
 
 public class PublicacionesEnMySQL implements Publicaciones {
