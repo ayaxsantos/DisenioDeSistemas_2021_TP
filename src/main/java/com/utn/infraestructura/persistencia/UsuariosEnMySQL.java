@@ -3,13 +3,14 @@ package com.utn.infraestructura.persistencia;
 import com.utn.dominio.Usuarios;
 import com.utn.dominio.autenticacion.Usuario;
 
+import javax.swing.border.EtchedBorder;
 import java.util.Optional;
 
 
 public class UsuariosEnMySQL implements Usuarios {
 
     @Override
-    public Optional<Usuario> obtenerPorNombreUsuario(String nombreUsuario) {
+    public Usuario obtenerPorNombreUsuario(String nombreUsuario) {
         EntityManagerHelper.beginTransaction();
 
         Usuario unUsuario = (Usuario) EntityManagerHelper
@@ -20,7 +21,16 @@ public class UsuariosEnMySQL implements Usuarios {
 
         EntityManagerHelper.commit();
 
-        return Optional.of(unUsuario);
+        return unUsuario;
+    }
+
+    @Override
+    public void guardar(Usuario unUsuario)
+    {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.persist(unUsuario);
+
+        EntityManagerHelper.commit();
     }
 
 }

@@ -20,8 +20,7 @@ public class ObtenerOrganizaciones
 
     public List<Organizacion> ejecutar(String nombreUsuario)
     {
-        Usuario unUsuario = usuarios.obtenerPorNombreUsuario(nombreUsuario)
-                .orElseThrow(CredencialesInvalidasException::new);
+        Usuario unUsuario = usuarios.obtenerPorNombreUsuario(nombreUsuario);
 
         return unUsuario.organizacionesPertenecientes();
     }

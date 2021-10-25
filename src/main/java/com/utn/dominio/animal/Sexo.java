@@ -15,9 +15,9 @@ public enum Sexo {
 
     public static Sexo buscar(String descripcion) {
         return Arrays.stream(Sexo.values())
-            .filter(sexo -> sexo.descripcion.equals(descripcion))
-            .findFirst()
-            .orElseThrow(RuntimeException::new);
+                .filter(sexo -> sexo.descripcion.equals(descripcion))
+                .findFirst()
+                .orElseThrow(RuntimeException::new);
     }
 
 }

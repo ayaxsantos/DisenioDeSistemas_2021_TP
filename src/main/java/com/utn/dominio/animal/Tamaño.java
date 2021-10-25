@@ -16,9 +16,8 @@ public enum Tamaño {
 
     public static Tamaño buscar(String descripcion) {
         return Arrays.stream(Tamaño.values())
-            .filter(tamaño -> tamaño.descripcion.equals(descripcion))
-            .findFirst()
-            .orElseThrow(RuntimeException::new);
+                .filter(tamaño -> tamaño.descripcion.equals(descripcion))
+                .findFirst()
+                .orElseThrow(RuntimeException::new);
     }
-
 }

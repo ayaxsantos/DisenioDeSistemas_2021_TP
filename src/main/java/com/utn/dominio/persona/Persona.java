@@ -20,6 +20,8 @@ public class Persona extends EntidadPersistencia {
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
+
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Contacto contactoPersonal;
 
@@ -28,6 +30,7 @@ public class Persona extends EntidadPersistencia {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Documento documento;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     private Direccion domicilio;
@@ -46,10 +49,10 @@ public class Persona extends EntidadPersistencia {
     private boolean esAdoptante;
 
     @Transient
-    private int radioHogares;
+    private Integer radioHogares;
 
     public Persona(Contacto contactoPersonal, LocalDate fechaNacimiento, Documento documento,
-                   Direccion domicilio, Contacto otroContacto, Usuario usuario, int radioHogares) {
+                   Direccion domicilio, Contacto otroContacto, Usuario usuario, Integer radioHogares) {
         this.contactoPersonal = contactoPersonal;
         this.fechaNacimiento = fechaNacimiento;
         this.documento = documento;
@@ -171,4 +174,25 @@ public class Persona extends EntidadPersistencia {
     public void setPreferencia(Preferencia preferencia) {
         this.preferencia = preferencia;
     }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
+    }
+
+    public void setDomicilio(Direccion domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public void setContactos(List<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+
+    public void setContactoPersonal(Contacto contactoPersonal) {
+        this.contactoPersonal = contactoPersonal;
+    }
+
 }
