@@ -18,10 +18,7 @@ import com.utn.dominio.notificacion.estrategia.WhatsApp;
 import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.organizacion.Voluntario;
-import com.utn.dominio.persona.Contacto;
-import com.utn.dominio.persona.Direccion;
-import com.utn.dominio.persona.Documento;
-import com.utn.dominio.persona.Persona;
+import com.utn.dominio.persona.*;
 import com.utn.dominio.publicacion.Preferencia;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
@@ -74,7 +71,7 @@ public class PruebaTemporal {
     @Test
     public void se_rescata_usuario_de_db(){
         Usuarios usuarios = new UsuariosEnMySQL();
-        Usuario usuario = usuarios.obtenerPorNombreUsuario("pepebavutti").orElseThrow(CredencialesInvalidasException::new);
+        Usuario usuario = usuarios.obtenerPorNombreUsuario("pepebavutti");
         System.out.println("Hola");
     }
 
@@ -82,7 +79,7 @@ public class PruebaTemporal {
     public void se_persiste_persona_en_db(){
         Contacto contactoTest = new Contacto("Celes","","+54 9 11 8755-7845","ebavutti@gmail.com");
         LocalDate nacimientoTest = LocalDate.of(1990,04,27);
-        Documento documentoTest = new Documento("DNI", 38554127);
+        Documento documentoTest = new Documento(TipoDocumento.DNI, 38554127);
         Direccion domicilioTest = new Direccion(1742.38,2394.2);
         Contacto otroContactoTest = new Contacto("Isabela", "Ferriera", "+54 9 11 7855-4121", "iferriera@gmail.com");
         Usuario usuarioTest = new Usuario("pepebavutti", "noSeQuePoner...");

@@ -83,4 +83,12 @@ public class Contacto extends EntidadPersistencia {
     public List<MedioDeComunicacion> getMediosDeComunicacion() {
         return mediosDeComunicacion;
     }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setMediosDeComunicacion(List<MedioDeComunicacion> mediosDeComunicacion) {
+        this.mediosDeComunicacion = mediosDeComunicacion;
+    }
 }

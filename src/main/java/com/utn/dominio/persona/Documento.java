@@ -8,13 +8,13 @@ import javax.persistence.*;
 @Table(name = "documento")
 public class Documento extends EntidadPersistencia {
 
-    @Column
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoDocumento tipo;
 
     @Column
     private Integer numero;
 
-    public Documento(String tipo, Integer numero) {
+    public Documento(TipoDocumento tipo, Integer numero) {
         this.tipo = tipo;
         this.numero = numero;
     }
@@ -27,7 +27,7 @@ public class Documento extends EntidadPersistencia {
         return this.numero;
     }
 
-    public String getTipo() {
+    public TipoDocumento getTipo() {
         return tipo;
     }
 

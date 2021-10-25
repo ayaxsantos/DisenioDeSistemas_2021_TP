@@ -6,16 +6,12 @@ import com.utn.dominio.animal.Mascota;
 
 import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.persona.Contacto;
+import com.utn.dominio.persona.*;
 import com.utn.dominio.notificacion.estrategia.SMS;
 import com.utn.dominio.notificacion.estrategia.Email;
 import com.utn.dominio.notificacion.estrategia.WhatsApp;
 import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
-import com.utn.dominio.persona.Persona;
-import com.utn.dominio.persona.Documento;
-
-import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.Notificador;
 import com.utn.infraestructura.notificador.NotificadorEmail;
 import com.utn.infraestructura.notificador.NotificadorTwilio;
@@ -76,7 +72,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static final String emailContactoRescatista = "juani@gmail.com";
     private static final String numeroContactoRescatista = "+5491173619611";
 
-    private static final String tipoDocumento = "DNI";
+    private static final TipoDocumento tipoDocumento = TipoDocumento.DNI;
     public static final int radioHogares = 10;
 
     protected static String mensajeMascotaEncontrada = "";
@@ -147,7 +143,7 @@ public class FixtureNotificarMascotaEncontrada {
         return new Persona(contacto, fechaNacimiento, documento, direccion, otroContacto, usuario, radioHogares);
     }
 
-    private static Documento crearDocumento(String tipo, Integer numero) {
+    private static Documento crearDocumento(TipoDocumento tipo, Integer numero) {
         return new Documento(tipo, numero);
     }
 

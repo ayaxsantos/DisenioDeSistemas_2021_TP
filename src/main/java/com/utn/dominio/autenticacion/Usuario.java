@@ -26,6 +26,7 @@ public class Usuario extends EntidadPersistencia {
     @Transient
     private Organizacion organizacionActual;
 
+
     @Transient
     private boolean estaLogueado = false;
 
@@ -90,6 +91,10 @@ public class Usuario extends EntidadPersistencia {
 
     public void setOrganizacionesPertenecientes(List<Organizacion> unasOrganizaciones) {
         this.organizacionesPertenecientes.addAll(unasOrganizaciones);
+    }
+
+    public String getUsuario() {
+        return usuario;
     }
 
 }

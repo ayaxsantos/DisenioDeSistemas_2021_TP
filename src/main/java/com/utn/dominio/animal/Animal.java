@@ -19,5 +19,4 @@ public enum Animal {
             .findFirst()
             .orElseThrow(RuntimeException::new);
     }
-
 }

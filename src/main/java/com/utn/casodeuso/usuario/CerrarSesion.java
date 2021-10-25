@@ -14,7 +14,6 @@ public class CerrarSesion {
 
     public void ejecutar(String nombreUsuario) {
         usuarios.obtenerPorNombreUsuario(nombreUsuario)
-                .orElseThrow(CredencialesInvalidasException::new)
                 .cerrarSesion();
     }
 
