@@ -12,5 +12,4 @@ public class ControladorSalubridad {
     public ResponseEntity<RespuestaChequearEstado> chequearEstado() {
         return new ResponseEntity<>(new RespuestaChequearEstado(), HttpStatus.OK);
     }
-
 }

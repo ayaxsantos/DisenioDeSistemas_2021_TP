@@ -2,13 +2,10 @@ package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.organizacion.Organizacion;
-import org.springframework.stereotype.Repository;
-
-import com.utn.infraestructura.persistencia.EntityManagerHelper;
 
 import java.util.List;
 
-@Repository
+
 public class OrganizacionesEnMySQL implements Organizaciones {
 
 

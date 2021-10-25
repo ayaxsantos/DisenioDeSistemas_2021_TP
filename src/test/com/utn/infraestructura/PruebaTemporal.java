@@ -75,7 +75,6 @@ public class PruebaTemporal {
     public void se_rescata_usuario_de_db(){
         Usuarios usuarios = new UsuariosEnMySQL();
         Usuario usuario = usuarios.obtenerPorNombreUsuario("pepebavutti").orElseThrow(CredencialesInvalidasException::new);
-
         System.out.println("Hola");
     }
 
