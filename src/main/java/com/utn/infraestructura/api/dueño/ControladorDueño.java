@@ -4,15 +4,12 @@ import com.utn.casodeuso.dueño.ConfirmarMascotaEncontrada;
 import com.utn.casodeuso.dueño.RegistrarMascota;
 import com.utn.casodeuso.dueño.GenerarPublicacionMascotaEnAdopcion;
 
-import com.utn.dominio.animal.Mascota;
 import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
-import com.utn.infraestructura.persistencia.PublicacionesEnMySQL;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -33,7 +30,7 @@ public class ControladorDueño {
         @PathVariable("numeroDocumento") int numeroDocumentoDueño, @RequestBody SolicitudRegistrarMascota solicitud){
             registrarMascota.ejecutar(
                 numeroDocumentoDueño, solicitud.nombre(),
-                solicitud.apodo(), solicitud.edad(), solicitud.sexo(),solicitud.tipoAnimal(), solicitud.tamaño(), solicitud.descripcionFisica(),
+                solicitud.apodo(), solicitud.edad(), solicitud.tipoAnimal() ,solicitud.sexo(), solicitud.tamaño(), solicitud.descripcionFisica(),
                 solicitud.fotos(), solicitud.caracteristicas());
             return new ResponseEntity<>(HttpStatus.CREATED);
     }

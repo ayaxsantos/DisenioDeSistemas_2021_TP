@@ -2,6 +2,7 @@
 package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Personas;
+import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.persona.Persona;
 
 
