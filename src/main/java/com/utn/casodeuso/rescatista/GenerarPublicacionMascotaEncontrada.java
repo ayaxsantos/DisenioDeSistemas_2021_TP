@@ -18,9 +18,9 @@ public class GenerarPublicacionMascotaEncontrada {
         this.personas = personas;
     }
 
-    public void ejecutar(int numeroDocumentoRescatista, String nombreOrganizacion, Double latitud, Double longitud, String estadoMascota) {
+    public void ejecutar(String usuarioRescatista, String nombreOrganizacion, Double latitud, Double longitud, String estadoMascota) {
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
-        Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
+        Persona personaRescatista = personas.obtenerPorNombreDeUsuario(usuarioRescatista);
 
         Direccion direccionMascotaEncontrada = new Direccion(latitud, longitud);
         PublicacionMascotaEncontrada publicacion = new PublicacionMascotaEncontrada(personaRescatista, direccionMascotaEncontrada, estadoMascota);
@@ -28,5 +28,4 @@ public class GenerarPublicacionMascotaEncontrada {
 
         organizaciones.guardar(organizacion);
     }
-
 }

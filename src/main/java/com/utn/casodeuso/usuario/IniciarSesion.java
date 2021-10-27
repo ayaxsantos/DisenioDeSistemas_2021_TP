@@ -14,6 +14,6 @@ public class IniciarSesion {
 
     public void ejecutar(String nombreUsuario, String contraseña) {
         usuarios.obtenerPorNombreUsuario(nombreUsuario)
-                .iniciarSesion(nombreUsuario, contraseña);
+            .iniciarSesion(nombreUsuario, contraseña);
     }
 }

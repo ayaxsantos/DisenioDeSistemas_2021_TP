@@ -26,7 +26,6 @@ public class Usuario extends EntidadPersistencia {
     @Transient
     private Organizacion organizacionActual;
 
-
     @Transient
     private boolean estaLogueado = false;
 

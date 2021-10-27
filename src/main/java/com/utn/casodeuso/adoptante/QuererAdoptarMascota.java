@@ -13,10 +13,9 @@ public class QuererAdoptarMascota {
         this.personas = personas;
     }
 
-    public void ejecutar(int numeroDocumentoAdoptante, int numeroDocumentoDueño) {
-        Persona personaAdoptante = personas.obtenerPorNumeroDocumento(numeroDocumentoAdoptante);
-        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
-
+    public void ejecutar(String nombreUsuarioAdoptante, String nombreUsuarioDueño) {
+        Persona personaAdoptante = personas.obtenerPorNombreDeUsuario(nombreUsuarioAdoptante);
+        Persona personaDueño = personas.obtenerPorNombreDeUsuario(nombreUsuarioDueño);
 
         Mensaje mensaje = new MensajeQuererAdoptarMascota(personaAdoptante);
         personaDueño.notificar(mensaje);

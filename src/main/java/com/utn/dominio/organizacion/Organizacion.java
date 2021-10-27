@@ -11,6 +11,7 @@ import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.persona.Persona;
+import com.utn.dominio.publicacion.Publicacion;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
@@ -38,9 +39,6 @@ public class Organizacion extends EntidadPersistencia {
 
     @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL)
     private List<Administrador> administradores = new ArrayList<>();
-
-    /*@ManyToMany
-    private List<Persona> personas = new ArrayList<>();*/
 
     @ManyToMany
     private Set<Persona> personas = new HashSet<>();
@@ -156,6 +154,8 @@ public class Organizacion extends EntidadPersistencia {
     }
 
     public List<Persona> adoptantesActivos() {
-        return personas.stream().filter(unaPersona -> unaPersona.isEsAdoptante()).collect(Collectors.toList());
+        return personas.stream()
+            .filter(Persona::esAdoptante)
+            .collect(Collectors.toList());
     }
 }

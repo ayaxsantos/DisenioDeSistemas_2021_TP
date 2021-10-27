@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.MedioDeComunicacion;
-import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
 import javax.persistence.*;
 

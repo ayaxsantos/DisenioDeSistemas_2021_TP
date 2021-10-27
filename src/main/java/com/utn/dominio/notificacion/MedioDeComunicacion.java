@@ -3,7 +3,6 @@ package com.utn.dominio.notificacion;
 import com.utn.dominio.EntidadPersistencia;
 import com.utn.dominio.Notificador;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
-import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
 import javax.persistence.*;
 

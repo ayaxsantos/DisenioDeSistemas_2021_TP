@@ -27,8 +27,8 @@ public class RegistrarMascota {
 
         Mascota mascota = new Mascota(nombre, apodo, edad, Animal.buscar(tipoAnimal), Sexo.buscar(sexo),
                 Tamaño.buscar(tamaño), descripcionFisica);
-        fotos.forEach(unaFoto -> mascota.añadirFoto(unaFoto));
-        caracteristicas.forEach((unaCaracteristica, unaRespuesta) -> mascota.añadirCaracteristica(unaCaracteristica, unaRespuesta));
+        fotos.forEach(mascota::añadirFoto);
+        caracteristicas.forEach(mascota::añadirCaracteristica);
         persona.añadirMascota(mascota);
 
         personas.guardar(persona);

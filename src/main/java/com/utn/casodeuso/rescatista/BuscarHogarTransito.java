@@ -27,10 +27,9 @@ public class BuscarHogarTransito {
         this.validacionesHogar = validacionesHogar;
     }
 
-    public List<Hogar> ejecutar(int numeroDocumentoRescatista, int idMascota) {
-        Persona persona = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista);
+    public List<Hogar> ejecutar(String nombreUsuarioRescatista, int idMascota) {
+        Persona persona = personas.obtenerPorNombreDeUsuario(nombreUsuarioRescatista);
         Mascota mascota = mascotas.obtenerPorId(idMascota);
-
         HogaresResponse respuesta = hogares.obtener();
         return respuesta.hogares.stream().filter(hogar ->
             validacionesHogar.stream().allMatch(validacionHogar ->

@@ -38,4 +38,5 @@ public class PersonasEnMySQL implements Personas {
         EntityManagerHelper.commit();
     }
 
+
 }

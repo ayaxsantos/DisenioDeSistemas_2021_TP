@@ -10,14 +10,10 @@ import com.utn.dominio.persona.*;
 import com.utn.dominio.notificacion.estrategia.SMS;
 import com.utn.dominio.notificacion.estrategia.Email;
 import com.utn.dominio.notificacion.estrategia.WhatsApp;
-import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 
 import com.utn.dominio.Notificador;
-import com.utn.infraestructura.notificador.NotificadorEmail;
-import com.utn.infraestructura.notificador.NotificadorTwilio;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

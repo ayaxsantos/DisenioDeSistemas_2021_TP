@@ -9,7 +9,6 @@ import com.utn.dominio.persona.Persona;
 import com.utn.dominio.publicacion.Preferencia;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
-import com.utn.dominio.notificacion.estrategia.EstrategiaDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.MensajeRecomendacionesAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 

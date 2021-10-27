@@ -20,8 +20,6 @@ public class Persona extends EntidadPersistencia {
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
-
-
     @ManyToOne(cascade = CascadeType.ALL)
     private Contacto contactoPersonal;
 
@@ -30,7 +28,6 @@ public class Persona extends EntidadPersistencia {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Documento documento;
-
 
     @OneToOne(cascade = CascadeType.ALL)
     private Direccion domicilio;
@@ -64,11 +61,9 @@ public class Persona extends EntidadPersistencia {
         this.esAdoptante = false;
     }
 
-    public Persona() {
+    public Persona() {}
 
-    }
-
-    public boolean isEsAdoptante() {
+    public boolean esAdoptante() {
         return esAdoptante;
     }
 

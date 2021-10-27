@@ -1,8 +1,10 @@
 package com.utn.infraestructura.api.persona;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.utn.dominio.persona.Contacto;
+
 import com.utn.dominio.persona.TipoDocumento;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,8 +20,8 @@ public class SolicitudRegistrarPersona
     @JsonProperty
     private int numeroDocumento;
 
-    //TODO: Conversion de tipos en la fecha
-    @JsonProperty
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaNacimiento;
 
     @JsonProperty
@@ -29,11 +31,10 @@ public class SolicitudRegistrarPersona
     private int longitud;
 
     @JsonProperty
-    private String mediosPreferidos;
+    private List<String> mediosPreferidos;
 
-    //Todo: Revisar contactos, generar nueva clase para comunicacion
     @JsonProperty
-    private List<Contacto> unosContactos;
+    private List<DatosContacto> unosContactos;
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -43,11 +44,11 @@ public class SolicitudRegistrarPersona
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getMediosPreferidos() {
+    public List<String> getMediosPreferidos() {
         return mediosPreferidos;
     }
 
-    public void setMediosPreferidos(String mediosPreferidos) {
+    public void setMediosPreferidos(List<String> mediosPreferidos) {
         this.mediosPreferidos = mediosPreferidos;
     }
 
@@ -91,11 +92,11 @@ public class SolicitudRegistrarPersona
         this.longitud = longitud;
     }
 
-    public List<Contacto> getUnosContactos() {
+    public List<DatosContacto> getUnosContactos() {
         return unosContactos;
     }
 
-    public void setUnosContactos(List<Contacto> unosContactos) {
+    public void setUnosContactos(List<DatosContacto> unosContactos) {
         this.unosContactos = unosContactos;
     }
 }
