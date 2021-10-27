@@ -46,7 +46,7 @@ public class Persona extends EntidadPersistencia {
     private boolean esAdoptante;
 
     @Transient
-    private Integer radioHogares;
+    private int radioHogares;
 
     public Persona(Contacto contactoPersonal, LocalDate fechaNacimiento, Documento documento,
                    Direccion domicilio, Contacto otroContacto, Usuario usuario, Integer radioHogares) {
