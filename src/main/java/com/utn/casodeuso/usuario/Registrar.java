@@ -33,7 +33,7 @@ public class Registrar
             Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
             Usuario unUsuario = new Usuario(usuario,contraseña);
             Contacto unContacto = new Contacto(nombrePersona, apellidoPerson, telefono, correoElectronico);
-            Persona unaPersona = new Persona(unContacto, null, null, null, null, unUsuario, null);
+            Persona unaPersona = new Persona(unContacto, null, null, null, null, unUsuario,0 );
             
             unUsuario.añadirOrganizacion(organizacion);
             

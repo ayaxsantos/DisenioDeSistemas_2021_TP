@@ -27,6 +27,4 @@ public class ControladorPublicacion {
         List<PublicacionMascotaEnAdopcion> publicaciones = obtenerPublicacionesMascotaEnAdopcion.ejecutar(nombreOrganizacion);
         return new ResponseEntity<>(publicaciones, HttpStatus.OK);
     }
-
-
 }

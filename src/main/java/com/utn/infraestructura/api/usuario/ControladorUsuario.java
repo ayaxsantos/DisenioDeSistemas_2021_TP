@@ -96,7 +96,8 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
         try{
             registrar.ejecutar(solicitudRegistroUsuario.getNombre(), solicitudRegistroUsuario.getApellido(),
                 solicitudRegistroUsuario.getNombreUsuario(),solicitudRegistroUsuario.getContraseña(),
-                solicitudRegistroUsuario.getCorreoElectronico(),solicitudRegistroUsuario.getTelefono(), solicitudRegistroUsuario.getNombreOrganizacion());
+                solicitudRegistroUsuario.getCorreoElectronico(),solicitudRegistroUsuario.getTelefono(),
+                    solicitudRegistroUsuario.getNombreOrganizacion());
         }
         catch(UsuarioYaRegistradoException e){
             return ResponseEntity.status(404).body("Usuario ya registrado");
