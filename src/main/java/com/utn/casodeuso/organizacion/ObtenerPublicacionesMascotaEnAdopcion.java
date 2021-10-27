@@ -2,7 +2,7 @@ package com.utn.casodeuso.organizacion;
 
 import java.util.List;
 import com.utn.dominio.Organizaciones;
-import com.utn.dominio.publicacion.Publicacion;
+import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 
 public class ObtenerPublicacionesMascotaEnAdopcion {
 
@@ -12,7 +12,7 @@ public class ObtenerPublicacionesMascotaEnAdopcion {
         this.organizaciones = organizaciones;
     }
 
-    public List<Publicacion> ejecutar(String nombreOrganizacion) {
+    public List<PublicacionMascotaEnAdopcion> ejecutar(String nombreOrganizacion) {
         return organizaciones.obtenerPorNombre(nombreOrganizacion)
             .publicacionesMascotaEnAdopcion();
     }

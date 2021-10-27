@@ -2,6 +2,7 @@ package com.utn.infraestructura.api.publicacion;
 
 import java.util.List;
 
+import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import org.springframework.http.HttpStatus;
 import com.utn.dominio.publicacion.Publicacion;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class ControladorPublicacion {
     }
 
     @GetMapping("/organizacion/{nombreOrganizacion}/publicacionesMascotaAdopcion")
-    public ResponseEntity<List<Publicacion>> publicacionesMascotaEnAdopcion(@PathVariable("nombreOrganizacion") String nombreOrganizacion) {
-        List<Publicacion> publicaciones = obtenerPublicacionesMascotaEnAdopcion.ejecutar(nombreOrganizacion);
+    public ResponseEntity<List<PublicacionMascotaEnAdopcion>> publicacionesMascotaEnAdopcion(@PathVariable("nombreOrganizacion") String nombreOrganizacion) {
+        List<PublicacionMascotaEnAdopcion> publicaciones = obtenerPublicacionesMascotaEnAdopcion.ejecutar(nombreOrganizacion);
         return new ResponseEntity<>(publicaciones, HttpStatus.OK);
     }
 
