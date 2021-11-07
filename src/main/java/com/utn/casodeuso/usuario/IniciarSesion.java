@@ -1,8 +1,9 @@
 package com.utn.casodeuso.usuario;
 
 import com.utn.dominio.Usuarios;
-import org.springframework.stereotype.Component;
-import com.utn.dominio.excepcion.CredencialesInvalidasException;
+import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
+
+import javax.persistence.NoResultException;
 
 public class IniciarSesion {
 
@@ -13,7 +14,14 @@ public class IniciarSesion {
     }
 
     public void ejecutar(String nombreUsuario, String contraseña) {
-        usuarios.obtenerPorNombreUsuario(nombreUsuario)
-            .iniciarSesion(nombreUsuario, contraseña);
+        try
+        {
+            usuarios.obtenerPorNombreUsuario(nombreUsuario)
+                    .iniciarSesion(nombreUsuario, contraseña);
+        }
+        catch(NoResultException e)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
     }
 }

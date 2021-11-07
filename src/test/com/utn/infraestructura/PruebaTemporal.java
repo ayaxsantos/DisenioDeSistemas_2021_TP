@@ -25,6 +25,7 @@ import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 import com.utn.infraestructura.notificador.NotificadorEmail;
 import com.utn.infraestructura.notificador.NotificadorTwilio;
+import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
 import com.utn.infraestructura.persistencia.UsuariosEnMySQL;
 import com.utn.infraestructura.persistencia.VoluntariosEnMySQL;
@@ -77,6 +78,7 @@ public class PruebaTemporal {
 
     @Test
     public void se_persiste_persona_en_db(){
+        OrganizacionesEnMySQL per = new OrganizacionesEnMySQL();
         Contacto contactoTest = new Contacto("Celes","","+54 9 11 8755-7845","ebavutti@gmail.com");
         LocalDate nacimientoTest = LocalDate.of(1990,04,27);
         Documento documentoTest = new Documento(TipoDocumento.DNI, 38554127);
@@ -137,7 +139,17 @@ public class PruebaTemporal {
         otroContactoTest.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
         otroContactoTest.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), false));
 
-        personas.guardar(personaTest);
+        per.guardar(organizacionTest);
+    }
+
+    @Test
+    public void se_persiste_organizacion_en_db(){
+        OrganizacionesEnMySQL per = new OrganizacionesEnMySQL();
+
+        Direccion domicilioOrgTest = new Direccion(5447.358, 5648.74);
+        Organizacion organizacionTest = new Organizacion("PatitasJugetonas", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
+
+        per.guardar(organizacionTest);
     }
 
     @Test

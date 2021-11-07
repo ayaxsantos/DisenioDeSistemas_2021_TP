@@ -9,6 +9,7 @@ import com.utn.casodeuso.usuario.IniciarSesion;
 import com.utn.casodeuso.usuario.ObtenerOrganizaciones;
 import com.utn.casodeuso.usuario.Registrar;
 import com.utn.casodeuso.adoptante.QuererAdoptarMascota;
+import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.excepcion.UsuarioYaRegistradoException;
 import com.utn.dominio.hogar.ValidacionHogar;
 import com.utn.dominio.hogar.criterios.*;
@@ -29,6 +30,7 @@ import com.utn.dominio.Usuarios;
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.Mascotas;
 
+import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,8 +73,13 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
 
     @PostMapping("usuarios/autenticar")
     public ResponseEntity iniciarSesion(@RequestBody SolicitudIniciarSesion solicitudIniciarSesion) {
-        iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contraseña());
-        return ResponseEntity.status(200).build();
+        try {
+            iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contraseña());
+            return ResponseEntity.status(200).build();
+        }
+        catch(UsuarioNoEncontradoException e) {
+            return ResponseEntity.status(404).body("Usuario NO ENCONTRADO!! \n Registrarse...");
+        }
     }
 
     @PostMapping("usuarios/desconectar")

@@ -46,4 +46,8 @@ public class Administrador extends EntidadPersistencia {
         return new Administrador(usuario, organizacion);
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
 }

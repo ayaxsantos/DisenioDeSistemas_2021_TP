@@ -158,4 +158,8 @@ public class Organizacion extends EntidadPersistencia {
             .filter(Persona::esAdoptante)
             .collect(Collectors.toList());
     }
+
+    public List<Administrador> getAdministradores() {
+        return administradores;
+    }
 }
