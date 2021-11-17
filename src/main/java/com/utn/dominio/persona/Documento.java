@@ -1,12 +1,12 @@
 package com.utn.dominio.persona;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "documento")
-public class Documento extends EntidadPersistencia {
+public class Documento extends EntidadPersistente {
 
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipo;

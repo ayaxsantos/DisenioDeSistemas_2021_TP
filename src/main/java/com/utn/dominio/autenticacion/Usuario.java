@@ -3,7 +3,7 @@ package com.utn.dominio.autenticacion;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.excepcion.OrganizacionNoEncontradaException;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario extends EntidadPersistencia {
+public class Usuario extends EntidadPersistente {
 
     @Column
     private String usuario;

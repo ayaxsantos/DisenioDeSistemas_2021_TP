@@ -1,6 +1,6 @@
 package com.utn.dominio.notificacion;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.Notificador;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "medioDeComunicacion")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public abstract class MedioDeComunicacion extends EntidadPersistencia {
+public abstract class MedioDeComunicacion extends EntidadPersistente {
 
     @Transient
     protected Notificador notificador;

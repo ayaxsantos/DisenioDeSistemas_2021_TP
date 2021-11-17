@@ -1,6 +1,6 @@
 package com.utn.dominio.publicacion;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.persona.Persona;
 
 import javax.persistence.*;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Publicacion extends EntidadPersistencia {
+public abstract class Publicacion extends EntidadPersistente {
 
 
     @Column

@@ -1,12 +1,12 @@
 package com.utn.dominio.persona;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="direccion")
-public class Direccion extends EntidadPersistencia{
+public class Direccion extends EntidadPersistente {
 
     @Column
     private double latitud;

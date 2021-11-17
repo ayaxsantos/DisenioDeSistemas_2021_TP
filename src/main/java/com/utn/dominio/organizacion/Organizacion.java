@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.persona.Persona;
-import com.utn.dominio.publicacion.Publicacion;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
@@ -20,7 +19,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "organizacion")
-public class Organizacion extends EntidadPersistencia {
+public class Organizacion extends EntidadPersistente {
 
     @Column
     private String nombre;
@@ -52,15 +51,16 @@ public class Organizacion extends EntidadPersistencia {
     @ElementCollection
     private List<String> preguntasQuieroAdoptar;
 
-    //Todo: Consultar como evitar la generacion de tablas automaticas,
-
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id")
     private List<PublicacionMascotaEncontrada> publicacionesMascotaEncontrada;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id")
     private List<PublicacionMascotaEnAdopcion> publicacionesMascotaEnAdopcion;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id")
     private List<PublicacionBusquedaAdopcion> publicacionesBusquedaAdopcion;
 
 

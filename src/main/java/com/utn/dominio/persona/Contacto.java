@@ -3,7 +3,7 @@ package com.utn.dominio.persona;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.MedioDeComunicacion;
 
@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "contacto")
-public class Contacto extends EntidadPersistencia {
+public class Contacto extends EntidadPersistente {
 
     @Column
     private String nombre;

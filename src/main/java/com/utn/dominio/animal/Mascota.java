@@ -1,7 +1,6 @@
 package com.utn.dominio.animal;
 
-import com.utn.dominio.EntidadPersistencia;
-import com.utn.dominio.persona.Persona;
+import com.utn.dominio.EntidadPersistente;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "mascota")
-public class Mascota extends EntidadPersistencia {
+public class Mascota extends EntidadPersistente {
 
     @Column
     private String nombre;

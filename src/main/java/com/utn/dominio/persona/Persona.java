@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.publicacion.Preferencia;
@@ -15,12 +15,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "persona")
-public class Persona extends EntidadPersistencia {
+public class Persona extends EntidadPersistente {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="contactoPersonal_id")
     private Contacto contactoPersonal;
 
     @Column(columnDefinition = "DATE")
@@ -37,6 +38,7 @@ public class Persona extends EntidadPersistencia {
 
     //TODO En SQL se esta creando una tabla auxiliar donde relaciona PK de Mascota con PK de Persona. (Relacionado con TODO de Mascota)
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "persona_id")
     private List<Mascota> mascotas;
 
     @ManyToOne(cascade = CascadeType.ALL)

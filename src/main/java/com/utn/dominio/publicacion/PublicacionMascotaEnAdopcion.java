@@ -16,6 +16,7 @@ public class PublicacionMascotaEnAdopcion extends Publicacion {
     private List<String> respuestas = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="mascota_id")
     private Mascota mascota;
 
     public PublicacionMascotaEnAdopcion(Persona personaDueño, Mascota mascota, List<String> respuestas) {

@@ -1,6 +1,6 @@
 package com.utn.dominio.publicacion;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.animal.Animal;
 import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "preferencia")
-public class Preferencia extends EntidadPersistencia {
+public class Preferencia extends EntidadPersistente {
     
     @Enumerated(EnumType.STRING)
     private Sexo sexo;

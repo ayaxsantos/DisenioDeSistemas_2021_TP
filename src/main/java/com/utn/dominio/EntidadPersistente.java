@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class EntidadPersistencia {
+public class EntidadPersistente {
     @Id
     @GeneratedValue
     private int id;

@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class PublicacionBusquedaAdopcion extends Publicacion {
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "preferencia_id")
     private Preferencia preferencia;
 
     @ElementCollection

@@ -1,6 +1,6 @@
 package com.utn.dominio.organizacion;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.publicacion.Publicacion;
 
@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "voluntario")
-public class Voluntario extends EntidadPersistencia {
+public class Voluntario extends EntidadPersistente {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;

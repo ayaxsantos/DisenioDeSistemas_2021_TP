@@ -1,6 +1,6 @@
 package com.utn.dominio.organizacion;
 
-import com.utn.dominio.EntidadPersistencia;
+import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.foto.TamañoFoto;
 
@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "administrador")
-public class Administrador extends EntidadPersistencia {
+public class Administrador extends EntidadPersistente {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
