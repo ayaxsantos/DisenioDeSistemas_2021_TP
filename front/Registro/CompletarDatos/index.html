@@ -18,25 +18,108 @@
                         <h3 class="text-gradient text-primary">Informacion Personal</h3>
                     </div>
                     <form>
+                        <p>
                         <label for="tipodocumento">Tipo de documento</label><br>
                         <select id="tipodocumento" name="tipodocumento">
                             <option value="dni">DNI</option>
                             <option value="enrolamiento">Enrolamiento</option>
                             <option value="pasaporte" selected>Pasaporte</option>
                         </select><br>
+                        </p>
+                        <p>
                         <label for="numero">Numero de documento:</label><br>
                         <input type="text" id="numero"><br>
+                        </p>
+                        <p>
                         <label for="fechanacimiento">Fecha de nacimiento:</label><br>
                         <input type="date" id="fechanacimiento"><br>
-                        <label for="tipodocumento">Elige una organización</label><br>
+                        </p>
+                        <!-- <label for="tipodocumento">Elige una organización</label><br> -->
                         <div class="text-center">
                             <h3 class="text-gradient text-primary">Direccion</h3>
                         </div>
+                        <p>
+                        <label for="calle">Calle:</label><br>
+                        <input type="text" id="calle"><br>
+                        </p>
+                        <p>
+                        <label for="numeroCalle">Numero de calle:</label><br>
+                        <input type="text" id="numeroCalle"><br>
+                        </p>
+                        <p>
+                        <label for="piso/depto">Piso/Depto:</label><br>
+                        <input type="text" id="piso/depto"><br>
+                        </p>
+                        <p>
+                        <label for="provincia">Provincia</label><br>
+                        <select id="provincia" name="provincia">
+                            <option value="buenosaires">Buenos Aires</option>
+                            <option value="catamarca">Catamarca</option>
+                            <option value="chaco">Chaco</option>
+                            <option value="chubut">Chubut</option>
+                            <option value="cordoba">Cordoba</option>
+                            <option value="corrientes">Corrientes</option>
+                            <option value="entrerios">Entre Rios</option>
+                            <option value="formosa" selected>Formosa</option>
+                            <option value="jujuy">Jujuy</option>
+                            <option value="lapampa">La Pampa</option>
+                            <option value="larioja">La Rioja</option>
+                            <option value="mendoza">Mendoza</option>
+                            <option value="misiones">Misiones</option>
+                            <option value="neuquen">Neuquen</option>
+                            <option value="rionegro">Rio Negro</option>
+                            <option value="salta">Salta</option>
+                            <option value="sanjuan">San Juan</option>
+                            <option value="sanluis">San Luis</option>
+                            <option value="santacruz">Santa Cruz</option>
+                            <option value="santafe">Santa Fe</option>
+                            <option value="santiagodelestero">Santiago del Estero</option>
+                            <option value="tierradelfuego">Tierra del Fuego</option>
+                            <option value="tucuman">Tucuman</option>
+                        </select><br>
+                        </p>
+                        <p>
+                        <label for="barrio">Barrio</label><br>
+                        <select id="barrio" name="barrio">
+
+                        </select><br>
+                        </p>
+                        <p>
+                        <label for="codigopostal">Codigo Postal:</label><br>
+                        <input type="text" id="codigopostal"><br>
+                        </p>
                         <div class="text-center">
                             <h3 class="text-gradient text-primary">Contactos</h3>
                         </div>
-
-                        <button type="submit" class="btn btn-primary mb-2">Registrar</button>
+                        <label for="telefonopersonal">Telefono personal:</label><br>
+                        <input type="text" id="telefonopersonal"><br>
+                        <p>
+                        <h4>Notificaciones preferidas:</h4>
+                        </p>
+                        <p>
+                        <label><input type="checkbox" id="cbox1" value="first_checkbox"> Whatsapp</label><br>
+                        <label><input type="checkbox" id="cbox2" value="second_checkbox"> SMS</label><br>
+                        <label><input type="checkbox" id="cbox3" value="third_checkbox"> Mail</label><br>
+                        </p>
+                        <p>
+                        <table>
+                            <tr>
+                                <th>Contacto</th>
+                            </tr>
+                            <tr>
+                                <td>Contacto 1</td>
+                            </tr>
+                            <tr>
+                                <td>Contacto 2</td>
+                            </tr>
+                            <tr>
+                                <td>Contacto 3</td>
+                            </tr>
+                        </table>
+                        </p>
+                        <p>
+                        <button type="submit" class="btn btn-primary mb-2">Agregar contacto de notificacion</button>
+                        </p>
                     </form>
                 </div>
             </div>
@@ -44,5 +127,7 @@
     </div>
     </div>
 </section>
+<button type="submit" class="btn btn-primary mb-2">Registrar</button>
+
 </body>
 </html>
