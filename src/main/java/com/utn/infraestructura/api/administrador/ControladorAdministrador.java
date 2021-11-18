@@ -4,6 +4,7 @@ import com.utn.casodeuso.administrador.AccederAdministrador;
 import com.utn.dominio.organizacion.Administrador;
 import com.utn.infraestructura.persistencia.AdministradoresEnMySQL;
 import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@CrossOrigin
 public class ControladorAdministrador
 {
     private final AccederAdministrador accederAdministrador;

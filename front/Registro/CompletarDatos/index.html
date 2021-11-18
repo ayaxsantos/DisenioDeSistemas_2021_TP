@@ -1,133 +1,139 @@
-<!DOCTYPE html>   //FALTA TERMINAR
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Registro</title>
+    <title>Mascotas en Adopcion</title>
 </head>
-<body>
-<div class="text-center shadow-lg">
-    <h2>Completa tus Datos</h2>
+<body style = "background-color: white">
+<div class="text-center">
+    <h2>Mascotas en adopcion</h2>
 </div>
 <section>
-    <div class="container py-4">
+    <div class="container py-4" style = "background-color: white">
         <div class="row">
-            <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
-                <div class="card d-flex justify-content-center p-4 shadow-lg">
-                    <div class="text-center">
-                        <h3 class="text-gradient text-primary">Informacion Personal</h3>
-                    </div>
-                    <form>
-                        <p>
-                        <label for="tipodocumento">Tipo de documento</label><br>
-                        <select id="tipodocumento" name="tipodocumento">
-                            <option value="dni">DNI</option>
-                            <option value="enrolamiento">Enrolamiento</option>
-                            <option value="pasaporte" selected>Pasaporte</option>
-                        </select><br>
-                        </p>
-                        <p>
-                        <label for="numero">Numero de documento:</label><br>
-                        <input type="text" id="numero"><br>
-                        </p>
-                        <p>
-                        <label for="fechanacimiento">Fecha de nacimiento:</label><br>
-                        <input type="date" id="fechanacimiento"><br>
-                        </p>
-                        <!-- <label for="tipodocumento">Elige una organización</label><br> -->
-                        <div class="text-center">
-                            <h3 class="text-gradient text-primary">Direccion</h3>
-                        </div>
-                        <p>
-                        <label for="calle">Calle:</label><br>
-                        <input type="text" id="calle"><br>
-                        </p>
-                        <p>
-                        <label for="numeroCalle">Numero de calle:</label><br>
-                        <input type="text" id="numeroCalle"><br>
-                        </p>
-                        <p>
-                        <label for="piso/depto">Piso/Depto:</label><br>
-                        <input type="text" id="piso/depto"><br>
-                        </p>
-                        <p>
-                        <label for="provincia">Provincia</label><br>
-                        <select id="provincia" name="provincia">
-                            <option value="buenosaires">Buenos Aires</option>
-                            <option value="catamarca">Catamarca</option>
-                            <option value="chaco">Chaco</option>
-                            <option value="chubut">Chubut</option>
-                            <option value="cordoba">Cordoba</option>
-                            <option value="corrientes">Corrientes</option>
-                            <option value="entrerios">Entre Rios</option>
-                            <option value="formosa" selected>Formosa</option>
-                            <option value="jujuy">Jujuy</option>
-                            <option value="lapampa">La Pampa</option>
-                            <option value="larioja">La Rioja</option>
-                            <option value="mendoza">Mendoza</option>
-                            <option value="misiones">Misiones</option>
-                            <option value="neuquen">Neuquen</option>
-                            <option value="rionegro">Rio Negro</option>
-                            <option value="salta">Salta</option>
-                            <option value="sanjuan">San Juan</option>
-                            <option value="sanluis">San Luis</option>
-                            <option value="santacruz">Santa Cruz</option>
-                            <option value="santafe">Santa Fe</option>
-                            <option value="santiagodelestero">Santiago del Estero</option>
-                            <option value="tierradelfuego">Tierra del Fuego</option>
-                            <option value="tucuman">Tucuman</option>
-                        </select><br>
-                        </p>
-                        <p>
-                        <label for="barrio">Barrio</label><br>
-                        <select id="barrio" name="barrio">
+            <div class="col-lg-15 mx-auto d-flex justify-content-center flex-column">
+                <div class="card d-flex justify-content-center p-4 shadow-lg float-sm-right" style="background-color: #C4F197">
+                    <div class="container py-4">
+                        <div class="row">
+                            <div class="col-lg-15 mx-auto d-flex justify-content-center flex-column">
+                                <div class="card d-flex justify-content-center p-4 shadow-lg float-sm-right" style="background-color: #FBDDA3">
+                                    <div class="container py-4">
+                                        <div class="row">
+                                            <div class="col d-flex flex-column">
+                                                <div class="card d-flex p-4 shadow-lg float-sm-right" style="background-color: #CECFCD">
+                                                    <p class="pe-5">Descripción de la mascota descripción de la mascota descripción de la mascota descripción de la mascota</p>
 
-                        </select><br>
-                        </p>
-                        <p>
-                        <label for="codigopostal">Codigo Postal:</label><br>
-                        <input type="text" id="codigopostal"><br>
-                        </p>
-                        <div class="text-center">
-                            <h3 class="text-gradient text-primary">Contactos</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl ">
+                                                <button type="submit" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);" >Adoptar</button><br>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <label for="telefonopersonal">Telefono personal:</label><br>
-                        <input type="text" id="telefonopersonal"><br>
-                        <p>
-                        <h4>Notificaciones preferidas:</h4>
-                        </p>
-                        <p>
-                        <label><input type="checkbox" id="cbox1" value="first_checkbox"> Whatsapp</label><br>
-                        <label><input type="checkbox" id="cbox2" value="second_checkbox"> SMS</label><br>
-                        <label><input type="checkbox" id="cbox3" value="third_checkbox"> Mail</label><br>
-                        </p>
-                        <p>
-                        <table>
-                            <tr>
-                                <th>Contacto</th>
-                            </tr>
-                            <tr>
-                                <td>Contacto 1</td>
-                            </tr>
-                            <tr>
-                                <td>Contacto 2</td>
-                            </tr>
-                            <tr>
-                                <td>Contacto 3</td>
-                            </tr>
-                        </table>
-                        </p>
-                        <p>
-                        <button type="submit" class="btn btn-primary mb-2">Agregar contacto de notificacion</button>
-                        </p>
-                    </form>
+                    </div>
+
+                    <div class="container py-4">
+                        <div class="row">
+                            <div class="col-lg-15 mx-auto d-flex justify-content-center flex-column">
+                                <div class="card d-flex justify-content-center p-4 shadow-lg float-sm-right" style="background-color: #FBDDA3">
+                                    <div class="container py-4">
+                                        <div class="row">
+                                            <div class="col d-flex flex-column">
+                                                <div class="card d-flex p-4 shadow-lg float-sm-right" style="background-color: #CECFCD">
+                                                    <p class="pe-5">Descripción de la mascota descripción de la mascota descripción de la mascota descripción de la mascota</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl ">
+                                                <button type="submit" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);" >Adoptar</button><br>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container py-4">
+                        <div class="row">
+                            <div class="col-lg-15 mx-auto d-flex justify-content-center flex-column">
+                                <div class="card d-flex justify-content-center p-4 shadow-lg float-sm-right" style="background-color: #FBDDA3">
+                                    <div class="container py-4">
+                                        <div class="row">
+                                            <div class="col d-flex flex-column">
+                                                <div class="card d-flex p-4 shadow-lg float-sm-right" style="background-color: #CECFCD">
+                                                    <p class="pe-5">Descripción de la mascota descripción de la mascota descripción de la mascota descripción de la mascota</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl ">
+                                                <button type="submit" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);" >Adoptar</button><br>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="container py-4">
+                        <div class="row">
+                            <div class="col-lg-15 mx-auto d-flex justify-content-center flex-column">
+                                <div class="card d-flex justify-content-center p-4 shadow-lg float-sm-right" style="background-color: #FBDDA3">
+                                    <div class="container py-4">
+                                        <div class="row">
+                                            <div class="col d-flex flex-column">
+                                                <div class="card d-flex p-4 shadow-lg float-sm-right" style="background-color: #CECFCD">
+                                                    <p class="pe-5">Descripción de la mascota descripción de la mascota descripción de la mascota descripción de la mascota</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl ">
+                                                <button type="submit" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);" >Adoptar</button><br>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container py-4">
+                        <div class="row">
+                            <div class="col-lg-15 mx-auto d-flex justify-content-center flex-column">
+                                <div class="card d-flex justify-content-center p-4 shadow-lg float-sm-right" style="background-color: #FBDDA3">
+                                    <div class="container py-4">
+                                        <div class="row">
+                                            <div class="col d-flex flex-column">
+                                                <div class="card d-flex p-4 shadow-lg float-sm-right" style="background-color: #CECFCD">
+                                                    <p class="pe-5">Descripción de la mascota descripción de la mascota descripción de la mascota descripción de la mascota</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl ">
+                                                <button type="submit" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);" >Adoptar</button><br>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </section>
-<button type="submit" class="btn btn-primary mb-2">Registrar</button>
 
 </body>
 </html>

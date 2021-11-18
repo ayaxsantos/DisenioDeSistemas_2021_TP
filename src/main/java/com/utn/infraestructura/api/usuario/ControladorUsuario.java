@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
 
     private final IniciarSesion iniciarSesion;

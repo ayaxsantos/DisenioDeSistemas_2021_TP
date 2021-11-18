@@ -6,6 +6,7 @@ import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import org.springframework.http.HttpStatus;
 import com.utn.dominio.publicacion.Publicacion;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
 import com.utn.casodeuso.organizacion.ObtenerPublicacionesMascotaEnAdopcion;
 
 @RestController
+@CrossOrigin
 public class ControladorPublicacion {
 
     private final ObtenerPublicacionesMascotaEnAdopcion obtenerPublicacionesMascotaEnAdopcion;
