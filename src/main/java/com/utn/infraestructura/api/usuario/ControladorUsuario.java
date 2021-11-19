@@ -75,7 +75,7 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
     @PostMapping("usuarios/autenticar")
     public ResponseEntity iniciarSesion(@RequestBody SolicitudIniciarSesion solicitudIniciarSesion) {
         try {
-            iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contraseña());
+            iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contrasenia());
             return ResponseEntity.status(200).build();
         }
         catch(UsuarioNoEncontradoException e) {

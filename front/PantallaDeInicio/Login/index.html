@@ -7,13 +7,17 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:ital,wght@1,700&display=swap" rel="stylesheet">
+
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
         <title>Bienvenido A Rescate de patitas</title>
     </head>
 
     <body style="background-color: #e0e0e0">
         <section>
             <div class="container"><br>
-                <div class="row">
+                <div id="loginVue" class="row">
 
                     <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-xl-4 offset-xl-4 shadow-lg" style="height: 450px; background-color: rgb(152, 89, 179); border: 2px solid black; border-radius: 5px;">
                         <form class = "text-center" role="form" id="login" method="post" autocomplete="off" style=" background-color: rgb(152, 89, 179); border-radius: 5px"><br>
@@ -21,26 +25,27 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-10 offset-lg-1">
                                         <div class="input-group mb-4">
-                                            <input class="form-control" placeholder="Nombre de usuario" type="text">
+                                            <input v-model="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre de usuario" type="text">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-lg-10 offset-lg-1">
                                         <div class="input-group input-group-dynamic">
-                                            <input type="password " class="form-control" placeholder="Contraseña">
+                                            <input type="password" v-model="contrasenia" id="contrasenia" class="form-control" placeholder="Contraseña">
                                         </div>
                                     </div>
                                 </div><br>
-                                <button type="submit" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);">Acceder</button><br>
+                                <button type="submit" v-on:click="iniciarSesion" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);">Acceder</button><br>
                                 <a href="javascript:;" class="text-dark mb-4"><u>Continuar sin iniciar sesión</u></a>
                         </form><br>
                         <div class="col-12 col-md-1">
-                                <img src="./img/patita.png" style="height: 50px; width: 50px;"" placeholder="Imagen patita">
+                                <img src="./img/patita.png" style="height: 50px; width: 50px;" placeholder="Imagen patita">
                             </div>
                         </div><br>
                 </div>
             </div>
         </section>
+        <script src="js/myscript.js"></script>
     </body>
 </html>
