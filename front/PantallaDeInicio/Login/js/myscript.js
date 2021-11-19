@@ -1,11 +1,9 @@
-var estado = 0;
-
 var app = new Vue(
     {
         el: '#loginVue',
         data: {
             nombreUsuario: "",
-            contrasenia: ""
+            contrasenia: "",
         },
         methods: {
             iniciarSesion: function () {
@@ -13,21 +11,13 @@ var app = new Vue(
                         nombreUsuario : this.nombreUsuario,
                         contrasenia : this.contrasenia
                 })
-            }
+            },
         }
     }
 )
 
 function crearSolicitudInicioSesion(unaSolicitud)
 {
- /* Con DOM...
-
-    var unaSolicitudPri = {
-        nombreUsuario : document.getElementById("nombreUsuario").value,
-        contrasenia : document.getElementById("contrasenia").value
-    };
-
- */
     fetch("http://localhost:8080/usuarios/autenticar",
         {
             method: "POST",
@@ -37,16 +27,10 @@ function crearSolicitudInicioSesion(unaSolicitud)
                 },
             body: JSON.stringify(unaSolicitud)
         })
-        .then(response => {
-            if(response.status >= 400)
-            {
-                alert("USUARIO INEXISTENTE O CONTRASEÑA INCORRECTA!!");
-            }
-            else
-            {
-                alert("USUARIO CORRECTO!!");
-                console.log(response.status);
-            }
+        .then(response => response.json())
+        .then(datos => {
+            localStorage.setItem("IDSESION", datos.idSesion)
+            if(datos.idSesion == "-1")
+                alert("Usuario o contraseña invalido");
         })
-    estado = response.status;
 }

@@ -9,6 +9,8 @@ import com.utn.casodeuso.usuario.IniciarSesion;
 import com.utn.casodeuso.usuario.ObtenerOrganizaciones;
 import com.utn.casodeuso.usuario.Registrar;
 import com.utn.casodeuso.adoptante.QuererAdoptarMascota;
+import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.excepcion.UsuarioYaRegistradoException;
 import com.utn.dominio.hogar.ValidacionHogar;
@@ -30,6 +32,7 @@ import com.utn.dominio.Usuarios;
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.Mascotas;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +45,6 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
     private final CerrarSesion cerrarSesion;
     private final ObtenerOrganizaciones obtenerOrganizaciones;
     private final Registrar registrar;
-    private final QuererAdoptarMascota quererAdoptarMascota;
-    private final GenerarPublicacionBusquedaAdopcion generarPublicacionBusquedaAdopcion;
-    private final GenerarPublicacionMascotaEncontrada generarPublicacionMascotaEncontrada;
     private final BuscarHogarTransito buscarHogarTransito;
 
     public ControladorUsuario() {
@@ -66,20 +66,21 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
         this.cerrarSesion = new CerrarSesion(usuariosEnMySQL);
         this.obtenerOrganizaciones = new ObtenerOrganizaciones(usuariosEnMySQL);
         this.registrar = new Registrar(usuariosEnMySQL, organizacionesEnMySQL, personasEnMySQL);
-        this.quererAdoptarMascota = new QuererAdoptarMascota(personasEnMySQL);
-        this.generarPublicacionBusquedaAdopcion = new GenerarPublicacionBusquedaAdopcion(personasEnMySQL, organizacionesEnMySQL);
-        this.generarPublicacionMascotaEncontrada = new GenerarPublicacionMascotaEncontrada(organizacionesEnMySQL, personasEnMySQL);
         this.buscarHogarTransito = new BuscarHogarTransito(personasEnMySQL, mascotasEnMySQL, hogares, validaciones);
     }
 
     @PostMapping("usuarios/autenticar")
-    public ResponseEntity iniciarSesion(@RequestBody SolicitudIniciarSesion solicitudIniciarSesion) {
+    public LoginResponse iniciarSesion(@RequestBody SolicitudIniciarSesion solicitudIniciarSesion,
+                                        HttpServletResponse response) {
         try {
-            iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contrasenia());
-            return ResponseEntity.status(200).build();
+            Usuario unUsuario = iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contrasenia());
+            SesionManager sesionManager =  SesionManager.getInstance();
+            String idSesion = sesionManager.crear("usuario",unUsuario);
+            System.out.println(idSesion);
+            return new LoginResponse(idSesion,true);
         }
         catch(UsuarioNoEncontradoException e) {
-            return ResponseEntity.status(404).body("Usuario NO ENCONTRADO!! \n Registrarse...");
+            return new LoginResponse("-1",false);
         }
     }
 
@@ -94,7 +95,8 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
     public ResponseEntity<List<Organizacion>> obtenerOrganizacionesUsuario(
             @RequestBody SolicitudObtenerOrganizaciones solicitudObtenerOrganizaciones)
     {
-        List<Organizacion> organizacionesUsuario = obtenerOrganizaciones.ejecutar(solicitudObtenerOrganizaciones.getNombreUsuario());
+        List<Organizacion> organizacionesUsuario = obtenerOrganizaciones.ejecutar(solicitudObtenerOrganizaciones
+                .getNombreUsuario());
         return ResponseEntity.status(200).body(organizacionesUsuario);
     }
 
@@ -110,40 +112,6 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
         catch(UsuarioYaRegistradoException e){
             return ResponseEntity.status(404).body("Usuario ya registrado");
         }
-        return ResponseEntity.status(200).build();
-    }
-
-    @PostMapping("mascotas-en-adopcion/adoptar")
-    public ResponseEntity quererAdoptar(@RequestBody SolicitudQuieroAdoptar solicitudQuieroAdoptar)
-    {
-        quererAdoptarMascota.ejecutar(
-                solicitudQuieroAdoptar.getNombreUsuarioAdoptante(),
-                solicitudQuieroAdoptar.getNombreUsuarioAdoptante());
-        return ResponseEntity.status(200).build();
-    }
-
-    @PostMapping("generar-publicacion-busqueda-adopcion")
-    public ResponseEntity generarPublicacionBusquedaAdopcion(
-            @RequestBody SolicitudGenerarPublicacionBusquedaAdopcion solicitudGenerarPublicacionBusquedaAdopcion)
-    {
-        generarPublicacionBusquedaAdopcion.ejecutar(
-                solicitudGenerarPublicacionBusquedaAdopcion.getNombreUsuario(),
-                solicitudGenerarPublicacionBusquedaAdopcion.getNombreOrganizacion(),
-                solicitudGenerarPublicacionBusquedaAdopcion.getComodidades());
-        return  ResponseEntity.status(200).build();
-    }
-
-    @PostMapping("ingresar-mascota-encontrada")
-    public ResponseEntity generarPublicacionMascotaEncontrada(
-            @RequestBody SolicitudCompletarFormularioMascotaEncontrada solicitudCompletarFormularioMascotaEncontrada)
-    {
-        generarPublicacionMascotaEncontrada.ejecutar(
-                solicitudCompletarFormularioMascotaEncontrada.getNombreUsuario(),
-                solicitudCompletarFormularioMascotaEncontrada.getNombreOrganizacion(),
-                solicitudCompletarFormularioMascotaEncontrada.getLatitud(),
-                solicitudCompletarFormularioMascotaEncontrada.getLongitud(),
-                solicitudCompletarFormularioMascotaEncontrada.getEstadoDeLaMascota()
-        );
         return ResponseEntity.status(200).build();
     }
 

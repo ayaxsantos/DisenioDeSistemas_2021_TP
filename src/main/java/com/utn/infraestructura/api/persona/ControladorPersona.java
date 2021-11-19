@@ -1,6 +1,8 @@
 package com.utn.infraestructura.api.persona;
 
+import com.utn.casodeuso.adoptante.QuererAdoptarMascota;
 import com.utn.casodeuso.persona.RegistrarPersona;
+import com.utn.dominio.Personas;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,10 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class ControladorPersona
 {
-    private RegistrarPersona registrarPersona;
+    private final RegistrarPersona registrarPersona;
+    private final QuererAdoptarMascota quererAdoptarMascota;
 
     public ControladorPersona() {
-        this.registrarPersona = new RegistrarPersona(new PersonasEnMySQL());
+        Personas personasEnMySQL = new PersonasEnMySQL();
+        this.quererAdoptarMascota = new QuererAdoptarMascota(personasEnMySQL);
+        this.registrarPersona = new RegistrarPersona(personasEnMySQL);
     }
 
     //TODO Terminar
@@ -28,6 +33,15 @@ public class ControladorPersona
                 solicitudRegistrarPersona.getLongitud(),solicitudRegistrarPersona.getMediosPreferidos(),
                 solicitudRegistrarPersona.getUnosContactos());
 
+        return ResponseEntity.status(200).build();
+    }
+
+    @PostMapping("mascotas-en-adopcion/adoptar")
+    public ResponseEntity quererAdoptar(@RequestBody SolicitudQuieroAdoptar solicitudQuieroAdoptar)
+    {
+        quererAdoptarMascota.ejecutar(
+                solicitudQuieroAdoptar.getNombreUsuarioAdoptante(),
+                solicitudQuieroAdoptar.getNombreUsuarioAdoptante());
         return ResponseEntity.status(200).build();
     }
 }
