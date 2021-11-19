@@ -7,7 +7,7 @@ var app = new Vue(
         },
         methods: {
             iniciarSesion: function () {
-                crearSolicitudInicioSesion({
+                solicitudInicioSesion({
                         nombreUsuario : this.nombreUsuario,
                         contrasenia : this.contrasenia
                 })
@@ -16,7 +16,7 @@ var app = new Vue(
     }
 )
 
-function crearSolicitudInicioSesion(unaSolicitud)
+function solicitudInicioSesion(unaSolicitud)
 {
     fetch("http://localhost:8080/usuarios/autenticar",
         {
@@ -32,5 +32,6 @@ function crearSolicitudInicioSesion(unaSolicitud)
             localStorage.setItem("IDSESION", datos.idSesion)
             if(datos.idSesion == "-1")
                 alert("Usuario o contraseña invalido");
+            else window.location.href = "../Home/index.html";
         })
 }
