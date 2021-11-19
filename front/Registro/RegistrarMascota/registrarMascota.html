@@ -22,7 +22,7 @@
 <img src="https://user-images.githubusercontent.com/62707565/142464421-bd2fff64-476c-496f-8039-f981fb1c6cae.png"
      alt="Perro y gato"/>
 <h2>🐶 Completa los datos de tu mascota 🐶</h2>
-
+<!--TODO traer los enum de tipo,sexo y tamanio, convertir la foto a string 64 y arreglar la primera seleccion en el select-->
 <form>
     <label>Nombre<input type="text" placeholder></label>
     <label>Apodo<input type="text" placeholder></label>
@@ -37,44 +37,33 @@
     <label>Descripción física de la mascota<textarea></textarea></label>
     <label>Fotos de tu mascota<input type="file" accept="image/png, image/jpg, image/jpeg" multiple></label>
 
-    <div id="VueOrganizacionesActuales">
-        <label>Organizaciones actuales<select>
-                <option value="0">Selecciona una opción</option>
-                <option value="1">Organización 1</option>
-                <option value="2">Organización 2</option>
-                <option value="3">Organización 3</option>
-            </select></label>
-    </div>
+    <div id="OrganizacionesVue">
+        <label>Organizaciones actuales
+            <select v-model="orgElegida" @change="cambioOrg()">
+                <option selected disabled>Selecciona una opción</option>
+                <option v-for="organizacion in organizaciones" v-bind:value="organizacion">{{ organizacion }}</option>
+            </select>
+        </label>
 
-    <!--TODO generar las caractersiticas con vue-->
-    <div id="VueTablaCaracteristicas">
+        <span>Seleccionado: {{ orgElegida }}</span>
+
         <table class="table table-bordered table-striped">
             <tr>
                 <th>Característica</th>
                 <th>Respuesta</th>
             </tr>
             <tr v-for="caracteristica in caracteristicas">
-                <td>{{caracteristica}}</td>
+                <td>{{ caracteristica }}</td>
                 <td><input type="text" placeholder=""></td>
             </tr>
         </table>
     </div>
-
-    <script>
-        var app = new Vue({
-            el: '#VueTablaCaracteristicas',
-            data: {
-                caracteristicas: []
-            },
-            created(){
-                fetch('http://localhost:8080/')
-
-            }
-        })
-
-    </script>
-
+    <input type="submit" value="Registrar">
 </form>
 
+
+
+<script src="registrarMascotaVue.js"></script>
 </body>
 </html>
+

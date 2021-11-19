@@ -162,4 +162,12 @@ public class Organizacion extends EntidadPersistente {
     public List<Administrador> getAdministradores() {
         return administradores;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public List<String> getCaracteristicas() {
+        return caracteristicas;
+    }
 }

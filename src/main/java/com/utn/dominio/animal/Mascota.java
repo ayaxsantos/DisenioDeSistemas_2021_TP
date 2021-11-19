@@ -41,7 +41,6 @@ public class Mascota extends EntidadPersistente {
 
     //TODO Como hacer para poder tener en la tabla de mascotas la FK de persona. Pues no asocia Mascota con Persona
     /*@ManyToOne()
-    @JoinColumn(name = "persona_id")
     private Persona persona;*/
 
     public Mascota(String nombre, String apodo, int edad, Animal animal, Sexo sexo, Tamaño tamaño, String descripcionFisica) {
