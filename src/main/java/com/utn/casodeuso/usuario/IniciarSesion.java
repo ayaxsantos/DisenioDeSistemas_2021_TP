@@ -1,6 +1,8 @@
 package com.utn.casodeuso.usuario;
 
 import com.utn.dominio.Usuarios;
+import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 
 import javax.persistence.NoResultException;
@@ -13,13 +15,14 @@ public class IniciarSesion {
         this.usuarios = usuarios;
     }
 
-    public void ejecutar(String nombreUsuario, String contraseña) {
+    public Usuario ejecutar(String nombreUsuario, String contraseña) {
         try
         {
-            usuarios.obtenerPorNombreUsuario(nombreUsuario)
-                    .iniciarSesion(nombreUsuario, contraseña);
+            Usuario unUsuario = usuarios.obtenerPorNombreUsuario(nombreUsuario);
+            unUsuario.iniciarSesion(nombreUsuario, contraseña);
+            return unUsuario;
         }
-        catch(NoResultException e)
+        catch(NoResultException | CredencialesInvalidasException e)
         {
             throw new UsuarioNoEncontradoException();
         }

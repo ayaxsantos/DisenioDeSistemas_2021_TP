@@ -1,4 +1,4 @@
-package com.utn.infraestructura.api.usuario;
+package com.utn.infraestructura.api.publicacion;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

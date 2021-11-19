@@ -8,13 +8,13 @@ public class SolicitudIniciarSesion {
     private String nombreUsuario;
 
     @JsonProperty
-    private String contraseña;
+    private String contrasenia;
 
     public String nombreUsuario() {
         return this.nombreUsuario;
     }
 
-    public String contraseña() {
-        return this.contraseña;
+    public String contrasenia() {
+        return this.contrasenia;
     }
 }
