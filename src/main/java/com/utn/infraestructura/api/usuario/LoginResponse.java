@@ -7,12 +7,9 @@ public class LoginResponse {
     @JsonProperty
     private String idSesion;
 
-    @JsonProperty
-    private boolean codigoEstado;
 
     public LoginResponse(String idSesion, boolean codigoEstado) {
         this.idSesion = idSesion;
-        this.codigoEstado = codigoEstado;
     }
 
     public String getIdSesion() {
@@ -23,11 +20,4 @@ public class LoginResponse {
         this.idSesion = idSesion;
     }
 
-    public boolean isCodigoEstado() {
-        return codigoEstado;
-    }
-
-    public void setCodigoEstado(boolean codigoEstado) {
-        this.codigoEstado = codigoEstado;
-    }
 }
