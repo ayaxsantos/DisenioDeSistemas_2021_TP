@@ -1,6 +1,8 @@
 package com.utn.dominio.animal;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Animal {
 
@@ -18,5 +20,11 @@ public enum Animal {
             .filter(animal -> animal.descripcion.equals(descripcion))
             .findFirst()
             .orElseThrow(RuntimeException::new);
+    }
+
+    public static List<String> getDescripciones() {
+        return Arrays.stream(Animal.values())
+            .map(animal -> animal.descripcion)
+            .collect(Collectors.toList());
     }
 }
