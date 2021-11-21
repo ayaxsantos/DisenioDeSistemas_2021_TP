@@ -8,12 +8,9 @@ import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.persistencia.AdministradoresEnMySQL;
 import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -29,10 +26,9 @@ public class ControladorAdministrador
     }
 
     @GetMapping("organizacion/panelAdministracion")
-    public ResponseEntity acceder(@RequestBody SolicitudAcceder solicitudAcceder)
+    public ResponseEntity acceder(@RequestBody SolicitudAcceder solicitudAcceder, @RequestHeader("Authorization") String idSesion)
     {
         try {
-            String idSesion = solicitudAcceder.getIdSesion();
             SesionManager sesionManager = SesionManager.getInstance();
 
             Map<String, Object> unosDatos = sesionManager.obtenerAtributos(idSesion);

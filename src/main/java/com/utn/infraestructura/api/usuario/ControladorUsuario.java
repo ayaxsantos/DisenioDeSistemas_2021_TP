@@ -36,7 +36,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito??
+public class ControladorUsuario {
 
     private final IniciarSesion iniciarSesion;
     private final CerrarSesion cerrarSesion;
@@ -82,8 +82,13 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito??
     }
 
     @PostMapping("usuarios/desconectar")
-    public ResponseEntity cerrarSesion(@RequestBody SolicitudCerrarSesion solicitudCerrarSesion) {
+    public ResponseEntity cerrarSesion(@RequestBody SolicitudCerrarSesion solicitudCerrarSesion,
+                                       @RequestHeader("Authorization") String idSesion) {
         cerrarSesion.ejecutar(solicitudCerrarSesion.nombreUsuario());
+
+        SesionManager sesionManager = SesionManager.getInstance();
+        sesionManager.eliminar(idSesion);
+
         return ResponseEntity.status(200).build();
     }
 
@@ -123,5 +128,4 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito??
                 solicitudBuscarHogarTransito.getIdMascota());
         return ResponseEntity.status(200).body(unosHogares);
     }
-
 }
