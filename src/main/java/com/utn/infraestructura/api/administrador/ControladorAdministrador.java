@@ -4,6 +4,7 @@ import com.utn.casodeuso.administrador.AccederAdministrador;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.organizacion.Administrador;
+import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.persistencia.AdministradoresEnMySQL;
 import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
@@ -37,9 +38,14 @@ public class ControladorAdministrador
             Map<String, Object> unosDatos = sesionManager.obtenerAtributos(idSesion);
             Usuario unUsuario = (Usuario) unosDatos.get("usuario");
 
-            Administrador unAdministrador = accederAdministrador.ejecutar(unUsuario.nombreUsuario(),
+            Organizacion unaOrganizacion = accederAdministrador.ejecutar(unUsuario.nombreUsuario(),
                     solicitudAcceder.getNombreOrganizacion());
-            return ResponseEntity.status(200).body(unAdministrador);
+
+            RespuestaAcceso unaRespuesta = new RespuestaAcceso();
+            unaRespuesta.setUnaOrganizacion(unaOrganizacion);
+            unaRespuesta.setNombreUsuario(unUsuario.nombreUsuario());
+            
+            return ResponseEntity.status(200).body(unaRespuesta);
         }
         catch(UsuarioNoEncontradoException | NullPointerException e)
         {
