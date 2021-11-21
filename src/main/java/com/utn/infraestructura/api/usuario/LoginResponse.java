@@ -8,7 +8,7 @@ public class LoginResponse {
     private String idSesion;
 
 
-    public LoginResponse(String idSesion, boolean codigoEstado) {
+    public LoginResponse(String idSesion) {
         this.idSesion = idSesion;
     }
 

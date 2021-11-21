@@ -39,10 +39,6 @@ public class Mascota extends EntidadPersistente {
     @ElementCollection
     private Map<String, String> caracteristicas;
 
-    //TODO Como hacer para poder tener en la tabla de mascotas la FK de persona. Pues no asocia Mascota con Persona
-    /*@ManyToOne()
-    private Persona persona;*/
-
     public Mascota(String nombre, String apodo, int edad, Animal animal, Sexo sexo, Tamaño tamaño, String descripcionFisica) {
         this.nombre = nombre;
         this.apodo = apodo;
