@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.utn.dominio.EntidadPersistente;
+import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.excepcion.UsuarioNoEsAdministradorException;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.persona.Direccion;
@@ -170,4 +172,5 @@ public class Organizacion extends EntidadPersistente {
     public List<String> getCaracteristicas() {
         return caracteristicas;
     }
+
 }

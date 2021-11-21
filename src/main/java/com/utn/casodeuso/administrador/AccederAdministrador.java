@@ -3,6 +3,7 @@ package com.utn.casodeuso.administrador;
 import com.utn.dominio.Administradores;
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
+import com.utn.dominio.excepcion.UsuarioNoEsAdministradorException;
 import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
 
@@ -27,7 +28,7 @@ public class AccederAdministrador
 
         Administrador unAdministrador = unosAdm.stream().filter(
                 admin -> admin.getUsuario().nombreUsuario().equals(nombreUsuario)
-        ).findFirst().orElseThrow(UsuarioNoEncontradoException::new);
+        ).findFirst().orElseThrow(UsuarioNoEsAdministradorException::new);
 
         return unaOrganizacion;
     }

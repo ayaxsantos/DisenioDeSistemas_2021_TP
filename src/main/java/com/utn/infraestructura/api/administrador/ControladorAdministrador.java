@@ -3,7 +3,7 @@ package com.utn.infraestructura.api.administrador;
 import com.utn.casodeuso.administrador.AccederAdministrador;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
-import com.utn.dominio.organizacion.Administrador;
+import com.utn.dominio.excepcion.UsuarioNoEsAdministradorException;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.persistencia.AdministradoresEnMySQL;
@@ -50,6 +50,10 @@ public class ControladorAdministrador
         catch(UsuarioNoEncontradoException | NullPointerException e)
         {
             return ResponseEntity.status(404).build();
+        }
+        catch(UsuarioNoEsAdministradorException e)
+        {
+            return ResponseEntity.status(402).build();
         }
     }
 }
