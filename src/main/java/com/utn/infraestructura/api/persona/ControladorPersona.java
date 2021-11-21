@@ -3,12 +3,13 @@ package com.utn.infraestructura.api.persona;
 import com.utn.casodeuso.adoptante.QuererAdoptarMascota;
 import com.utn.casodeuso.persona.RegistrarPersona;
 import com.utn.dominio.Personas;
+import com.utn.dominio.autenticacion.Usuario;
+import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -25,7 +26,7 @@ public class ControladorPersona
 
     //TODO Terminar
     @PostMapping("usuario/registroPersona")
-    public ResponseEntity registroPersona(@RequestBody SolicitudRegistrarPersona solicitudRegistrarPersona )
+    public ResponseEntity registroPersona(@RequestBody SolicitudRegistrarPersona solicitudRegistrarPersona)
     {
         registrarPersona.ejecutar(solicitudRegistrarPersona.getNombreUsuario(),
                 solicitudRegistrarPersona.getTipoDocumento(),solicitudRegistrarPersona.getNumeroDocumento(),
@@ -37,11 +38,22 @@ public class ControladorPersona
     }
 
     @PostMapping("mascotas-en-adopcion/adoptar")
-    public ResponseEntity quererAdoptar(@RequestBody SolicitudQuieroAdoptar solicitudQuieroAdoptar)
+    public ResponseEntity quererAdoptar(@RequestBody SolicitudQuieroAdoptar solicitudQuieroAdoptar,
+                                        @RequestHeader("Authorization") String idSesionAdoptante)
     {
+        Usuario unUsuarioAdoptante = this.obtenerUsuarioSesionManager(idSesionAdoptante);
+
         quererAdoptarMascota.ejecutar(
-                solicitudQuieroAdoptar.getNombreUsuarioAdoptante(),
-                solicitudQuieroAdoptar.getNombreUsuarioAdoptante());
+                unUsuarioAdoptante.nombreUsuario(),
+                solicitudQuieroAdoptar.getNombreUsuarioDuenio());
         return ResponseEntity.status(200).build();
+    }
+
+    private Usuario obtenerUsuarioSesionManager(String idSesion)
+    {
+        SesionManager sesionManager = SesionManager.getInstance();
+
+        Map<String, Object> unosDatos = sesionManager.obtenerAtributos(idSesion);
+        return (Usuario) unosDatos.get("usuario");
     }
 }

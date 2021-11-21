@@ -102,6 +102,7 @@ public class ControladorUsuario {
         return ResponseEntity.status(200).body(organizacionesUsuario);
     }
 
+    //TODO: Despues de registrar usuario, pedimos que vuelva a loguear??
     @PostMapping("registro")
     public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitudRegistroUsuario)
     {

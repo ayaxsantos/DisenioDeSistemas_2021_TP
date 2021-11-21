@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SolicitudCompletarFormularioMascotaEncontrada { //todo faltan algunas cosas q estaban en los wireframes
 
     @JsonProperty
-    private String nombreUsuario;
-
-    @JsonProperty
     private String nombreOrganizacion;
 
     @JsonProperty
@@ -23,16 +20,8 @@ public class SolicitudCompletarFormularioMascotaEncontrada { //todo faltan algun
         return nombreOrganizacion;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
     public void setNombreOrganizacion(String nombreOrganizacion) {
         this.nombreOrganizacion = nombreOrganizacion;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
     }
 
     public Double getLatitud() {
