@@ -6,7 +6,6 @@ import com.utn.dominio.notificacion.mensaje.Mensaje;
 
 import javax.persistence.*;
 
-//TODO que se genere 1 sola tabla donde tiene las 6 altenativas. SMS-Email-Whatsapp con no preferido y SMS-Email-Whatsapp con preferido. Porque sino crea de mas con id unicos.
 @Entity
 @Table(name = "medioDeComunicacion")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

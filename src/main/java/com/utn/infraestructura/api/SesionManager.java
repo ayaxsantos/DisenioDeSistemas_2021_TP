@@ -1,4 +1,4 @@
-package com.utn.infraestructura.api.usuario;
+package com.utn.infraestructura.api;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,9 +17,9 @@ public class SesionManager
     {
         if(instance == null)
         {
-            return new SesionManager();
+            instance = new SesionManager();
         }
-        else return instance;
+        return instance;
     }
 
     public String crear() {

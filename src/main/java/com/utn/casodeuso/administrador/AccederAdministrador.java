@@ -19,7 +19,7 @@ public class AccederAdministrador
         this.organizaciones = unasOrganizaciones;
     }
 
-    public Administrador ejecutar(String nombreUsuario, String nombreOrganizacion)
+    public Organizacion ejecutar(String nombreUsuario, String nombreOrganizacion)
     {
         Organizacion unaOrganizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
 
@@ -29,6 +29,6 @@ public class AccederAdministrador
                 admin -> admin.getUsuario().nombreUsuario().equals(nombreUsuario)
         ).findFirst().orElseThrow(UsuarioNoEncontradoException::new);
 
-        return unAdministrador;
+        return unaOrganizacion;
     }
 }

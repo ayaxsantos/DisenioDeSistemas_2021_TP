@@ -2,31 +2,26 @@ package com.utn.infraestructura.api.administrador;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SolicitudAcceder
-{
+public class SolicitudAcceder {
     @JsonProperty
-    private String nombreUsuario;
+    private String idSesion;
 
     @JsonProperty
     private String nombreOrganizacion;
 
-    public String getNombreUsuario()
-    {
-        return this.nombreUsuario;
+    public String getIdSesion() {
+        return idSesion;
     }
 
-    public String getNombreOrganizacion()
-    {
-        return this.nombreOrganizacion;
+    public void setIdSesion(String idSesion) {
+        this.idSesion = idSesion;
     }
 
-    public void setNombreUsuario(String nombreUsuario)
-    {
-        this.nombreUsuario = nombreUsuario;
+    public String getNombreOrganizacion() {
+        return nombreOrganizacion;
     }
 
-    public void setNombreOrganizacion(String nombreOrganizacion)
-    {
+    public void setNombreOrganizacion(String nombreOrganizacion) {
         this.nombreOrganizacion = nombreOrganizacion;
     }
 }

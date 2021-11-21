@@ -1,21 +1,19 @@
 package com.utn.infraestructura.api.usuario;
 
-import com.utn.casodeuso.adoptante.GenerarPublicacionBusquedaAdopcion;
 import com.utn.casodeuso.rescatista.BuscarHogarTransito;
-import com.utn.casodeuso.rescatista.GenerarPublicacionMascotaEncontrada;
 import com.utn.casodeuso.usuario.CerrarSesion;
 import com.utn.casodeuso.usuario.IniciarSesion;
 
 import com.utn.casodeuso.usuario.ObtenerOrganizaciones;
 import com.utn.casodeuso.usuario.Registrar;
-import com.utn.casodeuso.adoptante.QuererAdoptarMascota;
 import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.excepcion.CredencialesInvalidasException;
+import com.utn.dominio.excepcion.ContraseñaDebilException;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.excepcion.UsuarioYaRegistradoException;
 import com.utn.dominio.hogar.ValidacionHogar;
 import com.utn.dominio.hogar.criterios.*;
 import com.utn.dominio.organizacion.Organizacion;
+import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.hogares.Hogar;
 import com.utn.infraestructura.hogares.ServicioHogares;
 import com.utn.infraestructura.persistencia.MascotasEnMySQL;
@@ -33,13 +31,12 @@ import com.utn.dominio.Organizaciones;
 import com.utn.dominio.Mascotas;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
+public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito??
 
     private final IniciarSesion iniciarSesion;
     private final CerrarSesion cerrarSesion;
@@ -77,10 +74,10 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
             SesionManager sesionManager =  SesionManager.getInstance();
             String idSesion = sesionManager.crear("usuario",unUsuario);
             System.out.println(idSesion);
-            return new LoginResponse(idSesion,true);
+            return new LoginResponse(idSesion);
         }
         catch(UsuarioNoEncontradoException e) {
-            return new LoginResponse("-1",false);
+            return new LoginResponse("-1");
         }
     }
 
@@ -100,7 +97,7 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
         return ResponseEntity.status(200).body(organizacionesUsuario);
     }
 
-    @PostMapping("registro") //Todo: contraseña segura catch
+    @PostMapping("registro")
     public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitudRegistroUsuario)
     {
         try{
@@ -109,7 +106,12 @@ public class ControladorUsuario {  //Todo: agregar buscarHogarDeTransito
                 solicitudRegistroUsuario.getCorreoElectronico(),solicitudRegistroUsuario.getTelefono(),
                     solicitudRegistroUsuario.getNombreOrganizacion());
         }
-        catch(UsuarioYaRegistradoException e){
+        catch(ContraseñaDebilException e)
+        {
+            return ResponseEntity.status(400).build();
+        }
+        catch(UsuarioYaRegistradoException e)
+        {
             return ResponseEntity.status(404).body("Usuario ya registrado");
         }
         return ResponseEntity.status(200).build();

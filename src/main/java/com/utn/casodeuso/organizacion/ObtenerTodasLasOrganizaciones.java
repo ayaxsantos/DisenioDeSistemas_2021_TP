@@ -2,7 +2,6 @@ package com.utn.casodeuso.organizacion;
 
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.organizacion.Organizacion;
-import sun.awt.X11.XSystemTrayPeer;
 
 import java.util.List;
 

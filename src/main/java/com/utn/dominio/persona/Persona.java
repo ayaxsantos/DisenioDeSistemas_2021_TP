@@ -36,7 +36,6 @@ public class Persona extends EntidadPersistente {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Contacto> contactos = new ArrayList<>();
 
-    //TODO En SQL se esta creando una tabla auxiliar donde relaciona PK de Mascota con PK de Persona. (Relacionado con TODO de Mascota)
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_id")
     private List<Mascota> mascotas;
