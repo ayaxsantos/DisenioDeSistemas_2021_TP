@@ -22,18 +22,17 @@ public class RegistrarPersona {
     public void ejecutar(String nombreUsuario, TipoDocumento tipoDocumento, int numeroDocumento,
                          LocalDate fechaNacimiento, int latitud, int longitud, List<String> mediosPreferidos,
                          List<DatosContacto> datosContactos) {
+
         Persona persona = personas.obtenerPorNombreDeUsuario(nombreUsuario);
         persona.setDocumento(new Documento(tipoDocumento, numeroDocumento));
         persona.setFechaNacimiento(fechaNacimiento);
         persona.setDomicilio(new Direccion(latitud, longitud));
+
         List<Contacto> unosContactos = datosContactos.stream().map(
                 unosDatos -> this.datosAContacto(unosDatos)
         ).collect(Collectors.toList());
 
-        //TODO: Delegar esto, repeticion de logica!!
-        List<MedioDeComunicacion> mediosDeComunicacion = mediosPreferidos.stream().map(
-                unMedio -> this.obtenerMediosDeComunicacion(unMedio)
-        ).collect(Collectors.toList());
+        List<MedioDeComunicacion> mediosDeComunicacion = this.obtenerMediosDeComunicacion(mediosPreferidos);
 
         persona.getContactoPersonal().setMediosDeComunicacion(mediosDeComunicacion);
         persona.setContactos(unosContactos);
@@ -45,14 +44,18 @@ public class RegistrarPersona {
     {
         Contacto unContacto = new Contacto(datos.getNombre(),datos.getApellido(),
                 datos.getTelefono(),datos.getEmail());
-        List<MedioDeComunicacion> mediosComunicacion = datos.getMediosComunicacion().stream().map(
-                unMedio -> this.obtenerMediosDeComunicacion(unMedio)
-        ).collect(Collectors.toList());
+        List<MedioDeComunicacion> mediosComunicacion = this.obtenerMediosDeComunicacion(datos.getMediosComunicacion());
         unContacto.setMediosDeComunicacion(mediosComunicacion);
         return unContacto;
     }
 
-    private MedioDeComunicacion obtenerMediosDeComunicacion(String unMedio)
+    private List<MedioDeComunicacion> obtenerMediosDeComunicacion(List<String> mediosPreferidos)
+    {
+        return mediosPreferidos.stream().map(unMedio -> this.resolverMedioComunicacion(unMedio))
+                .collect(Collectors.toList());
+    }
+
+    private MedioDeComunicacion resolverMedioComunicacion(String unMedio)
     {
         switch (unMedio)
         {
