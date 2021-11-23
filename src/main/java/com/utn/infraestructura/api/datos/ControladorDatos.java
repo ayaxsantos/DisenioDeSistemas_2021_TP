@@ -3,6 +3,7 @@ package com.utn.infraestructura.api.datos;
 import com.utn.dominio.animal.Animal;
 import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
+import com.utn.dominio.persona.TipoDocumento;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,9 @@ public class ControladorDatos {
         return ResponseEntity.status(200).body(Tamaño.getDescripciones());
     }
 
-
+    @GetMapping("datos/persona/tipoDocumento")
+    public ResponseEntity<List<String>> obtenerTiposDeDocumento() {
+        return ResponseEntity.status(200).body(TipoDocumento.getDescripciones());
+    }
 
 }

@@ -1,6 +1,8 @@
 package com.utn.dominio.persona;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum TipoDocumento {
 
@@ -23,6 +25,12 @@ public enum TipoDocumento {
 
     public String getDescripcion() {
         return this.descripcion;
+    }
+
+    public static List<String> getDescripciones() {
+        return Arrays.stream(TipoDocumento.values())
+                .map(tipoDocumento -> tipoDocumento.descripcion)
+                .collect(Collectors.toList());
     }
 
 }

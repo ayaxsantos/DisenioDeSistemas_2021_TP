@@ -8,43 +8,94 @@
     <title>Registra tu datos</title>
 </head>
 <body>
-<form >
-    <label>Nombre<input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" required></label><br>
-    <label>Apellido<input type="text" name="apellido" id="apellido" placeholder="Ingrese su apellido"
-                          required></label><br>
-    <!--TODO obtener tipo de documentos del backend-->
-    <label>
-        Tipo documento
-        <select>
-            <option>DNI</option>
-            <option>Cédula</option>
-            <option>Pasaporte</option>
-        </select>
-    </label><br>
-    <label for="documento">Numero documento <input type="number" id="documento" name="documento"></label><br>
-    <label>Fecha de nacimiento<input type="date" name="fechaNacimiento" id="fechaNacimiento" required></label><br>
-    <label>Direccion<input type="text" name="direccion" id="direccion" placeholder="Ingrese su direccion"
-                           required></label><br>
-    <label>Piso y Dpto<input type="text" name="pisoDpto" id="pisoDpto" placeholder="Ingrese su piso y dpto"
-                             required></label><br>
-    <label>Provincia<input type="text" name="provincia" id="provincia" placeholder="Ingrese su provincia"
-                           required></label><br>
-    <label>Barrio<input type="text" name="barrio" id="barrio" placeholder="Ingrese su barrio" required></label><br>
-    <label>Codigo postal<input type="number" name="codigoPostal" id="codigoPostal"
-                               placeholder="Ingrese su codigo postal" required></label><br>
-    <label>Telefono<input type="text" name="telefono" id="telefono" placeholder="Ingrese su telefono"
-                          required></label><br>
-    <label>Email<input type="email" name="email" id="email" placeholder="Ingrese su email" required></label><br>
-    <!--TODO obtener notificaciones preferidas del backend-->
-    <label>
-        Notificaciones preferidas
-        <label>Whatsapp<input type="checkbox" name="notifPreferida"></label>
-        <label>SMS<input type="checkbox" name="notifPreferida"></label>
-        <label>Email<input type="checkbox" name="notifPreferida"></label>
-    </label><br>
-    <!--TODO añadir contactos-->
-    <input type="submit" value="Registrar">
-</form>
+<div id="RegistrarPersonaVue">
+    <form>
+        <label>Nombre<input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" required></label><br>
+        <label>Apellido<input type="text" name="apellido" id="apellido" placeholder="Ingrese su apellido"
+                              required></label><br>
+        <!--TODO obtener tipo de documentos del backend-->
+        <label v-for="tipoDocumento in tiposDocumento">
+            <input type="radio" v-bind:value="tipoDocumento" name="tipoDocumentoRadio"
+                   v-model="tipoDocumentoSeleccionado">
+            {{tipoDocumento}}</label><br>
+        <label for="documento">Numero documento <input type="number" id="documento" name="documento"></label><br>
+        <label>Fecha de nacimiento<input type="date" name="fechaNacimiento" id="fechaNacimiento" required></label><br>
+        <label>Longitud<input type="number" placeholder="Ingrese su longitud" required></label><br>
+        <label>Latitud<input type="number" placeholder="Ingrese su latitud" required></label><br>
+        <label>Radio de hogares<input type="number" placeholder="Ingrese el radio de hogares maximo"
+                                      required></label><br>
+        <label>Telefono<input type="text" name="telefono" id="telefono" placeholder="Ingrese su telefono"
+                              required></label><br>
+        <label>Email<input type="email" name="email" id="email" placeholder="Ingrese su email" required></label><br>
+
+        <label>
+            Notificaciones preferidas
+            <label>Whatsapp<input type="checkbox" name="notifPreferida"></label>
+            <label>SMS<input type="checkbox" name="notifPreferida"></label>
+            <label>Email<input type="checkbox" name="notifPreferida"></label>
+        </label><br>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Tipo del animal</td>
+                <td>Sexo del animal</td>
+                <td>Tamaño del animal</td>
+            </tr>
+            <tr>
+                <td>
+                    <label v-for="tipoAnimal in tiposAnimal">
+                        <input type="radio" v-bind:value="tipoAnimal" name="tipoAnimalRadio"
+                               v-model="tipoAnimalSeleccionado">
+                        {{tipoAnimal}}</label>
+                </td>
+                <td>
+                    <label v-for="sexoAnimal in sexosAnimal">
+                        <input type="radio" v-bind:value="sexoAnimal" name="sexoAnimalRadio"
+                               v-model="sexoAnimalSeleccionado">
+                        {{sexoAnimal}}</label>
+                </td>
+                <td>
+                    <label v-for="tamanioAnimal in tamaniosAnimal">
+                        <input type="radio" v-bind:value="tamanioAnimal" name="tamanioAnimalRadio"
+                               v-model="tamanioAnimalSeleccionado">
+                        {{tamanioAnimal}}</label>
+                </td>
+            </tr>
+        </table>
+
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Telefono</td>
+                <td>Email</td>
+                <td>Whatsapp</td>
+                <td>SMS</td>
+                <td>Email</td>
+                <td></td>
+            </tr>
+            <div id="otroContacto">
+                <tr>
+
+                    <td><input type="text" id="nombreA" placeholder="Ingrese nombre" v-model="otrosContactos.nombre" @input="algo">
+                    <td><input type="text" placeholder="Ingrese apellido" v-model="otrosContactos.apellido"></td>
+                    <td><input type="text" placeholder="Ingrese telefono" v-model="otrosContactos.telefono"></td>
+                    <td><input type="text" placeholder="Ingrese email" v-model="otrosContactos.email"></td>
+                    <td><input type="checkbox" name="notifPreferida" v-model="otrosContactos.whatsapp"></td>
+                    <td><input type="checkbox" name="notifPreferida" v-model="otrosContactos.sms"></td>
+                    <td><input type="checkbox" name="notifPreferida" v-model="otrosContactos.email"></td>
+                    <td><input type="submit" value="Añadir" v-on:click="algo"></td>
+                </tr>
+            </div>
+        </table>
+
+
+        <!--TODO añadir contactos-->
+        <input type="submit" value="Registrar">
+    </form>
+</div>
+
+<script src="registrarPersonaVue.js"></script>
 
 </body>
 </html>
