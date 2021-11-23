@@ -24,6 +24,12 @@
 <h2>🐶 Completa los datos de tu mascota 🐶</h2>
 
 <div id="RegistrarMascotaVue">
+
+    <label >Nombre <input type="text" v-model="nombre" placeholder="Ingrese el nombre de la mascota"></label>
+    <label >Apodo <input type="text" v-model="apodo" placeholder="Ingrese el apodo de la mascota"></label>
+    <label >Edad <input type="number" v-model="edad" placeholder="Ingrese la edad de la mascota"></label>
+    <label >Descripción física<textarea v-model="descripcionFisica" placeholder="Ingrese la descripción física de la mascota"></textarea></label>
+
     <label v-for="tipoAnimal in tiposAnimal">
         <input type="radio" v-bind:value="tipoAnimal" name="tipoAnimalRadio" v-model="tipoAnimalSeleccionado">
         {{tipoAnimal}}</label>
@@ -36,8 +42,8 @@
         {{tamanioAnimal}}</label>
     <br><label>Los selecionados son: {{  tipoAnimalSeleccionado  }} || {{  sexoAnimalSeleccionado  }} || {{  tamanioAnimalSeleccionado  }}</label><br>
 
-    <label>Descripción física de la mascota<textarea></textarea></label>
-    <label>Fotos de tu mascota<input type="file" accept="image/png, image/jpg, image/jpeg" multiple></label>
+
+    <label>Fotos de tu mascota<input type="file" @change="agregarFotos($event)" accept="image/png, image/jpg, image/jpeg" multiple></label>
 
     <label>Organizaciones actuales
         <select v-model="orgElegida" @change="cambioOrg()">

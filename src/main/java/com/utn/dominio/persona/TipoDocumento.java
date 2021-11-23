@@ -20,4 +20,9 @@ public enum TipoDocumento {
             .findFirst()
             .orElseThrow(RuntimeException::new);
     }
+
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+
 }

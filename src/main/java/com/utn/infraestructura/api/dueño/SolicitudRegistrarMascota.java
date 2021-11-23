@@ -1,14 +1,17 @@
 package com.utn.infraestructura.api.dueño;
 
-import java.util.Map;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
+import java.util.Map;
 
 public class SolicitudRegistrarMascota {
 
     @JsonProperty
-    private int idMascota;
+    private int numeroDocumento;
+
+    @JsonProperty
+    private String tipoDocumento;
 
     @JsonProperty
     private String nombre;
@@ -26,7 +29,7 @@ public class SolicitudRegistrarMascota {
     private String sexo;
 
     @JsonProperty
-    private String tamaño;
+    private String tamanio;
 
     @JsonProperty
     private String descripcionFisica;
@@ -37,8 +40,18 @@ public class SolicitudRegistrarMascota {
     @JsonProperty
     private Map<String, String> caracteristicas;
 
-    public int idMascota() {
-        return this.idMascota;
+    @JsonProperty
+    private List<String> caracteristicasPreguntas;
+
+    @JsonProperty
+    private List<String> caracteristicasRespuestas;
+
+    public int numeroDocumento() {
+        return this.numeroDocumento;
+    }
+
+    public String tipoDocumento() {
+        return this.tipoDocumento;
     }
 
     public String nombre() {
@@ -62,7 +75,7 @@ public class SolicitudRegistrarMascota {
     }
 
     public String tamaño() {
-        return this.tamaño;
+        return this.tamanio;
     }
 
     public String descripcionFisica() {
@@ -71,6 +84,14 @@ public class SolicitudRegistrarMascota {
 
     public List<String> fotos() {
         return this.fotos;
+    }
+
+    public List<String> caracteristicasPreguntas() {
+        return this.caracteristicasPreguntas;
+    }
+
+    public List<String> caracteristicasRespuestas() {
+        return this.caracteristicasRespuestas;
     }
 
     public Map<String, String> caracteristicas() {

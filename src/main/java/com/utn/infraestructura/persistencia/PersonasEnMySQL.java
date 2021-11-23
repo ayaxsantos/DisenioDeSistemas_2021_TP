@@ -19,7 +19,7 @@ public class PersonasEnMySQL implements Personas {
     }
 
     @Override
-    public Persona obtenerPorNumeroDocumento(int numeroDocumento) {
+    public Persona obtenerPorNumeroDocumento(int numeroDocumento, String tipoDocumento) {
         EntityManagerHelper.beginTransaction();
 
         Persona persona = (Persona) EntityManagerHelper.getEntityManager()
