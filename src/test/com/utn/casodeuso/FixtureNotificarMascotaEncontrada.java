@@ -37,6 +37,7 @@ public class FixtureNotificarMascotaEncontrada {
     }};
 
     protected static final int numeroDocumentoDueño = 11111;
+    protected static final TipoDocumento tipoDocumentoDueño = TipoDocumento.DNI;
     private static final String nombreDueño = "Camila";
     private static final String apellidoDueño = "Berro";
     private static final LocalDate fechaNacimientoDueño = LocalDate.now();
@@ -54,6 +55,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static final boolean noEsPreferido = false;
 
     protected static final int numeroDocumentoRescatista = 22222;
+    protected static final TipoDocumento tipoDocumentoRescatista = TipoDocumento.DNI;
     private static final String nombreRescatista = "Celeste";
     private static final String apellidoRescatista = "Fernandez";
     private static final LocalDate fechaNacimientoRescatista = LocalDate.now();

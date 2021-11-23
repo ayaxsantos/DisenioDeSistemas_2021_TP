@@ -6,7 +6,6 @@ import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.persona.Persona;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -20,10 +19,10 @@ public class RegistrarMascota {
         this.personas = personas;
     }
 
-    public void ejecutar(int documentoDueño, String nombre, String apodo, int edad, String tipoAnimal, String sexo,
+    public void ejecutar(int documentoDueño, String tipoDocumento, String nombre, String apodo, int edad, String tipoAnimal, String sexo,
                          String tamaño, String descripcionFisica, List<String> fotos,
                          Map<String, String> caracteristicas) {
-        Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño);
+        Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño, tipoDocumento);
 
         Mascota mascota = new Mascota(nombre, apodo, edad, Animal.buscar(tipoAnimal), Sexo.buscar(sexo),
                 Tamaño.buscar(tamaño), descripcionFisica);

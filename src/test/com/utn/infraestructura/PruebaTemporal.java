@@ -1,6 +1,5 @@
 package com.utn.infraestructura;
 
-import com.utn.casodeuso.dueño.RegistrarMascota;
 import com.utn.dominio.Personas;
 import com.utn.dominio.Usuarios;
 import com.utn.dominio.Voluntarios;
@@ -9,7 +8,6 @@ import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.notificacion.estrategia.Email;
@@ -33,7 +31,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PruebaTemporal {
 
@@ -63,7 +60,7 @@ public class PruebaTemporal {
 
     @Test
     public void se_rescata_persona_de_db(){
-        Persona persona = personas.obtenerPorNumeroDocumento(38554127);
+        Persona persona = personas.obtenerPorNumeroDocumento(38554127, TipoDocumento.DNI.getDescripcion());
 
         System.out.println("Hola");
 
@@ -157,7 +154,7 @@ public class PruebaTemporal {
 
     @Test
     public void se_actualiza_persona(){
-        Persona persona = personas.obtenerPorNumeroDocumento(38554127);
+        Persona persona = personas.obtenerPorNumeroDocumento(38554127, TipoDocumento.DNI.getDescripcion());
         persona.getUsuario().setNombreUsuario("InserteUsuarioGenerico");
         persona.setPreferencia(new Preferencia(Sexo.MACHO,Animal.GATO,Tamaño.GRANDE));
         persona.setEsAdoptante(true);

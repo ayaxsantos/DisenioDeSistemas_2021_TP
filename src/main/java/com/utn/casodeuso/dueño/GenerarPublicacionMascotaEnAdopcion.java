@@ -6,7 +6,6 @@ import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class GenerarPublicacionMascotaEnAdopcion {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(int numeroDocumentoDueño, String nombreMascota, String nombreOrganizacion, List<String> respuestasMascota) {
-        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño);
+    public void ejecutar(int numeroDocumentoDueño, String tipoDocumento, String nombreMascota, String nombreOrganizacion, List<String> respuestasMascota) {
+        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño, tipoDocumento);
         Mascota mascotaDeDueño = personaDueño.buscarMascota(nombreMascota);
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
 
