@@ -1,10 +1,67 @@
+<style>
+
+    .recuadroPrincipal{
+        background-color: lightgreen;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        border-radius: 20px;
+        padding: 100px 250px 100px 100px;
+    }
+
+    .formulario{
+        background-color: #ffccb3;
+    }
+
+
+
+
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta name = "viewport" content = "width+device-width, initial-scale=1">
     <title>Title</title>
 </head>
 <body>
+    <div class = "recuadroPrincipal">
+
+        <div class = "tituloFormulario">
+
+            <div class = "tituloFormulario">
+                <h3 class = "">Organizacion x</h3>
+
+                <label>Mascota Elegida:
+                    <select v-model="MascotaElegida" @change="cambioMascota()">
+                        <option selected disabled>Selecciona una opción</option>
+                        <option v-for="mascota in mascotas" v-bind:value="mascota">{{ mascota }}</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class = "formulario">
+            <form>
+                <div class = "subtitulo">
+                    <h4>
+                        Completar los siguientes campos:
+                    </h4>
+                </div>
+                <div class = "tablaDeValores">
+
+
+
+
+                </div>
+            </form>
+            </div>
+    </div>
+
 
 </body>
 </html>
