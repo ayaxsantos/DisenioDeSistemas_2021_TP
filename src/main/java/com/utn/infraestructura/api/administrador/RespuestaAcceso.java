@@ -1,7 +1,10 @@
 package com.utn.infraestructura.api.administrador;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.utn.dominio.organizacion.Organizacion;
+import com.utn.dominio.foto.CalidadFoto;
+import com.utn.dominio.foto.TamañoFoto;
+
+import java.util.List;
 
 public class RespuestaAcceso
 {
@@ -9,7 +12,24 @@ public class RespuestaAcceso
     private String nombreUsuario;
 
     @JsonProperty
-    private Organizacion unaOrganizacion;
+    private List<String> usuariosSinPrivilegios;
+
+    @JsonProperty
+    private CalidadFoto calidadFoto;
+
+    @JsonProperty
+    private TamañoFoto tamañoFoto;
+
+    @JsonProperty
+    private List<String> caracteristicas;
+
+    public List<String> getUsuariosSinPrivilegios() {
+        return usuariosSinPrivilegios;
+    }
+
+    public void setUsuariosSinPrivilegios(List<String> usuariosSinPrivilegios) {
+        this.usuariosSinPrivilegios = usuariosSinPrivilegios;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -19,11 +39,27 @@ public class RespuestaAcceso
         this.nombreUsuario = nombreUsuario;
     }
 
-    public Organizacion getUnaOrganizacion() {
-        return unaOrganizacion;
+    public CalidadFoto getCalidadFoto() {
+        return calidadFoto;
     }
 
-    public void setUnaOrganizacion(Organizacion unaOrganizacion) {
-        this.unaOrganizacion = unaOrganizacion;
+    public void setCalidadFoto(CalidadFoto calidadFoto) {
+        this.calidadFoto = calidadFoto;
+    }
+
+    public TamañoFoto getTamañoFoto() {
+        return tamañoFoto;
+    }
+
+    public void setTamañoFoto(TamañoFoto tamañoFoto) {
+        this.tamañoFoto = tamañoFoto;
+    }
+
+    public List<String> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(List<String> caracteristicas) {
+        this.caracteristicas = caracteristicas;
     }
 }

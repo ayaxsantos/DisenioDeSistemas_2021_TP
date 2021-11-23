@@ -16,12 +16,13 @@ var appRegistrarMascotaVue = new Vue({
     },
     methods: {
         cambioOrg() {
+            this.caracteristicas = [];
             fetch("http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/caracteristicas")
                 .then(response => response.json())
                 .then(unasCaracteristicas =>
                     unasCaracteristicas.forEach(caracteristica =>
                         this.caracteristicas.push({ name: caracteristica, value: "" }))
-            )
+                )
         },
         enviarDatos(){
 

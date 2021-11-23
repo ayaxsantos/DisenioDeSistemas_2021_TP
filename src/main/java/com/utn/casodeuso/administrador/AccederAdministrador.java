@@ -23,7 +23,6 @@ public class AccederAdministrador
     public Organizacion ejecutar(String nombreUsuario, String nombreOrganizacion)
     {
         Organizacion unaOrganizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
-
         List<Administrador> unosAdm = unaOrganizacion.getAdministradores();
 
         Administrador unAdministrador = unosAdm.stream().filter(

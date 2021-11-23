@@ -173,4 +173,7 @@ public class Organizacion extends EntidadPersistente {
         return caracteristicas;
     }
 
+    public Set<Persona> getPersonas() {
+        return personas;
+    }
 }

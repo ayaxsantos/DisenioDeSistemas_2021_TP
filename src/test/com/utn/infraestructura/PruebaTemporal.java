@@ -90,7 +90,7 @@ public class PruebaTemporal {
         Usuario usuarioVolTest = new Usuario("volOrg", "324ae41gg");
         Usuario usuarioAdminTest = new Usuario("adminOrg", "32ad965min");
 
-        Organizacion organizacionTest = new Organizacion("PatitasJugetonas", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
+        Organizacion organizacionTest = new Organizacion("Patitas Juguetonas", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
         Voluntario voluntarioTest = new Voluntario(usuarioVolTest, organizacionTest);
         Administrador administradorTest = new Administrador(usuarioAdminTest,organizacionTest);
 
@@ -147,9 +147,12 @@ public class PruebaTemporal {
         OrganizacionesEnMySQL per = new OrganizacionesEnMySQL();
 
         Direccion domicilioOrgTest = new Direccion(5447.358, 5648.74);
-        Organizacion organizacionTest = new Organizacion("PatitasJugetonas", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
+        Organizacion organizacionTest = new Organizacion("Peluditos al rescate", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
+        Organizacion organizacionTest2 = new Organizacion("Animalitos en espera", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
+
 
         per.guardar(organizacionTest);
+        per.guardar(organizacionTest2);
     }
 
     @Test
