@@ -33,15 +33,15 @@ public class ControladorAdministrador
         this.accederAdministrador = new AccederAdministrador(new AdministradoresEnMySQL(),new OrganizacionesEnMySQL());
     }
 
-    @GetMapping("organizacion/panelAdministracion")
-    public ResponseEntity acceder(@RequestBody SolicitudAcceder solicitudAcceder, @RequestHeader("Authorization") String idSesion)
+    @GetMapping("organizacion/{nombreOrganizacion}/panelAdministracion")
+    public ResponseEntity acceder(@PathVariable("nombreOrganizacion") String nombreOrganizacion,
+                                  @RequestHeader("Authorization") String idSesion)
     {
         try {
 
             Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
 
-            Organizacion unaOrganizacion = accederAdministrador.ejecutar(unUsuario.nombreUsuario(),
-                    solicitudAcceder.getNombreOrganizacion());
+            Organizacion unaOrganizacion = accederAdministrador.ejecutar(unUsuario.nombreUsuario(), nombreOrganizacion);
 
             CalidadFoto unaCalidad = unaOrganizacion.calidadFoto();
             TamañoFoto unTamaño = unaOrganizacion.tamañoFoto();

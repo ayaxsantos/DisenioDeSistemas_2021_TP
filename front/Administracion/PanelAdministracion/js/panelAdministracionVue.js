@@ -1,4 +1,4 @@
-var appPanelAdmin = new Vue({
+var appPanelAdministracionVue = new Vue({
     el: '#PanelAdministracionVue',
     data: {
         orgElegida: '',
@@ -9,17 +9,23 @@ var appPanelAdmin = new Vue({
         tamañoFoto: '',
         caracteristicas:[]
     },
-    method:
+    methods:
         {
             solicitarOrg() {
-                fetch('localhost:8080/organizacion/panelAdministracion')
-                    .then(response => response.json()).then(json =>{
-                    this.nombreUsuario = json.nombreUsuario;
-                    this.usuariosSinPrivilegios = json.usuariosSinPrivilegios;
-                    this.calidadFoto = json.calidadFoto;
-                    this.tamañoFoto = json.tamañoFoto;
-                    this.caracteristicas = json.caracteristicas;
+
+                var idSesion = localStorage.getItem("IDSESION") // Recuperamos el ID de sesion...
+                fetch("http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/panelAdministracion", {
+                    headers: {
+                        "Authorization": idSesion // Enviamos el ID de sesion como header...
+                    }
                 })
+                    .then(response => response.json()).then(infoPanel => {
+                        this.nombreUsuario = infoPanel.nombreUsuario;
+                        this.usuariosSinPrivilegios = infoPanel.usuariosSinPrivilegios;
+                        this.calidadFoto = infoPanel.calidadFoto;
+                        this.tamañoFoto = infoPanel.tamañoFoto;
+                        this.caracteristicas = infoPanel.caracteristicas;
+                    })
             }
         },
     created() {
