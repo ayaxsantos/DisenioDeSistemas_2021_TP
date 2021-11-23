@@ -2,10 +2,14 @@ package com.utn.infraestructura.api.dueño;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SolicitudRegistrarMascota {
+
+    @JsonProperty
+    private String organizacion;
 
     @JsonProperty
     private int numeroDocumento;
@@ -38,7 +42,7 @@ public class SolicitudRegistrarMascota {
     private List<String> fotos;
 
     @JsonProperty
-    private Map<String, String> caracteristicas;
+    private HashMap<String, String> caracteristicas;
 
     @JsonProperty
     private List<String> caracteristicasPreguntas;
@@ -94,8 +98,15 @@ public class SolicitudRegistrarMascota {
         return this.caracteristicasRespuestas;
     }
 
-    public Map<String, String> caracteristicas() {
+    public HashMap<String, String> caracteristicas() {
         return this.caracteristicas;
     }
 
+    public String organizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(String organizacion) {
+        this.organizacion = organizacion;
+    }
 }

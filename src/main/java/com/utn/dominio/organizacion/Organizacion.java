@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.utn.dominio.EntidadPersistente;
+import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.UsuarioNoEsAdministradorException;
 import com.utn.dominio.foto.CalidadFoto;
@@ -16,6 +17,7 @@ import com.utn.dominio.persona.Persona;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
+import com.utn.infraestructura.normalizador.NormalizadorGraphics2D;
 
 import javax.persistence.*;
 
@@ -40,6 +42,10 @@ public class Organizacion extends EntidadPersistente {
 
     @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL)
     private List<Administrador> administradores = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id")
+    private List<Mascota> mascotas = new ArrayList<>();
 
     @ManyToMany
     private Set<Persona> personas = new HashSet<>();
@@ -77,6 +83,7 @@ public class Organizacion extends EntidadPersistente {
         this.publicacionesMascotaEncontrada = new ArrayList<>();
         this.publicacionesMascotaEnAdopcion = new ArrayList<>();
         this.publicacionesBusquedaAdopcion = new ArrayList<>();
+        this.mascotas = new ArrayList<>();
     }
 
     public Organizacion() {
@@ -176,4 +183,21 @@ public class Organizacion extends EntidadPersistente {
     public Set<Persona> getPersonas() {
         return personas;
     }
+
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
+    }
+
+    public void añadirMascota(Mascota unaMascota) {
+        this.mascotas.add(unaMascota);
+    }
+
+    public void eliminarMascota(Mascota unaMascota) {
+        this.mascotas.remove(unaMascota);
+    }
+
 }

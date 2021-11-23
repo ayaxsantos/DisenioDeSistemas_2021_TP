@@ -30,4 +30,36 @@ public class PublicacionMascotaEncontrada extends Publicacion {
     public PublicacionMascotaEncontrada() {
 
     }
+
+    public Direccion getUbicacionMascota() {
+        return ubicacionMascota;
+    }
+
+    public void setUbicacionMascota(Direccion ubicacionMascota) {
+        this.ubicacionMascota = ubicacionMascota;
+    }
+
+    public String getEstadoMascota() {
+        return estadoMascota;
+    }
+
+    public void setEstadoMascota(String estadoMascota) {
+        this.estadoMascota = estadoMascota;
+    }
+
+    public List<String> getFotosMascota() {
+        return fotosMascota;
+    }
+
+    public void setFotosMascota(List<String> fotosMascota) {
+        this.fotosMascota = fotosMascota;
+    }
+
+    public void agregarFoto(String foto) {
+        this.fotosMascota.add(foto);
+    }
+
+    public void eliminarFoto(String foto) {
+        this.fotosMascota.remove(foto);
+    }
 }

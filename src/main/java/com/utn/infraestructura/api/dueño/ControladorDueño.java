@@ -9,9 +9,10 @@ import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
@@ -24,17 +25,14 @@ public class ControladorDueño {
     public ControladorDueño() {
         Personas personas = new PersonasEnMySQL();
         Organizaciones organizaciones = new OrganizacionesEnMySQL();
-        this.registrarMascota = new RegistrarMascota(personas);
+        this.registrarMascota = new RegistrarMascota(personas, organizaciones);
         this.generarPublicacionMascotaEnAdopcion = new GenerarPublicacionMascotaEnAdopcion(personas, organizaciones);
         this.confirmarMascotaEncontrada = new ConfirmarMascotaEncontrada(personas);
     }
 
     @PostMapping("registrar/mascota")
     public ResponseEntity<Void> registrarMascota(@RequestBody SolicitudRegistrarMascota solicitud) {
-  /*      HashMap<String, String> caracteristicas = new HashMap<>();
-        solicitud.caracteristicasPreguntas().forEach(caracteristica -> caracteristicas.put(caracteristica, caracteristica.valor()));*/
-        registrarMascota.ejecutar(
-                solicitud.numeroDocumento(), solicitud.tipoDocumento(), solicitud.nombre(), solicitud.apodo(),
+        registrarMascota.ejecutar(solicitud.organizacion(), solicitud.numeroDocumento(), solicitud.tipoDocumento(), solicitud.nombre(), solicitud.apodo(),
                 solicitud.edad(), solicitud.tipoAnimal(), solicitud.sexo(),
                 solicitud.tamaño(), solicitud.descripcionFisica(),
                 solicitud.fotos(), solicitud.caracteristicas());

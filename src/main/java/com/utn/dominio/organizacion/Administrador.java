@@ -42,8 +42,9 @@ public class Administrador extends EntidadPersistente {
         organizacion.quitarCaracteristica(caracteristica);
     }
 
-    public Administrador darAltaNuevoAdministrador(Usuario usuario, Organizacion organizacion) {
-        return new Administrador(usuario, organizacion);
+    public void darAltaNuevoAdministrador(Usuario usuario) {
+        Administrador adminNuevo = new Administrador(usuario, this.organizacion);
+        this.organizacion.añadirAdministrador(adminNuevo);
     }
 
     public Usuario getUsuario() {

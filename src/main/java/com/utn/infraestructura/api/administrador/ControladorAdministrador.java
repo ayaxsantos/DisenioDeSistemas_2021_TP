@@ -2,7 +2,6 @@ package com.utn.infraestructura.api.administrador;
 
 import com.utn.casodeuso.administrador.AccederAdministrador;
 import com.utn.casodeuso.organizacion.ObtenerTodasLasOrganizaciones;
-import com.utn.casodeuso.usuario.ObtenerOrganizaciones;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.excepcion.UsuarioNoEsAdministradorException;

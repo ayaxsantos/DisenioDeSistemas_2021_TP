@@ -4,7 +4,6 @@ import com.utn.casodeuso.rescatista.BuscarHogarTransito;
 import com.utn.casodeuso.usuario.CerrarSesion;
 import com.utn.casodeuso.usuario.IniciarSesion;
 
-import com.utn.casodeuso.usuario.ObtenerOrganizaciones;
 import com.utn.casodeuso.usuario.Registrar;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.ContraseñaDebilException;
@@ -40,7 +39,6 @@ public class ControladorUsuario {
 
     private final IniciarSesion iniciarSesion;
     private final CerrarSesion cerrarSesion;
-    private final ObtenerOrganizaciones obtenerOrganizaciones;
     private final Registrar registrar;
     private final BuscarHogarTransito buscarHogarTransito;
 
@@ -61,7 +59,6 @@ public class ControladorUsuario {
 
         this.iniciarSesion = new IniciarSesion(usuariosEnMySQL);
         this.cerrarSesion = new CerrarSesion(usuariosEnMySQL);
-        this.obtenerOrganizaciones = new ObtenerOrganizaciones(usuariosEnMySQL);
         this.registrar = new Registrar(usuariosEnMySQL, organizacionesEnMySQL, personasEnMySQL);
         this.buscarHogarTransito = new BuscarHogarTransito(personasEnMySQL, mascotasEnMySQL, hogares, validaciones);
     }
@@ -90,16 +87,6 @@ public class ControladorUsuario {
         sesionManager.eliminar(idSesion);
 
         return ResponseEntity.status(200).build();
-    }
-
-
-    @GetMapping("usuarios/organizaciones")
-    public ResponseEntity<List<Organizacion>> obtenerOrganizacionesUsuario(
-            @RequestBody SolicitudObtenerOrganizaciones solicitudObtenerOrganizaciones)
-    {
-        List<Organizacion> organizacionesUsuario = obtenerOrganizaciones.ejecutar(solicitudObtenerOrganizaciones
-                .getNombreUsuario());
-        return ResponseEntity.status(200).body(organizacionesUsuario);
     }
 
     //TODO: Despues de registrar usuario, pedimos que vuelva a loguear??

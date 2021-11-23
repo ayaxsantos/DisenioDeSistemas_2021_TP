@@ -1,6 +1,7 @@
 package com.utn.dominio.animal;
 
 import com.utn.dominio.EntidadPersistente;
+import com.utn.infraestructura.normalizador.NormalizadorGraphics2D;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -33,7 +34,8 @@ public class Mascota extends EntidadPersistente {
     @Column
     private String descripcionFisica;
 
-    @ElementCollection
+    @ElementCollection()
+    @Column(columnDefinition = "MEDIUMTEXT")
     private List<String> fotosNormalizadas;
 
     @ElementCollection

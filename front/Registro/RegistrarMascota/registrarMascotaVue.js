@@ -1,10 +1,5 @@
-/*
 const tipoDocumento = sessionStorage.getItem("tipoDocumento");
 const numeroDocumento = sessionStorage.getItem("numeroDocumento");
-*/
-
-const tipoDocumento = "DNI";
-const numeroDocumento = 38554127;
 
 var appRegistrarMascotaVue = new Vue({
     el: '#RegistrarMascotaVue',
@@ -23,7 +18,6 @@ var appRegistrarMascotaVue = new Vue({
         tiposAnimal: [],
         sexosAnimal: [],
         tamaniosAnimal: [],
-        caracteristicasTest : new Map ()
     },
     methods: {
         cambioOrg() {
@@ -32,16 +26,11 @@ var appRegistrarMascotaVue = new Vue({
                 .then(response => response.json())
                 .then(unasCaracteristicas =>
                     unasCaracteristicas.forEach(caracteristica =>
-<<<<<<< HEAD
-                        this.caracteristicas.push({ name: caracteristica, value: "" }))
-=======
-                        this.caracteristicas.push({name: caracteristica, value: ""}))
->>>>>>> ba3b0a8030c7ea3ffb96c9edbe1b0d323a2067fb
-                )
+                        this.caracteristicas.push({name: caracteristica, value: ""})));
         },
         enviarDatos() {
-            this.caracteristicas.forEach(caracteristica => this.caracteristicasTest.set(caracteristica.name, caracteristica.value))
             var solicitudRegistroMascota = {
+                organizacion: this.orgElegida,
                 numeroDocumento: numeroDocumento,
                 tipoDocumento: tipoDocumento,
                 nombre: this.nombre,
@@ -52,10 +41,11 @@ var appRegistrarMascotaVue = new Vue({
                 tamanio: this.tamanioAnimalSeleccionado,
                 descripcionFisica: this.descripcionFisica,
                 fotos: this.fotos,
-                caracteristicasTest: this.caracteristicasTest,
-                caracteristicasPreguntas: this.caracteristicas.map(caracteristica => caracteristica.name),
-                caracteristicasRespuestas: this.caracteristicas.map(caracteristica => caracteristica.value)
+                caracteristicas: {}
             }
+            var caracteristicasPreguntas = this.caracteristicas.map(caracteristica => caracteristica.name);
+            var caracteristicasRespuestas = this.caracteristicas.map(caracteristica => caracteristica.value);
+            caracteristicasPreguntas.forEach((key, i) => solicitudRegistroMascota.caracteristicas[key] = caracteristicasRespuestas[i]);
             console.log(solicitudRegistroMascota);
             fetch("http://localhost:8080/registrar/mascota", {
                 method: "POST",
@@ -68,6 +58,7 @@ var appRegistrarMascotaVue = new Vue({
                 if (response.status >= 400) {
                     alert("Hubo un error en el API")
                 } else {
+                    console.log(response);
                     return response.json()
                 }
             })
@@ -110,81 +101,3 @@ var appRegistrarMascotaVue = new Vue({
         })
     }
 })
-
-
-/*var appOrganizacionesVue = new Vue({
-    el: '#OrganizacionesVue',
-    data: {
-        orgElegida: 'PatitasJugetonas',
-        organizaciones: [],
-        caracteristicas: []
-    },
-    methods: {
-        cambioOrg() {
-            fetch("http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/caracteristicas")
-                .then(response => response.json()).then(json => {
-                this.caracteristicas = json;
-            })
-        }
-    },
-    created() {
-        fetch('http://localhost:8080/organizaciones/nombres')
-            .then(response => response.json()).then(json => {
-            this.organizaciones = json;
-        })
-    }
-})
-
-var appMascotaRadioVue = new Vue({
-    el: '#MascotaRadioVue',
-    data: {
-        tipoAnimalSeleccionado: '',
-        sexoAnimalSeleccionado: '',
-        tamanioAnimalSeleccionado: '',
-        tiposAnimal: [],
-        sexosAnimal: [],
-        tamaniosAnimal: []
-    },
-    created() {
-        fetch('http://localhost:8080/datos/mascota/animal')
-            .then(response => response.json()).then(json => {
-            this.tiposAnimal = json;
-        })
-        fetch('http://localhost:8080/datos/mascota/sexo')
-            .then(response => response.json()).then(json => {
-            this.sexosAnimal = json;
-        })
-        fetch('http://localhost:8080/datos/mascota/tamanio')
-            .then(response => response.json()).then(json => {
-            this.tamaniosAnimal = json;
-        })
-
-
-    }
-})*/
-/*
-
-var appRegistrarMascota = new Vue(
-    {
-        el: '#RegistrarMascotaVue',
-        data: {
-            nombre: '',
-            apodo: '',
-            edad: '',
-            respuestasCaracteristicas: []
-        },
-)
-
-
-sessionStorage.getItem("TipoDocumento", datos.tipoDocumento);
-sessionStorage.getItem("NumeroDocumento", datos.numeroDocumento);
-*/
-
-/*
-
-then(datos => {
-    localStorage.setItem("IDSESION", datos.idSesion)
-    if(datos.idSesion == "-1")
-        alert("Usuario o contraseña invalido");
-    else window.location.href = "../Home/index.html";
-})*/

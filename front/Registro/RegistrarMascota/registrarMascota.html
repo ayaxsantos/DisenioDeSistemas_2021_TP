@@ -66,57 +66,6 @@
     </table>
     <input type="submit" value="Registrar"  v-on:click="enviarDatos">
 </div>
-<!--
-
-<form>
-    <label>Nombre<input type="text" placeholder></label>
-    <label>Apodo<input type="text" placeholder></label>
-    <label>Edad<input type="number" placeholder></label>
-
-    <div id="MascotaRadioVue" style="text-transform: lowercase">
-        <label v-for="tipoAnimal in tiposAnimal">
-            <input type="radio" v-bind:value="tipoAnimal" name="tipoAnimalRadio" v-model="tipoAnimalSeleccionado">
-            {{tipoAnimal}}</label>
-        <label v-for="sexoAnimal in sexosAnimal" >
-            <input type="radio" v-bind:value="sexoAnimal" name="sexoAnimalRadio" v-model="sexoAnimalSeleccionado">
-            {{sexoAnimal}}</label>
-
-        <label v-for="tamanioAnimal in tamaniosAnimal">
-            <input type="radio" v-bind:value="tamanioAnimal" name="tamanioAnimalRadio" v-model="tamanioAnimalSeleccionado">
-            {{tamanioAnimal}}</label>
-        <br><label>Los selecionados son: {{  tipoAnimalSeleccionado  }} || {{  sexoAnimalSeleccionado  }} || {{  tamanioAnimalSeleccionado  }}</label><br>
-
-    </div>
-    <label>Descripción física de la mascota<textarea></textarea></label>
-    <label>Fotos de tu mascota<input type="file" accept="image/png, image/jpg, image/jpeg" multiple></label>
-
-    <div id="OrganizacionesVue">
-        <label>Organizaciones actuales
-            <select v-model="orgElegida" @change="cambioOrg()">
-                <option selected disabled>Selecciona una opción</option>
-                <option v-for="organizacion in organizaciones" v-bind:value="organizacion">{{ organizacion }}</option>
-            </select>
-        </label>
-
-        <span>Seleccionado: {{ orgElegida }}</span>
-
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>Característica</th>
-                <th>Respuesta</th>
-            </tr>
-            <tr v-for="caracteristica in caracteristicas">
-                <td>{{ caracteristica }}</td>
-                <td><input type="text" placeholder=""></td>
-            </tr>
-        </table>
-    </div>
-
-
-    <input type="submit" value="Registrar" v-on:click="appRegistrarMascota">
--->
-
-
 </form>
 
 

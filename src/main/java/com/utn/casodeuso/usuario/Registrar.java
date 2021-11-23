@@ -35,8 +35,6 @@ public class Registrar
             Contacto unContacto = new Contacto(nombrePersona, apellidoPerson, telefono, correoElectronico);
             Persona unaPersona = new Persona(unContacto, null, null, null, null, unUsuario,0 );
             
-            unUsuario.añadirOrganizacion(organizacion);
-            
             personas.guardar(unaPersona);
         }
     }

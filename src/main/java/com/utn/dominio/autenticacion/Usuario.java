@@ -20,6 +20,64 @@ public class Usuario extends EntidadPersistente {
     @Column
     private String contraseña;
 
+    @Transient
+    private boolean estaLogueado = false;
+
+    public Usuario() {}
+
+    public Usuario(String usuario, String contraseña) {
+        ValidadorContraseña.ejecutar(contraseña);
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+    }
+
+    public void iniciarSesion(String usuario, String contraseña) {
+        if(!this.usuario.equals(usuario) || !this.contraseña.equals(contraseña))
+            throw new CredencialesInvalidasException();
+        this.estaLogueado = true;
+    }
+
+    public void cerrarSesion() {
+        this.estaLogueado = false;
+    }
+
+    public void setNombreUsuario(String nombreUsuario)
+    {
+        this.usuario = nombreUsuario;
+    }
+
+    public String nombreUsuario() {
+        return this.usuario;
+    }
+
+    public boolean estaLogueado() {
+        return estaLogueado;
+    }
+
+    public void setEstaLogueado(boolean estaLogueado) {
+        this.estaLogueado = estaLogueado;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+}
+/*
+@Entity
+@Table(name = "usuario")
+public class Usuario extends EntidadPersistente {
+
+    @Column
+    private String usuario;
+
+    @Column
+    private String contraseña;
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Organizacion> organizacionesPertenecientes;
 
@@ -96,4 +154,4 @@ public class Usuario extends EntidadPersistente {
         return usuario;
     }
 
-}
+}*/
