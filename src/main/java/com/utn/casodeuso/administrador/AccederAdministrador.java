@@ -8,7 +8,7 @@ import com.utn.dominio.organizacion.Organizacion;
 
 public class AccederAdministrador
 {
-    private final Administradores administradores;
+    protected final Administradores administradores;
     protected final Organizaciones organizaciones;
 
     public AccederAdministrador(Administradores unosAdministradores, Organizaciones unasOrganizaciones)

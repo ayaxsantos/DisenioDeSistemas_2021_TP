@@ -53,12 +53,17 @@
                                     <table class="table table-bordered table-striped" style="background-color:#FFFFFF">
                                         <tr>
                                             <th> Administradores </th>
-                                        <tr v-for="usuario in usuariosAdministradores">
-                                            <td>{{ usuario }}</td>
+                                        </tr>
+                                        <tr v-for="usuario in usuariosAdmins">
+                                            <td> {{ usuario }} </td>
+
+                                                <div v-if="flagIngresoAdmin">
+                                                    <input v-model="usuarioIngresado" id="usuarioIngresado" required>
+                                                    <button type="submit" class="btn mb-2" @click="guardarValorAdmin()" style="background-color: rgb(204,204,204); border: 2px solid rgb(70,70,70);">Guardar</button><br>
+                                                </div>
                                         </tr>
                                     </table>
-
-                                    <button type="submit" class="btn mb-2" style="background-color: rgb(204,204,204); border: 2px solid rgb(70,70,70);">Generar usuario administrador</button><br>
+                                    <button type="submit" @click="flagIngresoAdmin = true" class="btn mb-2" style="background-color: rgb(204,204,204); border: 2px solid rgb(70,70,70);">Generar usuario administrador</button><br>
 
                                 </div>
 
@@ -81,19 +86,22 @@
                                 <div class="text-center">
                                     <form>
                                         <label>Tamaño Foto:
-                                            <select class="btn dropdown-toggle" model="tamanioElegido" :required="true" style="background-color: rgb(204,204,204); border: 2px solid rgb(70,70,70);">
+                                            <select class="btn dropdown-toggle" v-model="tamanioElegido" :required="true" style="background-color: rgb(204,204,204); border: 2px solid rgb(70,70,70);">
                                                 <option>{{tamanioElegido}}</option>
-                                                <option v-for="tamanio in tamaniosFotos" v-if="tamanio != tamanioElegido" v-bind:value="tamanio">{{tamanio}}</option>
+                                                <option v-for="tamanio in tamaniosFotos" v-if="tamanio != tamanioElegido">{{tamanio}}</option>
                                             </select>
                                         </label>
 
                                         <label>Calidad Foto:
                                             <select class="btn dropdown-toggle" v-model="calidadElegida" :required="true" style="background-color: rgb(204,204,204); border: 2px solid rgb(70,70,70);">
                                                 <option>{{calidadElegida}}</option>
-                                                <option v-for="calidad in calidadesFotos" v-if="calidad != calidadElegida" v-bind:value="calidad">{{calidad}}</option>
+                                                <option v-for="calidad in calidadesFotos" v-if="calidad != calidadElegida">{{calidad}}</option>
                                             </select>
                                         </label>
                                     </form>
+
+                                    <button type="submit" class="btn mb-2" @click="actualizarDetalleFotos()" style="background-color: rgb(204,204,204); border: 2px solid rgb(70,70,70);">Guardar</button><br>
+
 
                                 </div>
                             </div>

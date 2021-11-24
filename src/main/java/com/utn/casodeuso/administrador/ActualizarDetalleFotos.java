@@ -18,5 +18,6 @@ public class ActualizarDetalleFotos extends AccederAdministrador
         Organizacion unaOrganizacion = this.ejecutar(nombreUsuario,nombreOrganizacion);
         unaOrganizacion.tamañoFoto(unTamaño);
         unaOrganizacion.calidadFoto(unaCalidad);
+        organizaciones.guardar(unaOrganizacion);
     }
 }

@@ -6,7 +6,7 @@ var appPanelAdministracionVue = new Vue({
         orgElegida: '',
         organizaciones: [],
         nombreUsuario: '',
-        usuariosAdministradores: [],
+        usuariosAdmins: [],
         calidadFoto: '',
         tamanioFoto: '',
         caracteristicas:[],
@@ -14,12 +14,14 @@ var appPanelAdministracionVue = new Vue({
         tamaniosFotos: [],
         calidadElegida: '',
         tamanioElegido: '',
-        caracteristicaIngresada:''
+        caracteristicaIngresada:'',
+        usuarioIngresado:'',
+        flagIngresoAdmin: false
     },
     methods:
         {
             solicitarOrg: function() {
-                this.usuariosAdministradores = []
+                this.usuariosAdmins = []
                 this.caracteristicas = []
                 this.calidadElegida = ''
                 this.tamanioElegido= ''
@@ -30,7 +32,7 @@ var appPanelAdministracionVue = new Vue({
                 })
                     .then(response => response.json()).then(infoPanel => {
                         this.nombreUsuario = infoPanel.nombreUsuario
-                        this.usuariosAdministradores = infoPanel.usuariosAdministradores
+                        this.usuariosAdmins = infoPanel.usuariosAdministradores
                         this.calidadFoto = infoPanel.calidadFoto
                         this.tamanioFoto = infoPanel.tamañoFoto
                         infoPanel.caracteristicas.forEach(
@@ -40,6 +42,19 @@ var appPanelAdministracionVue = new Vue({
                         this.tamanioElegido = this.tamanioFoto
                     }
                 )
+            },
+            guardarValorAdmin: function()
+            {
+                this.usuariosAdmins.push(this.usuarioIngresado)
+                this.actualizarUsuariosAdmins()
+            },
+            actualizarUsuariosAdmins()
+            {
+                var response = {
+                    usuariosAdministradores: this.usuariosAdmins
+                }
+                console.log(JSON.stringify(response))
+                this.realizarActualizacion(response,"http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/actualizarAdministradores")
             },
             agregarFilaCaracteristicas: function(){
                 if(this.caracteristicas.length != 0)
@@ -54,6 +69,7 @@ var appPanelAdministracionVue = new Vue({
                 this.caracteristicas[indice].flagIngresoCar = true
                 this.actualizarCaracteristicas()
             },
+
             actualizarCaracteristicas: function()
             {
                 var response = {
@@ -67,8 +83,11 @@ var appPanelAdministracionVue = new Vue({
             actualizarDetalleFotos: function()
             {
                 var response = {
-                    //Falta response para fotos!!
+                    calidadFoto: this.calidadElegida,
+                    tamañoFoto: this.tamanioElegido
                 }
+                console.log(JSON.stringify(response))
+                this.realizarActualizacion(response,"http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/actualizarDetalleFotos")
             },
             realizarActualizacion: function(response,input)
             {
