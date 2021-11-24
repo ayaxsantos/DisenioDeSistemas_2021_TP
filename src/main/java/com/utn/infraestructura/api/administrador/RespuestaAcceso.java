@@ -12,7 +12,7 @@ public class RespuestaAcceso
     private String nombreUsuario;
 
     @JsonProperty
-    private List<String> usuariosSinPrivilegios;
+    private List<String> usuariosAdministradores;
 
     @JsonProperty
     private CalidadFoto calidadFoto;
@@ -23,12 +23,12 @@ public class RespuestaAcceso
     @JsonProperty
     private List<String> caracteristicas;
 
-    public List<String> getUsuariosSinPrivilegios() {
-        return usuariosSinPrivilegios;
+    public List<String> getUsuariosAdministradores() {
+        return usuariosAdministradores;
     }
 
-    public void setUsuariosSinPrivilegios(List<String> usuariosSinPrivilegios) {
-        this.usuariosSinPrivilegios = usuariosSinPrivilegios;
+    public void setUsuariosAdministradores(List<String> usuariosAdministradores) {
+        this.usuariosAdministradores = usuariosAdministradores;
     }
 
     public String getNombreUsuario() {

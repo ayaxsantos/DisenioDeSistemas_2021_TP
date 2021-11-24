@@ -45,14 +45,14 @@ public class ControladorAdministrador
             CalidadFoto unaCalidad = unaOrganizacion.calidadFoto();
             TamañoFoto unTamaño = unaOrganizacion.tamañoFoto();
 
-            List<String> unosUsuarios = unaOrganizacion.getPersonas().stream().map(
-                    unaPersona -> unaPersona.getUsuario().nombreUsuario()
+            List<String> unosUsuariosAdmins = unaOrganizacion.getAdministradores().stream().map(
+                    unAdmin -> unAdmin.getUsuario().nombreUsuario()
             ).collect(Collectors.toList());
 
             List<String> unasCaracteristicas = unaOrganizacion.getCaracteristicas();
 
             RespuestaAcceso unaRespuesta = new RespuestaAcceso();
-            unaRespuesta.setUsuariosSinPrivilegios(unosUsuarios);
+            unaRespuesta.setUsuariosAdministradores(unosUsuariosAdmins);
             unaRespuesta.setNombreUsuario(unUsuario.nombreUsuario());
             unaRespuesta.setCalidadFoto(unaCalidad);
             unaRespuesta.setTamañoFoto(unTamaño);
@@ -82,6 +82,13 @@ public class ControladorAdministrador
         respuesta.setNombresOrganizaciones(nombresOrganizaciones);
 
         return ResponseEntity.status(200).body(respuesta);
+    }
+
+    @PostMapping("/organizacion/{nombreOrganizacion}/actualizarCaracteristicas")
+    public ResponseEntity actualizarCaracteristicas(@PathVariable("nombreOrganizacion") String nombreOrganizacion,
+                                                    @RequestHeader("Authorization") String idSesion)
+    {
+        return ResponseEntity.status(200).build();
     }
 
     private Usuario obtenerUsuarioSesionManager(String idSesion)

@@ -3,6 +3,8 @@ package com.utn.dominio.foto;
 import com.utn.dominio.excepcion.CalidadFotoNoValidaException;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum TamañoFoto {
 
@@ -43,5 +45,11 @@ public enum TamañoFoto {
             case GRANDE: return 1920;
             default: return null; // TODO Arrojar una excepción?
         }
+    }
+
+    public static List<String> getDescripciones() {
+        return Arrays.stream(TamañoFoto.values())
+                .map(unTamaño -> unTamaño.valor)
+                .collect(Collectors.toList());
     }
 }

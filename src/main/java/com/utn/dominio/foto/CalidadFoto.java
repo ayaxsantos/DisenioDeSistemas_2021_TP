@@ -1,6 +1,9 @@
 package com.utn.dominio.foto;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.utn.dominio.excepcion.CalidadFotoNoValidaException;
 
 public enum CalidadFoto {
@@ -24,6 +27,12 @@ public enum CalidadFoto {
 
     public boolean coincide(String valor) {
         return this.valor.equals(valor);
+    }
+
+    public static List<String> getDescripciones() {
+        return Arrays.stream(CalidadFoto.values())
+                .map(calidadFoto -> calidadFoto.valor)
+                .collect(Collectors.toList());
     }
 
 }
