@@ -57,13 +57,12 @@ var appPanelAdministracionVue = new Vue({
             actualizarCaracteristicas: function()
             {
                 var response = {
-                        caracteristica : this.caracteristicas.map(
+                        caracteristicasActualizar : this.caracteristicas.map(
                             unaCar => unaCar.caracteristica
                         )
                     }
                 console.log(JSON.stringify(response))
-                this.realizarActualizacion(response,"http://localhost:8080/organizacion/"
-                    + this.orgElegida.toString() + "/actualizarCaracteristicas")
+                this.realizarActualizacion(response,"http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/actualizarCaracteristicas")
             },
             actualizarDetalleFotos: function()
             {

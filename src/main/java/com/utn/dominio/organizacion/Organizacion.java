@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.animal.Mascota;
-import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.excepcion.UsuarioNoEsAdministradorException;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.persona.Direccion;
@@ -17,7 +15,6 @@ import com.utn.dominio.persona.Persona;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
-import com.utn.infraestructura.normalizador.NormalizadorGraphics2D;
 
 import javax.persistence.*;
 
@@ -146,6 +143,12 @@ public class Organizacion extends EntidadPersistente {
         this.tamañoFoto = unTamaño;
     }
 
+    public void calidadFoto(CalidadFoto unaCalidad)
+    {
+        this.calidadFoto = unaCalidad;
+    }
+
+   // TODO: Esto para que se genero??
     public void calidadFoto(String calidad) {
         this.calidadFoto = CalidadFoto.obtener(calidad);
     }
@@ -166,6 +169,11 @@ public class Organizacion extends EntidadPersistente {
         return personas.stream()
             .filter(Persona::esAdoptante)
             .collect(Collectors.toList());
+    }
+
+    public boolean esAdministrador(Administrador unAdministrador)
+    {
+        return this.administradores.contains(unAdministrador);
     }
 
     public List<Administrador> getAdministradores() {
@@ -200,4 +208,7 @@ public class Organizacion extends EntidadPersistente {
         this.mascotas.remove(unaMascota);
     }
 
+    public void setCaracteristicas(List<String> caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
 }

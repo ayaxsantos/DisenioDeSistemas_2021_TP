@@ -51,4 +51,9 @@ public class Administrador extends EntidadPersistente {
         return usuario;
     }
 
+    public String nombreUsuario()
+    {
+        return this.usuario.nombreUsuario();
+    }
+
 }

@@ -7,13 +7,13 @@ import com.utn.dominio.organizacion.Administrador;
 public class AdministradoresEnMySQL implements Administradores
 {
     @Override
-    public Administrador obtenerPorId(int idAdministrador)
+    public Administrador obtenerPorNombreUsuario(String nombreUsuario)
     {
         EntityManagerHelper.beginTransaction();
 
         Administrador unAdministrador = (Administrador) EntityManagerHelper.getEntityManager()
-                .createQuery( "FROM Administrador adm WHERE adm.id = " + idAdministrador)
-                .getResultList();
+                .createQuery( "FROM Administrador adm WHERE EXISTS (FROM Usuario usr WHERE usr.usuario = '"
+                        + nombreUsuario +"' AND adm.usuario = usr)").getSingleResult();
 
         EntityManagerHelper.commit();
         return unAdministrador;

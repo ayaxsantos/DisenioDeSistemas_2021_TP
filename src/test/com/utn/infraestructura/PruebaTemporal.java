@@ -1,9 +1,6 @@
 package com.utn.infraestructura;
 
-import com.utn.dominio.Organizaciones;
-import com.utn.dominio.Personas;
-import com.utn.dominio.Usuarios;
-import com.utn.dominio.Voluntarios;
+import com.utn.dominio.*;
 import com.utn.dominio.animal.Animal;
 import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.animal.Sexo;
@@ -24,10 +21,7 @@ import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 import com.utn.infraestructura.notificador.NotificadorEmail;
 import com.utn.infraestructura.notificador.NotificadorTwilio;
-import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
-import com.utn.infraestructura.persistencia.PersonasEnMySQL;
-import com.utn.infraestructura.persistencia.UsuariosEnMySQL;
-import com.utn.infraestructura.persistencia.VoluntariosEnMySQL;
+import com.utn.infraestructura.persistencia.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -73,6 +67,13 @@ public class PruebaTemporal {
         Usuarios usuarios = new UsuariosEnMySQL();
         Usuario usuario = usuarios.obtenerPorNombreUsuario("pepebavutti");
         System.out.println("Hola" + usuario);
+    }
+
+    @Test
+    public void se_rescata_admin_de_db() {
+        Administradores administradores = new AdministradoresEnMySQL();
+        Administrador administrador = administradores.obtenerPorNombreUsuario("pepeOwner");
+        System.out.println("Hola " + administrador.getUsuario().nombreUsuario());
     }
 
     @Test

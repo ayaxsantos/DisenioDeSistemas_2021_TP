@@ -1,10 +1,13 @@
 package com.utn.infraestructura.api.administrador;
 
 import com.utn.casodeuso.administrador.AccederAdministrador;
+import com.utn.casodeuso.administrador.ActualizarCaracteristicas;
 import com.utn.casodeuso.organizacion.ObtenerTodasLasOrganizaciones;
+import com.utn.dominio.Administradores;
+import com.utn.dominio.Organizaciones;
 import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.excepcion.NoEsAdministradorDeLaOrganizacionException;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
-import com.utn.dominio.excepcion.UsuarioNoEsAdministradorException;
 import com.utn.dominio.foto.CalidadFoto;
 import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.organizacion.Organizacion;
@@ -25,11 +28,16 @@ import java.util.stream.Collectors;
 public class ControladorAdministrador
 {
     private final AccederAdministrador accederAdministrador;
+    private final ActualizarCaracteristicas actualizarCaracteristicas;
     private final ObtenerTodasLasOrganizaciones obtenerOrganizaciones;
 
     public ControladorAdministrador() {
-        this.obtenerOrganizaciones = new ObtenerTodasLasOrganizaciones(new OrganizacionesEnMySQL());
-        this.accederAdministrador = new AccederAdministrador(new AdministradoresEnMySQL(),new OrganizacionesEnMySQL());
+        Organizaciones organizacionesEnMySQL = new OrganizacionesEnMySQL();
+        Administradores administradoresEnMySQL = new AdministradoresEnMySQL();
+
+        this.actualizarCaracteristicas = new ActualizarCaracteristicas(administradoresEnMySQL,organizacionesEnMySQL);
+        this.obtenerOrganizaciones = new ObtenerTodasLasOrganizaciones(organizacionesEnMySQL);
+        this.accederAdministrador = new AccederAdministrador(administradoresEnMySQL,organizacionesEnMySQL);
     }
 
     @GetMapping("organizacion/{nombreOrganizacion}/panelAdministracion")
@@ -64,30 +72,20 @@ public class ControladorAdministrador
         {
             return ResponseEntity.status(404).build();
         }
-        catch(UsuarioNoEsAdministradorException e)
+        catch(NoEsAdministradorDeLaOrganizacionException e)
         {
             return ResponseEntity.status(402).build();
         }
     }
 
-    @GetMapping("/organizaciones")
-    public ResponseEntity obtenerOrganizaciones()
-    {
-        List<Organizacion> unasOrganizaciones = obtenerOrganizaciones.ejecutar();
-        List<String> nombresOrganizaciones = unasOrganizaciones.stream().map(
-                unaOrg -> unaOrg.getNombre()
-        ).collect(Collectors.toList());
-
-        RespuestaOrganizaciones respuesta = new RespuestaOrganizaciones();
-        respuesta.setNombresOrganizaciones(nombresOrganizaciones);
-
-        return ResponseEntity.status(200).body(respuesta);
-    }
-
     @PostMapping("/organizacion/{nombreOrganizacion}/actualizarCaracteristicas")
     public ResponseEntity actualizarCaracteristicas(@PathVariable("nombreOrganizacion") String nombreOrganizacion,
-                                                    @RequestHeader("Authorization") String idSesion)
+                                                      @RequestHeader("Authorization") String idSesion,
+                                                      @RequestBody SolicitudActualizarCaracteristicas solicitudActualizarCaracteristicas)
     {
+        Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
+        this.actualizarCaracteristicas.ejecutar(unUsuario.nombreUsuario(),nombreOrganizacion,
+                solicitudActualizarCaracteristicas.getCaracteristicasActualizar());
         return ResponseEntity.status(200).build();
     }
 
