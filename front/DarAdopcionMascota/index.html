@@ -1,19 +1,100 @@
 <style>
 
+    body{
+        background-image: url(imgs/imagenFondo.jpg);
+    }
     .recuadroPrincipal{
         background-color: lightgreen;
-        display: flex;
-        flex-direction: column;
+        display:inline-block;
         justify-content: center;
         align-items: center;
-        width: 100vw;
+        margin-top: 60px;
+        margin-left: 20px;
+        margin-right: 20px;
+        width: 97vw;
+        height: 90%;
         border-radius: 20px;
-        padding: 100px 250px 100px 100px;
     }
 
+    .tituloFormulario{
+        display: inline-block;
+    }
+
+    .tituloFormulario h3{
+        display: inline;
+        padding-left: 20px;
+    }
+
+    .tituloFormulario label{
+        display: inline;
+        float: right;
+        padding-left:70vw;
+    }
+
+    .elegirMascota{
+        background-color:  #ffccb3;
+        border-radius: 20px;
+        border-style: solid;
+        border-width: medium;
+        border-color: black;
+    }
     .formulario{
         background-color: #ffccb3;
+        display: block;
+        margin-bottom: 50px;
+        margin-right: 30px;
+        margin-left: 30px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
     }
+
+    .tablaDeValores {
+        text-align: center;
+        height: 50%;
+    }
+
+    .tablaDeValores table{
+        width: 80%;
+        margin-left: 10vw;
+        border-collapse: collapse;
+        border: 1px solid black;
+
+    }
+
+    .tablaDeValores tr{
+        border: 1px solid black;
+        padding-right: 30px;
+    }
+
+    .subtitulo{
+        margin-left: 20px;
+    }
+
+    .fotos{
+        margin-left: 20px;
+    }
+
+    .botnAdopcion{
+        margin-left: 20vw;
+    }
+
+    .fotos{
+        background-color:  #ffccb3;
+        border-radius: 20px;
+        border-style: solid;
+        border-width: medium;
+        border-color: black;
+    }
+
+    .botnAdopcion{
+        background-color:  #ffccb3;
+        border-radius: 20px;
+        border-style: solid;
+        border-width: medium;
+        border-color: black;
+    }
+
 
 
 
@@ -29,28 +110,36 @@
     <title>Title</title>
 </head>
 <body>
+
     <div class = "recuadroPrincipal">
 
         <div class = "tituloFormulario">
+
+            <br>
 
             <div class = "tituloFormulario">
                 <h3 class = "">Organizacion x</h3>
 
                 <label>Mascota Elegida:
-                    <select v-model="MascotaElegida" @change="cambioMascota()">
+                    <br>
+                    <select class = "elegirMascota" v-model="MascotaElegida" @change="cambioMascota()">
                         <option selected disabled>Selecciona una opción</option>
                         <option v-for="mascota in mascotas" v-bind:value="mascota">{{ mascota }}</option>
                     </select>
                 </label>
             </div>
+            <br>
         </div>
-
+        <br>
+        <br>
         <div class = "formulario">
+            <br>
             <form>
                 <div class = "subtitulo">
                     <h4>
                         Completar los siguientes campos:
                     </h4>
+                    <br>
                 </div>
                 <div class = "tablaDeValores">
                     <table>
@@ -98,9 +187,11 @@
 
                 </div>
             </form>
+            <br>
             </div>
-        <label><input type="file" @change="agregarFotos($event)" accept="image/png, image/jpg, image/jpeg" multiple></label>
-        <button>Dar en adopcion</button>
+        <br>
+        <label class = "fotos"><input type="file" @change="agregarFotos($event)" accept="image/png, image/jpg, image/jpeg" multiple></label>
+        <button class = "botnAdopcion">Dar en adopcion</button>
     </div>
 
 
