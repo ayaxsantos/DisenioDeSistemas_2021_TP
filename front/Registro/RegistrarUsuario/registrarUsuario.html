@@ -17,15 +17,6 @@
                     </div>
                     <form>
 
-                        <label>Tipo de Documento<br>
-                            <select v-model="tipoDocumentoSeleccionado">
-                                <option selected disabled>Selecciona una opción</option>
-                                <option v-for="tipoDocumento in tiposDocumento" v-bind:value="tipoDocumento">{{ tipoDocumento }}</option>
-                            </select>
-                        </label><br>
-
-                        <label> Numero documento <br><input type="text" v-model="numeroDocumento" placeholder="Ingrese su numero de documento"></label><br>
-
                         <label> Usuario <br><input type="text" v-model="usuario" placeholder="Ingrese su nombre de usuario"></label><br>
 
                         <label> Contraseña <br><input type="password" v-model="contrasenia" placeholder="Ingrese su contraseña"></label><br>
