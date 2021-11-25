@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <title>Registro</title>
 </head>
 <body>
-<section>
+<section id="RegistrarUsuarioVue">
     <div class="container py-4">
         <div class="row">
             <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
@@ -15,30 +16,32 @@
                         <h3 class="text-gradient text-primary">Regístrate</h3>
                     </div>
                     <form>
-                        <!--TODO obtener tipo de documentos del backend-->
-                        <label>
-                            Tipo documento:
-                            <select>
-                                <option>DNI</option>
-                                <option>Cédula</option>
-                                <option>Pasaporte</option>
+
+                        <label>Tipo de Documento<br>
+                            <select v-model="tipoDocumentoSeleccionado">
+                                <option selected disabled>Selecciona una opción</option>
+                                <option v-for="tipoDocumento in tiposDocumento" v-bind:value="tipoDocumento">{{ tipoDocumento }}</option>
                             </select>
                         </label><br>
-                        <label for="documento">Numero documento:</label><br>
-                        <input type="number" id="documento" name="documento"><br>
-                        <label for="username">Usuario:</label><br>
-                        <input type="text" id="username" name="username"><br>
-                        <label for="password">Contraseña:</label><br>
-                        <input type="password" id="password" name="password"><br>
-                        <label for="repassword">Repetir contraseña:</label><br>
-                        <input type="password" id="repassword" name="password"><br>
+
+                        <label> Numero documento <br><input type="text" v-model="numeroDocumento" placeholder="Ingrese su numero de documento"></label><br>
+
+                        <label> Usuario <br><input type="text" v-model="usuario" placeholder="Ingrese su nombre de usuario"></label><br>
+
+                        <label> Contraseña <br><input type="password" v-model="contrasenia" placeholder="Ingrese su contraseña"></label><br>
+
+                        <label> Repita la contraseña <br><input type="password" v-model="repeticionContrasenia" placeholder="Ingrese la misma contraseña"></label><br>
+
                         <br><br>
-                        <button type="submit" class="btn btn-primary mb-2">Crear Usuario</button>
+                        <input type="submit" value="Crear Usuario"  v-on:click="enviarDatos">
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script src="registrarUsuarioVue.js"></script>
+
 </body>
 </html>
