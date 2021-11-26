@@ -25,11 +25,21 @@ var RegistrarUsuarioVue = new Vue({
                     },
                 body: JSON.stringify(solicitudRegistroUsuario)
             }).then(response => {
-                if (response.status >= 400) {
-                    alert("Hubo un error en el API")
-                } else {
-                    console.log(response);
-                    return response.json()
+                switch (response.status) {
+                    case 400:
+                        alert("contraseña debil")
+                        break;
+                    case 404:
+                        alert("usuario ya registrado")
+                        break;
+                    case 200:
+                        alert("se registro el usuario correctamente")
+                        console.log(response);
+                        return response.json()
+                        break;
+                    default:
+                        alert("error desconocido")
+                        break;
                 }
             })
         },
