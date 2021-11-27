@@ -25,9 +25,6 @@ var RegistrarUsuarioVue = new Vue({
                     },
                 body: JSON.stringify(solicitudRegistroUsuario)
             }).then(response => {
-                console.log(response)
-                console.log("hola")
-                console.log(response)
                 switch (response.status) {
                     case 400:
                         alert("contraseña debil")
