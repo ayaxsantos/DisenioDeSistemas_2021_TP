@@ -1,9 +1,6 @@
 var RegistrarUsuarioVue = new Vue({
     el: '#RegistrarUsuarioVue',
     data: {
-        tiposDocumento: [],
-        tipoDocumentoSeleccionado: '',
-        numeroDocumento: '',
         usuario: '',
         contrasenia: '',
         repeticionContrasenia: ''
@@ -11,37 +8,38 @@ var RegistrarUsuarioVue = new Vue({
     methods: {
 
         enviarDatos() {
-            var solicitudRegistroUsuario = {
-                nombre: this.orgElegida,
-                numeroDocumento: numeroDocumento,
-                tipoDocumento: tipoDocumento,
-                nombre: this.nombre,
-                tipoAnimal: this.tipoAnimalSeleccionado,
-                apodo: this.apodo,
-                edad: this.edad,
-                sexo: this.sexoAnimalSeleccionado,
-                tamanio: this.tamanioAnimalSeleccionado,
-                descripcionFisica: this.descripcionFisica,
-                fotos: this.fotos,
-                caracteristicas: {}
+            if(this.contrasenia !== this.repeticionContrasenia){
+                alert("Las contraseñas no coinciden");
+                return;
             }
-            var caracteristicasPreguntas = this.caracteristicas.map(caracteristica => caracteristica.name);
-            var caracteristicasRespuestas = this.caracteristicas.map(caracteristica => caracteristica.value);
-            caracteristicasPreguntas.forEach((key, i) => solicitudRegistroMascota.caracteristicas[key] = caracteristicasRespuestas[i]);
-            console.log(solicitudRegistroMascota);
-            fetch("http://localhost:8080/registrar/mascota", {
+            sessionStorage.setItem("usuario", this.usuario);
+            var solicitudRegistroUsuario = {
+                nombreUsuario: this.usuario,
+                contrasenia: this.contrasenia
+            }
+            fetch("http://localhost:8080/registrar/usuario", {
                 method: "POST",
                 headers:
                     {
                         'Content-Type': 'application/json'
                     },
-                body: JSON.stringify(solicitudRegistroMascota)
+                body: JSON.stringify(solicitudRegistroUsuario)
             }).then(response => {
-                if (response.status >= 400) {
-                    alert("Hubo un error en el API")
-                } else {
-                    console.log(response);
-                    return response.json()
+                switch (response.status) {
+                    case 400:
+                        alert("contraseña debil")
+                        break;
+                    case 404:
+                        alert("usuario ya registrado")
+                        break;
+                    case 200:
+                        alert("se registro el usuario correctamente")
+                        console.log(response);
+                        return response.json()
+                        break;
+                    default:
+                        alert("error desconocido")
+                        break;
                 }
             })
         },

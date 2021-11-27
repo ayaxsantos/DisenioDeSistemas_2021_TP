@@ -11,7 +11,6 @@ import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.excepcion.UsuarioYaRegistradoException;
 import com.utn.dominio.hogar.ValidacionHogar;
 import com.utn.dominio.hogar.criterios.*;
-import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.api.usuario.*;
 import com.utn.infraestructura.hogares.Hogar;
@@ -60,7 +59,7 @@ public class ControladorUsuarioCP{
 
         this.iniciarSesion = new IniciarSesion(usuariosEnMySQL);
         this.cerrarSesion = new CerrarSesion(usuariosEnMySQL);
-        this.registrar = new Registrar(usuariosEnMySQL, organizacionesEnMySQL, personasEnMySQL);
+        this.registrar = new Registrar(usuariosEnMySQL);
         this.buscarHogarTransito = new BuscarHogarTransito(personasEnMySQL, mascotasEnMySQL, hogares, validaciones);
     }
 
@@ -91,14 +90,11 @@ public class ControladorUsuarioCP{
     }
 
     //TODO: Despues de registrar usuario, pedimos que vuelva a loguear??
-    @PostMapping("registro")
-    public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitudRegistroUsuario)
+    @PostMapping("registrar/usuario")
+    public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitud)
     {
         try{
-            registrar.ejecutar(solicitudRegistroUsuario.getNombre(), solicitudRegistroUsuario.getApellido(),
-                solicitudRegistroUsuario.getNombreUsuario(),solicitudRegistroUsuario.getContraseña(),
-                solicitudRegistroUsuario.getCorreoElectronico(),solicitudRegistroUsuario.getTelefono(),
-                    solicitudRegistroUsuario.getNombreOrganizacion());
+            registrar.ejecutar(solicitud.getNombreUsuario(), solicitud.getContrasenia());
         }
         catch(ContraseñaDebilException e)
         {

@@ -26,14 +26,14 @@ public class ControladorOrganizacion {
         this.obtenerOrganizacion = new ObtenerOrganizacion(organizacionesEnMySQL);
     }
 
-    @GetMapping("/organizaciones/nombres")
+    @GetMapping("organizaciones/nombres")
     public ResponseEntity obtenerNombreDeTodasLasOrganizaciones() {
         List<Organizacion> organizaciones = this.obtenerTodasLasOrganizaciones.ejecutar();
         List<String> nombresOrganizaciones = organizaciones.stream().map(Organizacion::getNombre).collect(java.util.stream.Collectors.toList());
         return ResponseEntity.status(200).body(nombresOrganizaciones);
     }
 
-    @GetMapping("/organizacion/{nombre}/caracteristicas")
+    @GetMapping("organizacion/{nombre}/caracteristicas")
     public ResponseEntity obtenerCaracteristicas(@PathVariable("nombre") String nombreOrg) {
         Organizacion organizacion = this.obtenerOrganizacion.ejecutar(nombreOrg);
         return ResponseEntity.status(200).body(organizacion.getCaracteristicas());

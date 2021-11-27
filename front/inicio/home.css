@@ -1,0 +1,126 @@
+body {
+    background-image: url(https://bit.ly/2ZmpIaE);
+}
+
+#menu {
+    background-color: #e0e0e0;
+    width: 80vw;
+    height: 80vh;
+    margin: 5vh 10vw;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.cajaInteractiva {
+    background-color: rgb(235, 218, 242);
+    border: 5px solid rgb(204, 101, 187);
+    height: 30vh;
+    border-radius: 5px;
+    display: table;
+    text-align: center;
+}
+
+#cajaInteractiva1 {
+    background-image: url(https://cdn.shopify.com/s/files/1/0318/7140/2117/products/3_1c7bbf2a-37b2-4054-959e-91a945a8d4f0_480x480@2x.jpg?v=1591015101);
+    background-size: cover;
+    background-position: bottom;
+}
+
+#cajaInteractiva2 {
+    background-image: url(https://downloader.la/temp/[Downloader.la]-61a15859bec9e.jpg);
+    background-size: cover;
+    background-position: bottom;
+}
+
+#cajaInteractiva3 {
+    background-image: url(https://st.depositphotos.com/1177973/i/600/depositphotos_19697611-stock-photo-cat-in-gift-box-isolated.jpg);
+    background-size: cover;
+    background-position: right;
+}
+
+#cajaInteractiva4 {
+    background-image: url(https://media.istockphoto.com/photos/cat-in-a-pod-picture-id858282646?k=20&m=858282646&s=612x612&w=0&h=boqSfIlJnH-JQfp5bLMSFhJxs2p0BU6ROHYAfod5gh0=);
+    background-size: cover;
+    background-position: center;
+}
+
+#cajaImagen1 {
+    background: #D0E4F5 url("https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/6124cf315cafe8c3101f8bab/perro-slide_0.jpg") no-repeat local 50% 50%;
+    background-size: cover;
+    border: 2px solid black;
+    height: 30vh;
+    border-radius: 5px;
+}
+
+#cajaImagen2 {
+    background: #D0E4F5 url("https://cdn.discordapp.com/attachments/887677500346490890/913549769664770120/cat-gb4d0a0945_1920.jpg") no-repeat local 50% 50%;
+    background-size: cover;
+    border: 2px solid black;
+    height: 30vh;
+    border-radius: 5px;
+}
+
+#nav {
+    height: 7vh;
+}
+
+.botonMenu-full {
+    background-color: rgb(235, 218, 242);
+    box-shadow: 3px 3px 5px 6px rgb(204, 101, 187);
+}
+
+.botonNav-full {
+    background-color: rgb(235, 218, 242);
+    border: 2px solid rgb(204, 101, 187);
+    margin: 1vw;
+}
+
+.brandNav-small {
+    display: none;
+}
+
+
+.rowMenu {
+    padding-top: 5vh;
+}
+
+@media (max-width: 575px) {
+    #menu {
+        height: auto;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        background-color: transparent;
+        border: none;
+    }
+
+    .rowMenu {
+        margin: 0 auto;
+        padding-top: 1px;
+        padding-left: 3vh;
+        padding-right: 3vh;
+    }
+
+    #cajaInteractiva {
+        height: 20vh;
+    }
+
+    #desapareceCol {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .brandNav-full {
+        display: none;
+    }
+
+    .brandNav-small {
+        display: block;
+    }
+}
+
+@media (max-width: 350px) {
+    .botonNav-full {
+        font-size: small;
+    }
+}

@@ -22,7 +22,7 @@ var appRegistrarMascotaVue = new Vue({
     methods: {
         cambioOrg() {
             this.caracteristicas = [];
-            fetch("http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/caracteristicas")
+            fetch("https://rescate-de-patitas-g6-1.herokuapp.com/organizacion/" + this.orgElegida.toString() + "/caracteristicas")
                 .then(response => response.json())
                 .then(unasCaracteristicas =>
                     unasCaracteristicas.forEach(caracteristica =>
@@ -47,7 +47,7 @@ var appRegistrarMascotaVue = new Vue({
             var caracteristicasRespuestas = this.caracteristicas.map(caracteristica => caracteristica.value);
             caracteristicasPreguntas.forEach((key, i) => solicitudRegistroMascota.caracteristicas[key] = caracteristicasRespuestas[i]);
             console.log(solicitudRegistroMascota);
-            fetch("http://localhost:8080/registrar/mascota", {
+            fetch("https://rescate-de-patitas-g6-1.herokuapp.com/registrar/mascota", {
                 method: "POST",
                 headers:
                     {
@@ -83,19 +83,19 @@ var appRegistrarMascotaVue = new Vue({
         }
     },
     created() {
-        fetch('http://localhost:8080/organizaciones/nombres')
+        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/organizaciones/nombres')
             .then(response => response.json()).then(json => {
             this.organizaciones = json;
         })
-        fetch('http://localhost:8080/datos/mascota/animal')
+        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/mascota/animal')
             .then(response => response.json()).then(json => {
             this.tiposAnimal = json;
         })
-        fetch('http://localhost:8080/datos/mascota/sexo')
+        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/mascota/sexo')
             .then(response => response.json()).then(json => {
             this.sexosAnimal = json;
         })
-        fetch('http://localhost:8080/datos/mascota/tamanio')
+        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/mascota/tamanio')
             .then(response => response.json()).then(json => {
             this.tamaniosAnimal = json;
         })
