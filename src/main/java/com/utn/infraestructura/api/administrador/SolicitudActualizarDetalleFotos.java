@@ -1,8 +1,8 @@
 package com.utn.infraestructura.api.administrador;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.organizacion.CalidadFoto;
+import com.utn.dominio.organizacion.TamañoFoto;
 
 public class SolicitudActualizarDetalleFotos
 {
@@ -10,7 +10,7 @@ public class SolicitudActualizarDetalleFotos
     private CalidadFoto calidadFoto;
 
     @JsonProperty
-    private TamañoFoto tamañoFoto;
+    private TamañoFoto tamanioFoto;
 
     public CalidadFoto getCalidadFoto() {
         return calidadFoto;
@@ -20,11 +20,11 @@ public class SolicitudActualizarDetalleFotos
         this.calidadFoto = calidadFoto;
     }
 
-    public TamañoFoto getTamañoFoto() {
-        return tamañoFoto;
+    public TamañoFoto getTamanioFoto() {
+        return tamanioFoto;
     }
 
-    public void setTamañoFoto(TamañoFoto tamañoFoto) {
-        this.tamañoFoto = tamañoFoto;
+    public void setTamanioFoto(TamañoFoto tamanioFoto) {
+        this.tamanioFoto = tamanioFoto;
     }
 }

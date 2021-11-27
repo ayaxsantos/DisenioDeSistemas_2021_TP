@@ -1,4 +1,4 @@
-package com.utn.dominio.foto;
+package com.utn.dominio.organizacion;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,7 @@ public enum CalidadFoto {
 
     private final String valor;
 
-    public static CalidadFoto obtener(String valor) {
+    public static CalidadFoto buscar(String valor) {
         return Arrays.stream(CalidadFoto.values())
             .filter(calidadFoto -> calidadFoto.coincide(valor))
             .findFirst()

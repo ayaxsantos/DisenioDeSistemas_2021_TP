@@ -7,13 +7,13 @@ import java.util.List;
 public class SolicitudActualizarCaracteristicas
 {
     @JsonProperty
-    private List<String> caracteristicasActualizar;
+    private String nuevaCaracteristica;
 
-    public List<String> getCaracteristicasActualizar() {
-        return caracteristicasActualizar;
+    public String getNuevaCaracteristica() {
+        return nuevaCaracteristica;
     }
 
-    public void setCaracteristicasActualizar(List<String> caracteristicasActualizar) {
-        this.caracteristicasActualizar = caracteristicasActualizar;
+    public void setNuevaCaracteristica(String nuevaCaracteristica) {
+        this.nuevaCaracteristica = nuevaCaracteristica;
     }
 }

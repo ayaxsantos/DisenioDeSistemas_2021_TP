@@ -1,8 +1,8 @@
 package com.utn.infraestructura.normalizador;
 
 import com.utn.dominio.Normalizador;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.organizacion.CalidadFoto;
+import com.utn.dominio.organizacion.TamañoFoto;
 
 import java.awt.*;
 import java.io.File;

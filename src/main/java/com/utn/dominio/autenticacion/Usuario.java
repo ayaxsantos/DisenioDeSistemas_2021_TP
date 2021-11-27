@@ -1,38 +1,33 @@
 package com.utn.dominio.autenticacion;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import com.utn.dominio.EntidadPersistente;
-import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.excepcion.CredencialesInvalidasException;
-import com.utn.dominio.excepcion.OrganizacionNoEncontradaException;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Usuario extends EntidadPersistente {
 
     @Column
     private String usuario;
 
     @Column
-    private String contraseña;
+    private String contrasenia;
 
     @Transient
     private boolean estaLogueado = false;
 
     public Usuario() {}
 
-    public Usuario(String usuario, String contraseña) {
-        ValidadorContraseña.ejecutar(contraseña);
+    public Usuario(String usuario, String contrasenia) {
+        ValidadorContraseña.ejecutar(contrasenia);
         this.usuario = usuario;
-        this.contraseña = contraseña;
+        this.contrasenia = contrasenia;
     }
 
     public void iniciarSesion(String usuario, String contraseña) {
-        if(!this.usuario.equals(usuario) || !this.contraseña.equals(contraseña))
+        if(!this.usuario.equals(usuario) || !this.contrasenia.equals(contraseña))
             throw new CredencialesInvalidasException();
         this.estaLogueado = true;
     }
@@ -58,8 +53,8 @@ public class Usuario extends EntidadPersistente {
         this.estaLogueado = estaLogueado;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
     public String getUsuario() {

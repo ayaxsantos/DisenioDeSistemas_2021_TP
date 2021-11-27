@@ -1,4 +1,4 @@
-body {
+body{
     background-image: url(../imagenes/fondo-pagina.png);
 }
 
@@ -32,7 +32,7 @@ h2 {
     color: rgb(152, 89, 179);
     text-align: center;
     width: 80vw;
-    margin: auto;
+    margin: 1vh auto auto;
 }
 
 .seleccionRadio {

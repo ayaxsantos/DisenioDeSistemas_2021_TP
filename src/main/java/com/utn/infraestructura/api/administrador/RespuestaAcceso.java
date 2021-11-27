@@ -1,16 +1,13 @@
 package com.utn.infraestructura.api.administrador;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.organizacion.CalidadFoto;
+import com.utn.dominio.organizacion.TamañoFoto;
 
 import java.util.List;
 
 public class RespuestaAcceso
 {
-    @JsonProperty
-    private String nombreUsuario;
-
     @JsonProperty
     private List<String> usuariosAdministradores;
 
@@ -18,7 +15,7 @@ public class RespuestaAcceso
     private CalidadFoto calidadFoto;
 
     @JsonProperty
-    private TamañoFoto tamañoFoto;
+    private TamañoFoto tamanioFoto;
 
     @JsonProperty
     private List<String> caracteristicas;
@@ -31,14 +28,6 @@ public class RespuestaAcceso
         this.usuariosAdministradores = usuariosAdministradores;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
     public CalidadFoto getCalidadFoto() {
         return calidadFoto;
     }
@@ -47,12 +36,12 @@ public class RespuestaAcceso
         this.calidadFoto = calidadFoto;
     }
 
-    public TamañoFoto getTamañoFoto() {
-        return tamañoFoto;
+    public TamañoFoto getTamanioFoto() {
+        return tamanioFoto;
     }
 
-    public void setTamañoFoto(TamañoFoto tamañoFoto) {
-        this.tamañoFoto = tamañoFoto;
+    public void setTamanioFoto(TamañoFoto tamanioFoto) {
+        this.tamanioFoto = tamanioFoto;
     }
 
     public List<String> getCaracteristicas() {

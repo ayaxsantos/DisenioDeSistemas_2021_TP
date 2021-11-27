@@ -9,9 +9,10 @@ public class VoluntariosEnMySQL implements Voluntarios {
     public Voluntario obtenerPorNombreUsuario(String nombreUsuario) {
         EntityManagerHelper.beginTransaction();
 
-        Voluntario voluntario = (Voluntario) EntityManagerHelper.getEntityManager()
-            .createQuery("FROM Voluntario vol WHERE EXISTS (FROM vol.usuario usr WHERE usr.usuario = '"
-                    + nombreUsuario +"')").getSingleResult();
+        Voluntario voluntario = EntityManagerHelper.getEntityManager()
+                .createQuery("select vol from Voluntario vol where vol.usuario = ?1", Voluntario.class)
+                .setParameter(1, nombreUsuario)
+                .getSingleResult();
 
         EntityManagerHelper.commit();
         return voluntario;
@@ -20,9 +21,7 @@ public class VoluntariosEnMySQL implements Voluntarios {
     @Override
     public void guardar(Voluntario voluntario) {
         EntityManagerHelper.beginTransaction();
-
         EntityManagerHelper.persist(voluntario);
-
         EntityManagerHelper.commit();
     }
 }

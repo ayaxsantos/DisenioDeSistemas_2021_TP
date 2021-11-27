@@ -2,20 +2,24 @@ package com.utn.casodeuso.administrador;
 
 import com.utn.dominio.Administradores;
 import com.utn.dominio.Organizaciones;
+import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
 
 import java.util.List;
 
-public class ActualizarCaracteristicas extends AccederAdministrador
+public class ActualizarCaracteristicas
 {
-    public ActualizarCaracteristicas(Administradores unosAdministradores, Organizaciones unasOrganizaciones) {
-        super(unosAdministradores, unasOrganizaciones);
+
+    Administradores administradores;
+
+    public ActualizarCaracteristicas(Administradores administradores) {
+        this.administradores = administradores;
     }
 
-    public void ejecutar(String nombreUsuario, String nombreOrganizacion, List<String> unasCaracteristicas)
+    public void ejecutar(String nombreUsuario, String unaCaracteristica)
     {
-        Organizacion unaOrganizacion = this.ejecutar(nombreUsuario,nombreOrganizacion);
-        unaOrganizacion.setCaracteristicas(unasCaracteristicas);
-        organizaciones.guardar(unaOrganizacion);
+        Administrador unAdministrador = this.administradores.obtenerPorNombreUsuario(nombreUsuario);
+        unAdministrador.añadirCaracteristica(unaCaracteristica);
+        administradores.guardar(unAdministrador);
     }
 }

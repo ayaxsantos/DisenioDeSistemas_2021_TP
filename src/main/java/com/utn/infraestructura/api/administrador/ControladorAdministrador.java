@@ -1,27 +1,23 @@
 package com.utn.infraestructura.api.administrador;
 
-import com.utn.casodeuso.administrador.AccederAdministrador;
-import com.utn.casodeuso.administrador.ActualizarAdministradores;
-import com.utn.casodeuso.administrador.ActualizarCaracteristicas;
-import com.utn.casodeuso.administrador.ActualizarDetalleFotos;
+import com.utn.casodeuso.administrador.IniciarSesionAdmin;
+import com.utn.casodeuso.usuario.IniciarSesion;
 import com.utn.dominio.Administradores;
 import com.utn.dominio.Organizaciones;
-import com.utn.dominio.Usuarios;
 import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.excepcion.NoEsAdministradorDeLaOrganizacionException;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.api.SesionManager;
+import com.utn.infraestructura.api.usuario.LoginResponse;
+import com.utn.infraestructura.api.usuario.SolicitudIniciarSesion;
 import com.utn.infraestructura.persistencia.AdministradoresEnMySQL;
 import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
 import com.utn.infraestructura.persistencia.UsuariosEnMySQL;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.http.ResponseEntity;
-
-import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,107 +25,81 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-public class ControladorAdministrador
-{
-    private final AccederAdministrador accederAdministrador;
-    private final ActualizarCaracteristicas actualizarCaracteristicas;
-    private final ActualizarDetalleFotos actualizarDetalleFotos;
-    private final ActualizarAdministradores actualizarAdministradores;
+public class ControladorAdministrador {
+
+    private final Organizaciones organizacionesEnMySQL;
+    private final IniciarSesionAdmin iniciarSesion;
 
     public ControladorAdministrador() {
-        Organizaciones organizacionesEnMySQL = new OrganizacionesEnMySQL();
-        Administradores administradoresEnMySQL = new AdministradoresEnMySQL();
-        Usuarios usuariosEnMySQL = new UsuariosEnMySQL();
-
-        this.actualizarCaracteristicas = new ActualizarCaracteristicas(administradoresEnMySQL,organizacionesEnMySQL);
-        this.actualizarDetalleFotos = new ActualizarDetalleFotos(administradoresEnMySQL,organizacionesEnMySQL);
-        this.accederAdministrador = new AccederAdministrador(administradoresEnMySQL,organizacionesEnMySQL);
-        this.actualizarAdministradores = new ActualizarAdministradores(administradoresEnMySQL,organizacionesEnMySQL, usuariosEnMySQL);
+        this.organizacionesEnMySQL = new OrganizacionesEnMySQL();
+        this.iniciarSesion = new IniciarSesionAdmin(new AdministradoresEnMySQL());
     }
 
-    @GetMapping("organizacion/{nombreOrganizacion}/panelAdministracion")
-    public ResponseEntity acceder(@PathVariable("nombreOrganizacion") String nombreOrganizacion,
-                                  @RequestHeader("Authorization") String idSesion)
-    {
+    @GetMapping("organizacion/panelAdministracion")
+    public ResponseEntity acceder(@RequestHeader("Authorization") String idAdmin) {
+        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+        Organizacion organizacion = administrador.getOrganizacion();
+
+        RespuestaAcceso unaRespuesta = new RespuestaAcceso();
+        List<String> usuarioAdmins = organizacion.getAdministradores().stream().map(Administrador::nombreUsuario).collect(Collectors.toList());
+        List<String> caracteristicas = organizacion.getCaracteristicas();
+        unaRespuesta.setUsuariosAdministradores(usuarioAdmins);
+        unaRespuesta.setCalidadFoto(organizacion.calidadFoto());
+        unaRespuesta.setTamanioFoto(organizacion.tamañoFoto());
+        unaRespuesta.setCaracteristicas(caracteristicas);
+
+        return ResponseEntity.status(200).body(unaRespuesta);
+    }
+
+    @PostMapping("organizacion/panelAdministracion/actualizarCaracteristicas")
+    public ResponseEntity actualizarCaracteristicas(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarCaracteristicas solicitud) {
+        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+        administrador.añadirCaracteristica(solicitud.getNuevaCaracteristica());
+
+        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.getOrganizacion().getNombre());
+        this.organizacionesEnMySQL.guardar(organizacion);
+        return ResponseEntity.status(200).build();
+    }
+
+    @PostMapping("organizacion/panelAdministracion/actualizarDetalleFotos")
+    public ResponseEntity actualizarDetalleFotos(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarDetalleFotos solicitud) {
+        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+        administrador.definirTamañoFoto(solicitud.getTamanioFoto());
+        administrador.definirCalidadFoto(solicitud.getCalidadFoto());
+
+        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.getOrganizacion().getNombre());
+        this.organizacionesEnMySQL.guardar(organizacion);
+        return ResponseEntity.status(200).build();
+    }
+
+    @PostMapping("organizacion/panelAdministracion/actualizarAdministradores")
+    public ResponseEntity actualizarAdministradores(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarAdministradores solicitud) {
+        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+
+        administrador.darAltaNuevoAdministrador(solicitud.getAdminNuevo(), solicitud.getContrasenia());
+
+        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.getOrganizacion().getNombre());
+        this.organizacionesEnMySQL.guardar(organizacion);
+        return ResponseEntity.status(200).build();
+    }
+
+    @PostMapping("administradores/autenticar")
+    public LoginResponse iniciarSesion(@RequestBody SolicitudIniciarSesion solicitud, HttpServletResponse response) {
         try {
-
-            Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
-
-            Organizacion unaOrganizacion = accederAdministrador.ejecutar(unUsuario.nombreUsuario(), nombreOrganizacion);
-
-            CalidadFoto unaCalidad = unaOrganizacion.calidadFoto();
-            TamañoFoto unTamaño = unaOrganizacion.tamañoFoto();
-
-            List<String> unosUsuariosAdmins = unaOrganizacion.getAdministradores().stream().map(
-                    unAdmin -> unAdmin.getUsuario().nombreUsuario()
-            ).collect(Collectors.toList());
-
-            List<String> unasCaracteristicas = unaOrganizacion.getCaracteristicas();
-
-            RespuestaAcceso unaRespuesta = new RespuestaAcceso();
-            unaRespuesta.setUsuariosAdministradores(unosUsuariosAdmins);
-            unaRespuesta.setNombreUsuario(unUsuario.nombreUsuario());
-            unaRespuesta.setCalidadFoto(unaCalidad);
-            unaRespuesta.setTamañoFoto(unTamaño);
-            unaRespuesta.setCaracteristicas(unasCaracteristicas);
-
-            return ResponseEntity.status(200).body(unaRespuesta);
+            Administrador administrador = iniciarSesion.ejecutar(solicitud.nombreUsuario(), solicitud.contrasenia());;
+            SesionManager sesionManager =  SesionManager.getInstance();
+            String idSesion = sesionManager.crear("administrador",administrador);
+            System.out.println(idSesion);
+            return new LoginResponse(idSesion);
         }
-        catch(UsuarioNoEncontradoException | NullPointerException e)
-        {
-            return ResponseEntity.status(404).build();
-        }
-        catch(NoEsAdministradorDeLaOrganizacionException e)
-        {
-            return ResponseEntity.status(402).build();
+        catch(UsuarioNoEncontradoException e) {
+            return new LoginResponse("-1");
         }
     }
 
-    @PostMapping("/organizacion/{nombreOrganizacion}/actualizarCaracteristicas")
-    public ResponseEntity actualizarCaracteristicas(@PathVariable("nombreOrganizacion") String nombreOrganizacion,
-                                                      @RequestHeader("Authorization") String idSesion,
-                                                      @RequestBody SolicitudActualizarCaracteristicas solicitudActualizarCaracteristicas)
-    {
-        Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
-        this.actualizarCaracteristicas.ejecutar(unUsuario.nombreUsuario(),nombreOrganizacion,
-                solicitudActualizarCaracteristicas.getCaracteristicasActualizar());
-        return ResponseEntity.status(200).build();
-    }
-
-    @PostMapping("/organizacion/{nombreOrganizacion}/actualizarDetalleFotos")
-    public ResponseEntity actualizarDetalleFotos(@PathVariable("nombreOrganizacion") String nombreOrganizacion,
-                                                    @RequestHeader("Authorization") String idSesion,
-                                                    @RequestBody SolicitudActualizarDetalleFotos solicitudActualizarDetalleFotos)
-    {
-        Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
-        this.actualizarDetalleFotos.ejecutar(unUsuario.nombreUsuario(),nombreOrganizacion,
-                solicitudActualizarDetalleFotos.getTamañoFoto(),solicitudActualizarDetalleFotos.getCalidadFoto());
-        return ResponseEntity.status(200).build();
-    }
-
-    @PostMapping("/organizacion/{nombreOrganizacion}/actualizarAdministradores")
-    public ResponseEntity actualizarAdministradores(@PathVariable("nombreOrganizacion") String nombreOrganizacion,
-                                                 @RequestHeader("Authorization") String idSesion,
-                                                 @RequestBody SolicitudActualizarAdministradores solicitudActualizarAdministradores)
-    {
-        Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
-        try
-        {
-            this.actualizarAdministradores.ejecutar(unUsuario.nombreUsuario(), nombreOrganizacion,
-                    solicitudActualizarAdministradores.getUsuariosAdministradores());
-            return ResponseEntity.status(200).build();
-        }
-        catch(NoEsAdministradorDeLaOrganizacionException | NoResultException e)
-        {
-            return ResponseEntity.status(404).build();
-        }
-    }
-
-    private Usuario obtenerUsuarioSesionManager(String idSesion)
-    {
+    private Administrador obtenerUsuarioSesionManager(String idAdmin) {
         SesionManager sesionManager = SesionManager.getInstance();
-
-        Map<String, Object> unosDatos = sesionManager.obtenerAtributos(idSesion);
-        return (Usuario) unosDatos.get("usuario");
+        Map<String, Object> unosDatos = sesionManager.obtenerAtributos(idAdmin);
+        return (Administrador) unosDatos.get("administrador");
     }
 }

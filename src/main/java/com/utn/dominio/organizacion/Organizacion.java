@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.animal.Mascota;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.foto.TamañoFoto;
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
@@ -150,7 +148,7 @@ public class Organizacion extends EntidadPersistente {
 
    // TODO: Esto para que se genero??
     public void calidadFoto(String calidad) {
-        this.calidadFoto = CalidadFoto.obtener(calidad);
+        this.calidadFoto = CalidadFoto.buscar(calidad);
     }
 
     public TamañoFoto tamañoFoto() {
