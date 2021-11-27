@@ -2,37 +2,145 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <title>Registro</title>
 </head>
 <body>
+
+<div id="nav">
+    <div class="col-4 "><img id="logo"
+                             src="https://cdn.discordapp.com/attachments/837008069972066334/913561013813669961/b373f71587e447fe80799afe1e3851531.png"/>
+    </div>
+</div>
+
 <section id="RegistrarUsuarioVue">
-    <div class="container py-4">
-        <div class="row">
-            <div class="col-lg-7 mx-auto d-flex justify-content-center flex-column">
-                <div class="card d-flex justify-content-center p-4 shadow-lg">
-                    <div class="text-center">
-                        <h3 class="text-gradient text-primary">Regístrate</h3>
-                    </div>
-                    <form>
-
-                        <label> Usuario <br><input type="text" v-model="usuario" placeholder="Ingrese su nombre de usuario"></label><br>
-
-                        <label> Contraseña <br><input type="password" v-model="contrasenia" placeholder="Ingrese su contraseña"></label><br>
-
-                        <label> Repita la contraseña <br><input type="password" v-model="repeticionContrasenia" placeholder="Ingrese la misma contraseña"></label><br>
-
-                        <br><br>
-                        <input type="submit" value="Crear Usuario"  v-on:click="enviarDatos">
-                    </form>
-                </div>
-            </div>
+    <div id="menu">
+        <div class="text-center">
+            <h3>Regístrate</h3>
         </div>
+        <div id="datos">
+            <div id="formulario">
+
+                <div class="text-center">
+                    <label class="input-registro"> Usuario <br><input type="text" v-model="usuario"
+                                                                      placeholder="Ingrese su nombre de usuario"></label><br>
+                    <label class="input-registro"> Contraseña <br><input type="password" v-model="contrasenia"
+                                                                         placeholder="Ingrese su contraseña"></label><br>
+                    <label class="input-registro"> Repita la contraseña <br><input type="password"
+                                                                                   v-model="repeticionContrasenia"
+                                                                                   placeholder="Ingrese la misma contraseña"></label><br>
+                    <input id="boton" type="submit" value="Crear Usuario" v-on:click="enviarDatos">
+                </div>
+
+            </div>
+
+            <div id="cajaImagen"></div>
+        </div>
+
     </div>
 </section>
 
 <script src="registrarUsuarioVue.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    if(document.body.clientWidth < 650) {
+        document.getElementById("cajaImagen").style.display = "none"
+    }
+</script>
 </body>
 </html>
+
+
+<style>
+
+    body
+    {
+        background-image: url(https://bit.ly/2ZmpIaE);
+    }
+
+    #menu
+    {
+        background-color:rgb(152, 89, 179);
+        border: 2px solid black;
+        border-radius: 5px;
+        margin-top: 40px;
+        margin-left: 10vh;
+        margin-right: 10vh;
+    }
+
+    #datos
+    {
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    #formulario
+    {
+
+        background-color: rgb(235, 218, 242);
+        border: 2px solid black;
+        border-radius: 5px;
+        width: -webkit-fill-available;
+        justify-content: center;
+        height: 65vh;
+    }
+
+    #nav
+    {
+        color:white;
+        background-color:rgb(152, 89, 179);
+        height: 7vh;
+    }
+
+    #boton
+    {
+        color:white;
+        background-color:rgb(152, 89, 179);
+        height: 7vh;
+        width: 30%;
+        margin-bottom: 10vh;
+        margin-top: 6vh;
+    }
+
+    .input-registro
+    {
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 5vh;
+    }
+
+    h3
+    {
+        color:black;
+    }
+
+    #cajaImagen
+    {
+        background: #D0E4F5 url(https://www.hola.com/imagenes/estar-bien/20190412140510/razas-de-perro-para-convivir-con-gato/0-668-422/perros-gatos-t.jpg) no-repeat local 50% 50%;
+        background-size: cover;
+        border: 2px solid black;
+        height: 65vh;
+        width: -webkit-fill-available;
+        border-radius: 5px;
+        height: 65vh;
+    }
+
+    @media(max-width: 600px)
+    {
+        #cajaImagen
+        {
+            display: none;
+            background: none;
+            border: 30px;
+        }
+    }
+
+</style>
