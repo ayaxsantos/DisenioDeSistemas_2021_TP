@@ -25,7 +25,7 @@ var appPanelAdministracionVue = new Vue({
                 this.caracteristicas = []
                 this.calidadElegida = ''
                 this.tamanioElegido= ''
-                fetch("http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/panelAdministracion", {
+                fetch("https://rescate-de-patitas-g6-1.herokuapp.com/organizacion/" + this.orgElegida.toString() + "/panelAdministracion", {
                     headers: {
                         "Authorization": idSesion // Enviamos el ID de sesion como header...
                     }
@@ -54,7 +54,7 @@ var appPanelAdministracionVue = new Vue({
                     usuariosAdministradores: this.usuariosAdmins
                 }
                 console.log(JSON.stringify(response))
-                this.realizarActualizacion(response,"http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/actualizarAdministradores")
+                this.realizarActualizacion(response,"https://rescate-de-patitas-g6-1.herokuapp.com/organizacion/" + this.orgElegida.toString() + "/actualizarAdministradores")
             },
             agregarFilaCaracteristicas: function(){
                 if(this.caracteristicas.length != 0)
@@ -78,7 +78,7 @@ var appPanelAdministracionVue = new Vue({
                         )
                     }
                 console.log(JSON.stringify(response))
-                this.realizarActualizacion(response,"http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/actualizarCaracteristicas")
+                this.realizarActualizacion(response,"https://rescate-de-patitas-g6-1.herokuapp.com/organizacion/" + this.orgElegida.toString() + "/actualizarCaracteristicas")
             },
             actualizarDetalleFotos: function()
             {
@@ -87,7 +87,7 @@ var appPanelAdministracionVue = new Vue({
                     tamañoFoto: this.tamanioElegido
                 }
                 console.log(JSON.stringify(response))
-                this.realizarActualizacion(response,"http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/actualizarDetalleFotos")
+                this.realizarActualizacion(response,"https://rescate-de-patitas-g6-1.herokuapp.com/organizacion/" + this.orgElegida.toString() + "/actualizarDetalleFotos")
             },
             realizarActualizacion: function(response,input)
             {
@@ -107,15 +107,15 @@ var appPanelAdministracionVue = new Vue({
             }
         },
     created() {
-        fetch('http://localhost:8080/organizaciones/nombres')
+        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/organizaciones/nombres')
             .then(response => response.json()).then(json => {
             this.organizaciones = json;
         })
-        fetch('http://localhost:8080/datos/persona/calidadesFoto')
+        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/persona/calidadesFoto')
             .then(response => response.json()).then(json => {
             this.calidadesFotos = json.map(unaCalidad => unaCalidad.toUpperCase());
         })
-        fetch('http://localhost:8080/datos/persona/tamanioFotos')
+        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/persona/tamanioFotos')
             .then(response => response.json()).then(json => {
             this.tamaniosFotos = json.map(unTamanio => unTamanio.toUpperCase());
         })

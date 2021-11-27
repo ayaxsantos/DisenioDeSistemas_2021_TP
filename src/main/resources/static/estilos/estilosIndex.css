@@ -1,0 +1,60 @@
+body
+{
+    background-image: url("../img/fondo.jpg");
+}
+
+#menu{
+    background-color:rgb(152, 89, 179);
+    width: 80vw;
+    height: 80vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 5vh;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#cajaInteractiva{
+    background-color: rgb(235, 218, 242);
+    border: 2px solid black;
+    height: 30vh;
+    border-radius: 5px;
+}
+
+#cajaImagen1{
+    background: #D0E4F5 url("../img/perrito.jpg");
+    background-size: cover;
+    border: 2px solid black;
+    height: 30vh;
+    border-radius: 5px;
+}
+
+#cajaImagen2{
+    background: #D0E4F5 url("../img/gato.jpg") no-repeat local 50% 50%;
+    background-size: cover;
+    border: 2px solid black;
+    height: 30vh;
+    border-radius: 5px;
+}
+
+
+#rowMenu{
+    padding-top: 5vh;
+}
+
+#nav{
+    color:white;
+    background-color:rgb(152, 89, 179);
+    height: 7vh;
+}
+
+#titulo
+{
+    margin-top: 2vh;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+#logo{
+    height: 7vh;
+    margin-left: 2vw;
+}

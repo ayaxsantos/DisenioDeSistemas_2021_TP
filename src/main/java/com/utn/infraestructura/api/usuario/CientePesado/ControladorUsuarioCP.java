@@ -1,4 +1,4 @@
-package com.utn.infraestructura.api.usuario;
+package com.utn.infraestructura.api.usuario.CientePesado;
 
 import com.utn.casodeuso.rescatista.BuscarHogarTransito;
 import com.utn.casodeuso.usuario.CerrarSesion;
@@ -13,6 +13,7 @@ import com.utn.dominio.hogar.ValidacionHogar;
 import com.utn.dominio.hogar.criterios.*;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.api.SesionManager;
+import com.utn.infraestructura.api.usuario.*;
 import com.utn.infraestructura.hogares.Hogar;
 import com.utn.infraestructura.hogares.ServicioHogares;
 import com.utn.infraestructura.persistencia.MascotasEnMySQL;
@@ -35,14 +36,14 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ControladorUsuario {
+public class ControladorUsuarioCP{
 
     private final IniciarSesion iniciarSesion;
     private final CerrarSesion cerrarSesion;
     private final Registrar registrar;
     private final BuscarHogarTransito buscarHogarTransito;
 
-    public ControladorUsuario() {
+    public ControladorUsuarioCP() {
         Usuarios usuariosEnMySQL = new UsuariosEnMySQL();
         Personas personasEnMySQL = new PersonasEnMySQL();
         Organizaciones organizacionesEnMySQL = new OrganizacionesEnMySQL();
@@ -65,7 +66,7 @@ public class ControladorUsuario {
 
     @PostMapping("usuarios/autenticar")
     public LoginResponse iniciarSesion(@RequestBody SolicitudIniciarSesion solicitudIniciarSesion,
-                                        HttpServletResponse response) {
+                                       HttpServletResponse response) {
         try {
             Usuario unUsuario = iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contrasenia());
             SesionManager sesionManager =  SesionManager.getInstance();

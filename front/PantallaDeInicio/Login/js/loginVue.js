@@ -32,6 +32,6 @@ function solicitudInicioSesion(unaSolicitud)
             localStorage.setItem("IDSESION", datos.idSesion)
             if(datos.idSesion == "-1")
                 alert("Usuario o contraseña invalido");
-            else window.location.href = "../../Home/index.html";
+            else window.location.href = "https://rescate-de-patitas-g6-1.herokuapp.com/Home/index.html";
         })
 }
