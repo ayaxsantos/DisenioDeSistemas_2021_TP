@@ -2,29 +2,35 @@ package com.utn.casodeuso.administrador;
 
 import com.utn.dominio.Administradores;
 import com.utn.dominio.Organizaciones;
+import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.excepcion.NoEsAdministradorDeLaOrganizacionException;
+import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
+
+import javax.persistence.NoResultException;
 
 public class AccederAdministrador
 {
     protected final Administradores administradores;
-    protected final Organizaciones organizaciones;
 
-    public AccederAdministrador(Administradores unosAdministradores, Organizaciones unasOrganizaciones)
+    public AccederAdministrador(Administradores administradores)
     {
-        this.administradores = unosAdministradores;
-        this.organizaciones = unasOrganizaciones;
+        this.administradores = administradores;
     }
 
-    public Organizacion ejecutar(String nombreUsuario, String nombreOrganizacion)
+    public Organizacion ejecutar(String nombreUsuario, String contraseña)
     {
-        Administrador unAdministrador = administradores.obtenerPorNombreUsuario(nombreUsuario);
-        Organizacion unaOrganizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
-        if(unaOrganizacion.esAdministrador(unAdministrador))
+        try
         {
-            return unaOrganizacion;
+            Administrador unAdministrador = administradores.obtenerPorNombreUsuario(nombreUsuario);
+            unAdministrador.iniciarSesion(nombreUsuario, contraseña);
+            return unAdministrador.getOrganizacion();
         }
-        else throw new NoEsAdministradorDeLaOrganizacionException();
+        catch(NoResultException | CredencialesInvalidasException e)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
     }
 }

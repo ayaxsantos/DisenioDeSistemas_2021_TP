@@ -7,7 +7,7 @@ const numeroDocumento = sessionStorage.getItem("numeroDocumento");
 var appRegistrarMascotaVue = new Vue({
     el: '#RegistrarMascotaVue',
     data: {
-        orgElegida: '',
+        orgElegida: 'info',
         organizaciones: [],
         caracteristicas: [],
         nombre: '',

@@ -2,32 +2,19 @@ body {
     background-image: url(../imagenes/fondo-pagina.png);
 }
 
-#imagenPatita {
-    max-width: 2vw;
+#imagenMenu {
+    background-size: cover;
+    background-position: center;
 }
 
-#nav {
-    height: 7vh;
-}
-
-input {
-    max-width: 50%;
-    margin: auto;
-}
-
-.col {
-    background-color: rgb(235, 218, 242);
+.col{
+    background-color:  rgb(235, 218, 242);
     padding: 10px;
     border-radius: 5px;
     border: 2px solid rgb(152, 89, 179);
+    margin-top: 20px;
     align-content: center;
     text-align: center;
-}
-
-.btn {
-    background-color: rgb(255, 224, 224);
-    border: 2px solid rgb(0, 0, 0);
-    margin-top: 1vh;
 }
 
 h2 {
@@ -39,14 +26,12 @@ h2 {
     margin: 1vh auto auto;
 }
 
-.menu {
-    background-color: #e0e0e0;
-    width: 80vw;
-    height: auto;
-    margin: 5vh 10vw;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding-bottom: 5vh;
+.seleccionRadio {
+    margin-right: 4px;
+}
+
+#nav {
+    height: 7vh;
 }
 
 .rowMenu {
@@ -55,14 +40,14 @@ h2 {
     margin-right: 1vw;
 }
 
-@media (max-width: 767px) {
-    #imagenPatita {
-        max-width: 3vw;
-    }
-
-    input{
-        max-width: 90%;
-    }
+#menu {
+    background-color: #e0e0e0;
+    width: 80vw;
+    height: auto;
+    margin: 5vh 10vw;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding-bottom: 5vh;
 }
 
 @media (max-width: 575px) {
@@ -80,4 +65,11 @@ h2 {
         padding-left: 3vh;
         padding-right: 3vh;
     }
+}
+
+@media (max-width: 425px) {
+    input{
+        width: 100%;
+    }
+
 }

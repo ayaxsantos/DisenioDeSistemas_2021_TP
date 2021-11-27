@@ -6,8 +6,8 @@ import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.foto.TamañoFoto;
+import com.utn.dominio.organizacion.CalidadFoto;
+import com.utn.dominio.organizacion.TamañoFoto;
 import com.utn.dominio.notificacion.estrategia.Email;
 import com.utn.dominio.notificacion.estrategia.SMS;
 import com.utn.dominio.notificacion.estrategia.WhatsApp;
@@ -40,14 +40,13 @@ public class PruebaTemporal {
     public void se_rescata_voluntario_con_sus_usuarios() {
         //Voluntario voluntario = voluntarios.obtenerPorNumeroDNI(5488759);
         Voluntario voluntario = voluntarios.obtenerPorNombreUsuario("pepe");
-        System.out.println(" Mi usuario es: " + voluntario.getUsuario().nombreUsuario() + " y contraseña: " + voluntario.getUsuario().getContraseña());
+        System.out.println(" Mi usuario es: " + voluntario.getUsuario() + " y contraseña: " + voluntario.getContrasenia());
     }
 
     @Test
     public void se_persiste_voluntario_en_db() {
         Organizacion organizacion = new Organizacion("nombre", new Direccion(3, 3), TamañoFoto.GRANDE, CalidadFoto.BAJA);
-        Usuario usuario = new Usuario("pepe", "hola1234");
-        Voluntario voluntario = new Voluntario(usuario, organizacion);
+        Voluntario voluntario = new Voluntario("pepe", "hola1234", organizacion);
 
         organizacion.añadirVoluntario(voluntario);
 
@@ -73,7 +72,7 @@ public class PruebaTemporal {
     public void se_rescata_admin_de_db() {
         Administradores administradores = new AdministradoresEnMySQL();
         Administrador administrador = administradores.obtenerPorNombreUsuario("pepeOwner");
-        System.out.println("Hola " + administrador.getUsuario().nombreUsuario());
+        System.out.println("Hola " + administrador.getUsuario());
     }
 
     @Test
@@ -87,12 +86,10 @@ public class PruebaTemporal {
         Usuario usuarioTest = new Usuario("pepebavutti", "noSeQuePoner...");
 
         Direccion domicilioOrgTest = new Direccion(5447.358, 5648.74);
-        Usuario usuarioVolTest = new Usuario("volOrg", "324ae41gg");
-        Usuario usuarioAdminTest = new Usuario("adminOrg", "32ad965min");
 
         Organizacion organizacionTest = new Organizacion("Patitas Juguetonas", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
-        Voluntario voluntarioTest = new Voluntario(usuarioVolTest, organizacionTest);
-        Administrador administradorTest = new Administrador(usuarioAdminTest, organizacionTest);
+        Voluntario voluntarioTest = new Voluntario("volOrg", "324ae41gg", organizacionTest);
+        Administrador administradorTest = new Administrador("adminOrg","32ad965min", organizacionTest);
 
         organizacionTest.agregarPreguntaAdopcion("Tu animal tiene vacunas?");
         organizacionTest.agregarPreguntaAdopcion("Tu animal es jugeton?");
@@ -323,40 +320,26 @@ public class PruebaTemporal {
         org2.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per6, new ArrayList<String>(){{add("Pileta");}}));
         org4.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per8, new ArrayList<String>(){{add("Balcon"); add("Plantas");}}));
 
-        Usuario usrAdmin1 = new Usuario("pepeOwner", "pepeo#123");
-        Usuario usrAdmin2 = new Usuario("juanOwner", "juan_cito(?123");
-        Usuario usrAdmin3 = new Usuario("mariaOwner", "maria_unica123");
-        Usuario usrAdmin4 = new Usuario("pedroOwner", "pedro_elduenio@123");
-        Usuario usrAdmin5 = new Usuario("joseOwner", "jose_nosequeponer%123");
-        Usuario usrAdmin6 = new Usuario("martaAdmin", "martita&123");
-        Usuario usrAdmin7 = new Usuario("celesteAdmin", "celeste_f123");
-        Administrador admin1 = new Administrador(usrAdmin1, org1);
-        Administrador admin2 = new Administrador(usrAdmin2, org2);
-        Administrador admin3 = new Administrador(usrAdmin3, org3);
-        Administrador admin4 = new Administrador(usrAdmin4, org4);
-        Administrador admin5 = new Administrador(usrAdmin5, org5);
+        Administrador admin1 = new Administrador("pepeOwner", "pepeo#123", org1);
+        Administrador admin2 = new Administrador("juanOwner", "juan_cito(?123", org2);
+        Administrador admin3 = new Administrador("mariaOwner", "maria_unica123", org3);
+        Administrador admin4 = new Administrador("pedroOwner", "pedro_elduenio@123", org4);
+        Administrador admin5 = new Administrador("joseOwner", "jose_nosequeponer%123", org5);
 
         org1.añadirAdministrador(admin1);
-        admin1.darAltaNuevoAdministrador(usrAdmin6);
+        admin1.darAltaNuevoAdministrador("martaAdmin", "martita&123");
         org2.añadirAdministrador(admin2);
         org3.añadirAdministrador(admin3);
-        admin3.darAltaNuevoAdministrador(usrAdmin7);
+        admin3.darAltaNuevoAdministrador("celesteAdmin", "celeste_f123");
         org4.añadirAdministrador(admin4);
         org5.añadirAdministrador(admin5);
 
-
-        Usuario usrVol1 = new Usuario("pepeVol", "pepe1rsd23");
-        Usuario usrVol2 = new Usuario("juanVol", "juan_cito(?123");
-        Usuario usrVol3 = new Usuario("mariaVol", "maria_unica123");
-        Usuario usrVol4 = new Usuario("pedroVol", "pedro_elduenio123");
-        Usuario usrVol5 = new Usuario("joseVol", "jose_nosequeponer123");
-        Usuario usrVol6 = new Usuario("martaVol", "martita123");
-        Voluntario vol1 = new Voluntario(usrVol1, org1);
-        Voluntario vol6 = new Voluntario(usrVol6, org1);
-        Voluntario vol2 = new Voluntario(usrVol2, org2);
-        Voluntario vol3 = new Voluntario(usrVol3, org3);
-        Voluntario vol4 = new Voluntario(usrVol4, org4);
-        Voluntario vol5 = new Voluntario(usrVol5, org5);
+        Voluntario vol1 = new Voluntario("pepeVol", "pepe1rsd23", org1);
+        Voluntario vol6 = new Voluntario("martaVol", "martita123", org1);
+        Voluntario vol2 = new Voluntario("juanVol", "juan_cito(?123", org2);
+        Voluntario vol3 = new Voluntario("mariaVol", "maria_unica123", org3);
+        Voluntario vol4 = new Voluntario("pedroVol", "pedro_elduenio123", org4);
+        Voluntario vol5 = new Voluntario("joseVol", "jose_nosequeponer123", org5);
 
         org1.añadirVoluntario(vol1);
         org1.añadirVoluntario(vol6);

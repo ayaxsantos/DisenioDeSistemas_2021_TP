@@ -7,13 +7,24 @@ import java.util.List;
 public class SolicitudActualizarAdministradores
 {
     @JsonProperty
-    private List<String> usuariosAdministradores;
+    private String adminNuevo;
 
-    public List<String> getUsuariosAdministradores() {
-        return usuariosAdministradores;
+    @JsonProperty
+    private String contrasenia;
+
+    public String getAdminNuevo() {
+        return adminNuevo;
     }
 
-    public void setUsuariosAdministradores(List<String> usuariosAdministradores) {
-        this.usuariosAdministradores = usuariosAdministradores;
+    public void setAdminNuevo(String adminNuevo) {
+        this.adminNuevo = adminNuevo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 }

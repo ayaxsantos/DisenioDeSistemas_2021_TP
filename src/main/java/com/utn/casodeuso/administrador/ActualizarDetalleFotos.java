@@ -1,23 +1,23 @@
 package com.utn.casodeuso.administrador;
 
 import com.utn.dominio.Administradores;
-import com.utn.dominio.Organizaciones;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.foto.TamañoFoto;
-import com.utn.dominio.organizacion.Organizacion;
+import com.utn.dominio.organizacion.Administrador;
+import com.utn.dominio.organizacion.CalidadFoto;
+import com.utn.dominio.organizacion.TamañoFoto;
 
-public class ActualizarDetalleFotos extends AccederAdministrador
+public class ActualizarDetalleFotos
 {
+    Administradores administradores;
 
-    public ActualizarDetalleFotos(Administradores unosAdministradores, Organizaciones unasOrganizaciones) {
-        super(unosAdministradores, unasOrganizaciones);
+    public ActualizarDetalleFotos(Administradores administradores) {
+        this.administradores = administradores;
     }
 
-    public void ejecutar(String nombreUsuario, String nombreOrganizacion, TamañoFoto unTamaño, CalidadFoto unaCalidad)
+    public void ejecutar(String nombreUsuario, String unTamaño, String unaCalidad)
     {
-        Organizacion unaOrganizacion = this.ejecutar(nombreUsuario,nombreOrganizacion);
-        unaOrganizacion.tamañoFoto(unTamaño);
-        unaOrganizacion.calidadFoto(unaCalidad);
-        organizaciones.guardar(unaOrganizacion);
+        Administrador unAdministrador = this.administradores.obtenerPorNombreUsuario(nombreUsuario);
+        unAdministrador.definirTamañoFoto(TamañoFoto.buscar(unTamaño));
+        unAdministrador.definirCalidadFoto(CalidadFoto.buscar(unaCalidad));
+        administradores.guardar(unAdministrador);
     }
 }

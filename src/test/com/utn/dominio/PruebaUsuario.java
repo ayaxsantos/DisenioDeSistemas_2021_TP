@@ -1,16 +1,11 @@
 package com.utn.dominio;
 
 import com.utn.dominio.excepcion.CredencialesInvalidasException;
-import com.utn.dominio.foto.TamañoFoto;
-import com.utn.dominio.foto.CalidadFoto;
-import com.utn.dominio.organizacion.Organizacion;
 
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.ContraseñaCortaException;
 import com.utn.dominio.excepcion.ContraseñaDebilException;
-import com.utn.dominio.excepcion.OrganizacionNoEncontradaException;
 
-import com.utn.dominio.persona.Direccion;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 

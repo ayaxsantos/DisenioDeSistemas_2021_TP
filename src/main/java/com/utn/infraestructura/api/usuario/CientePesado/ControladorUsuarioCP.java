@@ -3,8 +3,8 @@ package com.utn.infraestructura.api.usuario.CientePesado;
 import com.utn.casodeuso.rescatista.BuscarHogarTransito;
 import com.utn.casodeuso.usuario.CerrarSesion;
 import com.utn.casodeuso.usuario.IniciarSesion;
-
 import com.utn.casodeuso.usuario.Registrar;
+import com.utn.dominio.*;
 import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.ContraseñaDebilException;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
@@ -22,20 +22,13 @@ import com.utn.infraestructura.persistencia.UsuariosEnMySQL;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.utn.dominio.Hogares;
-
-import com.utn.dominio.Personas;
-import com.utn.dominio.Usuarios;
-import com.utn.dominio.Organizaciones;
-import com.utn.dominio.Mascotas;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ControladorUsuarioCP{
+public class ControladorUsuarioCP {
 
     private final IniciarSesion iniciarSesion;
     private final CerrarSesion cerrarSesion;
@@ -48,7 +41,7 @@ public class ControladorUsuarioCP{
         Organizaciones organizacionesEnMySQL = new OrganizacionesEnMySQL();
         Mascotas mascotasEnMySQL = new MascotasEnMySQL();
         Hogares hogares = new ServicioHogares();
-        
+
         List<ValidacionHogar> validaciones = new ArrayList<ValidacionHogar>() {{
             add(new CapacidadDisponible());
             add(new Cercania());
@@ -64,16 +57,14 @@ public class ControladorUsuarioCP{
     }
 
     @PostMapping("usuarios/autenticar")
-    public LoginResponse iniciarSesion(@RequestBody SolicitudIniciarSesion solicitudIniciarSesion,
-                                       HttpServletResponse response) {
+    public LoginResponse iniciarSesion(@RequestBody SolicitudIniciarSesion solicitud, HttpServletResponse response) {
         try {
-            Usuario unUsuario = iniciarSesion.ejecutar(solicitudIniciarSesion.nombreUsuario(), solicitudIniciarSesion.contrasenia());
-            SesionManager sesionManager =  SesionManager.getInstance();
-            String idSesion = sesionManager.crear("usuario",unUsuario);
+            Usuario unUsuario = iniciarSesion.ejecutar(solicitud.nombreUsuario(), solicitud.contrasenia());
+            SesionManager sesionManager = SesionManager.getInstance();
+            String idSesion = sesionManager.crear("usuario", unUsuario);
             System.out.println(idSesion);
             return new LoginResponse(idSesion);
-        }
-        catch(UsuarioNoEncontradoException e) {
+        } catch (UsuarioNoEncontradoException e) {
             return new LoginResponse("-1");
         }
     }
@@ -91,24 +82,19 @@ public class ControladorUsuarioCP{
 
     //TODO: Despues de registrar usuario, pedimos que vuelva a loguear??
     @PostMapping("registrar/usuario")
-    public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitud)
-    {
-        try{
+    public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitud) {
+        try {
             registrar.ejecutar(solicitud.getNombreUsuario(), solicitud.getContrasenia());
-        }
-        catch(ContraseñaDebilException e)
-        {
+        } catch (ContraseñaDebilException e) {
             return ResponseEntity.status(400).build();
-        }
-        catch(UsuarioYaRegistradoException e)
-        {
+        } catch (UsuarioYaRegistradoException e) {
             return ResponseEntity.status(404).body("Usuario ya registrado");
         }
         return ResponseEntity.status(200).build();
     }
 
     @GetMapping("buscar-hogar-de-transito")
-    public ResponseEntity buscarHogarDeTransito(SolicitudBuscarHogarTransito solicitudBuscarHogarTransito){
+    public ResponseEntity buscarHogarDeTransito(SolicitudBuscarHogarTransito solicitudBuscarHogarTransito) {
         List<Hogar> unosHogares = buscarHogarTransito.ejecutar(solicitudBuscarHogarTransito.getNombreUsuario(),
                 solicitudBuscarHogarTransito.getIdMascota());
         return ResponseEntity.status(200).body(unosHogares);

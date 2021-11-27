@@ -1,4 +1,4 @@
-package com.utn.dominio.foto;
+package com.utn.dominio.organizacion;
 
 import com.utn.dominio.excepcion.CalidadFotoNoValidaException;
 
@@ -18,9 +18,9 @@ public enum TamañoFoto {
 
     private final String valor;
 
-    public static CalidadFoto obtener(String valor) {
-        return Arrays.stream(CalidadFoto.values())
-                .filter(calidadFoto -> calidadFoto.coincide(valor))
+    public static TamañoFoto buscar(String valor) {
+        return Arrays.stream(TamañoFoto.values())
+                .filter(tamañoFoto -> tamañoFoto.coincide(valor))
                 .findFirst()
                 .orElseThrow(CalidadFotoNoValidaException::new);
     }
