@@ -7,7 +7,6 @@ public class LoginResponse {
     @JsonProperty
     private String idSesion;
 
-
     public LoginResponse(String idSesion) {
         this.idSesion = idSesion;
     }
