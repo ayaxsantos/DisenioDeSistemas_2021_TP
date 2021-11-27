@@ -8,16 +8,15 @@ var app = new Vue(
         methods: {
             iniciarSesion: function () {
                 solicitudInicioSesion({
-                        nombreUsuario : this.nombreUsuario,
-                        contrasenia : this.contrasenia
+                    nombreUsuario: this.nombreUsuario,
+                    contrasenia: this.contrasenia
                 })
             },
         }
     }
 )
 
-function solicitudInicioSesion(unaSolicitud)
-{
+function solicitudInicioSesion(unaSolicitud) {
     fetch("http://localhost:8080/usuarios/autenticar",
         {
             method: "POST",
@@ -30,12 +29,9 @@ function solicitudInicioSesion(unaSolicitud)
         .then(response => response.json())
         .then(datos => {
             localStorage.setItem("IDSESION", datos.idSesion)
-            if(datos.idSesion == "-1")
+            if (datos.idSesion == "-1")
                 alert("Usuario o contraseña invalido");
-<<<<<<< HEAD
-            else window.location.href = "https://rescate-de-patitas-g6-1.herokuapp.com/Home/index.html";
-=======
-            else window.location.href = "../../../inicio/home.html";
->>>>>>> master
+            else window.location.href = "../inicio/home";
+
         })
 }

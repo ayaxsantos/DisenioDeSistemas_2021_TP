@@ -1,6 +1,9 @@
 const tipoDocumento = sessionStorage.getItem("tipoDocumento");
 const numeroDocumento = sessionStorage.getItem("numeroDocumento");
 
+
+
+
 var appRegistrarMascotaVue = new Vue({
     el: '#RegistrarMascotaVue',
     data: {

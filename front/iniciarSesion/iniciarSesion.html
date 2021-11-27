@@ -14,18 +14,18 @@
         <title>Bienvenido A Rescate de patitas</title>
     </head>
 
-    <body style="background-color: #e0e0e0">
+    <body>
         <section>
             <div class="container"><br>
                 <div id="loginVue" class="row align-items-center" >
 
                     <div class = "d-none d-xl-block col-xl-6">
-                        <img src="./img/fondo.png" style="border: 2px solid black; border-radius: 5px;">
+                        <img id="fondoLogin" src="img/fondo.png">
                     </div>
 
-                    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-xl-4 offset-xl-1 shadow-lg" style="height: 450px; background-color: rgb(152, 89, 179); border: 2px solid black; border-radius: 5px;">
-                        <form class = "text-center" role="form" id="login" method="post" autocomplete="off" style=" background-color: rgb(152, 89, 179); border-radius: 5px"><br>
-                            <h1 class="text-center" style= "font-family: 'Luckiest Guy', cursive;">RESCATE DE PATITAS!!</h1><br>
+                    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-xl-4 offset-xl-1 shadow-lg" id="contenedorLogin">
+                        <form class = "text-center" role="form" id="login" method="post" autocomplete="off"><br>
+                            <img class="mb-2" src="../imagenes/logo-largo.png" id="logo"><br>
                                 <div class="row">
                                     <div class="col-12 col-lg-10 offset-lg-1">
                                         <div class="input-group mb-4">
@@ -41,16 +41,16 @@
                                     </div>
                                 </div><br>
                                 <!--<p class="text-danger" v-if ="estadoAutenticacion == false"><u>Error: Usuario o contraseña invalida</u></p>-->
-                                <button type="submit" v-on:click="iniciarSesion" class="btn mb-2" style="background-color: rgb(235, 218, 242); border: 2px solid rgb(204, 101, 187);">Acceder</button><br>
+                                <button id="botonLogin" type="submit" v-on:click="iniciarSesion" class="btn mb-2">Acceder</button><br>
                                 <a href="javascript:;" class="text-dark mb-4"><u>Continuar sin iniciar sesión</u></a>
                         </form><br>
                         <div class="col-12 col-md-1">
-                                <img src="./img/patita.png" style="height: 50px; width: 50px;" placeholder="Imagen patita">
+                                <img src="./img/patita.png" id="imagenPatita" placeholder="Imagen patita">
                             </div>
                         </div><br>
                 </div>
             </div>
         </section>
-        <script src="js/loginVue.js"></script>
+        <script src="iniciarSesion.js"></script>
     </body>
 </html>

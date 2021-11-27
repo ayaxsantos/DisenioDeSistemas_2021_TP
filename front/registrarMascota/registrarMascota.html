@@ -13,66 +13,97 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top" id="nav">
     <div class="container-fluid">
         <a class="navbar-brand" href="../inicio/home.html">
-            <img src="https://cdn.discordapp.com/attachments/837008069972066334/913561013813669961/b373f71587e447fe80799afe1e3851531.png"
+            <img src="../imagenes/logo-largo.png"
                  alt="logo">
         </a>
     </div>
 </nav>
 
 
-
-<img style="max-width: 100vw;" src="https://user-images.githubusercontent.com/62707565/142464421-bd2fff64-476c-496f-8039-f981fb1c6cae.png"
-alt="Perro y gato"/>
-<h2>🐶 Completa los datos de tu mascota 🐶</h2>
 <div id="RegistrarMascotaVue">
+    <h2>🐶 Completa los datos de tu mascota 🐶</h2>
+    <div id="menu">
+        <div class="row rowMenu">
+            <img class="col-6 offset-3" id="imagenMenu"
+                 src="img/foto-registrar-mascota.png"
+                 alt="Perro y gato">
+        </div>
+        <div class="row rowMenu">
 
-    <label>Nombre <input type="text" v-model="nombre" placeholder="Ingrese el nombre de la mascota"></label>
-    <label>Apodo <input type="text" v-model="apodo" placeholder="Ingrese el apodo de la mascota"></label>
-    <label>Edad <input type="number" v-model="edad" placeholder="Ingrese la edad de la mascota"></label>
-    <label>Descripción física<textarea v-model="descripcionFisica"
-                                       placeholder="Ingrese la descripción física de la mascota"></textarea></label>
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">Nombre<br>
+                <input type="text" v-model="nombre" placeholder="Ingrese el nombre de la mascota" required>
+            </label>
 
-    <label v-for="tipoAnimal in tiposAnimal">
-        <input type="radio" v-bind:value="tipoAnimal" name="tipoAnimalRadio" v-model="tipoAnimalSeleccionado">
-        {{tipoAnimal}}</label>
-    <label v-for="sexoAnimal in sexosAnimal">
-        <input type="radio" v-bind:value="sexoAnimal" name="sexoAnimalRadio" v-model="sexoAnimalSeleccionado">
-        {{sexoAnimal}}</label>
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">Apodo<br>
+                <input type="text" v-model="apodo" placeholder="Ingrese el apodo de la mascota" required>
+            </label>
 
-    <label v-for="tamanioAnimal in tamaniosAnimal">
-        <input type="radio" v-bind:value="tamanioAnimal" name="tamanioAnimalRadio" v-model="tamanioAnimalSeleccionado">
-        {{tamanioAnimal}}</label>
-    <br><label>Los selecionados son: {{ tipoAnimalSeleccionado }} || {{ sexoAnimalSeleccionado }} || {{
-    tamanioAnimalSeleccionado }}</label><br>
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">Edad<br>
+                <input type="number" v-model="edad" placeholder="Ingrese la edad de la mascota" required>
+            </label>
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">Descripción física<br>
+                <input type="text" v-model="descripcionFisica" placeholder="Ingrese la descripción de la mascota"
+                       required>
+            </label>
 
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">¿Qué animal es? <br>
+                <label v-for="tipoAnimal in tiposAnimal" class="seleccionRadio">
+                    <input type="radio" v-bind:value="tipoAnimal" name="tipoAnimalRadio"
+                           v-model="tipoAnimalSeleccionado">
+                    {{tipoAnimal}}
+                </label>
+            </label>
 
-    <label>Fotos de tu mascota<input type="file" @change="agregarFotos($event)"
-                                     accept="image/png, image/jpg, image/jpeg" multiple></label>
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">¿Qué sexo tiene? <br>
+                <label v-for="sexoAnimal in sexosAnimal" class="seleccionRadio">
+                    <input type="radio" v-bind:value="sexoAnimal" name="sexoAnimalRadio"
+                           v-model="sexoAnimalSeleccionado">
+                    {{sexoAnimal}}</label>
+            </label>
 
-    <label>Organizaciones actuales
-        <select v-model="orgElegida" @change="cambioOrg()">
-            <option selected disabled>Selecciona una opción</option>
-            <option v-for="organizacion in organizaciones" v-bind:value="organizacion">{{ organizacion }}</option>
-        </select>
-    </label>
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">¿Qué tan grande es?<br>
+                <label v-for="tamanioAnimal in tamaniosAnimal" class="seleccionRadio">
+                    <input type="radio" v-bind:value="tamanioAnimal" name="tamanioAnimalRadio"
+                           v-model="tamanioAnimalSeleccionado">
+                    {{tamanioAnimal}}</label>
+            </label>
 
-    <span>Seleccionado: {{ orgElegida }}</span>
+            <label class="col-xxl-3 col-xl-4 col-md-6 col-12">Fotos de tu mascota<br>
+                <input type="file" @change="agregarFotos($event)"
+                       accept="image/png, image/jpg, image/jpeg" multiple></label>
 
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Característica</th>
-            <th>Respuesta</th>
-        </tr>
-        <tr v-for="caracteristica in caracteristicas">
-            <td>{{ caracteristica.name }}</td>
-            <td><input type="text" placeholder="" name="caracteristica" v-model="caracteristica.value"></td>
-        </tr>
-    </table>
-    <input type="submit" value="Registrar" v-on:click="enviarDatos">
+            <label class="col-xxl-3 col-xl-4 col-md-12 col-12">Organizaciones actuales<br>
+                <select v-model="orgElegida" @change="cambioOrg()">
+                    <option selected disabled>Selecciona una opción</option>
+                    <option v-for="organizacion in organizaciones" v-bind:value="organizacion">{{ organizacion }}
+                    </option>
+                </select>
+            </label>
+            <div class="col-xxl-6 col-xl-8 col-md-9 col-12">
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Característica</th>
+                        <th>Respuesta</th>
+                    </tr>
+                    <tr v-for="caracteristica in caracteristicas">
+                        <td>{{ caracteristica.name }}</td>
+                        <td><input type="text" placeholder="" name="caracteristica" v-model="caracteristica.value"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-xxl-3 col-xl-4 col-md-3 col-12 text-center" id="botonRegistrar"><input type="submit"
+                                                                                            value="Registrar"
+                                                                                            v-on:click="enviarDatos">
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script src="registrarMascotaVue.js"></script>
+<script src="registrarMascota.js"></script>
 </body>
 </html>
 

@@ -1,5 +1,5 @@
-var RegistrarUsuarioVue = new Vue({
-    el: '#RegistrarUsuarioVue',
+var RegistrarUsuario = new Vue({
+    el: '#RegistrarUsuario',
     data: {
         usuario: '',
         contrasenia: '',

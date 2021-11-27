@@ -14,19 +14,22 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top" id="nav">
     <div class="container-fluid">
         <a class="navbar-brand brandNav-full" href="#">
-            <img src="https://cdn.discordapp.com/attachments/837008069972066334/913561013813669961/b373f71587e447fe80799afe1e3851531.png"
+            <img src="../imagenes/logo-largo.png"
                  alt="logo">
         </a>
         <a class="navbar-brand brandNav-small" href="#">
-            <img src="https://cdn.discordapp.com/attachments/837008069972066334/913902576142020688/Untitled.png"
+            <img src="../imagenes/logo-corto.png"
                  alt="logo">
         </a>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item active">
-                <button type="submit" class="btn botonNav-full" id="botonIniciarSesion">Iniciar sesion</button>
+                <button onclick="location.href='../iniciarSesion/iniciarSesion.html'" type="button" class="btn botonNav-full" id="botonIniciarSesion">Iniciar sesion</button>
             </li>
             <li class="nav-item">
-                <button type="submit" class="btn botonNav-full" id="botonRegistrarse">Registrarse</button>
+                <button onclick="location.href='../registrarUsuario/registrarUsuario.html'" type="button" class="btn botonNav-full" id="botonRegistrarse">Registrarse</button>
+            </li>
+            <li class="nav-item" id="elementoCerrarSesion">
+                <button type="button" class="btn botonNav-full" id="botonCerrarSesion">Cerrar sesion</button>
             </li>
         </ul>
     </div>
@@ -34,23 +37,23 @@
 
 <div id="menu">
     <div class="row rowMenu">
-        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-1 cajaInteractiva" id="cajaInteractiva1">
+        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-1 cajaInteractiva" id="cajaRegistrarMascota">
             <button onclick="location.href='../registrarMascota/registrarMascota.html'" type="button" class="btn botonMenu-full">Registrar mascota</button>
         </div>
-        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-0 cajaInteractiva" id="cajaInteractiva2">
+        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-0 cajaInteractiva" id="cajaAdoptarMascota">
             <button type="button" class="btn botonMenu-full">Adoptar mascota</button>
         </div>
-        <div class="d-none d-xl-block col-xl-4 offset-1" id="cajaImagen1"></div>
+        <div class="d-none d-xl-block col-xl-4 offset-1" id="cajaImagenPerro"></div>
 
     </div>
     <div class="row rowMenu">
-        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-1 cajaInteractiva" id="cajaInteractiva3">
+        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-1 cajaInteractiva" id="cajaDarEnAdopcionMascota">
             <button type="button" class="btn botonMenu-full">Dar en adopción mascota</button>
         </div>
-        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-0 cajaInteractiva" id="cajaInteractiva4">
+        <div class="col-12 col-sm-5 col-xl-2 offset-xl-1 offset-sm-0 cajaInteractiva" id="cajaEncontreMascota">
             <button type="button" class="btn botonMenu-full">Encontre mascota</button>
         </div>
-        <div class="d-none d-xl-block col-xl-4 offset-1" id="cajaImagen2"></div>
+        <div class="d-none d-xl-block col-xl-4 offset-1" id="cajaImagenGato"></div>
         <div class="col-1"></div>
     </div>
 </div>

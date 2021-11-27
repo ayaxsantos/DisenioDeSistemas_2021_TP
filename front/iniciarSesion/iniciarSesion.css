@@ -1,0 +1,47 @@
+body
+{
+    background-color: #e0e0e0;
+}
+
+#fondoLogin
+{
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#contenedorLogin
+{
+    height: 450px;
+    background-color: rgb(152, 89, 179);
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#login
+{
+    background-color: rgb(152, 89, 179);
+    border-radius: 5px;
+}
+
+#logo
+{
+    width: 70%;
+}
+
+#botonLogin
+{
+    background-color: rgb(235, 218, 242);
+    border: 2px solid rgb(204, 101, 187);
+}
+
+#imagenPatita
+{
+    height: 50px;
+    width: 50px;
+}
+
+#botonRegistro
+{
+    background-color: rgb(152, 89, 179);
+    border: 2px solid black;
+}

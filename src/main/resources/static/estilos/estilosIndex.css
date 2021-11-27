@@ -21,7 +21,7 @@ body
     border-radius: 5px;
 }
 
-#cajaImagen1{
+#cajaImagenPerro{
     background: #D0E4F5 url("../img/perrito.jpg");
     background-size: cover;
     border: 2px solid black;
@@ -29,7 +29,7 @@ body
     border-radius: 5px;
 }
 
-#cajaImagen2{
+#cajaImagenGato{
     background: #D0E4F5 url("../img/gato.jpg") no-repeat local 50% 50%;
     background-size: cover;
     border: 2px solid black;
