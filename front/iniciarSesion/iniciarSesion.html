@@ -8,8 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:ital,wght@1,700&display=swap" rel="stylesheet">
 
-        <!-- development version, includes helpful console warnings -->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <link rel="stylesheet" href="iniciarSesion.css">
 
         <title>Bienvenido A Rescate de patitas</title>
     </head>
@@ -17,14 +16,14 @@
     <body>
         <section>
             <div class="container"><br>
-                <div id="loginVue" class="row align-items-center" >
+                <div id="loginVue" class="row align-items-center">
 
                     <div class = "d-none d-xl-block col-xl-6">
                         <img id="fondoLogin" src="img/fondo.png">
                     </div>
 
                     <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-xl-4 offset-xl-1 shadow-lg" id="contenedorLogin">
-                        <form class = "text-center" role="form" id="login" method="post" autocomplete="off"><br>
+                        <form class = "text-center" role="form" id="login" autocomplete="off"><br>
                             <img class="mb-2" src="../imagenes/logo-largo.png" id="logo"><br>
                                 <div class="row">
                                     <div class="col-12 col-lg-10 offset-lg-1">
@@ -36,21 +35,33 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-10 offset-lg-1">
                                         <div class="input-group input-group-dynamic">
-                                            <input type="password" v-model="contrasenia" id="contrasenia" class="form-control" placeholder="Contraseña">
+                                            <input type="password" v-model="contrasenia" id="contrasenia"  class="form-control" placeholder="Contraseña">
                                         </div>
                                     </div>
                                 </div><br>
                                 <!--<p class="text-danger" v-if ="estadoAutenticacion == false"><u>Error: Usuario o contraseña invalida</u></p>-->
-                                <button id="botonLogin" type="submit" v-on:click="iniciarSesion" class="btn mb-2">Acceder</button><br>
-                                <a href="javascript:;" class="text-dark mb-4"><u>Continuar sin iniciar sesión</u></a>
+                                <button id="botonLogin" v-on:click="iniciarSesion" class="btn mb-2">Acceder</button><br>
+                                <a v-on:click = "accederHome()" class="text-dark mb-4"><u>Continuar sin iniciar sesión</u></a>
                         </form><br>
-                        <div class="col-12 col-md-1">
-                                <img src="./img/patita.png" id="imagenPatita" placeholder="Imagen patita">
+
+                        <div class ="row">
+                            <div class="col-auto mr-auto">
+                                <img class ="mt-4" id="imagenPatita" src="./img/huellita-login.png" placeholder="Imagen patita">
                             </div>
-                        </div><br>
+                            <div class="col-auto mt-4">
+                                <a class="text-dark mb-4">¿No tenes cuenta?</a>
+                                <button id="botonRegistro" v-on:click="accederRegistro()"  type="submit" class="btn mb-2">Registrate</button>
+                            </div>
+                        </div>
+
+                    </div><br>
                 </div>
             </div>
         </section>
+
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="iniciarSesion.js"></script>
+
     </body>
 </html>
