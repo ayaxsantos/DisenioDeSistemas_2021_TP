@@ -1,10 +1,7 @@
 package com.utn.infraestructura.api.administrador;
 
 import com.utn.casodeuso.administrador.IniciarSesionAdmin;
-import com.utn.casodeuso.usuario.IniciarSesion;
-import com.utn.dominio.Administradores;
 import com.utn.dominio.Organizaciones;
-import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.organizacion.Administrador;
 import com.utn.dominio.organizacion.Organizacion;
@@ -13,7 +10,6 @@ import com.utn.infraestructura.api.usuario.LoginResponse;
 import com.utn.infraestructura.api.usuario.SolicitudIniciarSesion;
 import com.utn.infraestructura.persistencia.AdministradoresEnMySQL;
 import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
-import com.utn.infraestructura.persistencia.UsuariosEnMySQL;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,12 +33,13 @@ public class ControladorAdministrador {
 
     @GetMapping("organizacion/panelAdministracion")
     public ResponseEntity acceder(@RequestHeader("Authorization") String idAdmin) {
-        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
         Organizacion organizacion = administrador.getOrganizacion();
 
         RespuestaAcceso unaRespuesta = new RespuestaAcceso();
         List<String> usuarioAdmins = organizacion.getAdministradores().stream().map(Administrador::nombreUsuario).collect(Collectors.toList());
         List<String> caracteristicas = organizacion.getCaracteristicas();
+
         unaRespuesta.setUsuariosAdministradores(usuarioAdmins);
         unaRespuesta.setCalidadFoto(organizacion.calidadFoto());
         unaRespuesta.setTamanioFoto(organizacion.tamañoFoto());
@@ -53,32 +50,32 @@ public class ControladorAdministrador {
 
     @PostMapping("organizacion/panelAdministracion/actualizarCaracteristicas")
     public ResponseEntity actualizarCaracteristicas(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarCaracteristicas solicitud) {
-        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
         administrador.añadirCaracteristica(solicitud.getNuevaCaracteristica());
 
-        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.getOrganizacion().getNombre());
+        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.nombreOrganizacionAdministrada());
         this.organizacionesEnMySQL.guardar(organizacion);
         return ResponseEntity.status(200).build();
     }
 
     @PostMapping("organizacion/panelAdministracion/actualizarDetalleFotos")
     public ResponseEntity actualizarDetalleFotos(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarDetalleFotos solicitud) {
-        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
         administrador.definirTamañoFoto(solicitud.getTamanioFoto());
         administrador.definirCalidadFoto(solicitud.getCalidadFoto());
 
-        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.getOrganizacion().getNombre());
+        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.nombreOrganizacionAdministrada());
         this.organizacionesEnMySQL.guardar(organizacion);
         return ResponseEntity.status(200).build();
     }
 
     @PostMapping("organizacion/panelAdministracion/actualizarAdministradores")
     public ResponseEntity actualizarAdministradores(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarAdministradores solicitud) {
-        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
+        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
 
         administrador.darAltaNuevoAdministrador(solicitud.getAdminNuevo(), solicitud.getContrasenia());
 
-        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.getOrganizacion().getNombre());
+        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.nombreOrganizacionAdministrada());
         this.organizacionesEnMySQL.guardar(organizacion);
         return ResponseEntity.status(200).build();
     }
@@ -86,7 +83,7 @@ public class ControladorAdministrador {
     @PostMapping("administradores/autenticar")
     public LoginResponse iniciarSesion(@RequestBody SolicitudIniciarSesion solicitud, HttpServletResponse response) {
         try {
-            Administrador administrador = iniciarSesion.ejecutar(solicitud.nombreUsuario(), solicitud.contrasenia());;
+            Administrador administrador = iniciarSesion.ejecutar(solicitud.nombreUsuario(), solicitud.contrasenia());
             SesionManager sesionManager =  SesionManager.getInstance();
             String idSesion = sesionManager.crear("administrador",administrador);
             System.out.println(idSesion);
@@ -97,7 +94,7 @@ public class ControladorAdministrador {
         }
     }
 
-    private Administrador obtenerUsuarioSesionManager(String idAdmin) {
+    private Administrador obtenerAdministradorSesionManager(String idAdmin) {
         SesionManager sesionManager = SesionManager.getInstance();
         Map<String, Object> unosDatos = sesionManager.obtenerAtributos(idAdmin);
         return (Administrador) unosDatos.get("administrador");

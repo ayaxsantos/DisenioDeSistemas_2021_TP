@@ -40,6 +40,11 @@ public class Administrador extends Usuario {
     public Organizacion getOrganizacion() {
         return organizacion;
     }
+
+    public String nombreOrganizacionAdministrada()
+    {
+        return this.organizacion.getNombre();
+    }
 }
 
 /*
