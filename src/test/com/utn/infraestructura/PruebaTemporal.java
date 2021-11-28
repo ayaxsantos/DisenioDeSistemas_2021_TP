@@ -84,6 +84,7 @@ public class PruebaTemporal {
         Direccion domicilioTest = new Direccion(1742.38, 2394.2);
         Contacto otroContactoTest = new Contacto("Isabela", "Ferriera", "+54 9 11 7855-4121", "iferriera@gmail.com");
         Usuario usuarioTest = new Usuario("pepebavutti", "noSeQuePoner...");
+        Preferencia preferenciaTest = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.MEDIANO);
 
         Direccion domicilioOrgTest = new Direccion(5447.358, 5648.74);
 
@@ -111,7 +112,7 @@ public class PruebaTemporal {
         otraMascotaTest.añadirCaracteristica("Garras", "Si");
         otraMascotaTest.añadirCaracteristica("Perdida de Pelo", "No");
 
-        Persona personaTest = new Persona(contactoTest, nacimientoTest, documentoTest, domicilioTest, otroContactoTest, usuarioTest, 32);
+        Persona personaTest = new Persona(usuarioTest, contactoTest, nacimientoTest, documentoTest, domicilioTest, preferenciaTest, new ArrayList<Contacto>(){{add(otroContactoTest);}}, 32);
         organizacionTest.añadirPersona(personaTest);
         personaTest.añadirMascota(mascotaTest);
         personaTest.añadirMascota(otraMascotaTest);
@@ -174,25 +175,26 @@ public class PruebaTemporal {
         //TODO : mascota fotos rellenar
         Contacto con1 = new Contacto("Juan", "Perez", "+54 9 11 75848544", "juanperez@gmail.com");
         Usuario usr1 = new Usuario("juanperez", "per@31Juan");
-        Persona per1 = new Persona(con1, LocalDate.of(1990, 4, 27), new Documento(TipoDocumento.DNI, 386514987), new Direccion(12133, 19783), new Contacto("Sofia", "Perez", "+54 9 11 74148879", "sofiaperez@gmail.com"), usr1, 10);
+        Preferencia pref1 = new Preferencia(Sexo.HEMBRA, Animal.PERRO, Tamaño.CHICO);
+        Persona per1 = new Persona(usr1, con1, LocalDate.of(1990, 4, 27), new Documento(TipoDocumento.DNI, 386514987), new Direccion(12133, 19783), pref1 ,new ArrayList<Contacto>(){{add(new Contacto("Sofia", "Perez", "+54 9 11 74148879", "sofiaperez@gmail.com"));}}, 10);
         Mascota masc1 = new Mascota("Mascota1", "Mascota1", 5, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, "desc Mascota1");
         Mascota masc2 = new Mascota("Mascota2", "Mascota2", 12, Animal.PERRO, Sexo.MACHO, Tamaño.CHICO, "desc Mascota2");
         Mascota masc3 = new Mascota("Mascota3", "Mascota3", 7, Animal.GATO, Sexo.HEMBRA, Tamaño.MEDIANO, "desc Mascota3");
         per1.añadirMascota(masc1);
         per1.añadirMascota(masc2);
         per1.añadirMascota(masc3);
-        per1.setPreferencia(new Preferencia(Sexo.HEMBRA, Animal.PERRO, Tamaño.CHICO));
 
         Contacto con2 = new Contacto("Esteban", "Sanchez", "+54 9 11 1243321", "estbansanchez@gmail.com");
         Usuario usr2 = new Usuario("estebanSanchez", "est.ez231");
-        Persona per2 = new Persona(con2, LocalDate.of(1967, 11, 21), new Documento(TipoDocumento.LICENCIA, 7889875), new Direccion(44488, 13454), new Contacto("Ricardo", "Sanchez", "+54 9 11 78554123", "ricsan@gmail.com"), usr2, 1);
+        Preferencia pref2 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.GRANDE);
+        Persona per2 = new Persona(usr2, con2, LocalDate.of(1967, 11, 21), new Documento(TipoDocumento.LICENCIA, 7889875), new Direccion(44488, 13454), pref2, new ArrayList<Contacto>(){{add(new Contacto("Ricardo", "Sanchez", "+54 9 11 78554123", "ricsan@gmail.com"));}}, 1);
         Mascota masc8 = new Mascota("Mascota8", "Mascota8", 21, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, "desc Mascota8");
         per2.añadirMascota(masc8);
-        per2.setPreferencia(new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.GRANDE));
 
         Contacto con3 = new Contacto("Jose", "Diaz", "+54 9 11 000000", "josediaz@gmail.com");
         Usuario usr3 = new Usuario("josaz", "josesito31-42");
-        Persona per3 = new Persona(con3, LocalDate.of(1987, 6, 12), new Documento(TipoDocumento.DNI, 14788695), new Direccion(45646, 13877), new Contacto("Marta", "diaz", "+54 9 11 78445689", "martitadiaz@gmail.com"), usr3, 3);
+        Preferencia pref3 = new Preferencia(Sexo.HEMBRA, Animal.GATO, Tamaño.MEDIANO);
+        Persona per3 = new Persona(usr3, con3, LocalDate.of(1987, 6, 12), new Documento(TipoDocumento.DNI, 14788695), new Direccion(45646, 13877), pref3, new ArrayList<Contacto>(){{add(new Contacto("Marta", "diaz", "+54 9 11 78445689", "martitadiaz@gmail.com"));}} , 3);
         Mascota masc4 = new Mascota("Mascota4", "Mascota4", 5, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, "desc Mascota4");
         Mascota masc5 = new Mascota("Mascota5", "Mascota5", 99, Animal.GATO, Sexo.HEMBRA, Tamaño.MEDIANO, "desc Mascota5");
         Mascota masc6 = new Mascota("Mascota6", "Mascota6", 1, Animal.PERRO, Sexo.MACHO, Tamaño.CHICO, "desc Mascota6");
@@ -201,32 +203,31 @@ public class PruebaTemporal {
         per3.añadirMascota(masc5);
         per3.añadirMascota(masc6);
         per3.añadirMascota(masc7);
-        per3.setPreferencia(new Preferencia(Sexo.HEMBRA, Animal.GATO, Tamaño.MEDIANO));
 
         Contacto con4 = new Contacto("Karen", "Lopez", "+54 9 11 1564566", "karenlopez@gmail.com");
         Usuario usr4 = new Usuario("karenlopez", "karendelbarrio@42");
-        Persona per4 = new Persona(con4, LocalDate.of(1970, 2, 1), new Documento(TipoDocumento.DNI, 11111119), new Direccion(97548, 16489), new Contacto("Lucas", "Perez", "+54 9 11 74148879", "lucasperez@gmail.com"), usr4, 7);
-        per4.setPreferencia(new Preferencia(Sexo.MACHO, Animal.GATO, Tamaño.GRANDE));
+        Preferencia pref4 = new Preferencia(Sexo.MACHO, Animal.GATO, Tamaño.GRANDE);
+        Persona per4 = new Persona(usr4, con4, LocalDate.of(1970, 2, 1), new Documento(TipoDocumento.DNI, 11111119), new Direccion(97548, 16489), pref4, new ArrayList<Contacto>(){{add(new Contacto("Lucas", "Perez", "+54 9 11 74148879", "lucasperez@gmail.com"));}}, 7);
 
         Contacto con5 = new Contacto("Peppa", "Pig", "+54 9 11 ", "peppitalacerdita@gmail.com");
         Usuario usr5 = new Usuario("peppapig", "peppa65%12");
-        Persona per5 = new Persona(con5, LocalDate.of(2002, 4, 27), new Documento(TipoDocumento.PASAPORTE, 788899777), new Direccion(12133, 19783), new Contacto("Peppe", "Pig", "+54 9 11 13547891", "peppeelcerdo@gmail.com"), usr5, 28);
-        per5.setPreferencia(new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.CHICO));
+        Preferencia pref5 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.CHICO);
+        Persona per5 = new Persona(usr5, con5, LocalDate.of(2002, 4, 27), new Documento(TipoDocumento.PASAPORTE, 788899777), new Direccion(12133, 19783), pref5, new ArrayList<Contacto>(){{add(new Contacto("Peppe", "Pig", "+54 9 11 13547891", "peppeelcerdo@gmail.com"));}},28);
 
         Contacto con6 = new Contacto("Lionel", "Messi", "+54 9 11 78874569", "traemelacopa@gmail.com");
         Usuario usr6 = new Usuario("lioeluno", "messi-10-barca");
-        Persona per6 = new Persona(con6, LocalDate.of(1921, 1, 1), new Documento(TipoDocumento.DNI, 15447875), new Direccion(4564236, 138177), new Contacto("Diego", "Maradona", "+54 9 11 47887542", "eldiegote10@gmail.com"), usr6, 100);
-        per6.setPreferencia(new Preferencia(Sexo.HEMBRA, Animal.GATO, Tamaño.CHICO));
+        Preferencia pref6 = new Preferencia(Sexo.HEMBRA, Animal.GATO, Tamaño.CHICO);
+        Persona per6 = new Persona(usr6, con6, LocalDate.of(1921, 1, 1), new Documento(TipoDocumento.DNI, 15447875), new Direccion(4564236, 138177), pref6, new ArrayList<Contacto>(){{add(new Contacto("Diego", "Maradona", "+54 9 11 47887542", "eldiegote10@gmail.com"));}},100);
 
         Contacto con7 = new Contacto("Kun", "Aguero", "+54 9 11 48678654", "elkun@gmail.com");
         Usuario usr7 = new Usuario("kunaguero", "457elkun@42");
-        Persona per7 = new Persona(con7, LocalDate.of(1945, 2, 11), new Documento(TipoDocumento.LICENCIA, 19115119), new Direccion(135468, 286489), new Contacto("Lionel", "Messi", "+54 9 11 78874569", "traemelacopa@gmail.com"), usr7, 165);
-        per7.setPreferencia(new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.GRANDE));
+        Preferencia pref7 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.GRANDE);
+        Persona per7 = new Persona(usr7, con7, LocalDate.of(1945, 2, 11), new Documento(TipoDocumento.LICENCIA, 19115119), new Direccion(135468, 286489), pref7, new ArrayList<Contacto>(){{add(new Contacto("Lionel", "Messi", "+54 9 11 78874569", "traemelacopa@gmail.com"));}}, 165);
 
         Contacto con8 = new Contacto("Celeste", "Rubino", "+54 9 11 78774112", "celesterubino@gmail.com");
         Usuario usr8 = new Usuario("celesrubi", "rubi99celes@");
-        Persona per8 = new Persona(con8, LocalDate.of(1998, 1, 13), new Documento(TipoDocumento.PASAPORTE, 74487), new Direccion(564789, 148477), new Contacto("Pepe", "Rubino", "+54 9 11 78745521", "peperubino@gmail.com"), usr8, 79);
-        per8.setPreferencia(new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.MEDIANO));
+        Preferencia pref8 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.MEDIANO);
+        Persona per8 = new Persona(usr8, con8, LocalDate.of(1998, 1, 13), new Documento(TipoDocumento.PASAPORTE, 74487), new Direccion(564789, 148477), pref8, new ArrayList<Contacto>(){{add(new Contacto("Pepe", "Rubino", "+54 9 11 78745521", "peperubino@gmail.com"));}}, 79);
 
         con1.añadirMedioDeComunicacion(new SMS(new NotificadorTwilio(), false));
         con1.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));

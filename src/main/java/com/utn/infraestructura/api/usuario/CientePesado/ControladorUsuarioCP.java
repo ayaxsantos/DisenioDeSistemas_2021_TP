@@ -84,6 +84,7 @@ public class ControladorUsuarioCP {
     public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitud) {
         try {
             registrar.ejecutar(solicitud.getNombreUsuario(), solicitud.getContrasenia());
+
         } catch (ContraseñaDebilException e) {
             return ResponseEntity.status(400).build();
         } catch (UsuarioYaRegistradoException e) {

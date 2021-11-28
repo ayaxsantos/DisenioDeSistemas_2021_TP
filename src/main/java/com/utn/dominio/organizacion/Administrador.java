@@ -29,7 +29,7 @@ public class Administrador extends Usuario {
     }
 
     public void añadirCaracteristica(String caracteristica) {
-        organizacion.añadirCaracteristica(caracteristica);
+        this.organizacion.añadirCaracteristica(caracteristica);
     }
 
     public void darAltaNuevoAdministrador(String usuario, String contrasenia) {
@@ -41,72 +41,3 @@ public class Administrador extends Usuario {
         return organizacion;
     }
 }
-
-/*
-@Entity
-@Table(name = "administrador")
-public class Administrador extends EntidadPersistente {
-
-    @Column
-    private String usuario;
-
-    @Column
-    private String contrasenia;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Organizacion organizacion;
-
-    @Transient
-    private boolean estaLogueado = false;
-
-    public Administrador(String usuario, String contrasenia, Organizacion organizacion) {
-        ValidadorContraseña.ejecutar(contrasenia);
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
-        this.organizacion = organizacion;
-    }
-
-    public Administrador()
-    {
-
-    }
-
-    public void definirTamañoFoto(TamañoFoto unTamaño) {
-        organizacion.tamañoFoto(unTamaño);
-    }
-
-    public void definirCalidadFoto(CalidadFoto unaCalidad) {
-        organizacion.calidadFoto(unaCalidad);
-    }
-
-    public void añadirCaracteristica(String caracteristica) {
-        organizacion.añadirCaracteristica(caracteristica);
-    }
-
-    public void darAltaNuevoAdministrador(String usuario, String contrasenia) {
-        Administrador adminNuevo = new Administrador(usuario, contrasenia, this.organizacion);
-        this.organizacion.añadirAdministrador(adminNuevo);
-    }
-
-    public void iniciarSesion(String usuario, String contraseña) {
-        if(!this.usuario.equals(usuario) || !this.contrasenia.equals(contraseña))
-            throw new CredencialesInvalidasException();
-        this.estaLogueado = true;
-    }
-
-    public void cerrarSesion() {
-        this.estaLogueado = false;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public Organizacion getOrganizacion() {
-        return organizacion;
-    }
-}*/

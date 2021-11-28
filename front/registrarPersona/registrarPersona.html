@@ -34,7 +34,7 @@
             </label>
 
             <div class="col">
-                <label for="documento">
+                <label>
                     <input type="number" v-model="numeroDocumento" placeholder="Ingrese numero de documento">
                 </label><br>
                 <label v-for="tipoDocumento in tiposDocumento">
@@ -101,7 +101,7 @@
                     <label><input type="checkbox" v-model="nuevoContacto.smsPref">SMS</label>
                     <label><input type="checkbox" v-model="nuevoContacto.emailPref">Email</label>
                 </label>
-                <button type="submit" class="btn mb-2" @click="actualizarContactos()"> Guardar</button>
+                <button type="submit" class="btn mb-2" @click="actualizarContactos()">Guardar</button>
             </div>
 
             <div class="col">

@@ -19,6 +19,8 @@ var appRegistrarMascotaVue = new Vue({
         tiposAnimal: [],
         sexosAnimal: [],
         tamaniosAnimal: [],
+        numeroDocumentoDuenio: '',
+        tipoDocumentoDuenio: ''
     },
     methods: {
         cambioOrg() {
@@ -29,11 +31,11 @@ var appRegistrarMascotaVue = new Vue({
                     unasCaracteristicas.forEach(caracteristica =>
                         this.caracteristicas.push({name: caracteristica, value: ""})));
         },
-        enviarDatos() {
-            var solicitudRegistroMascota = {
+        async guardarDatos() {
+            const solicitud = {
                 organizacion: this.orgElegida,
-                numeroDocumento: '',
-                tipoDocumento: '',
+                numeroDocumento: this.numeroDocumentoDuenio,
+                tipoDocumento: this.tipoDocumentoDuenio,
                 nombre: this.nombre,
                 tipoAnimal: this.tipoAnimalSeleccionado,
                 apodo: this.apodo,
@@ -43,41 +45,26 @@ var appRegistrarMascotaVue = new Vue({
                 descripcionFisica: this.descripcionFisica,
                 fotos: this.fotos,
                 caracteristicas: {}
-            }
-            console.log("idUsuario: " + idUsuario);
-            console.log("tipoDocumento: " + tipoDocumento);
-            //TODO no esta andando desde el idusuario, revisar
-            if(idUsuario != null){
-                fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}})
-                    .then(response => response.json()).then(documento => {
-                        solicitudRegistroMascota.numeroDocumento = documento.numero.toString();
-                        solicitudRegistroMascota.tipoDocumento = documento.tipo.toString();
-                })
-            } else if (numeroDocumento != null){
-                solicitudRegistroMascota.numeroDocumento = numeroDocumento;
-                solicitudRegistroMascota.tipoDocumento = tipoDocumento;
-            }
-            else {
-                alert("Debe iniciar sesión para registrar una mascota");
-                return;
-            }
-            var caracteristicasPreguntas = this.caracteristicas.map(caracteristica => caracteristica.name);
-            var caracteristicasRespuestas = this.caracteristicas.map(caracteristica => caracteristica.value);
-            caracteristicasPreguntas.forEach((key, i) => solicitudRegistroMascota.caracteristicas[key] = caracteristicasRespuestas[i]);
-            console.log(solicitudRegistroMascota);
+            };
+            const carPregs = this.caracteristicas.map(caracteristica => caracteristica.name);
+            const carRtas = this.caracteristicas.map(caracteristica => caracteristica.value);
+            carPregs.forEach((key, i) => solicitud.caracteristicas[key] = carRtas[i]);
+            return solicitud;
+        },
+        async enviarDatos() {
+            const solicitud = await this.guardarDatos();
             fetch("http://localhost:8080/registrar/mascota", {
                 method: "POST",
                 headers:
                     {
                         'Content-Type': 'application/json'
                     },
-                body: JSON.stringify(solicitudRegistroMascota)
+                body: JSON.stringify(solicitud)
             }).then(response => {
-                if (response.status >= 400) {
-                    alert("Hubo un error en el API")
+                if (response.status === 201) {
+                    location.href = "../inicio/home.html";
                 } else {
-                    console.log(response);
-                    return response.json()
+                    alert("Hubo un error en el API")
                 }
             })
         },
@@ -117,5 +104,16 @@ var appRegistrarMascotaVue = new Vue({
             .then(response => response.json()).then(json => {
             this.tamaniosAnimal = json;
         })
+        if (idUsuario) {
+            fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}}).then(response => response.json()).then(json => {
+                this.numeroDocumentoDuenio = json.numero;
+                this.tipoDocumentoDuenio = json.tipo;
+            })
+        } else if (numeroDocumento) {
+            this.numeroDocumentoDuenio = numeroDocumento;
+            this.tipoDocumentoDuenio = tipoDocumento;
+        } else {
+            location.href = "../registrarPersona/registrarPersona.html";
+        }
     }
 })

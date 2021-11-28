@@ -3,7 +3,12 @@ package com.utn.infraestructura.api.persona;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.utn.dominio.persona.Contacto;
+import com.utn.dominio.persona.Direccion;
+import com.utn.dominio.persona.Documento;
 import com.utn.dominio.persona.TipoDocumento;
+import com.utn.dominio.publicacion.Preferencia;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -15,26 +20,28 @@ public class SolicitudRegistrarPersona
     private String nombreUsuario;
 
     @JsonProperty
-    private TipoDocumento tipoDocumento;
+    private DatosContacto contactoPersonal;
 
     @JsonProperty
-    private int numeroDocumento;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaNacimiento;
 
     @JsonProperty
-    private int latitud;
+    private Documento documento;
 
     @JsonProperty
-    private int longitud;
+    private Double latitud;
 
     @JsonProperty
-    private List<String> mediosPreferidos;
+    private Double longitud;
+
+    @JsonProperty
+    private DatosPreferencia preferencia;
 
     @JsonProperty
     private List<DatosContacto> unosContactos;
+
+    @JsonProperty
+    private int radioHogares;
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -44,28 +51,12 @@ public class SolicitudRegistrarPersona
         this.nombreUsuario = nombreUsuario;
     }
 
-    public List<String> getMediosPreferidos() {
-        return mediosPreferidos;
+    public DatosContacto getContactoPersonal() {
+        return contactoPersonal;
     }
 
-    public void setMediosPreferidos(List<String> mediosPreferidos) {
-        this.mediosPreferidos = mediosPreferidos;
-    }
-
-    public TipoDocumento getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
-
-    public int getNumeroDocumento() {
-        return numeroDocumento;
-    }
-
-    public void setNumeroDocumento(int numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
+    public void setContactoPersonal(DatosContacto contactoPersonal) {
+        this.contactoPersonal = contactoPersonal;
     }
 
     public LocalDate getFechaNacimiento() {
@@ -76,20 +67,12 @@ public class SolicitudRegistrarPersona
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getLatitud() {
-        return latitud;
+    public Documento getDocumento() {
+        return documento;
     }
 
-    public void setLatitud(int latitud) {
-        this.latitud = latitud;
-    }
-
-    public int getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(int longitud) {
-        this.longitud = longitud;
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
     }
 
     public List<DatosContacto> getUnosContactos() {
@@ -98,5 +81,37 @@ public class SolicitudRegistrarPersona
 
     public void setUnosContactos(List<DatosContacto> unosContactos) {
         this.unosContactos = unosContactos;
+    }
+
+    public int getRadioHogares() {
+        return radioHogares;
+    }
+
+    public void setRadioHogares(int radioHogares) {
+        this.radioHogares = radioHogares;
+    }
+
+    public DatosPreferencia getPreferencia() {
+        return preferencia;
+    }
+
+    public void setPreferencia(DatosPreferencia preferencia) {
+        this.preferencia = preferencia;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
     }
 }

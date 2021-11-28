@@ -1,3 +1,6 @@
+localStorage.removeItem('tipoDocumento');
+localStorage.removeItem('numeroDocumento');
+
 var appInicirSesionVue = new Vue(
     {
         el: '#InicirSesionVue',
