@@ -42,7 +42,7 @@ public class ControladorPublicacion {
         Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
 
         generarPublicacionMascotaEncontrada.ejecutar(
-                unUsuario.nombreUsuario(),
+                unUsuario.getUsuario(),
                 solicitudCompletarFormularioMascotaEncontrada.getNombreOrganizacion(),
                 solicitudCompletarFormularioMascotaEncontrada.getLatitud(),
                 solicitudCompletarFormularioMascotaEncontrada.getLongitud(),
@@ -59,7 +59,7 @@ public class ControladorPublicacion {
         Usuario unUsuario = this.obtenerUsuarioSesionManager(idSesion);
 
         generarPublicacionBusquedaAdopcion.ejecutar(
-                unUsuario.nombreUsuario(),
+                unUsuario.getUsuario(),
                 solicitudGenerarPublicacionBusquedaAdopcion.getNombreOrganizacion(),
                 solicitudGenerarPublicacionBusquedaAdopcion.getComodidades());
         return  ResponseEntity.status(200).build();

@@ -29,7 +29,7 @@ public class RegistrarPersona {
         persona.setDomicilio(new Direccion(latitud, longitud));
 
         List<Contacto> unosContactos = datosContactos.stream().map(
-                unosDatos -> this.datosAContacto(unosDatos)
+                this::datosAContacto
         ).collect(Collectors.toList());
 
         List<MedioDeComunicacion> mediosDeComunicacion = this.obtenerMediosDeComunicacion(mediosPreferidos);

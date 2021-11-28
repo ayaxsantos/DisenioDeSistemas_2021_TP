@@ -55,7 +55,7 @@ public class PruebaTemporal {
 
     @Test
     public void se_rescata_persona_de_db() {
-        Persona persona = personas.obtenerPorNumeroDocumento(38554127, TipoDocumento.DNI.getDescripcion());
+        Persona persona = personas.obtenerPorNumeroDocumento(386514987, TipoDocumento.DNI);
 
         System.out.println("Hola" + persona);
 
@@ -159,8 +159,8 @@ public class PruebaTemporal {
 
     @Test
     public void se_actualiza_persona() {
-        Persona persona = personas.obtenerPorNumeroDocumento(38554127, TipoDocumento.DNI.getDescripcion());
-        persona.getUsuario().setNombreUsuario("InserteUsuarioGenerico");
+        Persona persona = personas.obtenerPorNumeroDocumento(38554127, TipoDocumento.DNI);
+        persona.getUsuario().setUsuario("InserteUsuarioGenerico");
         persona.setPreferencia(new Preferencia(Sexo.MACHO, Animal.GATO, Tamaño.GRANDE));
         persona.setEsAdoptante(true);
         persona.añadirMascota(new Mascota("nombre", "String apodo", 25, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, " String descripcionFisica"));

@@ -23,10 +23,6 @@ public enum TipoDocumento {
             .orElseThrow(RuntimeException::new);
     }
 
-    public String getDescripcion() {
-        return this.descripcion;
-    }
-
     public static List<String> getDescripciones() {
         return Arrays.stream(TipoDocumento.values())
                 .map(tipoDocumento -> tipoDocumento.descripcion)

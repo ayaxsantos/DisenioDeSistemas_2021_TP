@@ -16,7 +16,7 @@ public class PruebaUsuario {
     @Test
     public void un_usuario_con_contraseña_segura_se_genera_correctamente() {
         Usuario usuario = new Usuario(nombreUsuario, contraseñaSegura);
-        Assertions.assertEquals(usuario.nombreUsuario(), nombreUsuario);
+        Assertions.assertEquals(usuario.getUsuario(), nombreUsuario);
     }
 
     @Test
@@ -40,16 +40,6 @@ public class PruebaUsuario {
         String contraseñaValida = "Cont321Ho@13";
         usuario.iniciarSesion(nombreUsuarioValido, contraseñaValida);
         //Entonces el usuario se loguea correctamente
-        Assertions.assertTrue(usuario.estaLogueado());
-    }
-
-    @Test
-    public void un_usuario_cierra_sesion_correctamente() {
-        //Dado un usuario generado previamente en el sistema
-        Usuario usuario = new Usuario(nombreUsuario, contraseñaSegura);
-        usuario.setEstaLogueado(true);
-        usuario.cerrarSesion();
-        Assertions.assertFalse(usuario.estaLogueado());
     }
 
     @Test

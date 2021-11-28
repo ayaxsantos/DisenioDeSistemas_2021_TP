@@ -4,6 +4,7 @@ import com.utn.casodeuso.adoptante.QuererAdoptarMascota;
 import com.utn.casodeuso.persona.RegistrarPersona;
 import com.utn.dominio.Personas;
 import com.utn.dominio.autenticacion.Usuario;
+import com.utn.dominio.persona.Persona;
 import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,14 @@ public class ControladorPersona
         return ResponseEntity.status(200).build();
     }
 
+    @GetMapping("persona/documento")
+    public ResponseEntity obtenerDocumento(@RequestHeader("Authorization") String idSesion){
+        Usuario usuario = this.obtenerUsuarioSesionManager(idSesion);
+        Persona persona = new PersonasEnMySQL().obtenerPorNombreDeUsuario(usuario.getUsuario());
+
+        return ResponseEntity.status(200).body(persona.getDocumento());
+    }
+
     @PostMapping("mascotas-en-adopcion/adoptar")
     public ResponseEntity quererAdoptar(@RequestBody SolicitudQuieroAdoptar solicitudQuieroAdoptar,
                                         @RequestHeader("Authorization") String idSesionAdoptante)
@@ -44,7 +53,7 @@ public class ControladorPersona
         Usuario unUsuarioAdoptante = this.obtenerUsuarioSesionManager(idSesionAdoptante);
 
         quererAdoptarMascota.ejecutar(
-                unUsuarioAdoptante.nombreUsuario(),
+                unUsuarioAdoptante.getUsuario(),
                 solicitudQuieroAdoptar.getNombreUsuarioDuenio());
         return ResponseEntity.status(200).build();
     }

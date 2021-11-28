@@ -1,8 +1,6 @@
-const tipoDocumento = sessionStorage.getItem("tipoDocumento");
-const numeroDocumento = sessionStorage.getItem("numeroDocumento");
-
-
-
+const tipoDocumento = localStorage.getItem("tipoDocumento");
+const numeroDocumento = localStorage.getItem("numeroDocumento");
+const idUsuario = localStorage.getItem('idSesion');
 
 var appRegistrarMascotaVue = new Vue({
     el: '#RegistrarMascotaVue',
@@ -25,7 +23,7 @@ var appRegistrarMascotaVue = new Vue({
     methods: {
         cambioOrg() {
             this.caracteristicas = [];
-            fetch("https://rescate-de-patitas-g6-1.herokuapp.com/organizacion/" + this.orgElegida.toString() + "/caracteristicas")
+            fetch("http://localhost:8080/organizacion/" + this.orgElegida.toString() + "/caracteristicas")
                 .then(response => response.json())
                 .then(unasCaracteristicas =>
                     unasCaracteristicas.forEach(caracteristica =>
@@ -34,8 +32,8 @@ var appRegistrarMascotaVue = new Vue({
         enviarDatos() {
             var solicitudRegistroMascota = {
                 organizacion: this.orgElegida,
-                numeroDocumento: numeroDocumento,
-                tipoDocumento: tipoDocumento,
+                numeroDocumento: '',
+                tipoDocumento: '',
                 nombre: this.nombre,
                 tipoAnimal: this.tipoAnimalSeleccionado,
                 apodo: this.apodo,
@@ -46,11 +44,28 @@ var appRegistrarMascotaVue = new Vue({
                 fotos: this.fotos,
                 caracteristicas: {}
             }
+            console.log("idUsuario: " + idUsuario);
+            console.log("tipoDocumento: " + tipoDocumento);
+            //TODO no esta andando desde el idusuario, revisar
+            if(idUsuario != null){
+                fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}})
+                    .then(response => response.json()).then(documento => {
+                        solicitudRegistroMascota.numeroDocumento = documento.numero.toString();
+                        solicitudRegistroMascota.tipoDocumento = documento.tipo.toString();
+                })
+            } else if (numeroDocumento != null){
+                solicitudRegistroMascota.numeroDocumento = numeroDocumento;
+                solicitudRegistroMascota.tipoDocumento = tipoDocumento;
+            }
+            else {
+                alert("Debe iniciar sesión para registrar una mascota");
+                return;
+            }
             var caracteristicasPreguntas = this.caracteristicas.map(caracteristica => caracteristica.name);
             var caracteristicasRespuestas = this.caracteristicas.map(caracteristica => caracteristica.value);
             caracteristicasPreguntas.forEach((key, i) => solicitudRegistroMascota.caracteristicas[key] = caracteristicasRespuestas[i]);
             console.log(solicitudRegistroMascota);
-            fetch("https://rescate-de-patitas-g6-1.herokuapp.com/registrar/mascota", {
+            fetch("http://localhost:8080/registrar/mascota", {
                 method: "POST",
                 headers:
                     {
@@ -86,19 +101,19 @@ var appRegistrarMascotaVue = new Vue({
         }
     },
     created() {
-        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/organizaciones/nombres')
+        fetch('http://localhost:8080/organizaciones/nombres')
             .then(response => response.json()).then(json => {
             this.organizaciones = json;
         })
-        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/mascota/animal')
+        fetch('http://localhost:8080/datos/mascota/animal')
             .then(response => response.json()).then(json => {
             this.tiposAnimal = json;
         })
-        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/mascota/sexo')
+        fetch('http://localhost:8080/datos/mascota/sexo')
             .then(response => response.json()).then(json => {
             this.sexosAnimal = json;
         })
-        fetch('https://rescate-de-patitas-g6-1.herokuapp.com/datos/mascota/tamanio')
+        fetch('http://localhost:8080/datos/mascota/tamanio')
             .then(response => response.json()).then(json => {
             this.tamaniosAnimal = json;
         })

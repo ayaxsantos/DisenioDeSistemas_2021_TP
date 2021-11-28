@@ -44,12 +44,6 @@ public class SolicitudRegistrarMascota {
     @JsonProperty
     private HashMap<String, String> caracteristicas;
 
-    @JsonProperty
-    private List<String> caracteristicasPreguntas;
-
-    @JsonProperty
-    private List<String> caracteristicasRespuestas;
-
     public int numeroDocumento() {
         return this.numeroDocumento;
     }
@@ -88,14 +82,6 @@ public class SolicitudRegistrarMascota {
 
     public List<String> fotos() {
         return this.fotos;
-    }
-
-    public List<String> caracteristicasPreguntas() {
-        return this.caracteristicasPreguntas;
-    }
-
-    public List<String> caracteristicasRespuestas() {
-        return this.caracteristicasRespuestas;
     }
 
     public HashMap<String, String> caracteristicas() {
