@@ -5,6 +5,7 @@ import com.utn.dominio.Organizaciones;
 import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.organizacion.Organizacion;
+import com.utn.dominio.persona.TipoDocumento;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class GenerarPublicacionMascotaEnAdopcion {
     }
 
     public void ejecutar(int numeroDocumentoDueño, String tipoDocumento, String nombreMascota, String nombreOrganizacion, List<String> respuestasMascota) {
-        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño, tipoDocumento);
+        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño, TipoDocumento.buscar(tipoDocumento));
         Mascota mascotaDeDueño = personaDueño.buscarMascota(nombreMascota);
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
 

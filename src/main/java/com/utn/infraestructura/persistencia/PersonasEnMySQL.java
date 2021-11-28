@@ -2,6 +2,7 @@ package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Personas;
 import com.utn.dominio.persona.Persona;
+import com.utn.dominio.persona.TipoDocumento;
 
 
 public class PersonasEnMySQL implements Personas {
@@ -12,18 +13,21 @@ public class PersonasEnMySQL implements Personas {
 
         Persona unaPersona = (Persona) EntityManagerHelper.getEntityManager()
                 .createQuery("FROM Persona per WHERE EXISTS (FROM Usuario usr WHERE usr.usuario = '"
-                        + nombreUsuario +"' AND per.usuario = usr)").getSingleResult();
+                        + nombreUsuario + "' AND per.usuario = usr)").getSingleResult();
 
         EntityManagerHelper.commit();
         return unaPersona;
     }
 
     @Override
-    public Persona obtenerPorNumeroDocumento(int numeroDocumento, String tipoDocumento) {
+    public Persona obtenerPorNumeroDocumento(int numeroDocumento, TipoDocumento tipoDocumento) {
         EntityManagerHelper.beginTransaction();
 
         Persona persona = (Persona) EntityManagerHelper.getEntityManager()
-                .createQuery("FROM Persona per WHERE per.documento.numero = " + numeroDocumento).getSingleResult();
+                .createQuery("FROM Persona per WHERE EXISTS (FROM Documento doc WHERE doc.numero = ?1 AND doc.tipo = ?2 AND per.documento = doc.id)")
+                .setParameter(1, numeroDocumento)
+                .setParameter(2, tipoDocumento)
+                .getSingleResult();
 
         EntityManagerHelper.commit();
         return persona;

@@ -6,6 +6,7 @@ import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.mensaje.MensajeNotificarMascotaEncontrada;
 
 import com.utn.dominio.Personas;
+import com.utn.dominio.persona.TipoDocumento;
 
 public class NotificarMascotaEncontrada {
 
@@ -15,7 +16,7 @@ public class NotificarMascotaEncontrada {
         this.personas = personas;
     }
 
-    public void ejecutar(int numeroDocumentoRescatista, String tipoDocumentoRescatista, int numeroDocumentoDueño, String tipoDocumentoDueño, String nombreMascota){
+    public void ejecutar(int numeroDocumentoRescatista, TipoDocumento tipoDocumentoRescatista, int numeroDocumentoDueño, TipoDocumento tipoDocumentoDueño, String nombreMascota){
         Persona personaDueño =  personas.obtenerPorNumeroDocumento(numeroDocumentoDueño, tipoDocumentoDueño);
         Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDocumentoRescatista, tipoDocumentoRescatista);
 

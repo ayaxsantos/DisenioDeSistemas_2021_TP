@@ -41,7 +41,7 @@ public class ControladorAdministrador {
         Organizacion organizacion = administrador.getOrganizacion();
 
         RespuestaAcceso unaRespuesta = new RespuestaAcceso();
-        List<String> usuarioAdmins = organizacion.getAdministradores().stream().map(Administrador::nombreUsuario).collect(Collectors.toList());
+        List<String> usuarioAdmins = organizacion.getAdministradores().stream().map(Administrador::getUsuario).collect(Collectors.toList());
         List<String> caracteristicas = organizacion.getCaracteristicas();
         unaRespuesta.setUsuariosAdministradores(usuarioAdmins);
         unaRespuesta.setCalidadFoto(organizacion.calidadFoto());

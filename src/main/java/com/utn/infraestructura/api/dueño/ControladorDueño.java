@@ -5,6 +5,7 @@ import com.utn.casodeuso.dueño.GenerarPublicacionMascotaEnAdopcion;
 import com.utn.casodeuso.dueño.RegistrarMascota;
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.Personas;
+import com.utn.dominio.persona.TipoDocumento;
 import com.utn.infraestructura.persistencia.OrganizacionesEnMySQL;
 import com.utn.infraestructura.persistencia.PersonasEnMySQL;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,8 @@ public class ControladorDueño {
 
     @PostMapping("registrar/mascota")
     public ResponseEntity<Void> registrarMascota(@RequestBody SolicitudRegistrarMascota solicitud) {
-        registrarMascota.ejecutar(solicitud.organizacion(), solicitud.numeroDocumento(), solicitud.tipoDocumento(), solicitud.nombre(), solicitud.apodo(),
+        System.out.println(solicitud);
+        registrarMascota.ejecutar(solicitud.organizacion(), solicitud.numeroDocumento(), TipoDocumento.buscar(solicitud.tipoDocumento()), solicitud.nombre(), solicitud.apodo(),
                 solicitud.edad(), solicitud.tipoAnimal(), solicitud.sexo(),
                 solicitud.tamaño(), solicitud.descripcionFisica(),
                 solicitud.fotos(), solicitud.caracteristicas());

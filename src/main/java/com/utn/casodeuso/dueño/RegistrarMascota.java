@@ -8,6 +8,7 @@ import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.persona.Persona;
+import com.utn.dominio.persona.TipoDocumento;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class RegistrarMascota {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(String nombreOrg, int documentoDueño, String tipoDocumento, String nombre, String apodo, int edad, String tipoAnimal, String sexo,
+    public void ejecutar(String nombreOrg, int documentoDueño, TipoDocumento tipoDocumento, String nombre, String apodo, int edad, String tipoAnimal, String sexo,
                          String tamaño, String descripcionFisica, List<String> fotos,
                          Map<String, String> caracteristicas) {
         Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño, tipoDocumento);
