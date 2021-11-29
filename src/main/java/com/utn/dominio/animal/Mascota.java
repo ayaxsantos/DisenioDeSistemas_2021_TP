@@ -1,6 +1,7 @@
 package com.utn.dominio.animal;
 
 import com.utn.dominio.EntidadPersistente;
+import com.utn.dominio.organizacion.Organizacion;
 import com.utn.infraestructura.normalizador.NormalizadorGraphics2D;
 
 import javax.persistence.*;
@@ -34,6 +35,9 @@ public class Mascota extends EntidadPersistente {
     @Column
     private String descripcionFisica;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Organizacion organizacion;
+
     @ElementCollection()
     @Column(columnDefinition = "MEDIUMTEXT")
     private List<String> fotosNormalizadas;
@@ -51,7 +55,6 @@ public class Mascota extends EntidadPersistente {
         this.descripcionFisica = descripcionFisica;
         this.fotosNormalizadas = new ArrayList<>();
         this.caracteristicas = new HashMap<>();
-
     }
 
     public Mascota() {
@@ -102,5 +105,13 @@ public class Mascota extends EntidadPersistente {
     public void añadirCaracteristica(String unaCaracteristica, String unaRespuesta)
     {
         this.caracteristicas.put(unaCaracteristica,unaRespuesta);
+    }
+
+    public Organizacion getOrganizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
     }
 }

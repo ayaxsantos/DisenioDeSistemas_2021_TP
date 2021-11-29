@@ -1,6 +1,7 @@
 package com.utn.infraestructura.api.dueño;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.utn.dominio.persona.TipoDocumento;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,7 @@ public class SolicitudRegistrarMascota {
     private int numeroDocumento;
 
     @JsonProperty
-    private String tipoDocumento;
+    private TipoDocumento tipoDocumento;
 
     @JsonProperty
     private String nombre;
@@ -48,8 +49,8 @@ public class SolicitudRegistrarMascota {
         return this.numeroDocumento;
     }
 
-    public String tipoDocumento() {
-        return this.tipoDocumento;
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
     }
 
     public String nombre() {

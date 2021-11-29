@@ -1,7 +1,10 @@
 package com.utn.dominio;
 
+import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.persona.TipoDocumento;
+
+import java.util.List;
 
 public interface Personas {
     Persona obtenerPorNombreDeUsuario(String nombreUsuario);

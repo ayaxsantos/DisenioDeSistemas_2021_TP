@@ -9,28 +9,26 @@ import com.utn.dominio.persona.TipoDocumento;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class GenerarPublicacionMascotaEnAdopcion {
 
     private final Personas personas;
-    private final Organizaciones organizaciones;
 
-    public GenerarPublicacionMascotaEnAdopcion(Personas personas, Organizaciones organizaciones) {
+    public GenerarPublicacionMascotaEnAdopcion(Personas personas) {
         this.personas = personas;
-        this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(int numeroDocumentoDueño, String tipoDocumento, String nombreMascota, String nombreOrganizacion, List<String> respuestasMascota) {
-        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño, TipoDocumento.buscar(tipoDocumento));
+    public void ejecutar(int numeroDocumentoDueño, TipoDocumento tipoDocumento, String nombreMascota, Map<String, String> preguntasRespuestas) {
+        Persona personaDueño = personas.obtenerPorNumeroDocumento(numeroDocumentoDueño, tipoDocumento);
         Mascota mascotaDeDueño = personaDueño.buscarMascota(nombreMascota);
-        Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
+        Organizacion organizacion = mascotaDeDueño.getOrganizacion();
 
-
-        PublicacionMascotaEnAdopcion publicacion = new PublicacionMascotaEnAdopcion(personaDueño, mascotaDeDueño, respuestasMascota);
+        PublicacionMascotaEnAdopcion publicacion = new PublicacionMascotaEnAdopcion(personaDueño, mascotaDeDueño, preguntasRespuestas);
         organizacion.añadirPublicacionMascotaEnAdopcion(publicacion);
 
-        organizaciones.guardar(organizacion);
+        personas.guardar(personaDueño);
     }
 
 }

@@ -16,6 +16,15 @@ body{
     align-content: center;
     text-align: center;
 }
+#botonFuera{
+    margin-top: 1vh;
+    margin-bottom: 5vh;
+    align-content: center;
+    text-align: center;
+}
+#botonRegistrar {
+    background-color: rgb(235, 218, 242);
+}
 
 h2 {
     padding: 10px;

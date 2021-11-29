@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.utn.casodeuso.adoptante.GenerarPublicacionBusquedaAdopcion;
+import com.utn.casodeuso.dueño.GenerarPublicacionMascotaEnAdopcion;
 import com.utn.casodeuso.rescatista.GenerarPublicacionMascotaEncontrada;
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.Personas;
@@ -25,6 +26,7 @@ public class ControladorPublicacion {
     private final ObtenerPublicacionesMascotaEnAdopcion obtenerPublicacionesMascotaEnAdopcion;
     private final GenerarPublicacionBusquedaAdopcion generarPublicacionBusquedaAdopcion;
     private final GenerarPublicacionMascotaEncontrada generarPublicacionMascotaEncontrada;
+    private final GenerarPublicacionMascotaEnAdopcion generarPublicacionMascotaEnAdopcion;
 
     public ControladorPublicacion(){
         Personas personasEnMySQL = new PersonasEnMySQL();
@@ -32,6 +34,7 @@ public class ControladorPublicacion {
         this.generarPublicacionBusquedaAdopcion = new GenerarPublicacionBusquedaAdopcion(personasEnMySQL, organizacionesEnMySQL);
         this.generarPublicacionMascotaEncontrada = new GenerarPublicacionMascotaEncontrada(organizacionesEnMySQL, personasEnMySQL);
         this.obtenerPublicacionesMascotaEnAdopcion = new ObtenerPublicacionesMascotaEnAdopcion(new OrganizacionesEnMySQL());
+        this.generarPublicacionMascotaEnAdopcion = new GenerarPublicacionMascotaEnAdopcion(personasEnMySQL);
     }
 
     @PostMapping("ingresar-mascota-encontrada")
@@ -71,6 +74,16 @@ public class ControladorPublicacion {
 
         return new ResponseEntity<>(publicaciones, HttpStatus.OK);
     }
+
+    @PostMapping("/persona/publicarMascotaEnAdopcion")
+    public ResponseEntity generarPublicacionMascotaEnAdopcion(@RequestBody SolicitudPublicarMascotaEnAdopcion solicitud) {
+        this.generarPublicacionMascotaEnAdopcion.ejecutar(solicitud.getNumeroDocumento(), solicitud.getTipoDocumento(),
+                solicitud.getNombreMascota(), solicitud.getPreguntasRespuestas());
+
+        return ResponseEntity.status(201).build();
+    }
+
+
 
     private Usuario obtenerUsuarioSesionManager(String idSesion)
     {

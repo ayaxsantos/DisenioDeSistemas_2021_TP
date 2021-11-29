@@ -200,6 +200,7 @@ public class Organizacion extends EntidadPersistente {
 
     public void añadirMascota(Mascota unaMascota) {
         this.mascotas.add(unaMascota);
+        unaMascota.setOrganizacion(this);
     }
 
     public void eliminarMascota(Mascota unaMascota) {
@@ -208,5 +209,9 @@ public class Organizacion extends EntidadPersistente {
 
     public void setCaracteristicas(List<String> caracteristicas) {
         this.caracteristicas = caracteristicas;
+    }
+
+    public List<String> getPreguntasAdopcion() {
+        return preguntasAdopcion;
     }
 }

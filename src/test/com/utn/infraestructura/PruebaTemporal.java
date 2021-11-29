@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PruebaTemporal {
 
@@ -121,9 +122,9 @@ public class PruebaTemporal {
             add("Hola");
             add("Adios");
         }}));
-        organizacionTest.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(personaTest, mascotaTest, new ArrayList<String>() {{
-            add("Debe ser");
-            add("Por dogshow");
+        organizacionTest.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(personaTest, mascotaTest, new HashMap<String, String>() {{
+            put("Es fuerte?", "Si");
+            put("Dureme mucho?", "No");
         }}));
         organizacionTest.añadirPublicacionMascotaEncontrada(new PublicacionMascotaEncontrada(personaTest, new Direccion(20, 23), "Todo okey"));
 
@@ -312,10 +313,10 @@ public class PruebaTemporal {
         org5.añadirPublicacionMascotaEncontrada(pub5);
         org5.añadirPublicacionMascotaEncontrada(pub6);
 
-        org1.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(1), new ArrayList<String>(){{add("Si"); add("No");}}));
-        org2.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(2), new ArrayList<String>(){{add("Si"); add("Si");}}));
-        org2.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per2, per2.getMascotas().get(0), new ArrayList<String>(){{add("No");add("No");}}));
-        org5.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per3, per3.getMascotas().get(0), new ArrayList<String>(){{add("No"); add("No");}}));
+        org1.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(1), new HashMap<String, String>(){{put("Es bueno?", "Si"); put("Es malo?", "Si");}}));
+        org2.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(2), new HashMap<String, String>(){{put("Es alto?", "No"); put("Es bueno?", "Si");}}));
+        org2.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per2, per2.getMascotas().get(0), new HashMap<String, String>(){{put("Come mucho","No");}}));
+        org5.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per3, per3.getMascotas().get(0), new HashMap<String, String>(){{put("Es hiperactivo","Si");}}));
 
         org1.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per5, new ArrayList<String>(){{add("Patio"); add("Pasto");}}));
         org2.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per6, new ArrayList<String>(){{add("Pileta");}}));
@@ -349,6 +350,15 @@ public class PruebaTemporal {
         org4.añadirVoluntario(vol4);
         org5.añadirVoluntario(vol5);
 
+        masc1.añadirFoto("fottao1.jpg");
+        masc2.añadirFoto("fotartao2.jpg");
+        masc3.añadirFoto("fotaro1.jpg");
+        masc4.añadirFoto("fotozvz1.jpg");
+        masc5.añadirFoto("fotarsto1.jpg");
+        masc6.añadirFoto("foarstto1.jpg");
+        masc7.añadirFoto("fotaro1.jpg");
+        masc8.añadirFoto("fotarsto1.jpg");
+
         personas.guardar(per1);
         personas.guardar(per2);
         personas.guardar(per3);
@@ -356,13 +366,13 @@ public class PruebaTemporal {
         personas.guardar(per5);
         personas.guardar(per6);
         personas.guardar(per7);
+        personas.guardar(per8);
 
         organizaciones.guardar(org1);
         organizaciones.guardar(org2);
         organizaciones.guardar(org3);
         organizaciones.guardar(org4);
         organizaciones.guardar(org5);
-        personas.guardar(per8);
 
     }
 }

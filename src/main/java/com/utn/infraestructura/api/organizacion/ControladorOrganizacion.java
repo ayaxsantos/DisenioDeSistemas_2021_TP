@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,6 +38,22 @@ public class ControladorOrganizacion {
     public ResponseEntity obtenerCaracteristicas(@PathVariable("nombre") String nombreOrg) {
         Organizacion organizacion = this.obtenerOrganizacion.ejecutar(nombreOrg);
         return ResponseEntity.status(200).body(organizacion.getCaracteristicas());
+    }
+
+    @GetMapping("organizacion/{nombre}/preguntasDarEnAdopcion")
+    public ResponseEntity obtenerPreguntasDarEnAdopcion(@PathVariable("nombre") String nombreOrg) {
+        Organizacion organizacion = this.obtenerOrganizacion.ejecutar(nombreOrg);
+        return ResponseEntity.status(200).body(organizacion.getPreguntasAdopcion());
+    }
+
+    @GetMapping("organizacion/preguntasGenerales/darEnAdopcion")
+    public ResponseEntity obtenerPreguntasGeneralesEnAdopcion() {
+        List<String> preguntas = new ArrayList<String>(){{
+            add("¿PregGeneral1?");
+            add("¿PregGeneral2?");
+            add("¿PregGeneral3?");
+        }};
+        return ResponseEntity.status(200).body(preguntas);
     }
 
 }

@@ -1,8 +1,11 @@
 package com.utn.infraestructura.persistencia;
 
 import com.utn.dominio.Personas;
+import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.persona.TipoDocumento;
+
+import java.util.List;
 
 
 public class PersonasEnMySQL implements Personas {
@@ -41,6 +44,4 @@ public class PersonasEnMySQL implements Personas {
 
         EntityManagerHelper.commit();
     }
-
-
 }
