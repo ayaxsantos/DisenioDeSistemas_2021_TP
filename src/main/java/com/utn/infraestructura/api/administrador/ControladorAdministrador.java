@@ -34,7 +34,7 @@ public class ControladorAdministrador {
 
     @GetMapping("organizacion/panelAdministracion")
     public ResponseEntity acceder(@RequestHeader("Authorization") String idAdmin) {
-        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
+        Administrador administrador = this.obtenerUsuarioSesionManager(idAdmin);
         Organizacion organizacion = administrador.getOrganizacion();
 
         RespuestaAcceso unaRespuesta = new RespuestaAcceso();
@@ -97,7 +97,7 @@ public class ControladorAdministrador {
         }
     }
 
-    private Administrador obtenerAdministradorSesionManager(String idAdmin) {
+    private Administrador obtenerUsuarioSesionManager(String idAdmin) {
         SesionManager sesionManager = SesionManager.getInstance();
         Map<String, Object> unosDatos = sesionManager.obtenerAtributos(idAdmin);
         return (Administrador) unosDatos.get("administrador");

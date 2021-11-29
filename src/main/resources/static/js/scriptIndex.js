@@ -20,11 +20,11 @@ function redireccionamiento(input){
 
 function cerrarSesion()
 {
-    appCerrarSesionVue.cerrarSesion();
+    realizarDesconexion();
     localStorage.removeItem('idSesion');
     localStorage.removeItem('idAdmin');
     localStorage.removeItem('idVoluntario');
-    location.href = "../inicio/home.html"
+    location.href = "../../home"
 }
 
 function desconectar(auth) {
@@ -32,4 +32,17 @@ function desconectar(auth) {
         {headers: {"Authorization": auth}}).then(response => {
         if (response.status !== 200) alert("Algo salio mal!!")
     })
+}
+
+function realizarDesconexion()
+{
+    if (idUsuario) {
+        this.desconectar(idUsuario);
+    }
+    if (idAdmin) {
+        this.desconectar(idAdmin);
+    }
+    if (idVol) {
+        this.desconectar(idVol);
+    }
 }
