@@ -4,14 +4,14 @@ const idVol = localStorage.getItem('idVoluntario');
 const tipoDocumento = localStorage.getItem('tipoDocumento');
 const numerodocumento = localStorage.getItem('numeroDocumento');
 
-if (idUsuario !== null || idAdmin !== null || idVol !== null) {
+if (idUsuario || idAdmin || idVol) {
     document.getElementById("botonIniciarSesion").style.display = "none";
     document.getElementById("botonRegistrarse").style.display = "none";
     document.getElementById("elementoCerrarSesion").style.display = "block";
 }
 
 function redireccionamiento(input) {
-    if (idUsuario !== null || numerodocumento !== null) {
+    if (idUsuario || numerodocumento) {
         location.href = input
     } else {
         location.href = "../registrarPersona/registrarPersona.html"
@@ -29,13 +29,13 @@ function cerrarSesion() {
 const appCerrarSesionVue = new Vue({
     methods: {
         cerrarSesion: function () {
-            if (idUsuario !== null) {
+            if (idUsuario) {
                 this.desconectar(idUsuario);
             }
-            if (idAdmin !== null) {
+            if (idAdmin) {
                 this.desconectar(idAdmin);
             }
-            if (idVol !== null) {
+            if (idVol) {
                 this.desconectar(idVol);
             }
         },

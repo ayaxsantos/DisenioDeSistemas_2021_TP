@@ -1,54 +1,72 @@
-var RegistrarUsuario = new Vue({
-    el: '#RegistrarUsuario',
+const tipoDocumento = localStorage.getItem("tipoDocumento");
+const numeroDocumento = localStorage.getItem("numeroDocumento");
+
+
+var appRegistrarUsuarioVue = new Vue({
+    el: '#RegistrarUsuarioVue',
     data: {
         usuario: '',
         contrasenia: '',
         repeticionContrasenia: ''
     },
     methods: {
-
         enviarDatos() {
-            if(this.contrasenia !== this.repeticionContrasenia){
+            if (this.contrasenia !== this.repeticionContrasenia) {
                 alert("Las contraseñas no coinciden");
                 return;
             }
-            sessionStorage.setItem("usuario", this.usuario);
-            var solicitudRegistroUsuario = {
+            const solicitud = {
                 nombreUsuario: this.usuario,
                 contrasenia: this.contrasenia
-            }
+            };
             fetch("http://localhost:8080/registrar/usuario", {
                 method: "POST",
                 headers:
                     {
                         'Content-Type': 'application/json'
                     },
-                body: JSON.stringify(solicitudRegistroUsuario)
+                body: JSON.stringify(solicitud)
             }).then(response => {
                 switch (response.status) {
                     case 400:
                         alert("contraseña debil")
-                        break;
+                        return;
                     case 404:
                         alert("usuario ya registrado")
-                        break;
+                        return;
                     case 200:
-                        alert("se registro el usuario correctamente")
-                        console.log(response);
-                        return response.json()
                         break;
                     default:
                         alert("error desconocido")
-                        break;
+                        return;
                 }
             })
-        },
-    },
 
-    created() {
-        fetch('http://localhost:8080/datos/persona/tipoDocumento')
-            .then(response => response.json()).then(json => {
-            this.tiposDocumento = json;
-        })
+            if (numeroDocumento) {
+                const solicitud = {
+                    nombreUsuario: this.usuario,
+                    tipoDocumento: tipoDocumento,
+                    numeroDocumento: numeroDocumento
+                };
+                fetch("http://localhost:8080/persona/registrarleUsuario", {
+                    method: "POST",
+                    headers:
+                        {
+                            'Content-Type': 'application/json'
+                        },
+                    body: JSON.stringify(solicitud)}).then(response => {
+                        if(response.status === 200){
+                            localStorage.removeItem("tipoDocumento");
+                            localStorage.removeItem("numeroDocumento");
+                            location.href = "../inicio/home.html";
+                        } else {
+                            alert("error desconocido");
+                        }
+                    })
+            } else {
+                localStorage.setItem('usuario', this.usuario);
+                location.href = "../registrarPersona/registrarPersona.html";
+            }
+        },
     }
 })

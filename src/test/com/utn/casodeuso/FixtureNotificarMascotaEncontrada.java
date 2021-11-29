@@ -138,7 +138,7 @@ public class FixtureNotificarMascotaEncontrada {
     private static Persona crearPersona(
             Contacto contacto, LocalDate fechaNacimiento, Documento documento,
             Direccion direccion, Contacto otroContacto, Usuario usuario, int radioHogares) {
-        return new Persona(contacto, fechaNacimiento, documento, direccion, otroContacto, usuario, radioHogares);
+        return new Persona(usuario, contacto, fechaNacimiento, documento, direccion, null, new ArrayList<Contacto>(){{add(otroContacto);}}, radioHogares);
     }
 
     private static Documento crearDocumento(TipoDocumento tipo, Integer numero) {

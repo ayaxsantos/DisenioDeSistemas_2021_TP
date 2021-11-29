@@ -46,17 +46,18 @@ public class Persona extends EntidadPersistente {
     @Column
     private boolean esAdoptante;
 
-    @Transient
+    @Column
     private int radioHogares;
 
-    public Persona(Contacto contactoPersonal, LocalDate fechaNacimiento, Documento documento,
-                   Direccion domicilio, Contacto otroContacto, Usuario usuario, Integer radioHogares) {
+    public Persona(Usuario usuario, Contacto contactoPersonal, LocalDate fechaNacimiento, Documento documento,
+                   Direccion domicilio, Preferencia preferencia, List<Contacto> otrosContactos, Integer radioHogares) {
+        this.usuario = usuario;
         this.contactoPersonal = contactoPersonal;
         this.fechaNacimiento = fechaNacimiento;
         this.documento = documento;
         this.domicilio = domicilio;
-        this.contactos.add(otroContacto);
-        this.usuario = usuario;
+        this.preferencia = preferencia;
+        this.contactos = otrosContactos;
         this.radioHogares = radioHogares;
         this.mascotas = new ArrayList<>();
         this.esAdoptante = false;
@@ -191,4 +192,7 @@ public class Persona extends EntidadPersistente {
         this.contactoPersonal = contactoPersonal;
     }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

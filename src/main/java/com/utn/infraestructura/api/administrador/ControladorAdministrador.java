@@ -1,6 +1,7 @@
 package com.utn.infraestructura.api.administrador;
 
 import com.utn.casodeuso.administrador.IniciarSesionAdmin;
+import com.utn.dominio.Administradores;
 import com.utn.dominio.Organizaciones;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
 import com.utn.dominio.organizacion.Administrador;
@@ -23,11 +24,11 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class ControladorAdministrador {
 
-    private final Organizaciones organizacionesEnMySQL;
+    private final Administradores administradoresEnMySQL;
     private final IniciarSesionAdmin iniciarSesion;
 
     public ControladorAdministrador() {
-        this.organizacionesEnMySQL = new OrganizacionesEnMySQL();
+        this.administradoresEnMySQL = new AdministradoresEnMySQL();
         this.iniciarSesion = new IniciarSesionAdmin(new AdministradoresEnMySQL());
     }
 
@@ -50,33 +51,35 @@ public class ControladorAdministrador {
 
     @PostMapping("organizacion/panelAdministracion/actualizarCaracteristicas")
     public ResponseEntity actualizarCaracteristicas(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarCaracteristicas solicitud) {
-        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
+        Administrador administradorRealTime = this.obtenerUsuarioSesionManager(idAdmin);
+
+        Administrador administrador = new AdministradoresEnMySQL().obtenerPorNombreUsuario(administradorRealTime.getUsuario());
         administrador.añadirCaracteristica(solicitud.getNuevaCaracteristica());
 
-        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.nombreOrganizacionAdministrada());
-        this.organizacionesEnMySQL.guardar(organizacion);
+        administradoresEnMySQL.guardar(administrador);
         return ResponseEntity.status(200).build();
     }
 
     @PostMapping("organizacion/panelAdministracion/actualizarDetalleFotos")
     public ResponseEntity actualizarDetalleFotos(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarDetalleFotos solicitud) {
-        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
+        Administrador administradorRealTime = this.obtenerUsuarioSesionManager(idAdmin);
+
+        Administrador administrador = new AdministradoresEnMySQL().obtenerPorNombreUsuario(administradorRealTime.getUsuario());
         administrador.definirTamañoFoto(solicitud.getTamanioFoto());
         administrador.definirCalidadFoto(solicitud.getCalidadFoto());
 
-        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.nombreOrganizacionAdministrada());
-        this.organizacionesEnMySQL.guardar(organizacion);
+        administradoresEnMySQL.guardar(administrador);
         return ResponseEntity.status(200).build();
     }
 
     @PostMapping("organizacion/panelAdministracion/actualizarAdministradores")
     public ResponseEntity actualizarAdministradores(@RequestHeader("Authorization") String idAdmin, @RequestBody SolicitudActualizarAdministradores solicitud) {
-        Administrador administrador = this.obtenerAdministradorSesionManager(idAdmin);
+        Administrador administradorRealTime = this.obtenerUsuarioSesionManager(idAdmin);
 
+        Administrador administrador = new AdministradoresEnMySQL().obtenerPorNombreUsuario(administradorRealTime.getUsuario());
         administrador.darAltaNuevoAdministrador(solicitud.getAdminNuevo(), solicitud.getContrasenia());
 
-        Organizacion organizacion = organizacionesEnMySQL.obtenerPorNombre(administrador.nombreOrganizacionAdministrada());
-        this.organizacionesEnMySQL.guardar(organizacion);
+        administradoresEnMySQL.guardar(administrador);
         return ResponseEntity.status(200).build();
     }
 
