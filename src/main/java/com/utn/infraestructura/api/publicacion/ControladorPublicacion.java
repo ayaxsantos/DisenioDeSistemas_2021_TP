@@ -68,6 +68,7 @@ public class ControladorPublicacion {
     @GetMapping("/organizacion/{nombreOrganizacion}/publicacionesMascotaAdopcion")
     public ResponseEntity<List<PublicacionMascotaEnAdopcion>> publicacionesMascotaEnAdopcion(@PathVariable("nombreOrganizacion") String nombreOrganizacion) {
         List<PublicacionMascotaEnAdopcion> publicaciones = obtenerPublicacionesMascotaEnAdopcion.ejecutar(nombreOrganizacion);
+
         return new ResponseEntity<>(publicaciones, HttpStatus.OK);
     }
 
