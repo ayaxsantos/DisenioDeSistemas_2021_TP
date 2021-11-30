@@ -21,13 +21,13 @@ public class PruebaNotificadorEmail {
 
     @Test
     public void se_envia_un_email_correctamente() {
-        notificadorEmail.enviar(emailOrigen, emailDestinoValido, asunto, cuerpo);
+        notificadorEmail.enviar(emailDestinoValido, asunto, cuerpo);
     }
 
     @Test
     public void se_envia_un_email_y_lanza_una_excepcion() {
         Assertions.assertThrows(EmailNoEnviadoException.class, () ->
-            notificadorEmail.enviar(emailOrigen, emailDestinoInvalido, asunto, cuerpo));
+            notificadorEmail.enviar(emailDestinoInvalido, asunto, cuerpo));
     }
 
 }

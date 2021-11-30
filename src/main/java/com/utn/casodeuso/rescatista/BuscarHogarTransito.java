@@ -7,6 +7,7 @@ import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.hogar.ValidacionHogar;
 
+import com.utn.dominio.persona.TipoDocumento;
 import com.utn.infraestructura.hogares.Hogar;
 import com.utn.infraestructura.hogares.HogaresResponse;
 
@@ -27,8 +28,8 @@ public class BuscarHogarTransito {
         this.validacionesHogar = validacionesHogar;
     }
 
-    public List<Hogar> ejecutar(String nombreUsuarioRescatista, int idMascota) {
-        Persona persona = personas.obtenerPorNombreDeUsuario(nombreUsuarioRescatista);
+    public List<Hogar> ejecutar(int numDocRescatista, TipoDocumento tipoDocRescatista, int idMascota) {
+        Persona persona = personas.obtenerPorNumeroDocumento(numDocRescatista, tipoDocRescatista);
         Mascota mascota = mascotas.obtenerPorId(idMascota);
         HogaresResponse respuesta = hogares.obtener();
         return respuesta.hogares.stream().filter(hogar ->

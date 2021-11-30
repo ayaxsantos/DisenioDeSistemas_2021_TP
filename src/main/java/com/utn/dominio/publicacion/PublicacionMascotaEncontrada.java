@@ -18,6 +18,7 @@ public class PublicacionMascotaEncontrada extends Publicacion {
     private String estadoMascota;
 
     @ElementCollection
+    @Column(columnDefinition = "MEDIUMTEXT")
     private List<String> fotosMascota;
 
     public PublicacionMascotaEncontrada(Persona personaRescatista, Direccion ubicacionMascota, String estadoMascota) {

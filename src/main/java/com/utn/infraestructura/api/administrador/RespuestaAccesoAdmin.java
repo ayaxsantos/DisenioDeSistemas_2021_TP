@@ -6,7 +6,7 @@ import com.utn.dominio.organizacion.TamañoFoto;
 
 import java.util.List;
 
-public class RespuestaAcceso
+public class RespuestaAccesoAdmin
 {
     @JsonProperty
     private List<String> usuariosAdministradores;

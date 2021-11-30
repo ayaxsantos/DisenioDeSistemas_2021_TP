@@ -3,15 +3,13 @@ package com.utn.dominio.notificacion.mensaje;
 public class Mensaje {
 
     private String emailDestino;
-    private final String telefonoOrigen;
     private String telefonoDestino;
     private final String cuerpo;
     private final String asunto;
 
-    public Mensaje(String cuerpo, String asunto, String telefonoOrigen) {
+    public Mensaje(String cuerpo, String asunto) {
         this.cuerpo = cuerpo;
         this.asunto = asunto;
-        this.telefonoOrigen = telefonoOrigen;
     }
 
     public void agregarEmailDestino(String emailDestino) {
@@ -28,10 +26,6 @@ public class Mensaje {
 
     public String telefonoDestino(){
         return this.telefonoDestino;
-    }
-
-    public String telefonoOrigen(){
-        return this.telefonoOrigen;
     }
 
     public String emailDestino() {

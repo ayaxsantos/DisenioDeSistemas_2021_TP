@@ -2,6 +2,7 @@ package com.utn.dominio.animal;
 
 import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.organizacion.Organizacion;
+import com.utn.dominio.persona.Persona;
 import com.utn.infraestructura.normalizador.NormalizadorGraphics2D;
 
 import javax.persistence.*;
@@ -44,6 +45,9 @@ public class Mascota extends EntidadPersistente {
 
     @ElementCollection
     private Map<String, String> caracteristicas;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Persona duenio;
 
     public Mascota(String nombre, String apodo, int edad, Animal animal, Sexo sexo, Tamaño tamaño, String descripcionFisica) {
         this.nombre = nombre;
@@ -113,5 +117,21 @@ public class Mascota extends EntidadPersistente {
 
     public void setOrganizacion(Organizacion organizacion) {
         this.organizacion = organizacion;
+    }
+
+    public Persona getDuenio() {
+        return duenio;
+    }
+
+    public void setDuenio(Persona duenio) {
+        this.duenio = duenio;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public void setTamaño(Tamaño tamaño) {
+        this.tamaño = tamaño;
     }
 }

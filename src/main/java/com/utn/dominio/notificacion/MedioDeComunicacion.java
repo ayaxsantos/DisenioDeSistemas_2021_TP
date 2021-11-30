@@ -1,7 +1,6 @@
 package com.utn.dominio.notificacion;
 
 import com.utn.dominio.EntidadPersistente;
-import com.utn.dominio.Notificador;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 
 import javax.persistence.*;
@@ -12,20 +11,14 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "tipo")
 public abstract class MedioDeComunicacion extends EntidadPersistente {
 
-    @Transient
-    protected Notificador notificador;
-
     @Column
     private boolean esPreferido;
 
-    public MedioDeComunicacion(Notificador notificador, boolean esPreferido) {
-        this.notificador = notificador;
+    public MedioDeComunicacion(boolean esPreferido) {
         this.esPreferido = esPreferido;
     }
 
-    public MedioDeComunicacion() {
-
-    }
+    public MedioDeComunicacion() { }
 
     public boolean esPreferido() {
         return this.esPreferido;

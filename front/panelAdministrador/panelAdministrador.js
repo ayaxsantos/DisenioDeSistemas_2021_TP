@@ -1,4 +1,8 @@
 const idAdmin = localStorage.getItem("idAdmin");
+if(!idAdmin){
+    window.location.href = "../inicio/home.html";
+}
+
 
 var appPanelAdministracionVue = new Vue({
     el: '#PanelAdministracionVue',

@@ -72,17 +72,6 @@ public class ControladorPersona {
         return ResponseEntity.status(200).body(persona.getDocumento());
     }
 
-    @PostMapping("mascotas-en-adopcion/adoptar")
-    public ResponseEntity quererAdoptar(@RequestBody SolicitudQuieroAdoptar solicitudQuieroAdoptar,
-                                        @RequestHeader("Authorization") String idSesionAdoptante) {
-        Usuario unUsuarioAdoptante = this.obtenerUsuarioSesionManager(idSesionAdoptante);
-
-        quererAdoptarMascota.ejecutar(
-                unUsuarioAdoptante.getUsuario(),
-                solicitudQuieroAdoptar.getNombreUsuarioDuenio());
-        return ResponseEntity.status(200).build();
-    }
-
     private Usuario obtenerUsuarioSesionManager(String idSesion) {
         SesionManager sesionManager = SesionManager.getInstance();
 

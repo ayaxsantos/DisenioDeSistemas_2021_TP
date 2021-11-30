@@ -1,8 +1,8 @@
 package com.utn.dominio.notificacion.estrategia;
 
-import com.utn.dominio.Notificador;
 import com.utn.dominio.notificacion.MedioDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
+import com.utn.infraestructura.notificador.NotificadorTwilio;
 
 import javax.persistence.*;
 
@@ -11,19 +11,18 @@ import javax.persistence.*;
 public class WhatsApp extends MedioDeComunicacion {
 
     @Transient
-    private final String prefijo = "whatsapp:";
+    private static final String PREFIJO = "whatsapp:";
 
-    public WhatsApp(Notificador notificador, boolean esPreferido) {
-        super(notificador, esPreferido);
+    public WhatsApp(boolean esPreferido) {
+        super(esPreferido);
     }
 
-    public WhatsApp() {
-
-    }
+    public WhatsApp() { }
 
     @Override
     public void enviar(Mensaje mensaje) {
-        notificador.enviar(prefijo + mensaje.telefonoOrigen(), prefijo + mensaje.telefonoDestino(), mensaje.asunto(), mensaje.cuerpo());
+        System.out.println(mensaje.cuerpo());
+        NotificadorTwilio.instancia().enviar(PREFIJO + mensaje.telefonoDestino(), mensaje.asunto(), mensaje.cuerpo());
         System.out.println("Mensaje enviado por WhatsApp!");
     }
 

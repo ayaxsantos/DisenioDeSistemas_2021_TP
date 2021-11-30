@@ -6,7 +6,10 @@ import com.utn.dominio.Organizaciones;
 import com.utn.dominio.persona.Persona;
 import com.utn.dominio.persona.Direccion;
 import com.utn.dominio.organizacion.Organizacion;
+import com.utn.dominio.persona.TipoDocumento;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
+
+import java.util.List;
 
 public class GenerarPublicacionMascotaEncontrada {
 
@@ -18,12 +21,12 @@ public class GenerarPublicacionMascotaEncontrada {
         this.personas = personas;
     }
 
-    public void ejecutar(String usuarioRescatista, String nombreOrganizacion, Double latitud, Double longitud, String estadoMascota) {
+    public void ejecutar(int numeroDoc, TipoDocumento tipoDoc, String nombreOrganizacion, Direccion direccionMascotaEncontrada, String estadoMascota, List<String> fotos) {
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
-        Persona personaRescatista = personas.obtenerPorNombreDeUsuario(usuarioRescatista);
+        Persona personaRescatista = personas.obtenerPorNumeroDocumento(numeroDoc, tipoDoc);
 
-        Direccion direccionMascotaEncontrada = new Direccion(latitud, longitud);
         PublicacionMascotaEncontrada publicacion = new PublicacionMascotaEncontrada(personaRescatista, direccionMascotaEncontrada, estadoMascota);
+        publicacion.setFotosMascota(fotos);
         organizacion.añadirPublicacionMascotaEncontrada(publicacion);
 
         organizaciones.guardar(organizacion);

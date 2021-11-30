@@ -54,25 +54,4 @@ public class ControladorDueño {
 
         return ResponseEntity.status(200).body(mascotasResponse);
     }
-
-/*
-    @PostMapping("dueños/registrar/publicacion/mascotaEnAdopcion")
-    public ResponseEntity<Void> generarPublicacionMascotaEnAdopcion(@RequestBody SolicitudGenerarPublicacionMascotaEnAdopcion solicitud) {
-        generarPublicacionMascotaEnAdopcion.ejecutar(numeroDocumentoDueño,
-                solicitud.getNombreMascota(),
-                solicitud.getNombreOrganizacion(),
-                solicitud.getRespuestasFormulario());
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-*/
-
-/*    @PostMapping("dueños/{numeroDocumento}/confirmarMascotaEncontrada")
-    public ResponseEntity<Void> confirmarMascotaEncontrada(@PathVariable("numeroDocumento") int numeroDocumentoDueño,
-                                                           @RequestBody SolicitudConfirmarMascotaEncontrada solicitudConfirmarMascotaEncontrada) {
-        confirmarMascotaEncontrada.ejecutar(
-                solicitudConfirmarMascotaEncontrada.documentoRescatista(),
-                numeroDocumentoDueño);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }*/
-
 }

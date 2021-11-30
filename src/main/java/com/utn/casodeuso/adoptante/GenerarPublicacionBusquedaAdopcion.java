@@ -7,6 +7,7 @@ import com.utn.dominio.Organizaciones;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.mensaje.MensajePublicacionQuieroAdoptar;
+import com.utn.dominio.persona.TipoDocumento;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.infraestructura.notificador.NotificadorEmail;
 
@@ -22,9 +23,9 @@ public class GenerarPublicacionBusquedaAdopcion {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(String nombreUsuario, String nombreOrganizacion, List<String> comodidades) {
+    public void ejecutar(int numDocAdoptante, TipoDocumento tipoDocAdoptante, String nombreOrganizacion, List<String> comodidades) {
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
-        Persona personaAdoptante = personas.obtenerPorNombreDeUsuario(nombreUsuario);
+        Persona personaAdoptante = personas.obtenerPorNumeroDocumento(numDocAdoptante, tipoDocAdoptante);
 
         PublicacionBusquedaAdopcion publicacion = new PublicacionBusquedaAdopcion(personaAdoptante, comodidades);
         organizacion.añadirPublicacionBusquedaAdopcion(publicacion);
@@ -34,7 +35,7 @@ public class GenerarPublicacionBusquedaAdopcion {
 
         Mensaje mensaje = new MensajePublicacionQuieroAdoptar(publicacion);
         mensaje.agregarEmailDestino(personaAdoptante.email());
-        Email email = new Email(new NotificadorEmail(), false);
+        Email email = new Email(false);
         email.enviar(mensaje);
     }
 }

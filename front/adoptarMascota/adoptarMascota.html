@@ -19,13 +19,31 @@
     </div>
 </nav>
 
-
-
-
-
-
-
-
+<div id="AdoptarMascotaVue">
+    <div id="menu">
+        <h3>Organizaciones<br>
+            <select v-model="orgElegida" @change="cambioOrg()">
+                <option value="info" disabled>Selecciona una opción</option>
+                <option v-for="organizacion in organizaciones" v-bind:value="organizacion">{{ organizacion }}
+                </option>
+            </select>
+        </h3>
+        <div class="row rowMenu" v-for="publicacion in publicaciones">
+            <div class="col">
+                <h3>{{ publicacion.nombreMascota }}</h3>
+                <p>{{ publicacion.descripcion }}</p>
+                <div v-for="foto in publicacion.fotos">
+                    <img v-bind:src="foto" alt="foto" class="imgPublicacion">
+                </div>
+                <input id="botonAdoptar" type="submit" value="Adoptar"
+                       v-on:click="enviarDatos(publicacion)">
+            </div>
+        </div>
+        <h4>No encontraste a tu mascota perfecta?
+            <input type="button" class="btn btn-primary" value="Crea una publicacion!" onclick='location.href="crearPublicacionAdoptarMascota.html"'>
+        </h4>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="adoptarMascota.js"></script>

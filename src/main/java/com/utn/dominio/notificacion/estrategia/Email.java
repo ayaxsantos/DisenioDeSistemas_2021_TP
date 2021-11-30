@@ -1,8 +1,8 @@
 package com.utn.dominio.notificacion.estrategia;
 
-import com.utn.dominio.Notificador;
 import com.utn.dominio.notificacion.MedioDeComunicacion;
 import com.utn.dominio.notificacion.mensaje.Mensaje;
+import com.utn.infraestructura.notificador.NotificadorEmail;
 
 import javax.persistence.*;
 
@@ -10,18 +10,17 @@ import javax.persistence.*;
 @DiscriminatorValue("email")
 public class Email extends MedioDeComunicacion {
 
-    public Email(Notificador notificador, boolean esPreferido) {
-        super(notificador, esPreferido);
+    public Email(boolean esPreferido) {
+        super(esPreferido);
     }
 
-    public Email() {
-
-    }
+    public Email() { }
 
     @Override
     public void enviar(Mensaje mensaje) {
         System.out.println(mensaje.cuerpo());
-        notificador.enviar("no_email_origen", mensaje.emailDestino(), mensaje.asunto(), mensaje.cuerpo());
+        NotificadorEmail.instancia().enviar(mensaje.emailDestino(), mensaje.asunto(), mensaje.cuerpo());
         System.out.println("Mensaje enviado por email!");
     }
+
 }

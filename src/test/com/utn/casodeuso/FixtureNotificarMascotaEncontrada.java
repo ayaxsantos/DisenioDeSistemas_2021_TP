@@ -104,12 +104,12 @@ public class FixtureNotificarMascotaEncontrada {
 
     protected static void inicializarDueño() {
         otroContactoDueño = crearContacto(nombreContactoDueño, apellidoContactoDueño, numeroContactoDueño, emailContactoDueño);
-        otroContactoDueño.añadirMedioDeComunicacion(new SMS(sms, noEsPreferido));
-        otroContactoDueño.añadirMedioDeComunicacion(new Email(email, esPreferido));
-        otroContactoDueño.añadirMedioDeComunicacion(new WhatsApp(whatsApp, noEsPreferido));
+        otroContactoDueño.añadirMedioDeComunicacion(new SMS( noEsPreferido));
+        otroContactoDueño.añadirMedioDeComunicacion(new Email(esPreferido));
+        otroContactoDueño.añadirMedioDeComunicacion(new WhatsApp(noEsPreferido));
         documentoDueño = crearDocumento(tipoDocumento, numeroDocumentoDueño);
         contactoDueño = crearContacto(nombreDueño, apellidoDueño, numeroDueño, emailDueño);
-        contactoDueño.añadirMedioDeComunicacion(new SMS(sms, esPreferido));
+        contactoDueño.añadirMedioDeComunicacion(new SMS(esPreferido));
         personaDueño = crearPersona(contactoDueño, fechaNacimientoDueño, documentoDueño,
                 direccionDueño, otroContactoDueño, usuarioDueño, radioHogares);
         personaDueño.añadirMascota(mascota);

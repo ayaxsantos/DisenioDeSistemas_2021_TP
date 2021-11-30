@@ -59,11 +59,11 @@ public class RegistrarPersona {
     private MedioDeComunicacion resolverMedioComunicacion(String unMedio) {
         switch (unMedio) {
             case "WhatsApp":
-                return new WhatsApp(null, true);
+                return new WhatsApp(true);
             case "Email":
-                return new Email(null, true);
+                return new Email(true);
             case "SMS":
-                return new SMS(null, true);
+                return new SMS(true);
             default:
                 return null;
         }

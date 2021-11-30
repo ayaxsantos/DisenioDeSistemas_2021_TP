@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url(../imagenes/fondo-pagina.png);
 }
 
@@ -7,8 +7,8 @@ body{
     background-position: center;
 }
 
-.col-xxl-6{
-    background-color:  rgb(235, 218, 242);
+.col {
+    background-color: rgb(235, 218, 242);
     padding: 10px;
     border-radius: 5px;
     border: 2px solid rgb(152, 89, 179);
@@ -16,12 +16,14 @@ body{
     align-content: center;
     text-align: center;
 }
-#botonFuera{
+
+#botonFuera {
     margin-top: 1vh;
     margin-bottom: 5vh;
     align-content: center;
     text-align: center;
 }
+
 #botonRegistrar {
     background-color: rgb(235, 218, 242);
 }
@@ -32,6 +34,13 @@ h2 {
     color: rgb(152, 89, 179);
     text-align: center;
     width: 80vw;
+    margin: 1vh auto auto;
+}
+
+h3 {
+    padding: 10px;
+    color: rgb(152, 89, 179);
+    text-align: center;
     margin: 1vh auto auto;
 }
 
@@ -77,8 +86,13 @@ h2 {
 }
 
 @media (max-width: 425px) {
-    input{
+    input {
         width: 100%;
     }
 
+}
+
+#mascotaElegidaStyle{
+    color: rgb(152, 89, 179);
+    text-shadow:  1px 1px 1px black;
 }

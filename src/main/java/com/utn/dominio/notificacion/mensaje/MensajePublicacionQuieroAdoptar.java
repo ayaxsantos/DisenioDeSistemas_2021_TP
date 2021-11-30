@@ -5,7 +5,7 @@ import com.utn.dominio.publicacion.Publicacion;
 public class MensajePublicacionQuieroAdoptar extends Mensaje {
 
     public MensajePublicacionQuieroAdoptar(Publicacion publicacion) {
-        super("cuerpo", "asunto", "telefonoOrigen");
+        super("cuerpo", "[Importante] Rescate de Patitas");
     }
 
 }

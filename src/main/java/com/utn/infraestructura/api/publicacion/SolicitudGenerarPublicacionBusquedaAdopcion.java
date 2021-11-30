@@ -2,6 +2,7 @@ package com.utn.infraestructura.api.publicacion;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.utn.dominio.persona.TipoDocumento;
 
 public class SolicitudGenerarPublicacionBusquedaAdopcion {
 
@@ -11,17 +12,41 @@ public class SolicitudGenerarPublicacionBusquedaAdopcion {
     @JsonProperty
     private List<String> comodidades;
 
-    public String getNombreOrganizacion() {
+    @JsonProperty
+    private Integer numeroDocumentoAdoptante;
 
+    @JsonProperty
+    private TipoDocumento tipoDocumentoAdoptante;
+
+    public String getNombreOrganizacion() {
         return nombreOrganizacion;
     }
 
-    public List<String> getComodidades(){
+    public void setNombreOrganizacion(String nombreOrganizacion) {
+        this.nombreOrganizacion = nombreOrganizacion;
+    }
+
+    public List<String> getComodidades() {
         return comodidades;
     }
 
-    public void setNombreUsuarioDuenio(String nombreOrganizacion) {
+    public void setComodidades(List<String> comodidades) {
+        this.comodidades = comodidades;
+    }
 
-        this.nombreOrganizacion = nombreOrganizacion;
+    public Integer getNumeroDocumentoAdoptante() {
+        return numeroDocumentoAdoptante;
+    }
+
+    public void setNumeroDocumentoAdoptante(Integer numeroDocumentoAdoptante) {
+        this.numeroDocumentoAdoptante = numeroDocumentoAdoptante;
+    }
+
+    public TipoDocumento getTipoDocumentoAdoptante() {
+        return tipoDocumentoAdoptante;
+    }
+
+    public void setTipoDocumentoAdoptante(TipoDocumento tipoDocumentoAdoptante) {
+        this.tipoDocumentoAdoptante = tipoDocumentoAdoptante;
     }
 }

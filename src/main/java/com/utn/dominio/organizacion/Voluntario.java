@@ -24,74 +24,14 @@ public class Voluntario extends Usuario {
     }
 
     public void aprobarPublicacion(Publicacion publicacion){
-        publicacion.estaVisible(true);
+        publicacion.setEstaVisible(true);
     }
 
     public void rechazarPublicacion(Publicacion publicacion) {
-        publicacion.estaVisible(false);
+        publicacion.setEstaVisible(false);
     }
 
     public Organizacion getOrganizacion() {
         return organizacion;
     }
 }
-
-/*
-
-@Entity
-@Table(name = "voluntario")
-public class Voluntario extends EntidadPersistente {
-
-    @Column
-    private String usuario;
-
-    @Column
-    private String contrasenia;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Organizacion organizacion;
-
-    @Transient
-    private boolean estaLogueado = false;
-
-    public Voluntario(String usuario, String contrasenia, Organizacion organizacion) {
-        ValidadorContraseña.ejecutar(contrasenia);
-        this.usuario = usuario;
-        this.contrasenia = contrasenia;
-        this.organizacion = organizacion;
-    }
-
-    public Voluntario() {
-
-    }
-
-    public void aprobarPublicacion(Publicacion publicacion){
-        publicacion.estaVisible(true);
-    }
-
-    public void rechazarPublicacion(Publicacion publicacion) {
-        publicacion.estaVisible(false);
-    }
-
-    public void iniciarSesion(String usuario, String contraseña) {
-        if(!this.usuario.equals(usuario) || !this.contrasenia.equals(contraseña))
-            throw new CredencialesInvalidasException();
-        this.estaLogueado = true;
-    }
-
-    public void cerrarSesion() {
-        this.estaLogueado = false;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public Organizacion getOrganizacion() {
-        return organizacion;
-    }
-}*/

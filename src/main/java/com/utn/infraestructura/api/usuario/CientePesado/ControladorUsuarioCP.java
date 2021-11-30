@@ -92,11 +92,4 @@ public class ControladorUsuarioCP {
         }
         return ResponseEntity.status(200).build();
     }
-
-    @GetMapping("buscar-hogar-de-transito")
-    public ResponseEntity buscarHogarDeTransito(SolicitudBuscarHogarTransito solicitudBuscarHogarTransito) {
-        List<Hogar> unosHogares = buscarHogarTransito.ejecutar(solicitudBuscarHogarTransito.getNombreUsuario(),
-                solicitudBuscarHogarTransito.getIdMascota());
-        return ResponseEntity.status(200).body(unosHogares);
-    }
 }

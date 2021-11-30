@@ -35,7 +35,7 @@ public class ControladorAdministrador {
         Administrador administrador = this.obtenerAdminSesionManager(idAdmin);
         Organizacion organizacion = administrador.getOrganizacion();
 
-        RespuestaAcceso unaRespuesta = new RespuestaAcceso();
+        RespuestaAccesoAdmin unaRespuesta = new RespuestaAccesoAdmin();
         List<String> usuarioAdmins = organizacion.getAdministradores().stream().map(Administrador::getUsuario).collect(Collectors.toList());
         List<String> caracteristicas = organizacion.getCaracteristicas();
 

@@ -44,4 +44,17 @@ public class PersonasEnMySQL implements Personas {
 
         EntityManagerHelper.commit();
     }
+
+    @Override
+    public Persona obtenerPorIdMascota(int idMascota) {
+        EntityManagerHelper.beginTransaction();
+
+        Persona persona = (Persona) EntityManagerHelper.getEntityManager()
+                .createQuery("SELECT m.duenio from Mascota m where m.id = ?1")
+                .setParameter(1, idMascota)
+                .getSingleResult();
+
+        EntityManagerHelper.commit();
+        return persona;
+    }
 }

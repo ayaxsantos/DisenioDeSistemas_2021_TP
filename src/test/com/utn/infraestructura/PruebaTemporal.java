@@ -137,11 +137,11 @@ public class PruebaTemporal {
 
         personaTest.setEsAdoptante(false);
 
-        contactoTest.añadirMedioDeComunicacion(new SMS(new NotificadorTwilio(), false));
-        contactoTest.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), true));
-        contactoTest.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
-        otroContactoTest.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
-        otroContactoTest.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), false));
+        contactoTest.añadirMedioDeComunicacion(new SMS(false));
+        contactoTest.añadirMedioDeComunicacion(new Email(true));
+        contactoTest.añadirMedioDeComunicacion(new WhatsApp(true));
+        otroContactoTest.añadirMedioDeComunicacion(new WhatsApp(true));
+        otroContactoTest.añadirMedioDeComunicacion(new Email(false));
 
         per.guardar(organizacionTest);
     }
@@ -230,17 +230,17 @@ public class PruebaTemporal {
         Preferencia pref8 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.MEDIANO);
         Persona per8 = new Persona(usr8, con8, LocalDate.of(1998, 1, 13), new Documento(TipoDocumento.PASAPORTE, 74487), new Direccion(564789, 148477), pref8, new ArrayList<Contacto>(){{add(new Contacto("Pepe", "Rubino", "+54 9 11 78745521", "peperubino@gmail.com"));}}, 79);
 
-        con1.añadirMedioDeComunicacion(new SMS(new NotificadorTwilio(), false));
-        con1.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
-        con2.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), true));
-        con3.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
-        con4.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
-        con5.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), true));
-        con5.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), false));
-        con6.añadirMedioDeComunicacion(new SMS(new NotificadorTwilio(), true));
-        con7.añadirMedioDeComunicacion(new Email(new NotificadorEmail(), true));
-        con8.añadirMedioDeComunicacion(new WhatsApp(new NotificadorTwilio(), true));
-        con8.añadirMedioDeComunicacion(new Email(new NotificadorTwilio(), false));
+        con1.añadirMedioDeComunicacion(new SMS(false));
+        con1.añadirMedioDeComunicacion(new WhatsApp(true));
+        con2.añadirMedioDeComunicacion(new Email(true));
+        con3.añadirMedioDeComunicacion(new WhatsApp( true));
+        con4.añadirMedioDeComunicacion(new WhatsApp(true));
+        con5.añadirMedioDeComunicacion(new Email(true));
+        con5.añadirMedioDeComunicacion(new WhatsApp(false));
+        con6.añadirMedioDeComunicacion(new SMS(true));
+        con7.añadirMedioDeComunicacion(new Email(true));
+        con8.añadirMedioDeComunicacion(new WhatsApp(true));
+        con8.añadirMedioDeComunicacion(new Email(false));
 
         Organizacion org1 = new Organizacion("Patitas locas", new Direccion(1233, 13123), TamañoFoto.GRANDE, CalidadFoto.BAJA);
         Organizacion org2 = new Organizacion("Mascotas en casa", new Direccion(41233, 16423), TamañoFoto.GRANDE, CalidadFoto.ALTA);

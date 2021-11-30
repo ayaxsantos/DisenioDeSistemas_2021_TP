@@ -16,6 +16,14 @@ public class ServicioHogares implements Hogares {
     private final String endpoint = "https://api.refugiosdds.com.ar/api/";
     private final String bearerToken = "Bearer DlEO1YkConEH8roim0rnoHOe7dSgRyFBr95t7h0j5mXcAW32gE8OcdNclill";
     private final int paginas = 1;
+    private static ServicioHogares instance = null;
+
+    public static ServicioHogares getInstance() {
+        if (instance == null) {
+            instance = new ServicioHogares();
+        }
+        return instance;
+    }
 
     public ServicioHogares() {
         this.retrofit = new Retrofit.Builder()

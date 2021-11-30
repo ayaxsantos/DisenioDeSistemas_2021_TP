@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url(../imagenes/fondo-pagina.png);
 }
 
@@ -6,10 +6,36 @@ body{
     height: 7vh;
 }
 
+.imgPublicacion {
+    max-height: 20%;
+    max-width: 20%;
+}
+
+#botonAdoptar{
+    background-color: rgb(204, 101, 187);
+}
+
 .rowMenu {
     padding-top: 2vh;
     margin-left: 1vw;
     margin-right: 1vw;
+    margin-bottom: 3vh;
+    background-color: rgb(235, 218, 242);
+    border: 5px solid rgb(152, 89, 179);
+}
+
+h3 {
+    padding: 10px;
+    color: rgb(152, 89, 179);
+    text-align: center;
+    margin: 1vh auto auto;
+}
+
+h4 {
+    padding: 10px;
+    color: rgb(152, 89, 179);
+    text-align: center;
+    margin: 1vh auto auto;
 }
 
 #menu {
@@ -30,18 +56,4 @@ body{
         background-color: transparent;
         border: none;
     }
-
-    .rowMenu {
-        margin: 0 auto;
-        padding-top: 1px;
-        padding-left: 3vh;
-        padding-right: 3vh;
-    }
-}
-
-@media (max-width: 425px) {
-    input{
-        width: 100%;
-    }
-
 }

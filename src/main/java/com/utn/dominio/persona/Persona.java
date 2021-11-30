@@ -38,7 +38,7 @@ public class Persona extends EntidadPersistente {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_id")
-    private List<Mascota> mascotas;
+    private List<Mascota> mascotas = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Preferencia preferencia;
@@ -94,6 +94,7 @@ public class Persona extends EntidadPersistente {
 
     public void añadirMascota(Mascota mascota) {
         mascotas.add(mascota);
+        mascota.setDuenio(this);
     }
 
     public void radioHogares(int radioDeHogares) {
@@ -194,5 +195,11 @@ public class Persona extends EntidadPersistente {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Mascota buscarMascotaPorId(int id){
+        return mascotas.stream()
+                .filter(unaMascota -> unaMascota.getId() == id)
+                .findFirst().orElseThrow(MascotaNoEncontradaException::new);
     }
 }
