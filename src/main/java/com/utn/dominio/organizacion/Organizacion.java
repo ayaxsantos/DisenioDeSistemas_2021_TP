@@ -214,4 +214,16 @@ public class Organizacion extends EntidadPersistente {
     public List<String> getPreguntasAdopcion() {
         return preguntasAdopcion;
     }
+
+    public List<PublicacionMascotaEncontrada> getPublicacionesMascotaEncontrada() {
+        return publicacionesMascotaEncontrada;
+    }
+
+    public List<PublicacionMascotaEnAdopcion> getPublicacionesMascotaEnAdopcion() {
+        return publicacionesMascotaEnAdopcion;
+    }
+
+    public List<PublicacionBusquedaAdopcion> getPublicacionesBusquedaAdopcion() {
+        return publicacionesBusquedaAdopcion;
+    }
 }

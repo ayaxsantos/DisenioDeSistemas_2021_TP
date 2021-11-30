@@ -5,8 +5,13 @@ import com.utn.dominio.autenticacion.Usuario;
 import com.utn.dominio.autenticacion.ValidadorContraseña;
 import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.publicacion.Publicacion;
+import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
+import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
+import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Voluntario extends Usuario {
@@ -27,11 +32,22 @@ public class Voluntario extends Usuario {
         publicacion.setEstaVisible(true);
     }
 
-    public void rechazarPublicacion(Publicacion publicacion) {
-        publicacion.setEstaVisible(false);
-    }
-
     public Organizacion getOrganizacion() {
         return organizacion;
+    }
+
+    public List<PublicacionMascotaEncontrada> getPublicacionesMascotaEncontradaPendientes() {
+        return this.organizacion.getPublicacionesMascotaEncontrada().stream()
+                .filter(publicacion -> !publicacion.isEstaVisible()).collect(Collectors.toList());
+    }
+
+    public List<PublicacionMascotaEnAdopcion> getPublicacionesMascotaEnAdopcionPendientes() {
+        return this.organizacion.getPublicacionesMascotaEnAdopcion().stream().
+                filter(publicacion -> !publicacion.isEstaVisible()).collect(Collectors.toList());
+    }
+
+    public List<PublicacionBusquedaAdopcion> getPublicacionesBusquedaAdopcionPendientes() {
+        return this.organizacion.getPublicacionesBusquedaAdopcion().stream().
+                filter(publicacion -> !publicacion.isEstaVisible()).collect(Collectors.toList());
     }
 }

@@ -23,21 +23,37 @@
 
 <div id="PanelVoluntarioVue">
 
-  <h2>Panel de administración</h2>
+  <h2>Administracion de publicaciones</h2>
   <div class="menu">
     <div class="row rowMenu">
-      <h3 class="col-12 text-center">Aprobar publicaciones</h3>
-      <div class="row rowMenu" v-for="publicacion in publicaciones">
+      <h3 class="col-12 text-center">Publicaciones de mascota encontrada</h3>
+      <div class="row rowMenu" v-for="publicacion in publicacionesMascotaEncontrada">
+        <div class="col">
+          <h3>{{ publicacion.nombreMascota }}</h3>
+          <p>{{ publicacion.descripcion }}</p>
+          <p>{{ publicacion.longitud }}</p>
+          <p>{{ publicacion.latitud }}</p>
+          <p>{{ publicacion.estadoMascota }}</p>
+          <div v-for="foto in publicacion.fotos">
+            <img v-bind:src="foto" alt="foto" class="imgPublicacion">
+          </div>
+          <input class="botonAprobar" type="submit" value="Aprobar"
+                 v-on:click="aprobar(publicacion.id)">
+        </div>
+      </div>
+    </div>
+
+    <div class="row rowMenu">
+      <h3 class="col-12 text-center">Publicaciones de mascota en adopcion</h3>
+      <div class="row rowMenu" v-for="publicacion in publicacionesEnAdopcion">
         <div class="col">
           <h3>{{ publicacion.nombreMascota }}</h3>
           <p>{{ publicacion.descripcion }}</p>
           <div v-for="foto in publicacion.fotos">
             <img v-bind:src="foto" alt="foto" class="imgPublicacion">
           </div>
-          <input id="botonAprobar" type="submit" value="Aprobar"
-                 v-on:click="hacerlaVisible(publicacion)">
-          <input id="botonRechazar" type="submit" value="Rechazar"
-                 v-on:click="rechazar(publicacion)">
+          <input class="botonAprobar" type="submit" value="Aprobar"
+                 v-on:click="aprobar(publicacion.id)">
         </div>
       </div>
     </div>

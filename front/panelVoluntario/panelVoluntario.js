@@ -8,64 +8,41 @@ var appPanelVoluntarioVue = new Vue({
     el: '#PanelVoluntarioVue',
     data: {
         publicacionesMascotaEncontrada: [],
+        publicacionesEnAdopcion: [],
 
     },
     methods:
         {
-            actualizarAdmins: function () {
-                var response = {
-                    adminNuevo: this.usuarioIngresado,
-                    contrasenia: this.contraseniaIngresada
-                }
-                console.log(JSON.stringify(response))
-                this.realizarActualizacion(response, "http://localhost:8080/organizacion/panelAdministracion/actualizarAdministradores")
-                this.adminsAniadidos.push(this.usuarioIngresado)
-            },
-            actualizarCaracteristicas: function () {
-                var response = {
-                    nuevaCaracteristica: this.caracteristicaIngresada
-                }
-                console.log(JSON.stringify(response))
-                this.realizarActualizacion(response, "http://localhost:8080/organizacion/panelAdministracion/actualizarCaracteristicas")
-                this.caracteristicasAniadidas.push(this.caracteristicaIngresada)
-            },
-            actualizarDetalleFotos: function () {
-                var response = {
-                    calidadFoto: this.calidadElegida,
-                    tamanioFoto: this.tamanioElegido
-                }
-                console.log(JSON.stringify(response))
-                this.realizarActualizacion(response, "http://localhost:8080/organizacion/panelAdministracion/actualizarDetalleFotos")
-            },
-            realizarActualizacion: function (response, input) {
-                fetch(input,
+            aprobar(idPublicacion) {
+                const solicitud = {id: idPublicacion}
+                fetch("http://localhost:8080/organizacion/publicaciones/aceptar",
                     {
                         method: "POST",
                         headers:
                             {
                                 'Content-Type': 'application/json',
-                                "Authorization": idAdmin
+                                "Authorization": idVoluntario
                             },
-                        body: JSON.stringify(response)
+                        body: JSON.stringify(solicitud)
                     }).then(response => {
-                    if (response.status !== 200)
+                    if (response.status === 200){
+                        this.publicacionesMascotaEncontrada = this.publicacionesMascotaEncontrada.filter(publicacion => publicacion.id !== idPublicacion);
+                        this.publicacionesEnAdopcion = this.publicacionesEnAdopcion.filter(publicacion => publicacion.id !== idPublicacion);
+                    }
+                    else{
                         alert("Algo salio mal!!")
+                    }
                 })
             }
         },
     created() {
-        fetch("http://localhost:8080/organizacion/panelVoluntario" + this.orgElegida.toString() + "voluntario/organizacion/publicacionesNoVisibles")
-            .then(response => response.json())
-            .then(unasPublicaciones =>
-                unasPublicaciones.forEach(publicacion =>
-                    this.publicaciones.push(publicacion)));
-
         fetch("http://localhost:8080/organizacion/panelVoluntario", {
             headers: {
                 "Authorization": idVoluntario
             }
         }).then(response => response.json()).then(infoPanel => {
-            this.publicacionesMascotaEncontrada = infoPanel.publicacionesMascotaEncontrada
+            this.publicacionesMascotaEncontrada = infoPanel.publicacionesMascotaEncontrada;
+            this.publicacionesEnAdopcion = infoPanel.publicacionesMascotaEnAdopcion;
         })
     }
 })

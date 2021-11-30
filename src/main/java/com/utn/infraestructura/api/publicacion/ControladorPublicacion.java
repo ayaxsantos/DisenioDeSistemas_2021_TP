@@ -47,9 +47,12 @@ public class ControladorPublicacion {
 
     @PostMapping("adoptante/adoptarMascotaPublicacion")
     public ResponseEntity adoptarMascotaPublicacion(@RequestBody SolicitudAdoptarMascotaPublicacion solicitud) {
-        quererAdoptarMascota.ejecutar(solicitud.getNumeroDocDuenio(), solicitud.getTipoDocumentoDuenio(),
-                solicitud.getNombreMascota(), solicitud.getNumeroDocAdoptante(), solicitud.getTipoDocumentoAdoptante());
+        try {
+            quererAdoptarMascota.ejecutar(solicitud.getNumeroDocDuenio(), solicitud.getTipoDocumentoDuenio(),
+                    solicitud.getNombreMascota(), solicitud.getNumeroDocAdoptante(), solicitud.getTipoDocumentoAdoptante());
+        } catch (Exception ignored) {
 
+        }
         return ResponseEntity.status(200).build();
     }
 

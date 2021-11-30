@@ -350,14 +350,17 @@ public class PruebaTemporal {
         org4.añadirVoluntario(vol4);
         org5.añadirVoluntario(vol5);
 
-        masc1.añadirFoto("fottao1.jpg");
-        masc2.añadirFoto("fotartao2.jpg");
-        masc3.añadirFoto("fotaro1.jpg");
-        masc4.añadirFoto("fotozvz1.jpg");
-        masc5.añadirFoto("fotarsto1.jpg");
-        masc6.añadirFoto("foarstto1.jpg");
-        masc7.añadirFoto("fotaro1.jpg");
-        masc8.añadirFoto("fotarsto1.jpg");
+        masc1.añadirFoto("1.jpg");
+        masc1.añadirFoto("2.jpg");
+        masc2.añadirFoto("3.jpg");
+        masc3.añadirFoto("4.jpg");
+        masc4.añadirFoto("5.jpg");
+        masc4.añadirFoto("6.jpg");
+        masc5.añadirFoto("7.jpg");
+        masc6.añadirFoto("8.jpg");
+        masc6.añadirFoto("9.jpg");
+        masc7.añadirFoto("10.jpg");
+        masc8.añadirFoto("11.jpg");
 
         personas.guardar(per1);
         personas.guardar(per2);

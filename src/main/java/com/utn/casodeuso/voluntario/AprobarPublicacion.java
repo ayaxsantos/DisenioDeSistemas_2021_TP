@@ -22,12 +22,14 @@ public class AprobarPublicacion {
 
         unVoluntario.aprobarPublicacion(publicacion);
 
-        Mensaje mensaje = new Mensaje("Tu publicación ha sido aprobada, " +
-                "con el siguiente link puedes dar de baja la publicación: " +
-                "https://heroku.com/publicaciones/busquedaDeAdopcion/" + unVoluntario.getOrganizacion(),
-                                      " Publicacion aprobada");
+        if(publicacion.getClass().getSimpleName().equals("PublicacionBusquedaAdopcion")) {
+            Mensaje mensaje = new Mensaje("Tu publicación ha sido aprobada, " +
+                    "con el siguiente link puedes dar de baja la publicación: " +
+                    "https://rescate-de-patitas-g6-front.herokuapp.com/publicaciones/busquedaDeAdopcion/" + unVoluntario.getOrganizacion(),
+                    " Publicacion aprobada");
 
-        publicacion.getPersona().notificar(mensaje);
+            publicacion.getPersona().notificar(mensaje);
+        }
 
         publicaciones.guardar(publicacion);
     }

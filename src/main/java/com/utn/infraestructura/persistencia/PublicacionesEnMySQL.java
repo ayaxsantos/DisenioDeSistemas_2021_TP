@@ -24,5 +24,4 @@ public class PublicacionesEnMySQL implements Publicaciones {
 
         EntityManagerHelper.commit();
     }
-
 }
