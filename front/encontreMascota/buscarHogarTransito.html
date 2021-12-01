@@ -20,8 +20,8 @@
     </div>
 </nav>
 <div id="BuscarHogarTransitoVue">
-    <div id="conChapita" class="row rowMenu">
-        <div class="col">
+    <div class="row rowMenu">
+        <div id="conChapita" class="col">
             <label class="col">¿Qué animal es? <br>
                 <label v-for="tipoAnimal in tiposAnimal" class="seleccionRadio">
                     <input type="radio" v-bind:value="tipoAnimal" name="tipoAnimalRadio"
@@ -55,10 +55,9 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col"><input id="botonConChapita" type="submit" value="Buscar hogares" v-on:click="enviarDatos">
-</div>
 
+    <div class="col"><input id="botonConChapita" type="submit" value="Buscar hogares" v-on:click="enviarDatos"></div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="buscarHogarTransito.js"></script>

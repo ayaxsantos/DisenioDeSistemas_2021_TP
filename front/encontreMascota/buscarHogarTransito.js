@@ -25,7 +25,7 @@ var appBuscarHogarTransitoVue = new Vue({
         hogares: []
     },
     methods: {
-        enviarDatos() {
+        enviarDatos: function() {
             if (myParam) {
                 solicitud = {
                     tipoDocRescatista: this.tipoDocumento,
@@ -62,24 +62,6 @@ var appBuscarHogarTransitoVue = new Vue({
                 });
             })
         },
-        agregarFotos: function (event) {
-            var files = event.target.files
-            Array.from(files).forEach(unFile => this.getBase64(unFile).then(foto => {
-                this.fotos.push(foto)
-            }))
-        },
-        getBase64: function (file) {
-            return new Promise((resolve, reject) => {
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function () {
-                    resolve(reader.result)
-                };
-                reader.onerror = function (error) {
-                    reject('Error: ', error);
-                }
-            })
-        },
         async obtenerDocumento() {
             if (idUsuario) {
                 await fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}}).then(response => response.json()).then(json => {
@@ -111,6 +93,9 @@ var appBuscarHogarTransitoVue = new Vue({
             }).then(response => response.json()).then(hogares => {
                 this.hogares = hogares;
             })
+        },
+        test(){
+            console.log(this.hogares)
         }
     },
     async created() {
@@ -126,5 +111,6 @@ var appBuscarHogarTransitoVue = new Vue({
         if (myParam)
             await this.obtenerHogares();
 
+        console.log(this.hogares)
     }
 })
