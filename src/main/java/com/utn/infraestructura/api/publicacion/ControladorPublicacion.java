@@ -62,7 +62,7 @@ public class ControladorPublicacion {
                 .stream().filter(Publicacion::isEstaVisible).collect(Collectors.toList());
         List<RespuestaPublicacionMascotaEnAdopcion> publicacionesJson = publicaciones.stream()
                 .map(unaPublicacion -> new RespuestaPublicacionMascotaEnAdopcion(unaPublicacion.getMascota().getNombre(),
-                        unaPublicacion.getMascota().getDescripcionFisica(), unaPublicacion.getMascota().getFotosNormalizadas(),
+                        unaPublicacion.getMascota().getDescripcionFisica(), unaPublicacion.getMascota().getFotos(),
                         unaPublicacion.getPersona().getDocumento().getNumero(), unaPublicacion.getPersona().getDocumento().getTipo())).collect(java.util.stream.Collectors.toList());
         return ResponseEntity.status(200).body(publicacionesJson);
     }

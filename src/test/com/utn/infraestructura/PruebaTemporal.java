@@ -6,21 +6,15 @@ import com.utn.dominio.animal.Mascota;
 import com.utn.dominio.animal.Sexo;
 import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.organizacion.CalidadFoto;
-import com.utn.dominio.organizacion.TamañoFoto;
 import com.utn.dominio.notificacion.estrategia.Email;
 import com.utn.dominio.notificacion.estrategia.SMS;
 import com.utn.dominio.notificacion.estrategia.WhatsApp;
-import com.utn.dominio.organizacion.Administrador;
-import com.utn.dominio.organizacion.Organizacion;
-import com.utn.dominio.organizacion.Voluntario;
+import com.utn.dominio.organizacion.*;
 import com.utn.dominio.persona.*;
 import com.utn.dominio.publicacion.Preferencia;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
-import com.utn.infraestructura.notificador.NotificadorEmail;
-import com.utn.infraestructura.notificador.NotificadorTwilio;
 import com.utn.infraestructura.persistencia.*;
 import org.junit.jupiter.api.Test;
 
@@ -79,11 +73,11 @@ public class PruebaTemporal {
     @Test
     public void se_persiste_persona_en_db() {
         OrganizacionesEnMySQL per = new OrganizacionesEnMySQL();
-        Contacto contactoTest = new Contacto("Celes", "", "+54 9 11 8755-7845", "ebavutti@gmail.com");
+        Contacto contactoTest = new Contacto("Celes", "", "+549118755-7845", "ebavutti@gmail.com");
         LocalDate nacimientoTest = LocalDate.of(1990, 4, 27);
         Documento documentoTest = new Documento(TipoDocumento.DNI, 38554127);
         Direccion domicilioTest = new Direccion(1742.38, 2394.2);
-        Contacto otroContactoTest = new Contacto("Isabela", "Ferriera", "+54 9 11 7855-4121", "iferriera@gmail.com");
+        Contacto otroContactoTest = new Contacto("Isabela", "Ferriera", "+549117855-4121", "iferriera@gmail.com");
         Usuario usuarioTest = new Usuario("pepebavutti", "noSeQuePoner...");
         Preferencia preferenciaTest = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.MEDIANO);
 
@@ -91,10 +85,10 @@ public class PruebaTemporal {
 
         Organizacion organizacionTest = new Organizacion("Patitas Juguetonas", domicilioOrgTest, TamañoFoto.GRANDE, CalidadFoto.BAJA);
         Voluntario voluntarioTest = new Voluntario("volOrg", "324ae41gg", organizacionTest);
-        Administrador administradorTest = new Administrador("adminOrg","32ad965min", organizacionTest);
+        Administrador administradorTest = new Administrador("adminOrg", "32ad965min", organizacionTest);
 
-        organizacionTest.agregarPreguntaAdopcion("Tu animal tiene vacunas?");
-        organizacionTest.agregarPreguntaAdopcion("Tu animal es jugeton?");
+        organizacionTest.añadirPreguntaAdopcion("Tu animal tiene vacunas?");
+        organizacionTest.añadirPreguntaAdopcion("Tu animal es jugeton?");
         organizacionTest.añadirVoluntario(voluntarioTest);
         Mascota mascotaTest = new Mascota("Solange", "Sol", 5, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE,
                 "Soy muy linda y tierna");
@@ -113,7 +107,9 @@ public class PruebaTemporal {
         otraMascotaTest.añadirCaracteristica("Garras", "Si");
         otraMascotaTest.añadirCaracteristica("Perdida de Pelo", "No");
 
-        Persona personaTest = new Persona(usuarioTest, contactoTest, nacimientoTest, documentoTest, domicilioTest, preferenciaTest, new ArrayList<Contacto>(){{add(otroContactoTest);}}, 32);
+        Persona personaTest = new Persona(usuarioTest, contactoTest, nacimientoTest, documentoTest, domicilioTest, preferenciaTest, new ArrayList<Contacto>() {{
+            add(otroContactoTest);
+        }}, 32);
         organizacionTest.añadirPersona(personaTest);
         personaTest.añadirMascota(mascotaTest);
         personaTest.añadirMascota(otraMascotaTest);
@@ -129,8 +125,8 @@ public class PruebaTemporal {
         organizacionTest.añadirPublicacionMascotaEncontrada(new PublicacionMascotaEncontrada(personaTest, new Direccion(20, 23), "Todo okey"));
 
         organizacionTest.añadirCaracteristica("Perrito gordito");
-        organizacionTest.agregarPreguntaAdopcion("Cuanto pesa??");
-        organizacionTest.agregarPreguntaQuieroAdoptar("Tiene patio??");
+        organizacionTest.añadirPreguntaAdopcion("Cuanto pesa??");
+        organizacionTest.añadirPreguntaQuieroAdoptar("Tiene patio??");
         personaTest.setPreferencia(new Preferencia(Sexo.HEMBRA, Animal.PERRO, Tamaño.CHICO));
 
         organizacionTest.añadirAdministrador(administradorTest);
@@ -172,68 +168,84 @@ public class PruebaTemporal {
 
     @Test
     public void llenar_base_de_datos_con_datos_de_prueba() {
-        //TODO : mascota caracteristicas rellenar
-        //TODO : mascota fotos rellenar
-        Contacto con1 = new Contacto("Juan", "Perez", "+54 9 11 75848544", "juanperez@gmail.com");
+        String descripcion = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur mollis ipsum sem, non imperdiet diam commodo non. Cras dui eros, facilisis in luctus ut, cursus a dui. Curabitur sagittis tincidunt augue, in aliquam diam dictum in.";
+        Contacto con1 = new Contacto("Juan", "Perez", "+5491175848544", "juanperez@gmail.com");
         Usuario usr1 = new Usuario("juanperez", "per@31Juan");
         Preferencia pref1 = new Preferencia(Sexo.HEMBRA, Animal.PERRO, Tamaño.CHICO);
-        Persona per1 = new Persona(usr1, con1, LocalDate.of(1990, 4, 27), new Documento(TipoDocumento.DNI, 386514987), new Direccion(12133, 19783), pref1 ,new ArrayList<Contacto>(){{add(new Contacto("Sofia", "Perez", "+54 9 11 74148879", "sofiaperez@gmail.com"));}}, 10);
-        Mascota masc1 = new Mascota("Mascota1", "Mascota1", 5, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, "desc Mascota1");
-        Mascota masc2 = new Mascota("Mascota2", "Mascota2", 12, Animal.PERRO, Sexo.MACHO, Tamaño.CHICO, "desc Mascota2");
-        Mascota masc3 = new Mascota("Mascota3", "Mascota3", 7, Animal.GATO, Sexo.HEMBRA, Tamaño.MEDIANO, "desc Mascota3");
+        Persona per1 = new Persona(usr1, con1, LocalDate.of(1990, 4, 27), new Documento(TipoDocumento.DNI, 38456457), new Direccion(-34.60342185145848, -58.41012996306558), pref1, new ArrayList<Contacto>() {{
+            add(new Contacto("Sofia", "Perez", "+5491174148879", "sofiaperez@gmail.com"));
+        }}, 10);
+        Mascota masc1 = new Mascota("Piru", "Obi", 5, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, descripcion);
+        Mascota masc2 = new Mascota("Chispita", "Chispi", 12, Animal.PERRO, Sexo.MACHO, Tamaño.CHICO, descripcion);
         per1.añadirMascota(masc1);
         per1.añadirMascota(masc2);
-        per1.añadirMascota(masc3);
 
-        Contacto con2 = new Contacto("Esteban", "Sanchez", "+54 9 11 1243321", "estbansanchez@gmail.com");
+        Contacto con2 = new Contacto("Esteban", "Sanchez", "+549111243321", "estebansanchez@gmail.com");
         Usuario usr2 = new Usuario("estebanSanchez", "est.ez231");
         Preferencia pref2 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.GRANDE);
-        Persona per2 = new Persona(usr2, con2, LocalDate.of(1967, 11, 21), new Documento(TipoDocumento.LICENCIA, 7889875), new Direccion(44488, 13454), pref2, new ArrayList<Contacto>(){{add(new Contacto("Ricardo", "Sanchez", "+54 9 11 78554123", "ricsan@gmail.com"));}}, 1);
-        Mascota masc8 = new Mascota("Mascota8", "Mascota8", 21, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, "desc Mascota8");
+        Persona per2 = new Persona(usr2, con2, LocalDate.of(1967, 11, 21), new Documento(TipoDocumento.LICENCIA, 12454234), new Direccion(-34.62247272569366, -58.44569802091699), pref2, new ArrayList<Contacto>() {{
+            add(new Contacto("Ricardo", "Sanchez", "+5491178554123", "ricsan@gmail.com"));
+        }}, 1);
+        Mascota masc8 = new Mascota("Rocco", "Roki", 21, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, descripcion);
         per2.añadirMascota(masc8);
 
-        Contacto con3 = new Contacto("Jose", "Diaz", "+54 9 11 000000", "josediaz@gmail.com");
+        Contacto con3 = new Contacto("Jose", "Diaz", "+54911000000", "josediaz@gmail.com");
         Usuario usr3 = new Usuario("josaz", "josesito31-42");
         Preferencia pref3 = new Preferencia(Sexo.HEMBRA, Animal.GATO, Tamaño.MEDIANO);
-        Persona per3 = new Persona(usr3, con3, LocalDate.of(1987, 6, 12), new Documento(TipoDocumento.DNI, 14788695), new Direccion(45646, 13877), pref3, new ArrayList<Contacto>(){{add(new Contacto("Marta", "diaz", "+54 9 11 78445689", "martitadiaz@gmail.com"));}} , 3);
-        Mascota masc4 = new Mascota("Mascota4", "Mascota4", 5, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, "desc Mascota4");
-        Mascota masc5 = new Mascota("Mascota5", "Mascota5", 99, Animal.GATO, Sexo.HEMBRA, Tamaño.MEDIANO, "desc Mascota5");
-        Mascota masc6 = new Mascota("Mascota6", "Mascota6", 1, Animal.PERRO, Sexo.MACHO, Tamaño.CHICO, "desc Mascota6");
-        Mascota masc7 = new Mascota("Mascota7", "Mascota7", 3, Animal.GATO, Sexo.MACHO, Tamaño.GRANDE, "desc Mascota7");
+        Persona per3 = new Persona(usr3, con3, LocalDate.of(1987, 6, 12), new Documento(TipoDocumento.DNI, 24577458), new Direccion(-34.58582050299011, -58.479337073041734), pref3, new ArrayList<Contacto>() {{
+            add(new Contacto("Marta", "diaz", "+5491178445689", "martitadiaz@gmail.com"));
+        }}, 3);
+        Mascota masc4 = new Mascota("Wanda", "Wandi", 5, Animal.PERRO, Sexo.HEMBRA, Tamaño.GRANDE, descripcion);
+        Mascota masc5 = new Mascota("Brillito", "Brilli", 99, Animal.GATO, Sexo.HEMBRA, Tamaño.MEDIANO, descripcion);
+        Mascota masc6 = new Mascota("Hercules", "Hercu", 1, Animal.PERRO, Sexo.MACHO, Tamaño.CHICO, descripcion);
+        Mascota masc7 = new Mascota("Thor", "Thori", 3, Animal.GATO, Sexo.MACHO, Tamaño.GRANDE, descripcion);
         per3.añadirMascota(masc4);
         per3.añadirMascota(masc5);
         per3.añadirMascota(masc6);
         per3.añadirMascota(masc7);
 
-        Contacto con4 = new Contacto("Karen", "Lopez", "+54 9 11 1564566", "karenlopez@gmail.com");
+        Contacto con4 = new Contacto("Karen", "Lopez", "+5491121564566", "karenlopez@gmail.com");
         Usuario usr4 = new Usuario("karenlopez", "karendelbarrio@42");
         Preferencia pref4 = new Preferencia(Sexo.MACHO, Animal.GATO, Tamaño.GRANDE);
-        Persona per4 = new Persona(usr4, con4, LocalDate.of(1970, 2, 1), new Documento(TipoDocumento.DNI, 11111119), new Direccion(97548, 16489), pref4, new ArrayList<Contacto>(){{add(new Contacto("Lucas", "Perez", "+54 9 11 74148879", "lucasperez@gmail.com"));}}, 7);
+        Persona per4 = new Persona(usr4, con4, LocalDate.of(1970, 2, 1), new Documento(TipoDocumento.DNI, 42544587), new Direccion(-34.613379284716316, -58.368000742465895), pref4, new ArrayList<Contacto>() {{
+            add(new Contacto("Lucas", "Perez", "+5491174148879", "lucasperez@gmail.com"));
+        }}, 7);
+        Mascota masc3 = new Mascota("Luna", "Luni", 7, Animal.GATO, Sexo.HEMBRA, Tamaño.MEDIANO, descripcion);
+        per4.añadirMascota(masc3);
 
-        Contacto con5 = new Contacto("Peppa", "Pig", "+54 9 11 ", "peppitalacerdita@gmail.com");
-        Usuario usr5 = new Usuario("peppapig", "peppa65%12");
+        Contacto con5 = new Contacto("Marta", "Bavutti", "+5491145122457", "martitabavu@gmail.com");
+        Usuario usr5 = new Usuario("martab", "Bavutti21%12");
         Preferencia pref5 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.CHICO);
-        Persona per5 = new Persona(usr5, con5, LocalDate.of(2002, 4, 27), new Documento(TipoDocumento.PASAPORTE, 788899777), new Direccion(12133, 19783), pref5, new ArrayList<Contacto>(){{add(new Contacto("Peppe", "Pig", "+54 9 11 13547891", "peppeelcerdo@gmail.com"));}},28);
+        Persona per5 = new Persona(usr5, con5, LocalDate.of(2002, 4, 27), new Documento(TipoDocumento.PASAPORTE, 134451245), new Direccion(-34.585521050311804, -58.406342268765385), pref5, new ArrayList<Contacto>() {{
+            add(new Contacto("Peppe", "Pig", "+5491113547891", "peppeelcerdo@gmail.com"));
+        }}, 28);
 
-        Contacto con6 = new Contacto("Lionel", "Messi", "+54 9 11 78874569", "traemelacopa@gmail.com");
+        Contacto con6 = new Contacto("Lionel", "Messi", "+5491178874569", "traemelacopa@gmail.com");
         Usuario usr6 = new Usuario("lioeluno", "messi-10-barca");
         Preferencia pref6 = new Preferencia(Sexo.HEMBRA, Animal.GATO, Tamaño.CHICO);
-        Persona per6 = new Persona(usr6, con6, LocalDate.of(1921, 1, 1), new Documento(TipoDocumento.DNI, 15447875), new Direccion(4564236, 138177), pref6, new ArrayList<Contacto>(){{add(new Contacto("Diego", "Maradona", "+54 9 11 47887542", "eldiegote10@gmail.com"));}},100);
+        Persona per6 = new Persona(usr6, con6, LocalDate.of(1921, 1, 1), new Documento(TipoDocumento.DNI, 23545471), new Direccion(-34.63022913639562, -58.47919855613238), pref6, new ArrayList<Contacto>() {{
+            add(new Contacto("Diego", "Maradona", "+5491147887542", "eldiegote10@gmail.com"));
+        }}, 100);
 
-        Contacto con7 = new Contacto("Kun", "Aguero", "+54 9 11 48678654", "elkun@gmail.com");
+        Contacto con7 = new Contacto("Kun", "Aguero", "+5491148678654", "elkun@gmail.com");
         Usuario usr7 = new Usuario("kunaguero", "457elkun@42");
         Preferencia pref7 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.GRANDE);
-        Persona per7 = new Persona(usr7, con7, LocalDate.of(1945, 2, 11), new Documento(TipoDocumento.LICENCIA, 19115119), new Direccion(135468, 286489), pref7, new ArrayList<Contacto>(){{add(new Contacto("Lionel", "Messi", "+54 9 11 78874569", "traemelacopa@gmail.com"));}}, 165);
+        Persona per7 = new Persona(usr7, con7, LocalDate.of(1945, 2, 11), new Documento(TipoDocumento.LICENCIA, 35454748), new Direccion(-34.65607282734608, -58.623932684980254), pref7, new ArrayList<Contacto>() {{
+            add(new Contacto("Lionel", "Messi", "+5491178874569", "traemelacopa@gmail.com"));
+        }}, 165);
 
-        Contacto con8 = new Contacto("Celeste", "Rubino", "+54 9 11 78774112", "celesterubino@gmail.com");
+        Contacto con8 = new Contacto("Celeste", "Challen", "+5491178774112", "celestecn@gmail.com");
         Usuario usr8 = new Usuario("celesrubi", "rubi99celes@");
         Preferencia pref8 = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.MEDIANO);
-        Persona per8 = new Persona(usr8, con8, LocalDate.of(1998, 1, 13), new Documento(TipoDocumento.PASAPORTE, 74487), new Direccion(564789, 148477), pref8, new ArrayList<Contacto>(){{add(new Contacto("Pepe", "Rubino", "+54 9 11 78745521", "peperubino@gmail.com"));}}, 79);
+        Persona per8 = new Persona(usr8, con8, LocalDate.of(1998, 1, 13), new Documento(TipoDocumento.PASAPORTE, 147421243), new Direccion(-34.75305095133177, -58.392638979689174), pref8, new ArrayList<Contacto>() {{
+            add(new Contacto("Pepe", "Rubino", "+5491178745521", "peperubino@gmail.com"));
+        }}, 79);
+
 
         con1.añadirMedioDeComunicacion(new SMS(false));
         con1.añadirMedioDeComunicacion(new WhatsApp(true));
         con2.añadirMedioDeComunicacion(new Email(true));
-        con3.añadirMedioDeComunicacion(new WhatsApp( true));
+        con3.añadirMedioDeComunicacion(new WhatsApp(true));
         con4.añadirMedioDeComunicacion(new WhatsApp(true));
         con5.añadirMedioDeComunicacion(new Email(true));
         con5.añadirMedioDeComunicacion(new WhatsApp(false));
@@ -242,11 +254,11 @@ public class PruebaTemporal {
         con8.añadirMedioDeComunicacion(new WhatsApp(true));
         con8.añadirMedioDeComunicacion(new Email(false));
 
-        Organizacion org1 = new Organizacion("Patitas locas", new Direccion(1233, 13123), TamañoFoto.GRANDE, CalidadFoto.BAJA);
-        Organizacion org2 = new Organizacion("Mascotas en casa", new Direccion(41233, 16423), TamañoFoto.GRANDE, CalidadFoto.ALTA);
-        Organizacion org3 = new Organizacion("Dulce hogar", new Direccion(12422, 13753), TamañoFoto.NORMAL, CalidadFoto.MEDIA);
-        Organizacion org4 = new Organizacion("Peludones", new Direccion(12533, 13443), TamañoFoto.NORMAL, CalidadFoto.ALTA);
-        Organizacion org5 = new Organizacion("Tu compañerito", new Direccion(12533, 19123), TamañoFoto.CHICA, CalidadFoto.BAJA);
+        Organizacion org1 = new Organizacion("Patitas locas", new Direccion(-34.61297133588416, -58.42231495564473), TamañoFoto.GRANDE, CalidadFoto.BAJA);
+        Organizacion org2 = new Organizacion("Mascotas en casa", new Direccion(-34.59623438899126, -58.43776828091517), TamañoFoto.GRANDE, CalidadFoto.ALTA);
+        Organizacion org3 = new Organizacion("Dulce hogar", new Direccion(-34.620760937206086, -58.50204053938509), TamañoFoto.NORMAL, CalidadFoto.MEDIA);
+        Organizacion org4 = new Organizacion("Peludones", new Direccion(-34.61350551320277, -58.370166508249945), TamañoFoto.NORMAL, CalidadFoto.ALTA);
+        Organizacion org5 = new Organizacion("Tu compañerito", new Direccion(-34.65991349419335, -58.468461409429835), TamañoFoto.CHICA, CalidadFoto.BAJA);
 
         org1.añadirCaracteristica("Car1Org1");
         org1.añadirCaracteristica("Car2Org1");
@@ -261,27 +273,27 @@ public class PruebaTemporal {
         org5.añadirCaracteristica("Car2Org5");
         org5.añadirCaracteristica("Car3Org5");
 
-        org1.agregarPreguntaAdopcion("PregAdop1Org1");
-        org1.agregarPreguntaAdopcion("PregAdop2Org1");
-        org1.agregarPreguntaAdopcion("PregAdop3Org1");
-        org2.agregarPreguntaAdopcion("PregAdop1Org2");
-        org2.agregarPreguntaAdopcion("PregAdop2Org2");
-        org3.agregarPreguntaAdopcion("PregAdop1Org3");
-        org3.agregarPreguntaAdopcion("PregAdop2Org3");
-        org4.agregarPreguntaAdopcion("PregAdop1Org4");
-        org5.agregarPreguntaAdopcion("PregAdop1Org5");
-        org5.agregarPreguntaAdopcion("PregAdop2Org5");
+        org1.añadirPreguntaAdopcion("PregAdop1Org1");
+        org1.añadirPreguntaAdopcion("PregAdop2Org1");
+        org1.añadirPreguntaAdopcion("PregAdop3Org1");
+        org2.añadirPreguntaAdopcion("PregAdop1Org2");
+        org2.añadirPreguntaAdopcion("PregAdop2Org2");
+        org3.añadirPreguntaAdopcion("PregAdop1Org3");
+        org3.añadirPreguntaAdopcion("PregAdop2Org3");
+        org4.añadirPreguntaAdopcion("PregAdop1Org4");
+        org5.añadirPreguntaAdopcion("PregAdop1Org5");
+        org5.añadirPreguntaAdopcion("PregAdop2Org5");
 
-        org1.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar1Org1");
-        org1.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar2Org1");
-        org1.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar3Org1");
-        org2.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar1Org2");
-        org2.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar2Org2");
-        org3.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar1Org3");
-        org3.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar2Org3");
-        org4.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar1Org4");
-        org5.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar1Org5");
-        org5.agregarPreguntaQuieroAdoptar("PregQuieroAdoptar2Org5");
+        org1.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar1Org1");
+        org1.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar2Org1");
+        org1.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar3Org1");
+        org2.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar1Org2");
+        org2.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar2Org2");
+        org3.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar1Org3");
+        org3.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar2Org3");
+        org4.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar1Org4");
+        org5.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar1Org5");
+        org5.añadirPreguntaQuieroAdoptar("PregQuieroAdoptar2Org5");
 
         org1.añadirMascota(masc1);
         org3.añadirMascota(masc2);
@@ -292,20 +304,20 @@ public class PruebaTemporal {
         org5.añadirMascota(masc6);
         org3.añadirMascota(masc7);
 
-        PublicacionMascotaEncontrada pub1 = new PublicacionMascotaEncontrada(per8, new Direccion(1233, 13123), "Todo oki (?");
+        PublicacionMascotaEncontrada pub1 = new PublicacionMascotaEncontrada(per8, new Direccion(-34.79269093516929, -58.480033806673624), "Todo ok");
         pub1.agregarFoto("foto1.png");
         pub1.agregarFoto("foto2.png");
-        PublicacionMascotaEncontrada pub2 = new PublicacionMascotaEncontrada(per8, new Direccion(7874, 4587), "Patita lastimada");
+        pub1.agregarFoto("foto3.png");
+        PublicacionMascotaEncontrada pub2 = new PublicacionMascotaEncontrada(per8, new Direccion(-34.57408835867723, -58.72414063855492), "Patita lastimada");
         pub2.agregarFoto("foto1.png");
         pub2.agregarFoto("foto2.png");
-        PublicacionMascotaEncontrada pub3 = new PublicacionMascotaEncontrada(per7, new Direccion(45878, 9897), "Tiene parasitos");
+        PublicacionMascotaEncontrada pub3 = new PublicacionMascotaEncontrada(per7, new Direccion(-34.73605837002798, -58.29174260923606), "Tiene parasitos");
         pub3.agregarFoto("foto1.png");
         pub3.agregarFoto("foto2.png");
-        pub3.agregarFoto("foto3.png");
-        PublicacionMascotaEncontrada pub4 = new PublicacionMascotaEncontrada(per6, new Direccion(1233, 13123), "Hambriento");
+        PublicacionMascotaEncontrada pub4 = new PublicacionMascotaEncontrada(per6, new Direccion(-34.750943705113215, -58.29095499898228), "Hambriento");
         pub4.agregarFoto("foto1.png");
-        PublicacionMascotaEncontrada pub5 = new PublicacionMascotaEncontrada(per7, new Direccion(1, 65464), "Perfecto");
-        PublicacionMascotaEncontrada pub6 = new PublicacionMascotaEncontrada(per2, new Direccion(241443, 123333), "Asustado");
+        PublicacionMascotaEncontrada pub5 = new PublicacionMascotaEncontrada(per7, new Direccion(-34.47675454326059, -58.54614072120325), "Perfecto");
+        PublicacionMascotaEncontrada pub6 = new PublicacionMascotaEncontrada(per2, new Direccion(-34.70275860011573, -58.40645683721891), "Asustado");
         org1.añadirPublicacionMascotaEncontrada(pub1);
         org1.añadirPublicacionMascotaEncontrada(pub2);
         org2.añadirPublicacionMascotaEncontrada(pub3);
@@ -313,14 +325,32 @@ public class PruebaTemporal {
         org5.añadirPublicacionMascotaEncontrada(pub5);
         org5.añadirPublicacionMascotaEncontrada(pub6);
 
-        org1.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(1), new HashMap<String, String>(){{put("Es bueno?", "Si"); put("Es malo?", "Si");}}));
-        org2.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(2), new HashMap<String, String>(){{put("Es alto?", "No"); put("Es bueno?", "Si");}}));
-        org2.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per2, per2.getMascotas().get(0), new HashMap<String, String>(){{put("Come mucho","No");}}));
-        org5.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per3, per3.getMascotas().get(0), new HashMap<String, String>(){{put("Es hiperactivo","Si");}}));
+        org1.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(1), new HashMap<String, String>() {{
+            put("Es bueno?", "Si");
+            put("Es malo?", "Si");
+        }}));
+        org1.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per1, per1.getMascotas().get(0), new HashMap<String, String>() {{
+            put("Es alto?", "No");
+            put("Es bueno?", "Si");
+        }}));
+        org2.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per2, per2.getMascotas().get(0), new HashMap<String, String>() {{
+            put("Come mucho", "No");
+        }}));
+        org5.añadirPublicacionMascotaEnAdopcion(new PublicacionMascotaEnAdopcion(per3, per3.getMascotas().get(0), new HashMap<String, String>() {{
+            put("Es hiperactivo", "Si");
+        }}));
 
-        org1.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per5, new ArrayList<String>(){{add("Patio"); add("Pasto");}}));
-        org2.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per6, new ArrayList<String>(){{add("Pileta");}}));
-        org4.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per8, new ArrayList<String>(){{add("Balcon"); add("Plantas");}}));
+        org1.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per5, new ArrayList<String>() {{
+            add("Patio");
+            add("Pasto");
+        }}));
+        org2.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per6, new ArrayList<String>() {{
+            add("Pileta");
+        }}));
+        org4.añadirPublicacionBusquedaAdopcion(new PublicacionBusquedaAdopcion(per8, new ArrayList<String>() {{
+            add("Balcon");
+            add("Plantas");
+        }}));
 
         Administrador admin1 = new Administrador("pepeOwner", "pepeo#123", org1);
         Administrador admin2 = new Administrador("juanOwner", "juan_cito(?123", org2);
@@ -362,6 +392,27 @@ public class PruebaTemporal {
         masc7.añadirFoto("10.jpg");
         masc8.añadirFoto("11.jpg");
 
+
+        Contacto contactoProfesor = new Contacto("Luciano", "Straccia", "+5491158757641", "lstraccia1@frba.utn.edu.ar");
+        Usuario usuarioProfesor = new Usuario("lucianostraccia", "acare@1443$str");
+        Administrador administradorProfesor = new Administrador("lucianostraccia", "acare@1443$str", org1);
+        Voluntario voluntarioProfesor = new Voluntario("lucianostraccia", "acare@1443$str", org1);
+        Preferencia preferenciasProfesor = new Preferencia(Sexo.MACHO, Animal.PERRO, Tamaño.MEDIANO);
+        Persona personaProfesor = new Persona(usuarioProfesor, contactoProfesor, LocalDate.of(1982, 11, 23),
+                new Documento(TipoDocumento.DNI, 30787456), new Direccion(-34.59831733430477, -58.4201443483576),
+                preferenciasProfesor, new ArrayList<Contacto>() {{
+            add(con8);
+            add(con1);
+        }}, 10);
+        Mascota mascota1Profesor = new Mascota("Pepe", "Pancho", 11, Animal.GATO, Sexo.HEMBRA, Tamaño.MEDIANO, descripcion);
+        mascota1Profesor.añadirFoto("1.jpg");
+        mascota1Profesor.añadirFoto("2.jpg");
+        Mascota mascota2Profesor = new Mascota("Rex", "Dino", 3, Animal.PERRO, Sexo.MACHO, Tamaño.GRANDE, descripcion);
+        mascota2Profesor.añadirFoto("1.jpg");
+        Mascota mascota3Profesor = new Mascota("Pluto", "Plu", 5, Animal.PERRO, Sexo.MACHO, Tamaño.CHICO, descripcion);
+        mascota3Profesor.añadirFoto("1.jpg");
+        mascota3Profesor.añadirFoto("2.jpg");
+
         personas.guardar(per1);
         personas.guardar(per2);
         personas.guardar(per3);
@@ -370,6 +421,7 @@ public class PruebaTemporal {
         personas.guardar(per6);
         personas.guardar(per7);
         personas.guardar(per8);
+        personas.guardar(personaProfesor);
 
         organizaciones.guardar(org1);
         organizaciones.guardar(org2);

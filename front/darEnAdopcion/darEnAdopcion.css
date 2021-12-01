@@ -24,6 +24,10 @@ body {
     text-align: center;
 }
 
+.imgInicio{
+    max-width: content-box;
+}
+
 #botonRegistrar {
     background-color: rgb(235, 218, 242);
 }

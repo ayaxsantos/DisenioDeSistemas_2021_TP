@@ -22,9 +22,39 @@ var appEncontreMascotaVue = new Vue({
         numeroDocumento: '',
         tipoDocumento: '',
         organizaciones: [],
-        orgElegida: 'info'
+        orgElegida: 'info',
+        provincias: [],
+        provincia: '',
+        localidad: '',
+        calle: '',
+        altura: ''
     },
     methods: {
+        async consultarDireccion()
+        {
+            console.log(this.localidad);
+            console.log(this.calle);
+            console.log(this.altura);
+
+            var url = new URL('https://apis.datos.gob.ar/georef/api/direcciones')
+
+            var params = {direccion: this.calle + " al " + this.altura,localidad:this.localidad}
+            url.search = new URLSearchParams(params).toString();
+            console.log(url);
+
+            await fetch(url).then(response => response.json()).then(datos => {
+                console.log(datos);
+                this.latitud = datos.direcciones[0].ubicacion.lat;
+                this.longitud = datos.direcciones[0].ubicacion.lon;
+                console.log(this.latitud);
+                console.log(this.longitud);
+            })
+
+            map.setView(new ol.View({
+                center: ol.proj.fromLonLat([this.longitud, this.latitud]),
+                zoom: 17
+            }));
+        },
         enviarDatos(){
             var solicitud
             var input
@@ -106,3 +136,16 @@ var appEncontreMascotaVue = new Vue({
         })
     }
 })
+
+var map = new ol.Map({
+    target: 'map',
+    layers: [
+        new ol.layer.Tile({
+            source: new ol.source.OSM()
+        })
+    ],
+    view: new ol.View({
+        center: ol.proj.fromLonLat([-58.3712, -34.6083]),
+        zoom: 7
+    })
+});

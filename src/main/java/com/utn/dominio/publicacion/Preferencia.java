@@ -10,14 +10,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "preferencia")
 public class Preferencia extends EntidadPersistente {
-    
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 32)
     private Animal animal;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 8)
+    private Sexo sexo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 16)
     private Tamaño tamaño;
 
     public Preferencia(Sexo sexo, Animal animal, Tamaño tamaño) {
@@ -26,20 +29,21 @@ public class Preferencia extends EntidadPersistente {
         this.tamaño = tamaño;
     }
 
-    public Preferencia() {
-
-    }
-
-    public Animal animal() {
+    // Accessors
+    public Animal getAnimal() {
         return animal;
     }
 
-    public Sexo sexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public Tamaño tamaño() {
+    public Tamaño getTamaño() {
         return tamaño;
     }
 
+    // Hibernate
+    public Preferencia() {
+
+    }
 }

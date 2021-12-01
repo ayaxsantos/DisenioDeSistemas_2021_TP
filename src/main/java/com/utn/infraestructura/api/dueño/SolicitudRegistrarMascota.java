@@ -1,11 +1,13 @@
 package com.utn.infraestructura.api.dueño;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.utn.dominio.animal.Animal;
+import com.utn.dominio.animal.Sexo;
+import com.utn.dominio.animal.Tamaño;
 import com.utn.dominio.persona.TipoDocumento;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SolicitudRegistrarMascota {
 
@@ -22,7 +24,7 @@ public class SolicitudRegistrarMascota {
     private String nombre;
 
     @JsonProperty
-    private String tipoAnimal;
+    private Animal tipoAnimal;
 
     @JsonProperty
     private String apodo;
@@ -31,10 +33,10 @@ public class SolicitudRegistrarMascota {
     private int edad;
 
     @JsonProperty
-    private String sexo;
+    private Sexo sexo;
 
     @JsonProperty
-    private String tamanio;
+    private Tamaño tamanio;
 
     @JsonProperty
     private String descripcionFisica;
@@ -45,55 +47,51 @@ public class SolicitudRegistrarMascota {
     @JsonProperty
     private HashMap<String, String> caracteristicas;
 
-    public int numeroDocumento() {
-        return this.numeroDocumento;
+    public String getOrganizacion() {
+        return organizacion;
+    }
+
+    public int getNumeroDocumento() {
+        return numeroDocumento;
     }
 
     public TipoDocumento getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public String nombre() {
-        return this.nombre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String tipoAnimal() {
-        return this.tipoAnimal;
+    public Animal getTipoAnimal() {
+        return tipoAnimal;
     }
 
-    public String apodo() {
-        return this.apodo;
+    public String getApodo() {
+        return apodo;
     }
 
-    public int edad() {
-        return this.edad;
+    public int getEdad() {
+        return edad;
     }
 
-    public String sexo() {
-        return this.sexo;
+    public Sexo getSexo() {
+        return sexo;
     }
 
-    public String tamaño() {
-        return this.tamanio;
+    public Tamaño getTamanio() {
+        return tamanio;
     }
 
-    public String descripcionFisica() {
-        return this.descripcionFisica;
+    public String getDescripcionFisica() {
+        return descripcionFisica;
     }
 
-    public List<String> fotos() {
-        return this.fotos;
+    public List<String> getFotos() {
+        return fotos;
     }
 
-    public HashMap<String, String> caracteristicas() {
-        return this.caracteristicas;
-    }
-
-    public String organizacion() {
-        return organizacion;
-    }
-
-    public void setOrganizacion(String organizacion) {
-        this.organizacion = organizacion;
+    public HashMap<String, String> getCaracteristicas() {
+        return caracteristicas;
     }
 }

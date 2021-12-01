@@ -1,7 +1,5 @@
 package com.utn.infraestructura.api.dueño;
 
-import com.utn.casodeuso.dueño.ConfirmarMascotaEncontrada;
-import com.utn.casodeuso.dueño.GenerarPublicacionMascotaEnAdopcion;
 import com.utn.casodeuso.dueño.ObtenerMascotas;
 import com.utn.casodeuso.dueño.RegistrarMascota;
 import com.utn.dominio.Organizaciones;
@@ -22,25 +20,21 @@ import java.util.stream.Collectors;
 public class ControladorDueño {
 
     private final RegistrarMascota registrarMascota;
-    private final GenerarPublicacionMascotaEnAdopcion generarPublicacionMascotaEnAdopcion;
-    private final ConfirmarMascotaEncontrada confirmarMascotaEncontrada;
     private final ObtenerMascotas obtenerMascotas;
 
     public ControladorDueño() {
         Personas personas = new PersonasEnMySQL();
         Organizaciones organizaciones = new OrganizacionesEnMySQL();
         this.registrarMascota = new RegistrarMascota(personas, organizaciones);
-        this.generarPublicacionMascotaEnAdopcion = new GenerarPublicacionMascotaEnAdopcion(personas);
-        this.confirmarMascotaEncontrada = new ConfirmarMascotaEncontrada(personas);
         this.obtenerMascotas = new ObtenerMascotas(personas);
     }
 
     @PostMapping("registrar/mascota")
     public ResponseEntity<Void> registrarMascota(@RequestBody SolicitudRegistrarMascota solicitud) {
-        registrarMascota.ejecutar(solicitud.organizacion(), solicitud.numeroDocumento(), solicitud.getTipoDocumento(), solicitud.nombre(), solicitud.apodo(),
-                solicitud.edad(), solicitud.tipoAnimal(), solicitud.sexo(),
-                solicitud.tamaño(), solicitud.descripcionFisica(),
-                solicitud.fotos(), solicitud.caracteristicas());
+        registrarMascota.ejecutar(solicitud.getOrganizacion(), solicitud.getNumeroDocumento(), solicitud.getTipoDocumento(),
+                solicitud.getNombre(), solicitud.getApodo(), solicitud.getEdad(),
+                solicitud.getTipoAnimal(), solicitud.getSexo(), solicitud.getTamanio(),
+                solicitud.getDescripcionFisica(), solicitud.getFotos(), solicitud.getCaracteristicas());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -49,7 +43,7 @@ public class ControladorDueño {
         List<Mascota> mascotas = obtenerMascotas.ejecutar(numeroDocumento, tipoDocumento);
         List<RespuestaMascotas> mascotasResponse = mascotas.stream().map(mascota -> new RespuestaMascotas(
                 mascota.getNombre(),
-                mascota.getFotosNormalizadas().stream().findFirst().orElseThrow(RuntimeException::new),
+                mascota.getFotos().stream().findFirst().orElseThrow(RuntimeException::new),
                 mascota.getOrganizacion().getNombre())).collect(Collectors.toList());
 
         return ResponseEntity.status(200).body(mascotasResponse);

@@ -13,16 +13,16 @@ import javax.persistence.*;
 @Table(name = "contacto")
 public class Contacto extends EntidadPersistente {
 
-    @Column
+    @Column(nullable = false, length = 32)
     private String nombre;
 
-    @Column
+    @Column(nullable = false, length = 32)
     private String apellido;
 
-    @Column
+    @Column(nullable = false, length = 32)
     private String telefono;
 
-    @Column
+    @Column(nullable = false, length = 64)
     private String email;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -33,10 +33,6 @@ public class Contacto extends EntidadPersistente {
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
-    }
-
-    public Contacto() {
-
     }
 
     public void notificar(Mensaje mensaje) {
@@ -51,24 +47,9 @@ public class Contacto extends EntidadPersistente {
         mediosDeComunicacion.add(unMedioDeComunicacion);
     }
 
-    public String nombre() {
-        return this.nombre;
-    }
-
-    public String telefono() {
-        return this.telefono;
-    }
-
-    public String email() {
-        return this.email;
-    }
-
+    // Accessors
     public String getNombre() {
         return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
     }
 
     public String getTelefono() {
@@ -79,15 +60,12 @@ public class Contacto extends EntidadPersistente {
         return email;
     }
 
-    public List<MedioDeComunicacion> getMediosDeComunicacion() {
-        return mediosDeComunicacion;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
     public void setMediosDeComunicacion(List<MedioDeComunicacion> mediosDeComunicacion) {
         this.mediosDeComunicacion = mediosDeComunicacion;
+    }
+
+    // Hibernate
+    public Contacto() {
+
     }
 }

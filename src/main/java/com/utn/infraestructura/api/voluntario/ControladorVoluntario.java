@@ -4,7 +4,6 @@ import com.utn.casodeuso.organizacion.ObtenerPublicacionesMascotaEnAdopcion;
 import com.utn.casodeuso.voluntario.AprobarPublicacion;
 import com.utn.casodeuso.voluntario.IniciarSesionVoluntario;
 import com.utn.dominio.excepcion.UsuarioNoEncontradoException;
-import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.organizacion.Voluntario;
 import com.utn.infraestructura.api.SesionManager;
 import com.utn.infraestructura.api.usuario.LoginResponse;
@@ -52,13 +51,13 @@ public class ControladorVoluntario {
         Voluntario voluntario = this.obtenerVolSesionManager(idVoluntario);
 
         List<RespuestaPublicacionMascotaEncontradaID> publicacionMascotaEncontradas = voluntario.getPublicacionesMascotaEncontradaPendientes().stream()
-                .map(unaPublicacion -> new RespuestaPublicacionMascotaEncontradaID(unaPublicacion.getId(), unaPublicacion.getUbicacionMascota().latitud(),
-                        unaPublicacion.getUbicacionMascota().longitud(), unaPublicacion.getEstadoMascota(), unaPublicacion.getFotosMascota()))
+                .map(unaPublicacion -> new RespuestaPublicacionMascotaEncontradaID(unaPublicacion.getId(), unaPublicacion.getUbicacionMascota().getLatitud(),
+                        unaPublicacion.getUbicacionMascota().getLongitud(), unaPublicacion.getEstadoMascota(), unaPublicacion.getFotosMascota()))
                 .collect(Collectors.toList());
 
         List<RespuestaPublicacionMascotaEnAdopcionID> publicacionMascotaEnAdopciones = voluntario.getPublicacionesMascotaEnAdopcionPendientes()
                 .stream().map(unaPublicacion -> new RespuestaPublicacionMascotaEnAdopcionID(unaPublicacion.getMascota().getNombre(),
-                        unaPublicacion.getMascota().getDescripcionFisica(), unaPublicacion.getMascota().getFotosNormalizadas(), unaPublicacion.getId()))
+                        unaPublicacion.getMascota().getDescripcionFisica(), unaPublicacion.getMascota().getFotos(), unaPublicacion.getId()))
                 .collect(java.util.stream.Collectors.toList());
 
 

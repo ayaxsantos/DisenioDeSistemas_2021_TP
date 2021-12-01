@@ -14,7 +14,7 @@ public class PublicacionMascotaEncontrada extends Publicacion {
     @OneToOne(cascade = CascadeType.ALL)
     private Direccion ubicacionMascota;
 
-    @Column
+    @Column(nullable = false ,length = 128)
     private String estadoMascota;
 
     @ElementCollection
@@ -28,24 +28,17 @@ public class PublicacionMascotaEncontrada extends Publicacion {
         this.fotosMascota = new ArrayList<>();
     }
 
-    public PublicacionMascotaEncontrada() {
-
+    public void agregarFoto(String foto) {
+        this.fotosMascota.add(foto);
     }
 
+    // Accessors
     public Direccion getUbicacionMascota() {
         return ubicacionMascota;
     }
 
-    public void setUbicacionMascota(Direccion ubicacionMascota) {
-        this.ubicacionMascota = ubicacionMascota;
-    }
-
     public String getEstadoMascota() {
         return estadoMascota;
-    }
-
-    public void setEstadoMascota(String estadoMascota) {
-        this.estadoMascota = estadoMascota;
     }
 
     public List<String> getFotosMascota() {
@@ -56,11 +49,8 @@ public class PublicacionMascotaEncontrada extends Publicacion {
         this.fotosMascota = fotosMascota;
     }
 
-    public void agregarFoto(String foto) {
-        this.fotosMascota.add(foto);
-    }
+    // Hibernate
+    public PublicacionMascotaEncontrada() {
 
-    public void eliminarFoto(String foto) {
-        this.fotosMascota.remove(foto);
     }
 }

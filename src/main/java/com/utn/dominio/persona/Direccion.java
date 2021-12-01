@@ -2,10 +2,12 @@ package com.utn.dominio.persona;
 
 import com.utn.dominio.EntidadPersistente;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="direccion")
+@Table(name = "direccion")
 public class Direccion extends EntidadPersistente {
 
     @Column
@@ -13,21 +15,23 @@ public class Direccion extends EntidadPersistente {
     @Column
     private double longitud;
 
-    public Direccion(double latitud, double longitud) {
+    public Direccion(double longitud, double latitud) {
         this.latitud = latitud;
         this.longitud = longitud;
     }
 
-    public Direccion() {
 
-    }
-
-    public double latitud(){
+    // Accessors
+    public double getLatitud() {
         return this.latitud;
     }
 
-    public double longitud(){
+    public double getLongitud() {
         return this.longitud;
     }
 
+    // Hibernate
+    public Direccion() {
+
+    }
 }

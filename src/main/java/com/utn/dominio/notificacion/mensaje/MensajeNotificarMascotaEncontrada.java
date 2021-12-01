@@ -10,10 +10,10 @@ public class MensajeNotificarMascotaEncontrada extends Mensaje {
 
     public MensajeNotificarMascotaEncontrada(Persona personaRescatista, Mascota mascota, String estado,
                                              Direccion direccionEncontrada, List<String> fotos) {
-        super("Hola, soy " + personaRescatista.nombre() + " y encontré a " + mascota.getNombre() + ". " +
-            "Mi número es " + personaRescatista.telefono() + " y mi email es " + personaRescatista.email() +
+        super("Hola, soy " + personaRescatista.getNombre() + " y encontré a " + mascota.getNombre() + ". " +
+            "Mi número es " + personaRescatista.getTelefono() + " y mi email es " + personaRescatista.getEmail() +
             "\n El estado en que la encontre es " + estado + ", en esta direccion " +
-            direccionEncontrada.longitud() + "," + direccionEncontrada.latitud() + ".", "[Importante] Rescate de Patitas");
+            direccionEncontrada.getLongitud() + "," + direccionEncontrada.getLatitud() + ".", "[Importante] Rescate de Patitas");
     }
 
 }

@@ -16,15 +16,7 @@ public class SolicitudActualizarAdministradores
         return adminNuevo;
     }
 
-    public void setAdminNuevo(String adminNuevo) {
-        this.adminNuevo = adminNuevo;
-    }
-
     public String getContrasenia() {
         return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
     }
 }

@@ -20,32 +20,16 @@ public class RespuestaAccesoAdmin
     @JsonProperty
     private List<String> caracteristicas;
 
-    public List<String> getUsuariosAdministradores() {
-        return usuariosAdministradores;
-    }
-
     public void setUsuariosAdministradores(List<String> usuariosAdministradores) {
         this.usuariosAdministradores = usuariosAdministradores;
-    }
-
-    public CalidadFoto getCalidadFoto() {
-        return calidadFoto;
     }
 
     public void setCalidadFoto(CalidadFoto calidadFoto) {
         this.calidadFoto = calidadFoto;
     }
 
-    public TamañoFoto getTamanioFoto() {
-        return tamanioFoto;
-    }
-
     public void setTamanioFoto(TamañoFoto tamanioFoto) {
         this.tamanioFoto = tamanioFoto;
-    }
-
-    public List<String> getCaracteristicas() {
-        return caracteristicas;
     }
 
     public void setCaracteristicas(List<String> caracteristicas) {

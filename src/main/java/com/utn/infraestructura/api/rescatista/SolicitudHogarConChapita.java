@@ -18,24 +18,12 @@ public class SolicitudHogarConChapita {
         return numDocRescatista;
     }
 
-    public void setNumDocRescatista(int numDocRescatista) {
-        this.numDocRescatista = numDocRescatista;
-    }
-
     public TipoDocumento getTipoDocRescatista() {
         return tipoDocRescatista;
     }
 
-    public void setTipoDocRescatista(TipoDocumento tipoDocRescatista) {
-        this.tipoDocRescatista = tipoDocRescatista;
-    }
-
     public int getIdMascota() {
         return idMascota;
-    }
-
-    public void setIdMascota(int idMascota) {
-        this.idMascota = idMascota;
     }
 
 }

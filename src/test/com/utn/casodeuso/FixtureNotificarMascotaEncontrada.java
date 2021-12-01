@@ -150,8 +150,8 @@ public class FixtureNotificarMascotaEncontrada {
     }
 
     private static String mensajeMascotaEncontrada(Persona personaRescatista, Mascota mascota) {
-        return "Hola, soy " + personaRescatista.nombre() + " y encontré a " + mascota.getNombre() + ". " +
-                "Mi número es " + personaRescatista.telefono() + " y mi email es " + personaRescatista.email();
+        return "Hola, soy " + personaRescatista.getNombre() + " y encontré a " + mascota.getNombre() + ". " +
+                "Mi número es " + personaRescatista.getTelefono() + " y mi email es " + personaRescatista.getEmail();
     }
 
 }

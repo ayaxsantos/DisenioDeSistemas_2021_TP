@@ -16,6 +16,12 @@ body{
     align-content: center;
     text-align: center;
 }
+
+.map {
+    height: 150px;
+    width: 40%;
+}
+
 #botonFuera{
     margin-top: 1vh;
     margin-bottom: 5vh;

@@ -16,9 +16,9 @@ public class PublicacionBusquedaAdopcion extends Publicacion {
     private Preferencia preferencia;
 
     @ElementCollection
+    @Column(nullable = true, length = 64)
     private List<String> comodidades;
 
-    //TODO por que se pasa persona y una preferencia, cuando la misma preferencia se encuentra en la persona?
     public PublicacionBusquedaAdopcion(Persona personaAdoptante, List<String> comodidades) {
         super(personaAdoptante);
         this.preferencia = personaAdoptante.getPreferencia();
@@ -26,6 +26,7 @@ public class PublicacionBusquedaAdopcion extends Publicacion {
         this.comodidades.addAll(comodidades);
     }
 
+    // Hibernate
     public PublicacionBusquedaAdopcion() {
 
     }

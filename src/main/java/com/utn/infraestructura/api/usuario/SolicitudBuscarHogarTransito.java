@@ -1,13 +1,12 @@
 package com.utn.infraestructura.api.usuario;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.utn.dominio.animal.Animal;
 import com.utn.dominio.animal.Tamaño;
-import com.utn.dominio.hogar.criterios.TipoAnimal;
 
 import java.util.List;
 
-public class SolicitudBuscarHogarTransito { //todo preguntar cris caso de uso si cambiar o no caMBIAR
-    //tomamos como que hay una validacion previa de si esta registrada o no la mascota
+public class SolicitudBuscarHogarTransito {
 
     @JsonProperty
     private int idMascota;
@@ -16,7 +15,7 @@ public class SolicitudBuscarHogarTransito { //todo preguntar cris caso de uso si
     private String nombreUsuario;
 
     @JsonProperty
-    private TipoAnimal tipoAnimal;
+    private Animal tipoAnimal;
 
     @JsonProperty
     private Tamaño tamaño;
@@ -27,7 +26,7 @@ public class SolicitudBuscarHogarTransito { //todo preguntar cris caso de uso si
     @JsonProperty
     private int radioDeCercania;
 
-    public void setTipoAnimal(TipoAnimal tipoAnimal) {
+    public void setTipoAnimal(Animal tipoAnimal) {
         this.tipoAnimal = tipoAnimal;
     }
 
@@ -39,15 +38,11 @@ public class SolicitudBuscarHogarTransito { //todo preguntar cris caso de uso si
 
     public void setCaracteristicas(List<String> caracteristicas){this.caracteristicas = caracteristicas;}
 
-    public void setRadioDeCercania(int radioDeCercania) {
-        this.radioDeCercania = radioDeCercania;
-    }
-
     public String getNombreUsuario() {
         return nombreUsuario;
     }
 
-    public TipoAnimal getTipoAnimal() {
+    public Animal getTipoAnimal() {
         return tipoAnimal;
     }
 

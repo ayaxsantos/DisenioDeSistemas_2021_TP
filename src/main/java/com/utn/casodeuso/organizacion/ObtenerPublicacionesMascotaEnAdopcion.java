@@ -15,7 +15,7 @@ public class ObtenerPublicacionesMascotaEnAdopcion {
 
     public List<PublicacionMascotaEnAdopcion> ejecutar(String nombreOrganizacion) {
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
-        return organizacion.publicacionesMascotaEnAdopcion();
+        return organizacion.getPublicacionesMascotaEnAdopcion();
     }
 
 }

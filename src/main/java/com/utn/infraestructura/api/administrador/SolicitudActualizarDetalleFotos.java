@@ -16,15 +16,7 @@ public class SolicitudActualizarDetalleFotos
         return calidadFoto;
     }
 
-    public void setCalidadFoto(CalidadFoto calidadFoto) {
-        this.calidadFoto = calidadFoto;
-    }
-
     public TamañoFoto getTamanioFoto() {
         return tamanioFoto;
-    }
-
-    public void setTamanioFoto(TamañoFoto tamanioFoto) {
-        this.tamanioFoto = tamanioFoto;
     }
 }

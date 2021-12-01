@@ -24,31 +24,15 @@ public class SolicitudPublicarMascotaEnAdopcion {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
-
     public int getNumeroDocumento() {
         return numeroDocumento;
-    }
-
-    public void setNumeroDocumento(int numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
     }
 
     public String getNombreMascota() {
         return nombreMascota;
     }
 
-    public void setNombreMascota(String nombreMascota) {
-        this.nombreMascota = nombreMascota;
-    }
-
     public HashMap<String, String> getPreguntasRespuestas() {
         return preguntasRespuestas;
-    }
-
-    public void setPreguntasRespuestas(HashMap<String, String> preguntasRespuestas) {
-        this.preguntasRespuestas = preguntasRespuestas;
     }
 }

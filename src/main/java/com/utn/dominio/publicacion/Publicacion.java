@@ -26,31 +26,26 @@ public abstract class Publicacion extends EntidadPersistente {
         this.fecha = LocalDate.now();
     }
 
-    public Publicacion() {
-
-    }
-
+    // Accessors
     public boolean isEstaVisible() {
         return estaVisible;
-    }
-
-    public void setEstaVisible(boolean estaVisible) {
-        this.estaVisible = estaVisible;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
     }
 
     public Persona getPersona() {
         return persona;
     }
 
+    public void setEstaVisible(boolean estaVisible) {
+        this.estaVisible = estaVisible;
+    }
+
     public void setPersona(Persona persona) {
         this.persona = persona;
+    }
+
+
+    // Hibernate
+    public Publicacion() {
+
     }
 }

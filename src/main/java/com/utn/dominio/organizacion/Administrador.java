@@ -17,15 +17,12 @@ public class Administrador extends Usuario {
         this.organizacion = organizacion;
     }
 
-    public Administrador() {
-    }
-
     public void definirTamañoFoto(TamañoFoto unTamaño) {
-        organizacion.tamañoFoto(unTamaño);
+        organizacion.setTamañoFoto(unTamaño);
     }
 
     public void definirCalidadFoto(CalidadFoto unaCalidad) {
-        organizacion.calidadFoto(unaCalidad);
+        organizacion.setCalidadFoto(unaCalidad);
     }
 
     public void añadirCaracteristica(String caracteristica) {
@@ -37,12 +34,12 @@ public class Administrador extends Usuario {
         this.organizacion.añadirAdministrador(adminNuevo);
     }
 
+    // Accessors
     public Organizacion getOrganizacion() {
         return organizacion;
     }
 
-    public String nombreOrganizacionAdministrada()
-    {
-        return this.organizacion.getNombre();
+    // Hibernate
+    public Administrador() {
     }
 }

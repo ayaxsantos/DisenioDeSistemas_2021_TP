@@ -24,14 +24,13 @@ public class RegistrarMascota {
         this.organizaciones = organizaciones;
     }
 
-    public void ejecutar(String nombreOrg, int documentoDueño, TipoDocumento tipoDocumento, String nombre, String apodo, int edad, String tipoAnimal, String sexo,
-                         String tamaño, String descripcionFisica, List<String> fotos,
+    public void ejecutar(String nombreOrg, int documentoDueño, TipoDocumento tipoDocumento, String nombre, String apodo, int edad, Animal tipoAnimal, Sexo sexo,
+                         Tamaño tamaño, String descripcionFisica, List<String> fotos,
                          Map<String, String> caracteristicas) {
         Persona persona = personas.obtenerPorNumeroDocumento(documentoDueño, tipoDocumento);
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrg);
 
-        Mascota mascota = new Mascota(nombre, apodo, edad, Animal.buscar(tipoAnimal), Sexo.buscar(sexo),
-                Tamaño.buscar(tamaño), descripcionFisica);
+        Mascota mascota = new Mascota(nombre, apodo, edad, tipoAnimal, sexo, tamaño, descripcionFisica);
         fotos.forEach(mascota::añadirFoto);
         caracteristicas.forEach(mascota::añadirCaracteristica);
         persona.añadirMascota(mascota);

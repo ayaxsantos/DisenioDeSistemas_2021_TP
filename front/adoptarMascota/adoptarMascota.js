@@ -20,6 +20,7 @@ var appAdoptarMascotaVue = new Vue({
                 .then(unasPublicaciones =>
                     unasPublicaciones.forEach(publicacion =>
                         this.publicaciones.push(publicacion)));
+            console.log(this.publicaciones);
         },
         enviarDatos(publicacion) {
             const solicitud = {

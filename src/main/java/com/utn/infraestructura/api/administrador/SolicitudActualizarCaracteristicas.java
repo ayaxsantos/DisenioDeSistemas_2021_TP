@@ -12,8 +12,4 @@ public class SolicitudActualizarCaracteristicas
     public String getNuevaCaracteristica() {
         return nuevaCaracteristica;
     }
-
-    public void setNuevaCaracteristica(String nuevaCaracteristica) {
-        this.nuevaCaracteristica = nuevaCaracteristica;
-    }
 }

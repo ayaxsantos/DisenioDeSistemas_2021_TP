@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class PublicacionMascotaEnAdopcion extends Publicacion {
 
     @ElementCollection
+    @Column(nullable = true, length = 64)
     private Map<String, String> preguntasRespuestas;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -27,16 +28,17 @@ public class PublicacionMascotaEnAdopcion extends Publicacion {
         this.preguntasRespuestas = preguntasRespuestas;
     }
 
-    public PublicacionMascotaEnAdopcion() {
-
-    }
-
     public Preferencia obtenerFisionomia() {
         return new Preferencia(mascota.getSexo(), mascota.getAnimal(), mascota.getTamaño());
     }
 
+    // Accessors
     public Mascota getMascota() {
         return mascota;
     }
 
+    // Hibernate
+    public PublicacionMascotaEnAdopcion() {
+
+    }
 }

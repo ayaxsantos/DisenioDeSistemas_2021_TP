@@ -20,9 +20,6 @@ public class SolicitudCompletarFormularioMascotaEncontrada { //todo faltan algun
         return nombreOrganizacion;
     }
 
-    public void setNombreOrganizacion(String nombreOrganizacion) {
-        this.nombreOrganizacion = nombreOrganizacion;
-    }
 
     public Double getLatitud() {
         return latitud;
@@ -36,15 +33,4 @@ public class SolicitudCompletarFormularioMascotaEncontrada { //todo faltan algun
         return estadoDeLaMascota;
     }
 
-    public void setEstadoDeLaMascota(String estadoDeLaMascota) {
-        this.estadoDeLaMascota = estadoDeLaMascota;
-    }
-
-    public void setLatitud(Double latitud) {
-        this.latitud = latitud;
-    }
-
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
-    }
 }

@@ -43,7 +43,7 @@ public class ControladorOrganizacion {
     @GetMapping("organizacion/{nombre}/preguntasDarEnAdopcion")
     public ResponseEntity obtenerPreguntasDarEnAdopcion(@PathVariable("nombre") String nombreOrg) {
         Organizacion organizacion = this.obtenerOrganizacion.ejecutar(nombreOrg);
-        return ResponseEntity.status(200).body(organizacion.getPreguntasAdopcion());
+        return ResponseEntity.status(200).body(organizacion.getPreguntasDarEnAdopcion());
     }
 
     @GetMapping("organizacion/preguntasGenerales/darEnAdopcion")

@@ -8,7 +8,7 @@ import java.util.List;
 public class Criterios {
 
     private static Criterios instance;
-    private List<ValidacionHogar> criterios;
+    private final List<ValidacionHogar> criterios;
 
     public static Criterios getInstance() {
         if (instance == null)

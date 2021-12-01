@@ -23,7 +23,7 @@ public class EnviarRecomendacionAdopcion {
     public void ejecutar() {
         List<Organizacion> todasOrganizaciones = organizaciones.obtenerTodas();
         todasOrganizaciones.forEach(organizacion -> {
-            List<PublicacionMascotaEnAdopcion> publicaciones = organizacion.publicacionesMascotaEnAdopcion();
+            List<PublicacionMascotaEnAdopcion> publicaciones = organizacion.getPublicacionesMascotaEnAdopcion();
             List<Persona> adoptantesActivos = organizacion.adoptantesActivos();
             adoptantesActivos.forEach(adoptante -> {
                 List<String> recomendaciones = this.determinarRecomendaciones(adoptante, publicaciones);
@@ -33,7 +33,7 @@ public class EnviarRecomendacionAdopcion {
     }
 
     private List<String> determinarRecomendaciones(Persona personaAdoptante, List<PublicacionMascotaEnAdopcion> publicacionesAdopcion) {
-        Preferencia preferenciaAdoptante = personaAdoptante.preferencia();
+        Preferencia preferenciaAdoptante = personaAdoptante.getPreferencia();
         return publicacionesAdopcion.stream()
             .filter(publicacionAdopcion -> this.tienePreferencia(publicacionAdopcion, preferenciaAdoptante))
             .map(Object::toString)

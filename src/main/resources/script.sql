@@ -1,189 +1,339 @@
 create database rescatedepatitas;
-
 use rescatedepatitas;
 
-create table documento
+CREATE TABLE `contacto`
 (
-    id     int auto_increment,
-    tipo   varchar(10) not null,
-    numero int         not null,
-    constraint id_documento_pk primary key (id)
-);
+    `id`       int         NOT NULL,
+    `apellido` varchar(32) NOT NULL,
+    `email`    varchar(64) NOT NULL,
+    `nombre`   varchar(32) NOT NULL,
+    `telefono` varchar(32) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table tamañoFoto
+
+CREATE TABLE `direccion`
 (
-    id          int auto_increment,
-    descripcion varchar(10),
-    constraint id_tamaño_foto_pk primary key (id)
-);
+    `id`       int NOT NULL,
+    `latitud`  double DEFAULT NULL,
+    `longitud` double DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table calidadFoto
+
+CREATE TABLE `documento`
 (
-    id          int auto_increment,
-    descripcion varchar(10),
-    constraint id_calidad_foto_pk primary key (id)
-);
+    `id`     int         NOT NULL,
+    `numero` int DEFAULT NULL,
+    `tipo`   varchar(16) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table direccion
+
+CREATE TABLE `hibernate_sequence`
 (
-    id       int auto_increment,
-    latitud  double not null,
-    longitud double not null,
-    constraint id_direccion_pk primary key (id)
-);
+    `next_val` bigint DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table animal
+
+CREATE TABLE `medioDeComunicacion`
 (
-    id          int auto_increment,
-    descripcion varchar(20) not null,
-    constraint id_animal_pk primary key (id)
-);
+    `tipo`        varchar(16) NOT NULL,
+    `id`          int         NOT NULL,
+    `esPreferido` bit(1)      NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table sexo
+
+CREATE TABLE `preferencia`
 (
-    id          int auto_increment,
-    descripcion varchar(20) not null,
-    constraint id_sexo_pk primary key (id)
-);
+    `id`     int         NOT NULL,
+    `animal` varchar(32) NOT NULL,
+    `sexo`   varchar(8)  NOT NULL,
+    `tamaño` varchar(16) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table tamaño
+
+CREATE TABLE `contacto_medioDeComunicacion`
 (
-    id          int auto_increment,
-    descripcion varchar(20) not null,
-    constraint id_tamaño_pk primary key (id)
-);
+    `Contacto_id`             int NOT NULL,
+    `mediosDeComunicacion_id` int NOT NULL,
+    KEY `FKtiwsx8sbyka24byq66evie2c9` (`mediosDeComunicacion_id`),
+    KEY `FKij8ciwlh0ie85idka53nfe6dt` (`Contacto_id`),
+    CONSTRAINT `FKij8ciwlh0ie85idka53nfe6dt` FOREIGN KEY (`Contacto_id`) REFERENCES `contacto` (`id`),
+    CONSTRAINT `FKtiwsx8sbyka24byq66evie2c9` FOREIGN KEY (`mediosDeComunicacion_id`) REFERENCES `medioDeComunicacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table preferencia
+
+CREATE TABLE `organizacion`
 (
-    id        int auto_increment,
-    id_animal int,
-    id_sexo   int,
-    id_tamaño int,
-    constraint id_preferencia_pk primary key (id),
-    constraint preferencia_id_animal_fk foreign key (id_animal) references animal (id),
-    constraint preferencia_id_sexo_fk foreign key (id_sexo) references sexo (id),
-    constraint preferencia_id_tamaño_fk foreign key (id_tamaño) references tamaño (id)
-);
+    `id`           int         NOT NULL,
+    `calidadFoto`  varchar(16) NOT NULL,
+    `nombre`       varchar(64) NOT NULL,
+    `tamañoFoto`   varchar(16) NOT NULL,
+    `direccion_id` int DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FKpmg553n9jtb05q28eu7a8k5ol` (`direccion_id`),
+    CONSTRAINT `FKpmg553n9jtb05q28eu7a8k5ol` FOREIGN KEY (`direccion_id`) REFERENCES `direccion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table organizacion
+
+CREATE TABLE `usuario`
 (
-    id                  int auto_increment,
-    nombre_organizacion varchar(40),
-    id_direccion        int,
-    id_tamaño_foto      int,
-    id_calidad_foto     int,
-    constraint id_organizacion_pk primary key (id),
-    constraint organizacion_id_direccion_fk foreign key (id_direccion) references direccion (id),
-    constraint organizacion_id_tamaño_foto_fk foreign key (id_tamaño_foto) references tamañoFoto (id),
-    constraint organizacion_id_calidad_foto_fk foreign key (id_calidad_foto) references calidadFoto (id)
-);
+    `DTYPE`           varchar(31)  NOT NULL,
+    `id`              int          NOT NULL,
+    `contrasenia`     varchar(128) NOT NULL,
+    `usuario`         varchar(32)  NOT NULL,
+    `organizacion_id` int DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FK6mhr5w8do1ptj5sour6oojh9u` (`organizacion_id`),
+    CONSTRAINT `FK6mhr5w8do1ptj5sour6oojh9u` FOREIGN KEY (`organizacion_id`) REFERENCES `organizacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table usuario
+
+CREATE TABLE `Organizacion_caracteristicas`
 (
-    id             int auto_increment,
-    nombre_usuario varchar(32) not null,
-    contraseña     varchar(32) not null,
-    constraint id_usuario_pk primary key (id)
-);
+    `Organizacion_id` int NOT NULL,
+    `caracteristicas` varchar(64) DEFAULT NULL,
+    KEY `FKdhj68hff259clba7132nwv95o` (`Organizacion_id`),
+    CONSTRAINT `FKdhj68hff259clba7132nwv95o` FOREIGN KEY (`Organizacion_id`) REFERENCES `organizacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table administrador
+
+CREATE TABLE `Organizacion_preguntasDarEnAdopcion`
 (
-    id              int primary key auto_increment,
-    id_usuario      int,
-    id_organizacion int,
-    constraint administrador_id_usuario_fk foreign key (id_usuario) references usuario (id),
-    constraint administrador_id_organizacion_fk foreign key (id_organizacion) references organizacion (id)
-);
+    `Organizacion_id`        int NOT NULL,
+    `preguntasDarEnAdopcion` varchar(64) DEFAULT NULL,
+    KEY `FKo0gtgcp835l5hyoxx15nwvhks` (`Organizacion_id`),
+    CONSTRAINT `FKo0gtgcp835l5hyoxx15nwvhks` FOREIGN KEY (`Organizacion_id`) REFERENCES `organizacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table persona
+
+CREATE TABLE `Organizacion_preguntasQuieroAdoptar`
 (
-    id               int auto_increment,
-    fecha_nacimiento date not null,
-    id_documento     int,
-    id_direccion     int,
-    id_preferencia   int,
-    id_usuario       int,
-    constraint id_persona_pk primary key (id),
-    constraint persona_id_documento_fk foreign key (id_documento) references documento (id),
-    constraint persona_id_direccion_fk foreign key (id_direccion) references direccion (id),
-    constraint persona_id_preferencia_fk foreign key (id_preferencia) references preferencia (id),
-    constraint persona_id_usuario_fk foreign key (id_usuario) references usuario (id)
-);
+    `Organizacion_id`        int NOT NULL,
+    `preguntasQuieroAdoptar` varchar(64) DEFAULT NULL,
+    KEY `FKmleeltaqm8oxo29ncbknfwme6` (`Organizacion_id`),
+    CONSTRAINT `FKmleeltaqm8oxo29ncbknfwme6` FOREIGN KEY (`Organizacion_id`) REFERENCES `organizacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
 
-create table mascota
+CREATE TABLE `persona`
 (
-    id                 int auto_increment,
-    nombre_mascota     varchar(50) not null,
-    apodo              varchar(25),
-    edad               int,
-    descripcion_fisica varchar(1000),
-    id_animal          int,
-    id_sexo            int,
-    id_tamaño          int,
-    id_persona         int,
-    constraint id_mascota_pk primary key (id),
-    constraint mascota_id_persona_fk foreign key (id_persona) references persona (id),
-    constraint mascota_id_animal_fk foreign key (id_animal) references animal (id),
-    constraint mascota_id_sexo_fk foreign key (id_sexo) references sexo (id),
-    constraint mascota_id_tamaño_fk foreign key (id_tamaño) references tamaño (id)
-);
+    `id`                  int NOT NULL,
+    `esAdoptante`         bit(1) DEFAULT NULL,
+    `fechaNacimiento`     date   DEFAULT NULL,
+    `radioHogares`        int    DEFAULT NULL,
+    `contactoPersonal_id` int    DEFAULT NULL,
+    `direccion_id`        int    DEFAULT NULL,
+    `documento_id`        int    DEFAULT NULL,
+    `preferencia_id`      int    DEFAULT NULL,
+    `usuario_id`          int    DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FK187jpd1k7pgrwrbay09wpuah4` (`contactoPersonal_id`),
+    KEY `FK78198ggd6thip6qloht9ho248` (`direccion_id`),
+    KEY `FKdmqxwct45r4vm4ygl24sn63n2` (`documento_id`),
+    KEY `FKh3ajapv3v3u69w29jmv1gb26d` (`preferencia_id`),
+    KEY `FKgedbtrc2ob95e7n8xt0vaaaa0` (`usuario_id`),
+    CONSTRAINT `FK187jpd1k7pgrwrbay09wpuah4` FOREIGN KEY (`contactoPersonal_id`) REFERENCES `contacto` (`id`),
+    CONSTRAINT `FK78198ggd6thip6qloht9ho248` FOREIGN KEY (`direccion_id`) REFERENCES `direccion` (`id`),
+    CONSTRAINT `FKdmqxwct45r4vm4ygl24sn63n2` FOREIGN KEY (`documento_id`) REFERENCES `documento` (`id`),
+    CONSTRAINT `FKgedbtrc2ob95e7n8xt0vaaaa0` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`),
+    CONSTRAINT `FKh3ajapv3v3u69w29jmv1gb26d` FOREIGN KEY (`preferencia_id`) REFERENCES `preferencia` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table contacto
+
+CREATE TABLE `persona_contacto`
 (
-    id       int auto_increment,
-    nombre   varchar(40),
-    apellido varchar(40),
-    telefono varchar(20),
-    mail     varchar(20),
-    constraint id_contacto_pk primary key (id)
-);
+    `Persona_id`   int NOT NULL,
+    `contactos_id` int NOT NULL,
+    KEY `FK1jtc4ywq5bb4je19c4v3pufuu` (`contactos_id`),
+    KEY `FKueu4c46mtadxbo1oinfnbefv` (`Persona_id`),
+    CONSTRAINT `FK1jtc4ywq5bb4je19c4v3pufuu` FOREIGN KEY (`contactos_id`) REFERENCES `contacto` (`id`),
+    CONSTRAINT `FKueu4c46mtadxbo1oinfnbefv` FOREIGN KEY (`Persona_id`) REFERENCES `persona` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
 
-create table persona_x_contacto
+CREATE TABLE `publicacionBusquedaAdopcion`
 (
-    id          int auto_increment,
-    id_persona  int,
-    id_contacto int,
-    constraint id_persona_x_contacto_pk primary key (id),
-    constraint persona_x_contacto_id_persona_fk foreign key (id_persona) references persona (id),
-    constraint persona_x_contacto_id_contacto_fk foreign key (id_contacto) references contacto (id)
-);
+    `id`              int NOT NULL,
+    `estaVisible`     bit(1) DEFAULT NULL,
+    `fecha`           date   DEFAULT NULL,
+    `persona_id`      int    DEFAULT NULL,
+    `preferencia_id`  int    DEFAULT NULL,
+    `organizacion_id` int    DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FKsdn4nqki73yjx2sttg31j7ei6` (`preferencia_id`),
+    KEY `FK2vt9s2nci9ot7jvc7bb5ul0b7` (`organizacion_id`),
+    KEY `FK_q8hfcqaucw4c8riw4mf3euclu` (`persona_id`),
+    CONSTRAINT `FK2vt9s2nci9ot7jvc7bb5ul0b7` FOREIGN KEY (`organizacion_id`) REFERENCES `organizacion` (`id`),
+    CONSTRAINT `FK_q8hfcqaucw4c8riw4mf3euclu` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`),
+    CONSTRAINT `FKsdn4nqki73yjx2sttg31j7ei6` FOREIGN KEY (`preferencia_id`) REFERENCES `preferencia` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table voluntario
-(
-    id              int auto_increment,
-    id_usuario      int,
-    id_organizacion int,
-    constraint id_voluntario_pk primary key (id),
-    constraint voluntario_id_usuario_fk foreign key (id_usuario) references usuario (id),
-    constraint voluntario_id_organizacion_fk foreign key (id_organizacion) references organizacion (id)
-);
 
-create table usuario_x_organizacion
+CREATE TABLE `publicacionMascotaEncontrada`
 (
-    id              int auto_increment,
-    id_organizacion int,
-    id_usuario      int,
-    constraint id_usuario_x_organizacion_pk primary key (id),
-    constraint usuario_x_organizacion_id_organizacion foreign key (id_organizacion) references organizacion (id),
-    constraint usuario_x_organizacion_id_usuario foreign key (id_usuario) references usuario (id)
-);
+    `id`                  int          NOT NULL,
+    `estaVisible`         bit(1) DEFAULT NULL,
+    `fecha`               date   DEFAULT NULL,
+    `persona_id`          int    DEFAULT NULL,
+    `estadoMascota`       varchar(128) NOT NULL,
+    `ubicacionMascota_id` int    DEFAULT NULL,
+    `organizacion_id`     int    DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FKp0vlj24e9pt1ebuhlhc6ipm4w` (`ubicacionMascota_id`),
+    KEY `FK813s1xs7fo3c6v4feb5r9xofe` (`organizacion_id`),
+    KEY `FK_en6hhhfoxvibxgdiiunny68wv` (`persona_id`),
+    CONSTRAINT `FK813s1xs7fo3c6v4feb5r9xofe` FOREIGN KEY (`organizacion_id`) REFERENCES `organizacion` (`id`),
+    CONSTRAINT `FK_en6hhhfoxvibxgdiiunny68wv` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`),
+    CONSTRAINT `FKp0vlj24e9pt1ebuhlhc6ipm4w` FOREIGN KEY (`ubicacionMascota_id`) REFERENCES `direccion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
 
-create table medio_de_comunicacion
-(
-    id          int auto_increment,
-    descripcion varchar(20),
-    constraint id_medio_de_comunicacion_pk primary key (id)
-);
 
-create table medio_de_comunicacion_preferido
+CREATE TABLE `PublicacionBusquedaAdopcion_comodidades`
 (
-    id                       int auto_increment,
-    es_preferido             bool,
-    id_medio_de_comunicacion int,
-    id_contacto              int,
-    constraint id_medio_preferido_pk primary key (id),
-    constraint medio_de_comunicacion_preferido_id_medio_fk foreign key (id_medio_de_comunicacion) references medio_de_comunicacion (id),
-    constraint medio_de_comunicacion_preferido_id_contacto_fk foreign key (id_contacto) references contacto (id)
-);
+    `PublicacionBusquedaAdopcion_id` int NOT NULL,
+    `comodidades`                    varchar(64) DEFAULT NULL,
+    KEY `FK8pk23cwos4urjbsi82ufuaa6e` (`PublicacionBusquedaAdopcion_id`),
+    CONSTRAINT `FK8pk23cwos4urjbsi82ufuaa6e` FOREIGN KEY (`PublicacionBusquedaAdopcion_id`) REFERENCES `publicacionBusquedaAdopcion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `PublicacionMascotaEncontrada_fotosMascota`
+(
+    `PublicacionMascotaEncontrada_id` int NOT NULL,
+    `fotosMascota`                    mediumtext,
+    KEY `FKbty5vnfe999fnls62t7ya40t8` (`PublicacionMascotaEncontrada_id`),
+    CONSTRAINT `FKbty5vnfe999fnls62t7ya40t8` FOREIGN KEY (`PublicacionMascotaEncontrada_id`) REFERENCES `publicacionMascotaEncontrada` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `mascota`
+(
+    `id`                int          NOT NULL,
+    `animal`            varchar(32)  NOT NULL,
+    `apodo`             varchar(32) DEFAULT NULL,
+    `descripcionFisica` varchar(512) NOT NULL,
+    `edad`              int          NOT NULL,
+    `nombre`            varchar(32)  NOT NULL,
+    `sexo`              varchar(8)   NOT NULL,
+    `tamaño`            varchar(16)  NOT NULL,
+    `duenio_id`         int         DEFAULT NULL,
+    `organizacion_id`   int         DEFAULT NULL,
+    `persona_id`        int         DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FK6eivwqtrgl18u7y2akpp9inqc` (`duenio_id`),
+    KEY `FKgc77riia3dnivwctxpdoin4fh` (`organizacion_id`),
+    KEY `FKceulsmrswvcx6q4byphuhe8px` (`persona_id`),
+    CONSTRAINT `FK6eivwqtrgl18u7y2akpp9inqc` FOREIGN KEY (`duenio_id`) REFERENCES `persona` (`id`),
+    CONSTRAINT `FKceulsmrswvcx6q4byphuhe8px` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`),
+    CONSTRAINT `FKgc77riia3dnivwctxpdoin4fh` FOREIGN KEY (`organizacion_id`) REFERENCES `organizacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `organizacion_persona`
+(
+    `Organizacion_id` int NOT NULL,
+    `adoptantes_id`   int NOT NULL,
+    PRIMARY KEY (`Organizacion_id`, `adoptantes_id`),
+    KEY `FK9xwqeiqipl5nk2a40p82ya909` (`adoptantes_id`),
+    CONSTRAINT `FK9xwqeiqipl5nk2a40p82ya909` FOREIGN KEY (`adoptantes_id`) REFERENCES `persona` (`id`),
+    CONSTRAINT `FKtnn38gbaf07w77vouk823ejti` FOREIGN KEY (`Organizacion_id`) REFERENCES `organizacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `publicacionMascotaEnAdopcion`
+(
+    `id`              int NOT NULL,
+    `estaVisible`     bit(1) DEFAULT NULL,
+    `fecha`           date   DEFAULT NULL,
+    `persona_id`      int    DEFAULT NULL,
+    `mascota_id`      int    DEFAULT NULL,
+    `organizacion_id` int    DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `FKhi655p20058jvdou0386cx78j` (`mascota_id`),
+    KEY `FKrwlqrsimo0yuxddggmnp8t55f` (`organizacion_id`),
+    KEY `FK_bhafjbe4y4m12qip97jw38k5c` (`persona_id`),
+    CONSTRAINT `FK_bhafjbe4y4m12qip97jw38k5c` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`id`),
+    CONSTRAINT `FKhi655p20058jvdou0386cx78j` FOREIGN KEY (`mascota_id`) REFERENCES `mascota` (`id`),
+    CONSTRAINT `FKrwlqrsimo0yuxddggmnp8t55f` FOREIGN KEY (`organizacion_id`) REFERENCES `organizacion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `Mascota_caracteristicas`
+(
+    `Mascota_id`          int          NOT NULL,
+    `caracteristicas`     varchar(255) DEFAULT NULL,
+    `caracteristicas_KEY` varchar(255) NOT NULL,
+    PRIMARY KEY (`Mascota_id`, `caracteristicas_KEY`),
+    CONSTRAINT `FK9031cpfkkpo8ywdpr33krk675` FOREIGN KEY (`Mascota_id`) REFERENCES `mascota` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `Mascota_fotos`
+(
+    `Mascota_id` int NOT NULL,
+    `fotos`      mediumtext,
+    KEY `FKl8giuyygtl0iqygn6tph2lhat` (`Mascota_id`),
+    CONSTRAINT `FKl8giuyygtl0iqygn6tph2lhat` FOREIGN KEY (`Mascota_id`) REFERENCES `mascota` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `PublicacionMascotaEnAdopcion_preguntasRespuestas`
+(
+    `PublicacionMascotaEnAdopcion_id` int          NOT NULL,
+    `preguntasRespuestas`             varchar(64) DEFAULT NULL,
+    `preguntasRespuestas_KEY`         varchar(255) NOT NULL,
+    PRIMARY KEY (`PublicacionMascotaEnAdopcion_id`, `preguntasRespuestas_KEY`),
+    CONSTRAINT `FKbsmv8tbboke1uab996mov9l8s` FOREIGN KEY (`PublicacionMascotaEnAdopcion_id`) REFERENCES `publicacionMascotaEnAdopcion` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;

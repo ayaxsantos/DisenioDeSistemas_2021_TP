@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class Documento extends EntidadPersistente {
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 16)
     private TipoDocumento tipo;
 
     @Column
@@ -19,19 +20,17 @@ public class Documento extends EntidadPersistente {
         this.numero = numero;
     }
 
-    public Documento() {
-
-    }
-
-    public Integer numero() {
-        return this.numero;
-    }
-
+    // Accessors
     public TipoDocumento getTipo() {
         return tipo;
     }
 
     public Integer getNumero() {
         return numero;
+    }
+
+    // Hibernate
+    public Documento() {
+
     }
 }

@@ -3,7 +3,6 @@ package com.utn.dominio.animal;
 import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.organizacion.Organizacion;
 import com.utn.dominio.persona.Persona;
-import com.utn.infraestructura.normalizador.NormalizadorGraphics2D;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -15,25 +14,28 @@ import java.util.ArrayList;
 @Table(name = "mascota")
 public class Mascota extends EntidadPersistente {
 
-    @Column
+    @Column(nullable = false, length = 32)
     private String nombre;
 
-    @Column
+    @Column(nullable = true, length = 32)
     private String apodo;
 
-    @Column
+    @Column(nullable = false)
     private int edad;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 32)
     private Animal animal;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 8)
     private Sexo sexo;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 16)
     private Tamaño tamaño;
 
-    @Column
+    @Column(nullable = false, length = 512)
     private String descripcionFisica;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -41,7 +43,7 @@ public class Mascota extends EntidadPersistente {
 
     @ElementCollection()
     @Column(columnDefinition = "MEDIUMTEXT")
-    private List<String> fotosNormalizadas;
+    private List<String> fotos;
 
     @ElementCollection
     private Map<String, String> caracteristicas;
@@ -57,24 +59,31 @@ public class Mascota extends EntidadPersistente {
         this.sexo = sexo;
         this.tamaño = tamaño;
         this.descripcionFisica = descripcionFisica;
-        this.fotosNormalizadas = new ArrayList<>();
+        this.fotos = new ArrayList<>();
         this.caracteristicas = new HashMap<>();
     }
 
-    public Mascota() {
-
+    public void añadirFoto(String rutaFoto)
+    {
+        this.fotos.add(rutaFoto);
     }
 
+    public void añadirCaracteristica(String unaCaracteristica, String unaRespuesta)
+    {
+        this.caracteristicas.put(unaCaracteristica,unaRespuesta);
+    }
+
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
+    }
+
+    // Accessors
     public String getNombre() {
         return nombre;
     }
 
     public String getApodo() {
         return apodo;
-    }
-
-    public int getEdad() {
-        return edad;
     }
 
     public Animal getAnimal() {
@@ -93,34 +102,16 @@ public class Mascota extends EntidadPersistente {
         return descripcionFisica;
     }
 
-    public List<String> getFotosNormalizadas() {
-        return fotosNormalizadas;
+    public List<String> getFotos() {
+        return fotos;
     }
 
     public Map<String, String> getCaracteristicas() {
         return caracteristicas;
     }
 
-    public void añadirFoto(String rutaFoto)
-    {
-        this.fotosNormalizadas.add(rutaFoto);
-    }
-
-    public void añadirCaracteristica(String unaCaracteristica, String unaRespuesta)
-    {
-        this.caracteristicas.put(unaCaracteristica,unaRespuesta);
-    }
-
     public Organizacion getOrganizacion() {
         return organizacion;
-    }
-
-    public void setOrganizacion(Organizacion organizacion) {
-        this.organizacion = organizacion;
-    }
-
-    public Persona getDuenio() {
-        return duenio;
     }
 
     public void setDuenio(Persona duenio) {
@@ -133,5 +124,10 @@ public class Mascota extends EntidadPersistente {
 
     public void setTamaño(Tamaño tamaño) {
         this.tamaño = tamaño;
+    }
+
+    // Hibernate
+    public Mascota() {
+
     }
 }

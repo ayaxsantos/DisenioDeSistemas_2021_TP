@@ -31,7 +31,7 @@ public class Persona extends EntidadPersistente {
     private Documento documento;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Direccion domicilio;
+    private Direccion direccion;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Contacto> contactos = new ArrayList<>();
@@ -50,27 +50,17 @@ public class Persona extends EntidadPersistente {
     private int radioHogares;
 
     public Persona(Usuario usuario, Contacto contactoPersonal, LocalDate fechaNacimiento, Documento documento,
-                   Direccion domicilio, Preferencia preferencia, List<Contacto> otrosContactos, Integer radioHogares) {
+                   Direccion direccion, Preferencia preferencia, List<Contacto> otrosContactos, Integer radioHogares) {
         this.usuario = usuario;
         this.contactoPersonal = contactoPersonal;
         this.fechaNacimiento = fechaNacimiento;
         this.documento = documento;
-        this.domicilio = domicilio;
+        this.direccion = direccion;
         this.preferencia = preferencia;
         this.contactos = otrosContactos;
         this.radioHogares = radioHogares;
         this.mascotas = new ArrayList<>();
         this.esAdoptante = false;
-    }
-
-    public Persona() {}
-
-    public boolean esAdoptante() {
-        return esAdoptante;
-    }
-
-    public void setEsAdoptante(boolean esAdoptante) {
-        this.esAdoptante = esAdoptante;
     }
 
     public void notificar(Mensaje mensaje) {
@@ -84,49 +74,44 @@ public class Persona extends EntidadPersistente {
                 .findFirst().orElseThrow(MascotaNoEncontradaException::new);
     }
 
-    public void avisoDeBaja(Mensaje unMensaje){
-        this.contactoPersonal.notificar(unMensaje);
-    }
-
-    public void añadirContacto(Contacto contacto) {
-        contactos.add(contacto);
-    }
-
     public void añadirMascota(Mascota mascota) {
         mascotas.add(mascota);
         mascota.setDuenio(this);
     }
 
-    public void radioHogares(int radioDeHogares) {
-        this.radioHogares = radioDeHogares;
+    public Mascota buscarMascotaPorId(int id){
+        return mascotas.stream()
+                .filter(unaMascota -> unaMascota.getId() == id)
+                .findFirst().orElseThrow(MascotaNoEncontradaException::new);
     }
 
-    public String nombre() {
-        return this.contactoPersonal.nombre();
+    // Accessors
+    public boolean isAdoptante() {
+        return esAdoptante;
     }
 
-    public String telefono() {
-        return this.contactoPersonal.telefono();
+    public String getNombre() {
+        return this.contactoPersonal.getNombre();
     }
 
-    public String email() {
-        return this.contactoPersonal.email();
+    public String getTelefono() {
+        return this.contactoPersonal.getTelefono();
     }
 
-    public int numeroDocumento() {
-        return this.documento.numero();
+    public String getEmail() {
+        return this.contactoPersonal.getEmail();
     }
 
-    public Direccion domicilio() {
-        return this.domicilio;
+    public int getNumeroDocumento() {
+        return this.documento.getNumero();
     }
 
-    public int radioHogares() {
+    public Direccion getDireccion() {
+        return this.direccion;
+    }
+
+    public int getRadioHogares() {
         return this.radioHogares;
-    }
-
-    public Preferencia preferencia() {
-        return this.preferencia;
     }
 
     public Usuario getUsuario() {
@@ -137,32 +122,12 @@ public class Persona extends EntidadPersistente {
         return contactoPersonal;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
     public Documento getDocumento() {
         return documento;
     }
 
-    public Direccion getDomicilio() {
-        return domicilio;
-    }
-
-    public List<Contacto> getContactos() {
-        return contactos;
-    }
-
     public List<Mascota> getMascotas() {
         return mascotas;
-    }
-
-    public int getRadioHogares() {
-        return radioHogares;
-    }
-
-    public void setRadioHogares(int radioHogares) {
-        this.radioHogares = radioHogares;
     }
 
     public Preferencia getPreferencia() {
@@ -173,33 +138,18 @@ public class Persona extends EntidadPersistente {
         this.preferencia = preferencia;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setEsAdoptante(boolean esAdoptante) {
+        this.esAdoptante = esAdoptante;
     }
 
     public void setDocumento(Documento documento) {
         this.documento = documento;
     }
 
-    public void setDomicilio(Direccion domicilio) {
-        this.domicilio = domicilio;
-    }
-
-    public void setContactos(List<Contacto> contactos) {
-        this.contactos = contactos;
-    }
-
-    public void setContactoPersonal(Contacto contactoPersonal) {
-        this.contactoPersonal = contactoPersonal;
-    }
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public Mascota buscarMascotaPorId(int id){
-        return mascotas.stream()
-                .filter(unaMascota -> unaMascota.getId() == id)
-                .findFirst().orElseThrow(MascotaNoEncontradaException::new);
-    }
+    // Hibernate
+    public Persona() {}
 }

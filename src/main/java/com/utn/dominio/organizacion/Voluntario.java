@@ -1,15 +1,14 @@
 package com.utn.dominio.organizacion;
 
-import com.utn.dominio.EntidadPersistente;
 import com.utn.dominio.autenticacion.Usuario;
-import com.utn.dominio.autenticacion.ValidadorContraseña;
-import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import com.utn.dominio.publicacion.Publicacion;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEnAdopcion;
 import com.utn.dominio.publicacion.PublicacionMascotaEncontrada;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,14 +23,11 @@ public class Voluntario extends Usuario {
         this.organizacion = organizacion;
     }
 
-    public Voluntario() {
-
-    }
-
-    public void aprobarPublicacion(Publicacion publicacion){
+    public void aprobarPublicacion(Publicacion publicacion) {
         publicacion.setEstaVisible(true);
     }
 
+    // Accessors
     public Organizacion getOrganizacion() {
         return organizacion;
     }
@@ -49,5 +45,10 @@ public class Voluntario extends Usuario {
     public List<PublicacionBusquedaAdopcion> getPublicacionesBusquedaAdopcionPendientes() {
         return this.organizacion.getPublicacionesBusquedaAdopcion().stream().
                 filter(publicacion -> !publicacion.isEstaVisible()).collect(Collectors.toList());
+    }
+
+    // Hibernate
+    public Voluntario() {
+
     }
 }

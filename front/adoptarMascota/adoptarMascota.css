@@ -2,6 +2,18 @@ body {
     background-image: url(../imagenes/fondo-pagina.png);
 }
 
+.desc{
+
+    border: 2px solid black;
+    background-color: rgb(152, 89, 179);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.button{
+    text-align: center;
+    align-items: center;
+}
 #nav {
     height: 7vh;
 }
@@ -9,6 +21,8 @@ body {
 .imgPublicacion {
     max-height: 20%;
     max-width: 20%;
+    text-align: center;
+    align-items: center;
 }
 
 #botonAdoptar{

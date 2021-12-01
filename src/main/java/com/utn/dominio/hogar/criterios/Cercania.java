@@ -10,8 +10,8 @@ public class Cercania implements ValidacionHogar {
 
     @Override
     public boolean ejecutar(Hogar hogar, Persona personaRescatista, Mascota mascota) {
-        double latitudRescatista = personaRescatista.domicilio().latitud();
-        double longitudRescatista = personaRescatista.domicilio().longitud();
+        double latitudRescatista = personaRescatista.getDireccion().getLatitud();
+        double longitudRescatista = personaRescatista.getDireccion().getLongitud();
         double latitudHogar = hogar.ubicacion.latitud;
         double longitudHogar = hogar.ubicacion.longitud;
         double diferenciaLatitud = latitudHogar - latitudRescatista;
@@ -20,8 +20,8 @@ public class Cercania implements ValidacionHogar {
         double diferenciaLongitud = longitudHogar - longitudRescatista;
         if(diferenciaLongitud < 0)
             diferenciaLongitud = diferenciaLongitud * (-1);
-        return diferenciaLatitud <= personaRescatista.radioHogares() &&
-            diferenciaLongitud <= personaRescatista.radioHogares();
+        return diferenciaLatitud <= personaRescatista.getRadioHogares() &&
+            diferenciaLongitud <= personaRescatista.getRadioHogares();
     }
 
 }

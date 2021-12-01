@@ -8,6 +8,9 @@ let RegistrarPersona = new Vue({
         fechaDeNacimiento: '',
         numeroDocumento: '',
         tipoDocumentoSeleccionado: '',
+        localidad: '',
+        calle: '',
+        altura: '',
         longitud: '',
         latitud: '',
         radioHogares: '',
@@ -35,9 +38,29 @@ let RegistrarPersona = new Vue({
         tamaniosAnimal: []
     },
     methods: {
+        async consultarDireccion()
+        {
+            console.log(this.localidad);
+            console.log(this.calle);
+            console.log(this.altura);
+
+            var url = new URL('https://apis.datos.gob.ar/georef/api/direcciones')
+
+            var params = {direccion: this.calle + " al " + this.altura,localidad:this.localidad}
+            url.search = new URLSearchParams(params).toString();
+            console.log(url);
+
+            await fetch(url).then(response => response.json()).then(datos => {
+                console.log(datos);
+                this.latitud = datos.direcciones[0].ubicacion.lat;
+                this.longitud = datos.direcciones[0].ubicacion.lon;
+                console.log(this.latitud);
+                console.log(this.longitud);
+            })
+        },
         enviarDatos: function () {
             let usuario = '';
-
+            this.consultarDireccion();
             if (usuarioActual) {
                 usuario = usuarioActual;
             } else {

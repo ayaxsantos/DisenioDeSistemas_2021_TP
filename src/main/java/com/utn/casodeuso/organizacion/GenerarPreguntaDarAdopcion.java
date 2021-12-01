@@ -16,7 +16,7 @@ public class GenerarPreguntaDarAdopcion {
     public void ejecutar(String nombreOrganizacion, List<String> preguntasAdopcion) {
         Organizacion organizacion = organizaciones.obtenerPorNombre(nombreOrganizacion);
 
-        preguntasAdopcion.forEach(unaPregunta -> organizacion.agregarPreguntaAdopcion(unaPregunta));
+        preguntasAdopcion.forEach(unaPregunta -> organizacion.añadirPreguntaAdopcion(unaPregunta));
 
         organizaciones.guardar(organizacion);
     }

@@ -38,32 +38,18 @@ public class RespuestaPublicacionMascotaEnAdopcion {
         this.nombreMascota = nombreMascota;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public List<String> getFotos() {
-        return fotos;
-    }
 
     public void setFotos(List<String> fotos) {
         this.fotos = fotos;
     }
 
-    public Integer getNumeroDocDuenio() {
-        return numeroDocDuenio;
-    }
-
     public void setNumeroDocDuenio(Integer numeroDocDuenio) {
         this.numeroDocDuenio = numeroDocDuenio;
-    }
-
-    public TipoDocumento getTipoDocDuenio() {
-        return tipoDocDuenio;
     }
 
     public void setTipoDocDuenio(TipoDocumento tipoDocDuenio) {

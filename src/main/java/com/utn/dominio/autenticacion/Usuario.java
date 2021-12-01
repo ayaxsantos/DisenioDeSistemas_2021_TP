@@ -6,16 +6,15 @@ import com.utn.dominio.excepcion.CredencialesInvalidasException;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Usuario extends EntidadPersistente {
 
-    @Column
+    @Column(nullable = false, length = 32)
     private String usuario;
 
-    @Column
+    @Column(nullable = false, length = 128)
     private String contrasenia;
-
-    public Usuario() {}
 
     public Usuario(String usuario, String contrasenia) {
         ValidadorContraseña.ejecutar(contrasenia);
@@ -28,19 +27,23 @@ public class Usuario extends EntidadPersistente {
             throw new CredencialesInvalidasException();
     }
 
+    // Accessors
     public String getUsuario() {
         return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
     }
 
     public String getContrasenia() {
         return contrasenia;
     }
 
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+    // Hibernate
+    public Usuario() {}
 }

@@ -9,7 +9,6 @@ import com.utn.dominio.notificacion.mensaje.Mensaje;
 import com.utn.dominio.notificacion.mensaje.MensajePublicacionQuieroAdoptar;
 import com.utn.dominio.persona.TipoDocumento;
 import com.utn.dominio.publicacion.PublicacionBusquedaAdopcion;
-import com.utn.infraestructura.notificador.NotificadorEmail;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class GenerarPublicacionBusquedaAdopcion {
         organizaciones.guardar(organizacion);
 
         Mensaje mensaje = new MensajePublicacionQuieroAdoptar(publicacion);
-        mensaje.agregarEmailDestino(personaAdoptante.email());
+        mensaje.agregarEmailDestino(personaAdoptante.getEmail());
         Email email = new Email(false);
         email.enviar(mensaje);
     }

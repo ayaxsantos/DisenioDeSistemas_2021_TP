@@ -8,21 +8,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "medioDeComunicacion")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo")
+@DiscriminatorColumn(name = "tipo", length = 16)
 public abstract class MedioDeComunicacion extends EntidadPersistente {
 
-    @Column
+    @Column(nullable = false)
     private boolean esPreferido;
 
     public MedioDeComunicacion(boolean esPreferido) {
         this.esPreferido = esPreferido;
     }
 
-    public MedioDeComunicacion() { }
+    public abstract void enviar(Mensaje mensaje);
 
+    // Accessors
     public boolean esPreferido() {
         return this.esPreferido;
     }
 
-    public abstract void enviar(Mensaje mensaje);
+    // Hibernate
+    public MedioDeComunicacion() { }
 }

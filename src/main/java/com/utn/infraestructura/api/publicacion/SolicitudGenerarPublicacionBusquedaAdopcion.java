@@ -22,31 +22,16 @@ public class SolicitudGenerarPublicacionBusquedaAdopcion {
         return nombreOrganizacion;
     }
 
-    public void setNombreOrganizacion(String nombreOrganizacion) {
-        this.nombreOrganizacion = nombreOrganizacion;
-    }
-
     public List<String> getComodidades() {
         return comodidades;
-    }
-
-    public void setComodidades(List<String> comodidades) {
-        this.comodidades = comodidades;
     }
 
     public Integer getNumeroDocumentoAdoptante() {
         return numeroDocumentoAdoptante;
     }
 
-    public void setNumeroDocumentoAdoptante(Integer numeroDocumentoAdoptante) {
-        this.numeroDocumentoAdoptante = numeroDocumentoAdoptante;
-    }
-
     public TipoDocumento getTipoDocumentoAdoptante() {
         return tipoDocumentoAdoptante;
     }
 
-    public void setTipoDocumentoAdoptante(TipoDocumento tipoDocumentoAdoptante) {
-        this.tipoDocumentoAdoptante = tipoDocumentoAdoptante;
-    }
 }

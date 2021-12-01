@@ -13,11 +13,11 @@ public class ActualizarDetalleFotos
         this.administradores = administradores;
     }
 
-    public void ejecutar(String nombreUsuario, String unTamaño, String unaCalidad)
+    public void ejecutar(String nombreUsuario, TamañoFoto unTamaño, CalidadFoto unaCalidad)
     {
         Administrador unAdministrador = this.administradores.obtenerPorNombreUsuario(nombreUsuario);
-        unAdministrador.definirTamañoFoto(TamañoFoto.buscar(unTamaño));
-        unAdministrador.definirCalidadFoto(CalidadFoto.buscar(unaCalidad));
+        unAdministrador.definirTamañoFoto(unTamaño);
+        unAdministrador.definirCalidadFoto(unaCalidad);
         administradores.guardar(unAdministrador);
     }
 }
