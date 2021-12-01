@@ -2,7 +2,6 @@ const tipoDocumento = localStorage.getItem("tipoDocumento");
 const numeroDocumento = localStorage.getItem("numeroDocumento");
 const idUsuario = localStorage.getItem('idSesion');
 
-
 var appDarEnAdopcionVue = new Vue({
     el: '#DarEnAdopcionVue',
     data: {
@@ -16,7 +15,7 @@ var appDarEnAdopcionVue = new Vue({
         preguntasOrganizacion: [],
         preguntas: {},
         numeroDocumento: '',
-        tipoDocumento: '',
+        tipoDocumento: ''
     },
     methods: {
         cambioMascota(){
@@ -56,21 +55,23 @@ var appDarEnAdopcionVue = new Vue({
                     alert("Hubo un error en el API")
                 }
             })
+        },
+        async obtenerDocumento(){
+            if (idUsuario) {
+                await fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}}).then(response => response.json()).then(json => {
+                    this.numeroDocumento = json.numero;
+                    this.tipoDocumento = json.tipo;
+                })
+            } else if (numeroDocumento) {
+                this.numeroDocumento = numeroDocumento;
+                this.tipoDocumento = tipoDocumento;
+            } else {
+                location.href = "../registrarPersona/registrarPersona.html";
+            }
         }
-
     },
-    created() {
-        if (idUsuario) {
-            fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}}).then(response => response.json()).then(json => {
-                this.numeroDocumento = json.numero;
-                this.tipoDocumento = json.tipo;
-            })
-        } else if (numeroDocumento) {
-            this.numeroDocumento = numeroDocumento;
-            this.tipoDocumento = tipoDocumento;
-        } else {
-            location.href = "../registrarPersona/registrarPersona.html";
-        }
+    async created() {
+        await this.obtenerDocumento();
         fetch('http://localhost:8080/duenio/mascotas', {
             headers:
                 {

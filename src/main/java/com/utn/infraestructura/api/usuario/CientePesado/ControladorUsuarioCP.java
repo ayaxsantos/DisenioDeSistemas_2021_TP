@@ -78,8 +78,6 @@ public class ControladorUsuarioCP {
     }
 
 
-
-    //TODO: Despues de registrar usuario, pedimos que vuelva a loguear??
     @PostMapping("registrar/usuario")
     public ResponseEntity registrarUsuario(@RequestBody SolicitudRegistroUsuario solicitud) {
         try {

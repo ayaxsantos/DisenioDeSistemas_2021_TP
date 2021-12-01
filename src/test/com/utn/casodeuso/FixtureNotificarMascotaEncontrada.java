@@ -130,7 +130,7 @@ public class FixtureNotificarMascotaEncontrada {
             String descripcionFisica, List<String> fotos, Map<String, String> caracteristicas) {
         Mascota mascota = new Mascota(nombre, apodo, edad, animal, sexo, tamaño, descripcionFisica);
         fotos.forEach(unaFoto -> mascota.añadirFoto(unaFoto));
-        caracteristicas.forEach((unaCaracteristica, unaRespuesta) -> mascota.añadirCaracteristica(unaCaracteristica, unaRespuesta)); //TODO testear que funcione bien
+        caracteristicas.forEach((unaCaracteristica, unaRespuesta) -> mascota.añadirCaracteristica(unaCaracteristica, unaRespuesta));
 
         return mascota;
     }

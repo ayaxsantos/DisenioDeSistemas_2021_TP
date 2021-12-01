@@ -119,6 +119,10 @@ var appEncontreMascotaVue = new Vue({
         }
     },
     created() {
+        fetch('http://localhost:8080/organizaciones/nombres')
+            .then(response => response.json()).then(json => {
+            this.organizaciones = json;
+        })
         if (idUsuario) {
             fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}}).then(response => response.json()).then(json => {
                 this.numeroDocumento = json.numero;
@@ -130,10 +134,6 @@ var appEncontreMascotaVue = new Vue({
         } else {
             location.href = "../registrarPersona/registrarPersona.html";
         }
-        fetch('http://localhost:8080/organizaciones/nombres')
-            .then(response => response.json()).then(json => {
-            this.organizaciones = json;
-        })
     }
 })
 

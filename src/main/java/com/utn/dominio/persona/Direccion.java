@@ -15,7 +15,7 @@ public class Direccion extends EntidadPersistente {
     @Column
     private double longitud;
 
-    public Direccion(double longitud, double latitud) {
+    public Direccion(double latitud, double longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
     }

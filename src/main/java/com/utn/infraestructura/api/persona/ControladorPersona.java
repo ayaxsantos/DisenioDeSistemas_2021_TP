@@ -40,7 +40,7 @@ public class ControladorPersona {
         this.aniadirUsuario = new AniadirUsuario(personasEnMySQL, usuariosEnMySQL);
     }
 
-    //TODO Terminar
+
     @PostMapping("usuario/registroPersona")
     public ResponseEntity registroPersona(@RequestBody SolicitudRegistrarPersona solicitud) {
 
@@ -68,8 +68,8 @@ public class ControladorPersona {
     public ResponseEntity obtenerDocumento(@RequestHeader("Authorization") String idSesion) {
         Usuario usuario = this.obtenerUsuarioSesionManager(idSesion);
         Persona persona = new PersonasEnMySQL().obtenerPorNombreDeUsuario(usuario.getUsuario());
-
-        return ResponseEntity.status(200).body(persona.getDocumento());
+        RespuestaDocumento documento = new RespuestaDocumento(persona.getDocumento().getNumero(), persona.getDocumento().getTipo());
+        return ResponseEntity.status(200).body(documento);
     }
 
     private Usuario obtenerUsuarioSesionManager(String idSesion) {

@@ -34,7 +34,7 @@ public enum TamañoFoto {
             case CHICA: return 540;
             case NORMAL: return 720;
             case GRANDE: return 1080;
-            default: return null; // TODO Arrojar una excepción?
+            default: return null;
         }
     }
 
@@ -43,7 +43,7 @@ public enum TamañoFoto {
             case CHICA: return 960;
             case NORMAL: return 1280;
             case GRANDE: return 1920;
-            default: return null; // TODO Arrojar una excepción?
+            default: return null;
         }
     }
 

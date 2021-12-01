@@ -1,11 +1,10 @@
 const urlParams = new URLSearchParams(window.location.search);
 let myParam = urlParams.get('id');
 
-if(myParam !== "null"){
-    document.getElementById("conChapita1").style.display = "none";
-    document.getElementById("conChapita2").style.display = "none";
-    document.getElementById("conChapita3").style.display = "none";
-} else{
+if (myParam !== "null") {
+    document.getElementById("conChapita").style.display = "none";
+    document.getElementById("botonConChapita").style.display = "none";
+} else {
     myParam = null;
 }
 
@@ -26,8 +25,8 @@ var appBuscarHogarTransitoVue = new Vue({
         hogares: []
     },
     methods: {
-        enviarDatos(){
-            if(myParam){
+        enviarDatos() {
+            if (myParam) {
                 solicitud = {
                     tipoDocRescatista: this.tipoDocumento,
                     numDocRescatista: this.numeroDocumento,
@@ -80,31 +79,21 @@ var appBuscarHogarTransitoVue = new Vue({
                     reject('Error: ', error);
                 }
             })
-        }
-    },
-    created() {
-        fetch('http://localhost:8080/datos/mascota/animal')
-            .then(response => response.json()).then(json => {
-            this.tiposAnimal = json;
-        })
-
-        fetch('http://localhost:8080/datos/mascota/tamanio')
-            .then(response => response.json()).then(json => {
-            this.tamaniosAnimal = json;
-        })
-
-        if (idUsuario) {
-            fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}}).then(response => response.json()).then(json => {
-                this.numeroDocumento = json.numero;
-                this.tipoDocumento = json.tipo;
-            })
-        } else if (numeroDocumento) {
-            this.numeroDocumento = numeroDocumento;
-            this.tipoDocumento = tipoDocumento;
-        } else {
-            location.href = "../registrarPersona/registrarPersona.html";
-        }
-        if(myParam) {
+        },
+        async obtenerDocumento() {
+            if (idUsuario) {
+                await fetch('http://localhost:8080/persona/documento', {headers: {"Authorization": idUsuario}}).then(response => response.json()).then(json => {
+                    this.numeroDocumento = json.numero;
+                    this.tipoDocumento = json.tipo;
+                })
+            } else if (numeroDocumento) {
+                this.numeroDocumento = numeroDocumento;
+                this.tipoDocumento = tipoDocumento;
+            } else {
+                location.href = "../registrarPersona/registrarPersona.html";
+            }
+        },
+        async obtenerHogares() {
             var solicitud = {
                 tipoDocRescatista: this.tipoDocumento,
                 numDocRescatista: this.numeroDocumento,
@@ -112,23 +101,30 @@ var appBuscarHogarTransitoVue = new Vue({
             }
             var input = "http://localhost:8080/rescatista/HogarTransitoChapita"
 
-            fetch(input, {
+            await fetch(input, {
                 method: "POST",
                 headers:
                     {
                         'Content-Type': 'application/json'
                     },
                 body: JSON.stringify(solicitud)
-            }).then(response => {
-                if (response.status === 200) {
-                } else {
-                    alert("Hubo un error en el API")
-                }
-                let respuesta = response.json().then(hogares => {
-                    this.hogares = hogares;
-                });
+            }).then(response => response.json()).then(hogares => {
+                this.hogares = hogares;
             })
-                console.log(this.hogares)
         }
+    },
+    async created() {
+        fetch('http://localhost:8080/datos/mascota/animal')
+            .then(response => response.json()).then(json => {
+            this.tiposAnimal = json;
+        })
+        fetch('http://localhost:8080/datos/mascota/tamanio')
+            .then(response => response.json()).then(json => {
+            this.tamaniosAnimal = json;
+        })
+        await this.obtenerDocumento();
+        if (myParam)
+            await this.obtenerHogares();
+
     }
 })

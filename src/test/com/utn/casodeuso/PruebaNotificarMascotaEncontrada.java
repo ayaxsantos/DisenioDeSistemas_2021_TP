@@ -35,7 +35,6 @@ public class PruebaNotificarMascotaEncontrada {
         inicializarEstrategiasDeNotificacion(notificador);
     }
 
-    //TODO Arreglar al caso de uso actual
 /*    @Test
     public void se_notifica_al_dueño_que_se_encontro_su_mascota() {
         dado_un_rescatista_y_un_dueño_con_mascota_existente();
